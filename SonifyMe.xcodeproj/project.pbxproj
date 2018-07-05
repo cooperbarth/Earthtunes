@@ -97,12 +97,12 @@
 		F225967020EE86E600327413 /* SonifyMe */ = {
 			isa = PBXGroup;
 			children = (
-				F225967120EE86E700327413 /* AppDelegate.swift */,
 				F225967320EE86E700327413 /* ViewController.swift */,
 				F225967520EE86E700327413 /* Main.storyboard */,
 				F225967820EE86E700327413 /* Assets.xcassets */,
-				F225967A20EE86E700327413 /* LaunchScreen.storyboard */,
 				F225967D20EE86E700327413 /* Info.plist */,
+				F225967A20EE86E700327413 /* LaunchScreen.storyboard */,
+				F225967120EE86E700327413 /* AppDelegate.swift */,
 			);
 			path = SonifyMe;
 			sourceTree = "<group>";
