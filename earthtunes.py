@@ -68,7 +68,7 @@ bandstuptotenthHz = 64000
 type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
 when = "&starttime=" + date + "T" + time + "&duration=" + duration
 url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
-sfn = "IRISfiles/" + station + "." + net + ".." + channel + "." + date + "." + duration + ".rm.scale-AUTO.txt" 
+sfn = "IRISfiles/" + station + "." + net + ".." + channel + "." + date + "." + duration + ".rm.scale-AUTO.txt"
 print 'Requesting ',url
 print 'Saved in ',sfn
 
