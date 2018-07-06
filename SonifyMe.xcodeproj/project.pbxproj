@@ -14,6 +14,9 @@
 		F225967C20EE86E700327413 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F225967A20EE86E700327413 /* LaunchScreen.storyboard */; };
 		F225968720EE86E700327413 /* SonifyMeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F225968620EE86E700327413 /* SonifyMeTests.swift */; };
 		F225969220EE86E700327413 /* SonifyMeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F225969120EE86E700327413 /* SonifyMeUITests.swift */; };
+		F25E890D20EFD413005A2E63 /* earthtunes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E890C20EFD413005A2E63 /* earthtunes.swift */; };
+		F25E890F20EFD7BF005A2E63 /* SelectionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E890E20EFD7BF005A2E63 /* SelectionScreen.swift */; };
+		F25E891120EFD7D5005A2E63 /* DisplayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25E891020EFD7D5005A2E63 /* DisplayScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		F225968D20EE86E700327413 /* SonifyMeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SonifyMeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F225969120EE86E700327413 /* SonifyMeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SonifyMeUITests.swift; sourceTree = "<group>"; };
 		F225969320EE86E700327413 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F25E890C20EFD413005A2E63 /* earthtunes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earthtunes.swift; sourceTree = SOURCE_ROOT; };
+		F25E890E20EFD7BF005A2E63 /* SelectionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionScreen.swift; sourceTree = "<group>"; };
+		F25E891020EFD7D5005A2E63 /* DisplayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				F225967320EE86E700327413 /* ViewController.swift */,
+				F25E890E20EFD7BF005A2E63 /* SelectionScreen.swift */,
+				F25E891020EFD7D5005A2E63 /* DisplayScreen.swift */,
 				F225967520EE86E700327413 /* Main.storyboard */,
+				F225967120EE86E700327413 /* AppDelegate.swift */,
+				F25E890C20EFD413005A2E63 /* earthtunes.swift */,
 				F225967820EE86E700327413 /* Assets.xcassets */,
 				F225967D20EE86E700327413 /* Info.plist */,
 				F225967A20EE86E700327413 /* LaunchScreen.storyboard */,
-				F225967120EE86E700327413 /* AppDelegate.swift */,
 			);
 			path = SonifyMe;
 			sourceTree = "<group>";
@@ -257,6 +266,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F225967420EE86E700327413 /* ViewController.swift in Sources */,
+				F25E890D20EFD413005A2E63 /* earthtunes.swift in Sources */,
+				F25E891120EFD7D5005A2E63 /* DisplayScreen.swift in Sources */,
+				F25E890F20EFD7BF005A2E63 /* SelectionScreen.swift in Sources */,
 				F225967220EE86E700327413 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
