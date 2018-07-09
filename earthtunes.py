@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import numpy
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 from scipy.io import wavfile
 from matplotlib.pyplot import *
 from datetime import datetime, timedelta
@@ -35,7 +35,7 @@ fixedamp = 5.e-5
 # yesterday:
 yesterday = datetime.today() - timedelta(days=1)
 date = yesterday.strftime('%Y-%m-%d')
-print "Getting yesterday's Ryerson data, ",date
+print("Getting yesterday's Ryerson data, ",date)
 
 # a specific random day (with 2 thunderstorms):
 # date = "2016-07-24"
@@ -69,21 +69,21 @@ type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
 when = "&starttime=" + date + "T" + time + "&duration=" + duration
 url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
 sfn = "IRISfiles/" + station + "." + net + ".." + channel + "." + date + "." + duration + ".rm.scale-AUTO.txt"
-print 'Requesting ',url
-print 'Saved in ',sfn
+print('Requesting ',url)
+print('Saved in ',sfn)
 
 if path.isfile(sfn):
-   print "reading previously requested data from saved file..."
+   print("reading previously requested data from saved file...")
    rsfn = open(sfn,'r')
    df = rsfn.read()
    dflines = df.split('\n')
 else:
-   print "requesting data from IRIS...please be patient..."
-   ws = urllib2.urlopen(url)
-   print "loading data ..."
+   print("requesting data from IRIS...please be patient...")
+   ws = urllib.request.urlopen(url)
+   print("loading data ...")
    df = ws.read()
-   print "processing data..."
-   dflines = df.split('\n')
+   print("processing data...")
+   dflines = df.split('\n', 'rt')
    wsfn = open(sfn,'w')
    wsfn.write(df)
    
@@ -95,11 +95,11 @@ fsps = numpy.float(head.split()[4])
 tot = numpy.float(head.split()[2])
 # duration of data (in hours):
 realduration = (tot/fsps)/3600.
-print "original duration = %7.2f hours" % realduration
+print("original duration = %7.2f hours" % realduration)
 hours = numpy.linspace(0,realduration,tot)
 
 soundduration = tot/(fsps*bandstupto20Hz)
-print "max 20Hz wav file duration = %8.1f seconds" % (soundduration)
+print("max 20Hz wav file duration = %8.1f seconds" % (soundduration))
 
 mxs = 1.01*numpy.max(sound)
 mns = 1.01*numpy.min(sound)
