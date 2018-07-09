@@ -72,21 +72,26 @@ sfn = "IRISfiles/" + station + "." + net + ".." + channel + "." + date + "." + d
 print('Requesting ',url)
 print('Saved in ',sfn)
 
-if path.isfile(sfn):
+if path.isfile(sfn): 	#Reading from saved file
    print("reading previously requested data from saved file...")
    rsfn = open(sfn,'r')
    df = rsfn.read()
    dflines = df.split('\n')
-else:
+else:					#Retrieving data from website
    print("requesting data from IRIS...please be patient...")
    ws = urllib.request.urlopen(url)
+   urllib.request.urlretrieve(url,sfn)
    print("loading data ...")
-   df = ws.read()
+   #df = ws.read()				#Old implementation, replaced with urlretrieve
+   dflines = []
    print("processing data...")
-   dflines = df.split('\n', 'rt')
-   wsfn = open(sfn,'w')
-   wsfn.write(df)
+   for line in ws:
+      dflines.append(line)
    
+   #dflines = df.split('\n')  	#Old implementation, replaced with urlretrieve
+   #wsfn = open(sfn,'w')      	#Old implementation, replaced with urlretrieve
+   #wsfn.write(df) 				#Old implementation, replaced with urlretrieve
+  
 head = dflines[0]
 sound = numpy.array([float(l) for l in dflines[1:-1]])
 # sampling rate in data:
@@ -109,7 +114,7 @@ scaledsound = (2**31)*numpy.arctan(sound/fixedamp)/halfpi
 s32 = numpy.int32(scaledsound)
 
 # filename explanation: numbers between underscores are freq range (in mHz) that's sonified in audible range.
-ssps = bandstupto20Hz * fsps
+ssps = numpy.int32(bandstupto20Hz * fsps)
 wavfile.write(soundname + "_400_20000.wav",ssps,s32)
 
 axes(xlim=[0,realduration], ylim=[ymin,ymax], xlabel="time (hours)",ylabel="ground velocity (mm/s)", title=station+' '+channel+' '+date)
