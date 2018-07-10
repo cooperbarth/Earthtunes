@@ -10,26 +10,26 @@ from os import path, system
 def getSoundAndGraph(l, d):
 	halfpi = 0.5*numpy.pi
 
-	if l == 'Ryerson' or l == 'ryerson':
+	if l.upper() == 'RYERSON':
 		soundname = 'ryerson'
 		station = "L44A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-	elif l == 'midewin' or l == 'Midewin':
+	elif l.upper() == 'MIDEWIN':
 		soundname = 'midewin'
 		station = "M44A"
 		net = "N4"
 		location = "--"
 		channel = "HHZ"
-	elif l == 'Yellowstone' or l == 'yellowstone':
+	elif l.upper() == 'YELLOWSTONE':
 		soundname = 'yellowstone' 
 		station = "H17A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
 	else:
-		print('else')
+		print('Defaulting to Ryerson Station...')
 		soundname = 'ryerson'
 		station = "L44A"
 		net = "TA"
@@ -104,7 +104,7 @@ def getSoundAndGraph(l, d):
 		dflines = df.split('\n')
 	  
 	head = dflines[0]
-	sound = numpy.array([float(l) for l in dflines[1:-1]])
+	sound = numpy.array([float(l) for l in dflines[1:-1]]) #this line causes errors if the station reloaded
 	# sampling rate in data:
 	fsps = numpy.float(head.split()[4])
 	# total number of samples in data:
