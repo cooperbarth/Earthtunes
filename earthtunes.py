@@ -104,11 +104,20 @@ def getSoundAndGraph(l, d):
 		dflines = df.split('\n')
 	  
 	head = dflines[0]
-	sound = numpy.array([float(l) for l in dflines[1:-1]]) #this line causes errors if the station reloaded
-	# sampling rate in data:
-	fsps = numpy.float(head.split()[4])
 	# total number of samples in data:
 	tot = numpy.float(head.split()[2])
+	# sampling rate in data:
+	fsps = numpy.float(head.split()[4])
+	sound = []
+	for l in dflines[1:-1]:
+		if isNumber(l):
+			sound.append(float(l))
+		else:
+			tot = tot + numpy.float(l.split()[2])
+			#sound.append(0.0)
+	sound = numpy.asarray(sound)
+	#sound = numpy.array([float(l) for l in dflines[1:-1]]) #this line causes errors if the station reloaded.
+	
 	# duration of data (in hours):
 	realduration = (tot/fsps)/3600.
 	print("original duration = %7.2f hours" % realduration)
@@ -138,3 +147,9 @@ def getSoundAndGraph(l, d):
 	#system("open " + soundname + ".png")
 	#system("afplay " + soundname + "_400_20000.wav&")
 
+def isNumber(number):
+	try:
+		float(number)
+	except:
+		return False
+	return True
