@@ -46,6 +46,7 @@ sm = ScreenManager()
 sound = SoundLoader.load('ryerson_400_20000.wav')
 im = Image(source="ryerson.png")
 
+
 def playSound(instance):
 	if sound:
 		sound.play()
@@ -57,14 +58,16 @@ def toDisplay(instance):
 	#else:
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
-	#earthtunes.getSoundAndGraph(loc, date)
+	earthtunes.getSoundAndGraph('fix', 'me')
+	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 	
 def toInput(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
 	if sound.state is 'play':
 		sound.stop()
-
+	sm.get_screen('Display Screen').layout.remove_widget(im)
+	
 # Declare both screens
 class InputScreen(Screen):
     
@@ -90,9 +93,6 @@ class DisplayScreen(Screen):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		earthtunes.getSoundAndGraph('fix', 'me')
-		
-		self.layout.add_widget(im)
 		self.play = Button(text='Play')
 		self.play.bind(on_press=playSound)
 		self.layout.add_widget(self.play)
