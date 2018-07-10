@@ -8,8 +8,10 @@ from kivy.uix.label import Label
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.image import Image
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
+
 
 import earthtunes
 
@@ -42,6 +44,7 @@ import earthtunes
 sm = ScreenManager()
 
 sound = SoundLoader.load('ryerson_400_20000.wav')
+im = Image(source="ryerson.png")
 
 def playSound(instance):
 	if sound:
@@ -87,6 +90,9 @@ class DisplayScreen(Screen):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
+		earthtunes.getSoundAndGraph('fix', 'me')
+		
+		self.layout.add_widget(im)
 		self.play = Button(text='Play')
 		self.play.bind(on_press=playSound)
 		self.layout.add_widget(self.play)
