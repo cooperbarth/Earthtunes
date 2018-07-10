@@ -7,26 +7,36 @@ from matplotlib.pyplot import *
 from datetime import datetime, timedelta
 from os import path, system
 
-def getSoundAndGraph(location, date):
+def getSoundAndGraph(l, d):
 	halfpi = 0.5*numpy.pi
 
-	#soundname = 'midewin'
-	#station = "M44A"
-	#net = "N4"
-	#location = "--"
-	#channel = "HHZ"
-
-	soundname = 'ryerson'
-	station = "L44A"
-	net = "TA"
-	location = "--"
-	channel = "BHZ"
-
-	#soundname = 'yellowstone' 
-	#station = "H17A"
-	#net = "TA"
-	#location = "--"
-	#channel = "BHZ"
+	if l == 'Ryerson' or l == 'ryerson':
+		soundname = 'ryerson'
+		station = "L44A"
+		net = "TA"
+		location = "--"
+		channel = "BHZ"
+	elif l == 'midewin' or l == 'Midewin':
+		soundname = 'midewin'
+		station = "M44A"
+		net = "N4"
+		location = "--"
+		channel = "HHZ"
+	elif l == 'Yellowstone' or l == 'yellowstone':
+		soundname = 'yellowstone' 
+		station = "H17A"
+		net = "TA"
+		location = "--"
+		channel = "BHZ"
+	else:
+		print('else')
+		soundname = 'ryerson'
+		station = "L44A"
+		net = "TA"
+		location = "--"
+		channel = "BHZ"
+	
+	
 
 	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
 	# An arctan() function is used to keep sound from overshooting and destroying speakers (the IRIS audio service calls this "compression" -- I guess!)
@@ -34,9 +44,10 @@ def getSoundAndGraph(location, date):
 	fixedamp = 5.e-5
 
 	# yesterday:
-	yesterday = datetime.today() - timedelta(days=1)
-	date = yesterday.strftime('%Y-%m-%d')
-	print("Getting yesterday's Ryerson data, ",date)
+	##yesterday = datetime.today() - timedelta(days=1)
+	##date = yesterday.strftime('%Y-%m-%d')
+	date = d
+	print("Getting Ryerson data from",date)
 
 	# a specific random day (with 2 thunderstorms):
 	# date = "2016-07-24"
@@ -117,7 +128,7 @@ def getSoundAndGraph(location, date):
 	ssps = numpy.int32(bandstupto20Hz * fsps)
 	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
 
-	axes(xlim=[0,realduration], ylim=[-3*fixedamp,fixedamp*3], xlabel="time (hours)",ylabel="ground velocity (mm/s)", title=station+' '+channel+' '+date)
+	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="time (hours)",ylabel="ground velocity (mm/s)", title=station+' '+channel+' '+date)
 	# plot y in mm (or mm/s) rather than m:
 	plot(hours,1000.*sound)
 	axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])

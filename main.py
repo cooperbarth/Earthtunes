@@ -26,7 +26,7 @@ import earthtunes
 #			text: 'Date'
 #       Button:
 #            text: 'Submit'
-#			on_press: 
+#			on_release: 
 #				root.manager.transition.direction = 'left'
 #				root.manager.current = 'Display Screen'
 #
@@ -35,7 +35,7 @@ import earthtunes
 #		orientation: 'vertical'
 #        Button:
 #            text: 'Return'
-#            on_press: 
+#            on_release: 
 #				root.manager.transition.direction = 'right'
 #				root.manager.current = 'Input Screen'
 #""")
@@ -58,7 +58,8 @@ def toDisplay(instance):
 	#else:
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
-	earthtunes.getSoundAndGraph('fix', 'me')
+	earthtunes.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
+	im.reload()
 	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 	
 def toInput(instance):
@@ -78,11 +79,11 @@ class InputScreen(Screen):
 		self.layout.add_widget(Label(text='Location'))
 		self.location = TextInput(multiline=False)
 		self.layout.add_widget(self.location)
-		self.layout.add_widget(Label(text='Date'))
+		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)'))
 		self.date = TextInput(multiline=False)
 		self.layout.add_widget(self.date)
 		self.button = Button(text='Submit',font_size=14)
-		self.button.bind(on_press=toDisplay)
+		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
 		
 		self.add_widget(self.layout)
@@ -94,10 +95,10 @@ class DisplayScreen(Screen):
 		self.layout = BoxLayout(orientation='vertical')
 		
 		self.play = Button(text='Play')
-		self.play.bind(on_press=playSound)
+		self.play.bind(on_release=playSound)
 		self.layout.add_widget(self.play)
 		self.button = Button(text='Return')
-		self.button.bind(on_press=toInput)
+		self.button.bind(on_release=toInput)
 		self.layout.add_widget(self.button)
 		
 		self.add_widget(self.layout)
@@ -137,7 +138,7 @@ if __name__ == '__main__':
 #		self.date = TextInput(multiline=False)
 #		self.add_widget(self.date)
 #		self.button = Button(text='Submit',font_size=14)
-#		self.button.bind(on_press=segue)
+#		self.button.bind(on_release=segue)
 #		self.add_widget(self.button)
 #		
 #class DisplayScreen(Label):
