@@ -11,7 +11,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 
-
+import earthtunes
 
 # Formats the screens
 #Builder.load_string("""
@@ -41,18 +41,26 @@ from kivy.core.audio import SoundLoader
 # Create screen manager
 sm = ScreenManager()
 
+sound = SoundLoader.load('ryerson_400_20000.wav')
+
 def playSound(instance):
-	sound = SoundLoader.load('ryerson_400_20000.wav')
 	if sound:
 		sound.play()
 
 def toDisplay(instance):
+	#if loc is '' or date is '':
+	#	return
+	
+	#else:
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
+	#earthtunes.getSoundAndGraph(loc, date)
 	
 def toInput(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
+	if sound.state is 'play':
+		sound.stop()
 
 # Declare both screens
 class InputScreen(Screen):
@@ -62,14 +70,14 @@ class InputScreen(Screen):
 		self.layout = BoxLayout(orientation='vertical')
 		
 		self.layout.add_widget(Label(text='Location'))
-		self.layout.location = TextInput(multiline=False)
-		self.layout.add_widget(self.layout.location)
+		self.location = TextInput(multiline=False)
+		self.layout.add_widget(self.location)
 		self.layout.add_widget(Label(text='Date'))
-		self.layout.date = TextInput(multiline=False)
-		self.layout.add_widget(self.layout.date)
-		self.layout.button = Button(text='Submit',font_size=14)
-		self.layout.button.bind(on_press=toDisplay)
-		self.layout.add_widget(self.layout.button)
+		self.date = TextInput(multiline=False)
+		self.layout.add_widget(self.date)
+		self.button = Button(text='Submit',font_size=14)
+		self.button.bind(on_press=toDisplay)
+		self.layout.add_widget(self.button)
 		
 		self.add_widget(self.layout)
 
