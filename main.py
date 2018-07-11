@@ -13,7 +13,7 @@ from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 
 
-import earthtunes
+import earthtunes27
 
 # Formats the screens
 #Builder.load_string("""
@@ -58,7 +58,7 @@ def toDisplay(instance):
 	#else:
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
-	earthtunes.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
+	earthtunes27.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
 	im.reload()
 	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 	

@@ -45,7 +45,7 @@ def getSoundAndGraph(l, d):
 	#yesterday = datetime.today() - timedelta(days=1)
 	#date = yesterday.strftime('%Y-%m-%d')
 	date = d
-	print "Getting Ryerson data from ",date
+	print "Getting data from",l,'on',date
 
 	# a specific random day (with 2 thunderstorms):
 	# date = "2016-07-24"
@@ -131,7 +131,7 @@ def getSoundAndGraph(l, d):
 	ssps = bandstupto20Hz * fsps
 	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
 
-	axes(xlim=[0,realduration], ylim=[ymin,ymax], xlabel="time (hours)",ylabel="ground velocity (mm/s)", title=station+' '+channel+' '+date)
+	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="time (hours)",ylabel="ground velocity (mm/s)", title=station+' '+channel+' '+date)
 	# plot y in mm (or mm/s) rather than m:
 	plot(hours,1000.*sound)
 	axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
