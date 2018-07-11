@@ -61,7 +61,8 @@ def getSoundAndGraph(l, d):
 
 	time = "00:00:00"
 
-	duration = "86400"   #  in seconds = 24 hours
+	duration = "420"
+	#duration = "86400"   #  in seconds = 24 hours
 	#duration = "21600"  # 6 hours
 
 	# 6 different time series acceleration factors ("stretch" factors in the frequency domain).
@@ -78,24 +79,13 @@ def getSoundAndGraph(l, d):
 	type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
 	when = "&starttime=" + date + "T" + time + "&duration=" + duration
 	url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
-	sfn = "IRISfiles/" + station + "." + net + ".." + channel + "." + date + "." + duration + ".rm.scale-AUTO.txt" 
-	print 'Requesting ',url
-	print 'Saved in ',sfn
 
-	if path.isfile(sfn):
-	   print "reading previously requested data from saved file..."
-	   rsfn = open(sfn,'r')
-	   df = rsfn.read()
-	   dflines = df.split('\n')
-	else:
-	   print "requesting data from IRIS...please be patient..."
-	   ws = urllib2.urlopen(url)
-	   print "loading data ..."
-	   df = ws.read()
-	   print "processing data..."
-	   dflines = df.split('\n')
-	   wsfn = open(sfn,'w')
-	   wsfn.write(df)
+	print "requesting data from IRIS...please be patient..."
+	ws = urllib2.urlopen(url)
+	print "loading data ..."
+	df = ws.read()
+	print "processing data..."
+	dflines = df.split('\n')
 	   
 	head = dflines[0]
 	# sampling rate in data:
@@ -109,8 +99,6 @@ def getSoundAndGraph(l, d):
 		else:
 			tot = tot + numpy.float(l.split()[2])
 	sound = numpy.asarray(sound)
-
-	#sound = numpy.array([float(l) for l in dflines[1:-1]])
 
 	# duration of data (in hours):
 	realduration = (tot/fsps)/3600.
