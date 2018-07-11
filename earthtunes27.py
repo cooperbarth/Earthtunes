@@ -137,6 +137,8 @@ def getSoundAndGraph(l, d):
 	axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
 	#show()
 	savefig(soundname + ".png")
+	
+	return soundname
 
 	#system("open " + soundname + ".png")
 	#system("afplay " + soundname + "_400_20000.wav&")

@@ -58,8 +58,11 @@ def toDisplay(instance):
 	#else:
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
-	earthtunes27.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
+	name = earthtunes27.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
+	im.source = name + '.png'
 	im.reload()
+	sound = SoundLoader.load(name + '_400_20000.wav')
+	print sound.source
 	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 	
 def toInput(instance):
