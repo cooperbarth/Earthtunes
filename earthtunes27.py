@@ -7,22 +7,22 @@ from matplotlib.pyplot import *
 from datetime import datetime, timedelta
 from os import path, system
 
-def getSoundAndGraph(l, d, t, dur):
+def getSoundAndGraph(location, date, time, duration):
 	halfpi = 0.5*numpy.pi
 
-	if l == 'Ryerson (IL,USA)':
+	if location == 'Ryerson (IL,USA)':
 		soundname = 'ryerson'
 		station = "L44A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-	#elif l.upper() == 'MIDEWIN':
+	#elif location == 'Midewin (IL,USA)':
 	#	soundname = 'midewin'
 	#	station = "M44A"
 	#	net = "N4"
 	#	location = "--"
 	#	channel = "HHZ"
-	elif l == 'Yellowstone (WY,USA)':
+	elif location == 'Yellowstone (WY,USA)':
 		soundname = 'yellowstone' 
 		station = "H17A"
 		net = "TA"
@@ -35,47 +35,33 @@ def getSoundAndGraph(l, d, t, dur):
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-
-	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
-	# An arctan() function is used to keep sound from overshooting and destroying speakers (the IRIS audio service calls this "compression" -- I guess!)
-	# enter the signal level (in physical units (m/s)) to which you want sound to scale quasi-linearly (about a third of the expected maximum signal)
-	fixedamp = 5.e-5
-
-	# yesterday:
-	#yesterday = datetime.today() - timedelta(days=1)
-	#date = yesterday.strftime('%Y-%m-%d')
-	date = d
+		
 	print "Getting data from",l,'on',date
 
-	# a specific random day (with 2 thunderstorms):
-	# date = "2016-07-24"
-
-	# Alaska M6.2 & Alaska M6.2 
-	#date = "2017-05-01"
-
-	# M5.8 Montana and M6.5 Philippines 
-	#date = "2017-07-06"
-
-	# Oklahoma M4.2
-	#date = "2017-07-14"
-
-	time = t
+	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
+	# enter the signal level (in physical units (m/s)) to which you want sound to scale quasi-linearly (about a third of the expected maximum signal)
+	fixedamp = 5.e-5
 	
-	duration = dur
-	#duration = "86400"   #  in seconds = 24 hours
-	#duration = "21600"  # 6 hours
+	# Example dates:
+		# a specific random day (with 2 thunderstorms):
+			# date = "2016-07-24"
+		# Alaska M6.2 & Alaska M6.2 
+			#date = "2017-05-01"
+		# M5.8 Montana and M6.5 Philippines 
+			#date = "2017-07-06"
+		# Oklahoma M4.2
+			#date = "2017-07-14"
 
 	# 6 different time series acceleration factors ("stretch" factors in the frequency domain).
-	# only one of them is used in line 101.
+	# only one of them is used in line 94 and 105.
 	bandstupto50Hz = 160
 	bandstupto20Hz = 400
 	bandstupto10Hz = 800
 	bandstupto5Hz = 1600
 	bandstuptohalfHz = 16000
 	bandstuptotenthHz = 64000
-	#--------------------------------------------------
 
-	# request data from IRIS' timeseries web service, and store in folder "IRISfiles" (make sure it exists) for ipotential repeat use.
+	# request data from IRIS' timeseries web service
 	type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
 	when = "&starttime=" + date + "T" + time + "&duration=" + duration
 	url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
@@ -111,7 +97,7 @@ def getSoundAndGraph(l, d, t, dur):
 	mxs = 1.01*numpy.max(sound)
 	mns = 1.01*numpy.min(sound)
 
-	# use fixed_amplitude:
+	# An arctan() function is used to keep sound from overshooting and destroying speakers (the IRIS audio service calls this "compression" -- I guess!)
 	scaledsound = (2**31)*numpy.arctan(sound/fixedamp)/halfpi
 	s32 = numpy.int32(scaledsound)
 
@@ -123,13 +109,9 @@ def getSoundAndGraph(l, d, t, dur):
 	# plot y in mm (or mm/s) rather than m:
 	plot(hours,1000.*sound)
 	axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
-	#show()
 	savefig(soundname + ".png")
 	
 	return soundname
-
-	#system("open " + soundname + ".png")
-	#system("afplay " + soundname + "_400_20000.wav&")
 
 def isNumber(number):
 	try:
