@@ -47,7 +47,7 @@ def getSoundAndGraph(l, d):
 	##yesterday = datetime.today() - timedelta(days=1)
 	##date = yesterday.strftime('%Y-%m-%d')
 	date = d
-	print("Getting Ryerson data from",date)
+	print("Getting Ryerson data from ",date)
 
 	# a specific random day (with 2 thunderstorms):
 	# date = "2016-07-24"
@@ -91,16 +91,11 @@ def getSoundAndGraph(l, d):
 		dflines = df.split('\n')
 	else:					#Retrieving data from website
 		print("requesting data from IRIS...please be patient...")
-		#ws = urllib.request.urlopen(url)		#Old implementation, replaced with urlretrieve
 		urllib.request.urlretrieve(url,sfn)
 		print("loading data ...")
-		#df = ws.read()							#Old implementation, replaced with urlretrieve
 		rsfn = open(sfn,'r')
 		df = rsfn.read()
 		print("processing data...")
-		#dflines = df.decode().split('\n')  	#Old implementation, replaced with urlretrieve
-		#wsfn = open(sfn,'w')      				#Old implementation, replaced with urlretrieve
-		#wsfn.write(df.decode()) 				#Old implementation, replaced with urlretrieve
 		dflines = df.split('\n')
 	  
 	head = dflines[0]
@@ -114,9 +109,7 @@ def getSoundAndGraph(l, d):
 			sound.append(float(l))
 		else:
 			tot = tot + numpy.float(l.split()[2])
-			#sound.append(0.0)
 	sound = numpy.asarray(sound)
-	#sound = numpy.array([float(l) for l in dflines[1:-1]]) #this line causes errors if the station reloaded.
 	
 	# duration of data (in hours):
 	realduration = (tot/fsps)/3600.
