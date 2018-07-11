@@ -37,10 +37,6 @@ def getSoundAndGraph(location, date, time, duration):
 		channel = "BHZ"
 		
 	print "Getting data from",location,'on',date
-
-	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
-	# enter the signal level (in physical units (m/s)) to which you want sound to scale quasi-linearly (about a third of the expected maximum signal)
-	fixedamp = 5.e-5
 	
 	# Example dates:
 		# a specific random day (with 2 thunderstorms):
@@ -79,13 +75,20 @@ def getSoundAndGraph(location, date, time, duration):
 	# total number of samples in data:
 	tot = numpy.float(head.split()[2])
 	sound = []
+	maxAmp = 0
 	for l in dflines[1:-1]:
 		if isNumber(l):
-			sound.append(float(l))
+			l = float(l)
+			sound.append(l)
+			maxAmp = max(maxAmp, abs(l))
 		else:
 			tot = tot + numpy.float(l.split()[2])
 	sound = numpy.asarray(sound)
 
+	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
+	# calculate signal level (in physical units (m/s)) to which you want sound to scale quasi-linearly (one-third of the maximum signal)
+	fixedamp = maxAmp / 3.
+	
 	# duration of data (in hours):
 	realduration = (tot/fsps)/3600.
 	print "original duration = %7.2f hours" % realduration
