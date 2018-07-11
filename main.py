@@ -65,7 +65,7 @@ class InputScreen(Screen):
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.layout.add_widget(Label(text='Location'))
+		self.layout.add_widget(Label(text='Location'))				#Location Entry
 		
 		self.location = Spinner(
 							# default value shown
@@ -79,18 +79,21 @@ class InputScreen(Screen):
 							)
 		self.layout.add_widget(self.location)
 		
-		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)'))
+		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)')) 	#Date Entry
 		self.date = TextInput(multiline=False)
 		self.layout.add_widget(self.date)
 		
-		self.layout.add_widget(Label(text='Start Time (HH:MM:SS)'))
+		self.grid = GridLayout(cols=4)								#Time  Entry
+		self.grid.add_widget(Label(text='Start Time (HH:MM:SS)'))	
 		self.startTime = TextInput(multiline=False)
-		self.layout.add_widget(self.startTime)
-		self.layout.add_widget(Label(text='Duration (minutes)'))
+		self.grid.add_widget(self.startTime)
+		self.grid.add_widget(Label(text='Duration (minutes)'))
 		self.duration = TextInput(multiline=False)
-		self.layout.add_widget(self.duration)
+		self.grid.add_widget(self.duration)
 		
-		self.button = Button(text='Submit',font_size=14)
+		self.layout.add_widget(self.grid)
+		
+		self.button = Button(text='Submit',font_size=14)			#Submit Button
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
 		
