@@ -50,20 +50,22 @@ im = Image(source="ryerson.png")
 def playSound(instance):
 	if sound:
 		sound.play()
+	else:
+		return
 
 def toDisplay(instance):
-	#if loc is '' or date is '':
-	#	return
+	if sm.get_screen('Input Screen').location.text == '' or sm.get_screen('Input Screen').date.text == '':
+		return
 	
-	#else:
-	sm.transition.direction = 'left'
-	sm.current = 'Display Screen'
-	name = earthtunes27.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
-	im.source = name + '.png'
-	im.reload()
-	sound = SoundLoader.load(name + '_400_20000.wav')
-	print sound.source
-	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
+	else:
+		global sound
+		sm.transition.direction = 'left'
+		sm.current = 'Display Screen'
+		name = earthtunes27.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
+		im.source = name + '.png'
+		im.reload()
+		sound = SoundLoader.load(name + '_400_20000.wav')
+		sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 	
 def toInput(instance):
 	sm.transition.direction = 'right'
