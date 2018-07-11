@@ -9,7 +9,9 @@ from os import path, system
 
 def getSoundAndGraph(location, date, time, duration):
 	halfpi = 0.5*numpy.pi
-
+	duration = str(float(duration) * 60)
+	disploc = location
+	
 	if location == 'Ryerson (IL,USA)':
 		soundname = 'ryerson'
 		station = "L44A"
@@ -36,7 +38,7 @@ def getSoundAndGraph(location, date, time, duration):
 		location = "--"
 		channel = "BHZ"
 		
-	print "Getting data from",location,'on',date
+	print "Getting data from",disploc,'on',date
 	
 	# Example dates:
 		# a specific random day (with 2 thunderstorms):
