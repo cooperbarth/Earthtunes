@@ -36,7 +36,7 @@ def getSoundAndGraph(location, date, time, duration):
 		location = "--"
 		channel = "BHZ"
 		
-	print "Getting data from",l,'on',date
+	print "Getting data from",location,'on',date
 
 	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
 	# enter the signal level (in physical units (m/s)) to which you want sound to scale quasi-linearly (about a third of the expected maximum signal)
