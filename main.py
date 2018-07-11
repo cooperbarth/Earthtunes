@@ -62,7 +62,11 @@ def toDisplay(instance):
 		global sound
 		sm.transition.direction = 'left'
 		sm.current = 'Display Screen'
-		name = earthtunes27.getSoundAndGraph(sm.get_screen('Input Screen').location.text, sm.get_screen('Input Screen').date.text)
+		name = earthtunes27.getSoundAndGraph(
+							sm.get_screen('Input Screen').location.text, 
+							sm.get_screen('Input Screen').date.text,
+							sm.get_screen('Input Screen').startTime.text,
+							sm.get_screen('Input Screen').duration.text)
 		im.source = name + '.png'
 		im.reload()
 		sound = SoundLoader.load(name + '_400_20000.wav')
@@ -94,13 +98,19 @@ class InputScreen(Screen):
 							#size=(100, 44),
 							#pos_hint={'center_x': .5, 'center_y': .5})
 							)
-		
 		self.layout.add_widget(self.location)
-		
 		
 		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)'))
 		self.date = TextInput(multiline=False)
 		self.layout.add_widget(self.date)
+		
+		self.layout.add_widget(Label(text='Start Time (HH:MM:SS)'))
+		self.startTime = TextInput(multiline=False)
+		self.layout.add_widget(self.startTime)
+		self.layout.add_widget(Label(text='Duration (seconds)'))
+		self.duration = TextInput(multiline=False)
+		self.layout.add_widget(self.duration)
+		
 		self.button = Button(text='Submit',font_size=14)
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
