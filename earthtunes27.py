@@ -10,19 +10,19 @@ from os import path, system
 def getSoundAndGraph(l, d):
 	halfpi = 0.5*numpy.pi
 
-	if l.upper() == 'RYERSON':
+	if l == 'Ryerson (IL,USA)':
 		soundname = 'ryerson'
 		station = "L44A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-	elif l.upper() == 'MIDEWIN':
-		soundname = 'midewin'
-		station = "M44A"
-		net = "N4"
-		location = "--"
-		channel = "HHZ"
-	elif l.upper() == 'YELLOWSTONE':
+	#elif l.upper() == 'MIDEWIN':
+	#	soundname = 'midewin'
+	#	station = "M44A"
+	#	net = "N4"
+	#	location = "--"
+	#	channel = "HHZ"
+	elif l == 'Yellowstone (WY,USA)':
 		soundname = 'yellowstone' 
 		station = "H17A"
 		net = "TA"

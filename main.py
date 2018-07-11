@@ -9,6 +9,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
+from kivy.uix.spinner import Spinner
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 
@@ -82,8 +83,21 @@ class InputScreen(Screen):
 		self.layout = BoxLayout(orientation='vertical')
 		
 		self.layout.add_widget(Label(text='Location'))
-		self.location = TextInput(multiline=False)
+		
+		self.location = Spinner(
+							# default value shown
+							text='Select:',
+							# available values
+							values=('Select:', 'Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'More to come')
+							# just for positioning in our example
+							#size_hint=(None, None),
+							#size=(100, 44),
+							#pos_hint={'center_x': .5, 'center_y': .5})
+							)
+		
 		self.layout.add_widget(self.location)
+		
+		
 		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)'))
 		self.date = TextInput(multiline=False)
 		self.layout.add_widget(self.date)
