@@ -7,7 +7,7 @@ from matplotlib.pyplot import *
 from datetime import datetime, timedelta
 from os import path, system
 
-def getSoundAndGraph(l, d):
+def getSoundAndGraph(l, d, t, dur):
 	halfpi = 0.5*numpy.pi
 
 	if l == 'Ryerson (IL,USA)':
@@ -59,9 +59,9 @@ def getSoundAndGraph(l, d):
 	# Oklahoma M4.2
 	#date = "2017-07-14"
 
-	time = "00:00:00"
-
-	duration = "420"
+	time = t
+	
+	duration = dur
 	#duration = "86400"   #  in seconds = 24 hours
 	#duration = "21600"  # 6 hours
 
