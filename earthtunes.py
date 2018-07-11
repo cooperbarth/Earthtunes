@@ -6,7 +6,7 @@ from scipy.io import wavfile
 from matplotlib.pyplot import *
 from datetime import datetime, timedelta
 from os import path, system
-
+#test
 def getSoundAndGraph(l, d):
 	halfpi = 0.5*numpy.pi
 
