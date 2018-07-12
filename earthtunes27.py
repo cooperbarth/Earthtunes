@@ -51,7 +51,7 @@ def getSoundAndGraph(location, date, time, duration):
 			#date = "2017-07-14"
 
 	# 6 different time series acceleration factors ("stretch" factors in the frequency domain).
-	# only one of them is used in line 94 and 105.
+	# only one of them is used in line 99 and 110.
 	bandstupto50Hz = 160
 	bandstupto20Hz = 400
 	bandstupto10Hz = 800

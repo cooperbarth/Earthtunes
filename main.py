@@ -33,6 +33,7 @@ def playSound(instance):
 def toDisplay(instance):
 	global sound
 	
+	#Checking for Error in User Input
 	locationText = sm.get_screen('Input Screen').location.text
 	dateText = sm.get_screen('Input Screen').date.text
 	startText = sm.get_screen('Input Screen').startTime.text
@@ -57,6 +58,7 @@ def toDisplay(instance):
 		print 'Date is out of range'
 		return
 
+	#The Actual Transition Code
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
 	name = earthtunes27.getSoundAndGraph(
