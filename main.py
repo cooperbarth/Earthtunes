@@ -94,10 +94,13 @@ def getSoundAndGraph(location, date, time, duration):
 	url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
 
 	print "requesting data from IRIS...please be patient..."
+	#sm.get_screen('Loading Screen').message.text = "requesting data from IRIS...please be patient..."
 	ws = urllib2.urlopen(url)
 	print "loading data ..."
+	#sm.get_screen('Loading Screen').message.text = 'loading data...'
 	df = ws.read()
 	print "processing data..."
+	#sm.get_screen('Loading Screen').message.text = 'processing data...'
 	dflines = df.split('\n')
 	   
 	head = dflines[0]
@@ -154,46 +157,10 @@ def isNumber(number):
 		return False
 	return True		
 		
-#toDisplay: transitions to Display Screen; calls earthtunes and reloads sound/image to match
+#toDisplay: transitions to Loading Screen; calls earthtunes and reloads sound/image to match
 def toDisplay(instance):
-	global sound
-	
-	#Checking for Error in User Input
-	locationText = sm.get_screen('Input Screen').location.text
-	dateText = sm.get_screen('Input Screen').date.text
-	startText = sm.get_screen('Input Screen').startTime.text
-	durationText = sm.get_screen('Input Screen').duration.text
-	
-	if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
-		print 'Please fill out all fields'
-		return
-	if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
-		print 'Invalid Date'
-		return
-	if len(startText) is not 8 or (startText[0:1] + startText[3:4] + startText[6:7]).isdigit() is False or startText[2] + startText[5] <> '::':
-		print 'Invalid Start Time'
-		return
-	if durationText.isdigit() is False:
-		print 'Invalid Duration'
-		return
-		
-	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
-	if thenDate >= datetime.now():
-		print 'Date is out of range'
-		return
-
-	#The Actual Transition Code
 	sm.transition.direction = 'left'
-	sm.current = 'Display Screen'
-	name = getSoundAndGraph(
-						sm.get_screen('Input Screen').location.text, 
-						sm.get_screen('Input Screen').date.text,
-						sm.get_screen('Input Screen').startTime.text,
-						sm.get_screen('Input Screen').duration.text)
-	im.source = name + '.png'
-	im.reload()
-	sound = SoundLoader.load(name + '_400_20000.wav')
-	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
+	sm.current = 'Loading Screen'
 
 #toInput: transitions back to input screen; stops sound, resets picture
 def toInput(instance):
@@ -239,6 +206,54 @@ class InputScreen(Screen):
 		self.layout.add_widget(self.button)
 		
 		self.add_widget(self.layout)
+		
+class LoadingScreen(Screen):
+	
+	def __init__(self, **kwargs):
+		super(LoadingScreen, self).__init__(**kwargs)
+		self.message = Label(text='Loading...')
+		self.add_widget(self.message)
+		
+	def on_enter(self):
+		global sound
+		
+		#Checking for Error in User Input
+		locationText = sm.get_screen('Input Screen').location.text
+		dateText = sm.get_screen('Input Screen').date.text
+		startText = sm.get_screen('Input Screen').startTime.text
+		durationText = sm.get_screen('Input Screen').duration.text
+		
+		if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
+			print 'Please fill out all fields'
+			return
+		if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
+			print 'Invalid Date'
+			return
+		if len(startText) is not 8 or (startText[0:1] + startText[3:4] + startText[6:7]).isdigit() is False or startText[2] + startText[5] <> '::':
+			print 'Invalid Start Time'
+			return
+		if durationText.isdigit() is False:
+			print 'Invalid Duration'
+			return
+			
+		thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
+		if thenDate >= datetime.now():
+			print 'Date is out of range'
+			return
+
+		#The Actual Transition Code
+		sm.transition.direction = 'left'
+		sm.current = 'Display Screen'
+		name = getSoundAndGraph(
+							sm.get_screen('Input Screen').location.text, 
+							sm.get_screen('Input Screen').date.text,
+							sm.get_screen('Input Screen').startTime.text,
+							sm.get_screen('Input Screen').duration.text)
+		#sm.get_screen('Loading Screen').message.text='Loading...'
+		im.source = name + '.png'
+		im.reload()
+		sound = SoundLoader.load(name + '_400_20000.wav')
+		sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 
 class DisplayScreen(Screen):
 
@@ -257,9 +272,11 @@ class DisplayScreen(Screen):
 
 # Create screens and add to manager
 input = InputScreen(name='Input Screen')
+loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 
 sm.add_widget(input)
+sm.add_widget(loading)
 sm.add_widget(display)
 
 sm.current = 'Input Screen'
