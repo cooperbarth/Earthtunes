@@ -289,15 +289,19 @@ class LoadingScreen(Screen):
 		
 		if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
 			print 'Please fill out all fields'
+			sm.current = 'Input Screen'
 			return
 		if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
 			print 'Invalid Date'
+			sm.current = 'Input Screen'
 			return
 		if len(startText) is not 8 or (startText[0:1] + startText[3:4]).isdigit() is False or startText[2] <> ':':
 			print 'Invalid Start Time'
+			sm.current = 'Input Screen'
 			return
 		if durationText.isdigit() is False:
 			print 'Invalid Duration'
+			sm.current = 'Input Screen'
 			return
 			
 		thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
