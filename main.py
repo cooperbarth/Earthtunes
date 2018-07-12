@@ -191,6 +191,54 @@ def isNumber(number):
 #toDisplay: transitions to Loading Screen; calls earthtunes and reloads sound/image to match
 def toDisplay(instance):
 	sm.transition.direction = 'left'
+	
+	#Checking for Error in User Input
+	locationText = sm.get_screen('Input Screen').location.text
+	dateText = sm.get_screen('Input Screen').date.text
+	startText = sm.get_screen('Input Screen').startTime.text + ":00"
+	durationText = sm.get_screen('Input Screen').duration.text
+	
+	if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Empty Field(s).'
+		return
+	if len(dateText) is not 10 or '.' in dateText or (dateText[0:3] + dateText[5:7] + dateText[8:-1]).isdigit() is False or dateText[4] + dateText[7] <> '--':
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date Format.'
+		return
+		
+	if int(dateText[5:7]) > 12 or dateText[5:7] == '0':
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date.'
+		return
+	if dateText[5:7] in ['04', '06', '09', '11']:
+		numdays = 30
+	elif dateText[5:6] == '02':
+		if float(dateText[0:3]) / 4. == 0.:
+			numdays = 29
+		else:
+			numdays = 28
+	else:
+		numdays = 31
+	if int(dateText[8:9]) > numdays:
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date.'
+		return
+	
+	if len(startText) is not 8 or '.' in startText or (startText[0:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[0:2]) > 23 or int(startText[3:5]) > 59:
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Start Time.'
+		return
+	if '.' in durationText or '-' in durationText or durationText.isdigit() is False:
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Duration Format.'
+		return
+	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
+	if thenDate >= datetime.now():
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Date Out of Range.'
+		return
+
 	sm.current = 'Loading Screen'
 
 #toInput: transitions back to input screen; stops sound, resets picture
@@ -240,7 +288,7 @@ class ChooseScreen(Screen):
 	
 choose = ChooseScreen(name='Choose Screen')
 sm.add_widget(choose)
-	
+
 class InputScreen(Screen):
     
 	def __init__(self, **kwargs):
@@ -280,7 +328,8 @@ class InputError(Screen):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
-		self.layout.add_widget(Label(text='input error message here'))
+		self.errorlabel = Label(text='Input Error')
+		self.layout.add_widget(self.errorlabel)
 		self.returnbutton = Button(text='Return', font_size=14)
 		self.returnbutton.bind(on_release=toInputSimple)
 		self.layout.add_widget(self.returnbutton)
@@ -295,34 +344,6 @@ class LoadingScreen(Screen):
 		
 	def on_enter(self):
 		global sound
-		
-		#Checking for Error in User Input
-		locationText = sm.get_screen('Input Screen').location.text
-		dateText = sm.get_screen('Input Screen').date.text
-		startText = sm.get_screen('Input Screen').startTime.text + ":00"
-		durationText = sm.get_screen('Input Screen').duration.text
-		
-		if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
-			print 'Please fill out all fields'
-			sm.current = 'Input Error Screen'
-			return
-		if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
-			print 'Invalid Date'
-			sm.current = 'Input Error Screen'
-			return
-		if len(startText) is not 8 or (startText[0:1] + startText[3:4]).isdigit() is False or startText[2] <> ':':
-			print 'Invalid Start Time'
-			sm.current = 'Input Error Screen'
-			return
-		if durationText.isdigit() is False:
-			print 'Invalid Duration'
-			sm.current = 'Input Error Screen'
-			return
-			
-		thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
-		if thenDate >= datetime.now():
-			print 'Date is out of range'
-			return
 
 		#The Actual Transition Code
 		sm.transition.direction = 'left'
