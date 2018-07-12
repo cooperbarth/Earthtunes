@@ -1,5 +1,6 @@
 import kivy
-kivy.require('1.10.0')
+import earthtunes27
+kivy.require('1.10.1')
 
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
@@ -12,8 +13,7 @@ from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
-
-import earthtunes27
+from datetime import datetime
 
 # Create screen manager
 sm = ScreenManager()
@@ -31,17 +31,32 @@ def playSound(instance):
 
 #toDisplay: transitions to Display Screen; calls earthtunes and reloads sound/image to match
 def toDisplay(instance):
-	#Input checking
-	if sm.get_screen('Input Screen').location.text == 'Select:':
-		return
-	if sm.get_screen('Input Screen').date.text == '':
-		return
-	if sm.get_screen('Input Screen').startTime.text == '':
-		return
-	if sm.get_screen('Input Screen').duration.text == '':
-		return
-	
 	global sound
+	
+	locationText = sm.get_screen('Input Screen').location.text
+	dateText = sm.get_screen('Input Screen').date.text
+	startText = sm.get_screen('Input Screen').startTime.text
+	durationText = sm.get_screen('Input Screen').duration.text
+	
+	if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
+		print 'Please fill out all fields'
+		return
+	if len(dateText) is not 10 or earthtunes27.isNumber(dateText[0:3] + dateText[5:6] + dateText[8:9]) is False or dateText[4] + dateText[7] <> '--':
+		print 'Invalid Date'
+		return
+	if len(startText) is not 8 or earthtunes27.isNumber(startText[0:1] + startText[3:4] + startText[6:7]) is False or startText[2] + startText[5] <> '::':
+		print 'Invalid Start Time'
+		return
+	if earthtunes27.isNumber(durationText) is False:
+		print 'Invalid Duration'
+		return
+		
+	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
+	nowDate = datetime.now()
+	if thenDate >= nowDate:
+		print 'Date is out of range'
+		return
+
 	sm.transition.direction = 'left'
 	sm.current = 'Display Screen'
 	name = earthtunes27.getSoundAndGraph(
