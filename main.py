@@ -42,10 +42,10 @@ def toDisplay(instance):
 	if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
 		print 'Please fill out all fields'
 		return
-	if len(dateText) is not 10 or earthtunes27.isNumber(dateText[0:3] + dateText[5:6] + dateText[8:9]) is False or dateText[4] + dateText[7] <> '--':
+	if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
 		print 'Invalid Date'
 		return
-	if len(startText) is not 8 or earthtunes27.isNumber(startText[0:1] + startText[3:4] + startText[6:7]) is False or startText[2] + startText[5] <> '::':
+	if len(startText) is not 8 or (startText[0:1] + startText[3:4] + startText[6:7]).isdigit() is False or startText[2] + startText[5] <> '::':
 		print 'Invalid Start Time'
 		return
 	if earthtunes27.isNumber(durationText) is False:
@@ -53,8 +53,7 @@ def toDisplay(instance):
 		return
 		
 	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
-	nowDate = datetime.now()
-	if thenDate >= nowDate:
+	if thenDate >= datetime.now():
 		print 'Date is out of range'
 		return
 
@@ -92,11 +91,7 @@ class InputScreen(Screen):
 							# default value shown
 							text='Select:',
 							# available values
-							values=('Select:', 'Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'More to come')
-							# just for positioning in our example
-							#size_hint=(None, None),
-							#size=(100, 44),
-							#pos_hint={'center_x': .5, 'center_y': .5})
+							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'More to come')
 							)
 		self.layout.add_widget(self.location)
 		
