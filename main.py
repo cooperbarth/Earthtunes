@@ -214,6 +214,10 @@ def Selected(instance):
 	sm.current = 'Input Screen'
 	sm.get_screen('Input Screen').location.text = choose.location.text
 	
+def toInputError(instance):
+	sm.transition.direction = 'left'
+	sm.current = 'Input Error Screen'
+	
 class ChooseScreen(Screen):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
@@ -235,6 +239,7 @@ class ChooseScreen(Screen):
 		self.add_widget(self.layout)
 	
 choose = ChooseScreen(name='Choose Screen')
+sm.add_widget(choose)
 	
 class InputScreen(Screen):
     
@@ -271,6 +276,16 @@ class InputScreen(Screen):
 		
 		self.add_widget(self.layout)
 		
+class InputError(Screen):
+	def __init__(self, **kwargs):
+		super(InputError, self).__init__(**kwargs)
+		self.layout = BoxLayout(orientation='vertical')
+		self.layout.add_widget(Label(text='input error message here'))
+		self.returnbutton = Button(text='Return', font_size=14)
+		self.returnbutton.bind(on_release=toInputSimple)
+		self.layout.add_widget(self.returnbutton)
+		self.add_widget(self.layout)
+		
 class LoadingScreen(Screen):
 	
 	def __init__(self, **kwargs):
@@ -289,19 +304,19 @@ class LoadingScreen(Screen):
 		
 		if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
 			print 'Please fill out all fields'
-			sm.current = 'Input Screen'
+			sm.current = 'Input Error Screen'
 			return
 		if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
 			print 'Invalid Date'
-			sm.current = 'Input Screen'
+			sm.current = 'Input Error Screen'
 			return
 		if len(startText) is not 8 or (startText[0:1] + startText[3:4]).isdigit() is False or startText[2] <> ':':
 			print 'Invalid Start Time'
-			sm.current = 'Input Screen'
+			sm.current = 'Input Error Screen'
 			return
 		if durationText.isdigit() is False:
 			print 'Invalid Duration'
-			sm.current = 'Input Screen'
+			sm.current = 'Input Error Screen'
 			return
 			
 		thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
@@ -360,12 +375,13 @@ input = InputScreen(name='Input Screen')
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 error = Error404(name='Error Screen')
+inputError = InputError(name='Input Error Screen')
 
 sm.add_widget(input)
 sm.add_widget(loading)
 sm.add_widget(display)
 sm.add_widget(error)
-sm.add_widget(choose)
+sm.add_widget(inputError)
 
 sm.current = 'Input Screen'
 
