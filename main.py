@@ -207,7 +207,7 @@ def toDisplay(instance):
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date Format.'
 		return
 		
-	if int(dateText[5:7]) > 12 or dateText[5:7] == '0':
+	if int(dateText[5:7]) > 12 or int(dateText[5:7]) == 0:
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date.'
 		return
