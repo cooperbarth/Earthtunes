@@ -18,17 +18,20 @@ import earthtunes27
 # Create screen manager
 sm = ScreenManager()
 
+#Preload sound and image. These will be reloaded later for correct files
 sound = SoundLoader.load('ryerson_400_20000.wav')
 im = Image(source="ryerson.png")
 
-
+#playSound: Play the currently loaded sound
 def playSound(instance):
-	if sound:
+	if sound: #Check if it exists
 		sound.play()
 	else:
 		return
 
+#toDisplay: transitions to Display Screen; calls earthtunes and reloads sound/image to match
 def toDisplay(instance):
+	#Input checking
 	if sm.get_screen('Input Screen').location.text == 'Select:':
 		return
 	if sm.get_screen('Input Screen').date.text == '':
@@ -50,7 +53,8 @@ def toDisplay(instance):
 	im.reload()
 	sound = SoundLoader.load(name + '_400_20000.wav')
 	sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
-	
+
+#toInput: transitions back to input screen; stops sound, resets picture
 def toInput(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
@@ -105,10 +109,10 @@ class DisplayScreen(Screen):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.play = Button(text='Play')
+		self.play = Button(text='Play')					#Play Button
 		self.play.bind(on_release=playSound)
 		self.layout.add_widget(self.play)
-		self.button = Button(text='Return')
+		self.button = Button(text='Return')				#Return button
 		self.button.bind(on_release=toInput)
 		self.layout.add_widget(self.button)
 		
