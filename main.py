@@ -205,14 +205,19 @@ def toInputSimple(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
 	
-# Declare both screens
-class InputScreen(Screen):
-    
+def toChoose(instance):
+	sm.transition.direction = 'left'
+	sm.current = 'Choose Screen'
+	
+def Selected(instance):
+	sm.transition.direction = 'right'
+	sm.current = 'Input Screen'
+	sm.get_screen('Input Screen').location.text = choose.location.text
+	
+class ChooseScreen(Screen):
 	def __init__(self, **kwargs):
-		super(InputScreen, self).__init__(**kwargs)
+		super(ChooseScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
-		
-		self.layout.add_widget(Label(text='Location'))				#Location Entry
 		
 		self.location = Spinner(
 							# default value shown
@@ -222,6 +227,28 @@ class InputScreen(Screen):
 									'Kyoto, Japan', 'Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
 									'Addis Ababa, Ethiopia', 'Antarctica')
 							)
+		self.layout.add_widget(self.location)
+		
+		self.select = Button(text='Select', font_size=14)
+		self.select.bind(on_release=Selected)
+		self.layout.add_widget(self.select)
+		self.add_widget(self.layout)
+	
+choose = ChooseScreen(name='Choose Screen')
+	
+class InputScreen(Screen):
+    
+	def __init__(self, **kwargs):
+		global choose
+	
+		super(InputScreen, self).__init__(**kwargs)
+		self.layout = BoxLayout(orientation='vertical')
+		
+		self.layout.add_widget(Label(text='Location'))				#Location Entry
+		
+		txt = choose.location.text
+		self.location = Button(text=txt, font_size=14)
+		self.location.bind(on_release=toChoose)
 		self.layout.add_widget(self.location)
 		
 		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)')) 	#Date Entry
@@ -334,6 +361,7 @@ sm.add_widget(input)
 sm.add_widget(loading)
 sm.add_widget(display)
 sm.add_widget(error)
+sm.add_widget(choose)
 
 sm.current = 'Input Screen'
 
