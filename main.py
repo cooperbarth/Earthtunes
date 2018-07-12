@@ -40,6 +40,7 @@ def getSoundAndGraph(location, date, time, duration):
 	halfpi = 0.5*numpy.pi
 	duration = str(float(duration) * 60)
 	disploc = location
+	time = time + ':00'
 	
 	if location == 'Ryerson (IL,USA)':
 		soundname = 'ryerson'
@@ -47,18 +48,48 @@ def getSoundAndGraph(location, date, time, duration):
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-	#elif location == 'Midewin (IL,USA)':
-	#	soundname = 'midewin'
-	#	station = "M44A"
-	#	net = "N4"
-	#	location = "--"
-	#	channel = "HHZ"
 	elif location == 'Yellowstone (WY,USA)':
 		soundname = 'yellowstone' 
 		station = "H17A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
+	elif location == 'Antarctica':
+		soundname = 'antarctica'
+		station = 'BELA'
+		net = 'AI'
+		location = '04'
+		channel = 'BHZ'
+	elif location == 'Chile':
+		soundname = 'chile'
+		station = 'LCO'
+		net = 'IU'
+		location = '10'
+		channel = 'BHZ'
+	elif location == 'Anchorage (AK,USA)':
+		soundname = 'alaska'
+		station = 'ARTY'
+		net = 'NP'
+		location = '01'
+		channel = 'HNZ'
+	elif location == "Kyoto, Japan":
+		soundname = 'japan'
+		station = 'JWT'
+		net = 'JP'
+		location = '--'
+		channel = 'BHZ'
+	elif location == 'London, UK':
+		soundname = 'london'
+		station = 'HMNX'
+		net = 'GB'
+		location = '--'
+		channel = 'BHZ'
+	elif location == 'Ar Rayn, Saudi Arabia':
+		soundname = 'saudiarabia'
+		station = 'RAYN'
+		net = 'II'
+		location = '10'
+		channel = 'BHZ'
 	else:
 		print('Defaulting to Ryerson Station...')
 		soundname = 'ryerson'
@@ -183,7 +214,9 @@ class InputScreen(Screen):
 							# default value shown
 							text='Select:',
 							# available values
-							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'More to come')
+							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
+									'Kyoto, Japan', 'Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
+									'Addis Ababa, Ethiopia', 'Antarctica')
 							)
 		self.layout.add_widget(self.location)
 		
@@ -192,7 +225,7 @@ class InputScreen(Screen):
 		self.layout.add_widget(self.date)
 		
 		self.grid = GridLayout(cols=4)								#Time  Entry
-		self.grid.add_widget(Label(text='Start Time (HH:MM:SS)'))	
+		self.grid.add_widget(Label(text='Start Time (HH:MM)'))	
 		self.startTime = TextInput(multiline=False)
 		self.grid.add_widget(self.startTime)
 		self.grid.add_widget(Label(text='Duration (minutes)'))
@@ -220,7 +253,7 @@ class LoadingScreen(Screen):
 		#Checking for Error in User Input
 		locationText = sm.get_screen('Input Screen').location.text
 		dateText = sm.get_screen('Input Screen').date.text
-		startText = sm.get_screen('Input Screen').startTime.text
+		startText = sm.get_screen('Input Screen').startTime.text + ":00"
 		durationText = sm.get_screen('Input Screen').duration.text
 		
 		if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
@@ -229,7 +262,7 @@ class LoadingScreen(Screen):
 		if len(dateText) is not 10 or (dateText[0:3] + dateText[5:6] + dateText[8:9]).isdigit() is False or dateText[4] + dateText[7] <> '--':
 			print 'Invalid Date'
 			return
-		if len(startText) is not 8 or (startText[0:1] + startText[3:4] + startText[6:7]).isdigit() is False or startText[2] + startText[5] <> '::':
+		if len(startText) is not 8 or (startText[0:1] + startText[3:4]).isdigit() is False or startText[2] <> ':':
 			print 'Invalid Start Time'
 			return
 		if durationText.isdigit() is False:
