@@ -229,9 +229,13 @@ def toDisplay(instance):
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Start Time.'
 		return
-	if '.' in durationText or '-' in durationText or durationText.isdigit() is False:
+	if '-' in durationText or durationText.isdigit() is False:
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Duration Format.'
+		return
+	if int(durationText) == 0:
+		sm.current = 'Input Error Screen'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
 		return
 	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
 	if thenDate >= datetime.now():
@@ -273,7 +277,7 @@ class ChooseScreen(Screen):
 		
 		self.location = Spinner(
 							# default value shown
-							text='Select:',
+							text='Select Location',
 							# available values
 							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
 									'Kyoto, Japan', 'Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
@@ -297,22 +301,22 @@ class InputScreen(Screen):
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.layout.add_widget(Label(text='Location'))				#Location Entry
+		self.layout.add_widget(Label(text='Location:'))				#Location Entry
 		
 		txt = choose.location.text
 		self.location = Button(text=txt, font_size=14)
 		self.location.bind(on_release=toChoose)
 		self.layout.add_widget(self.location)
 		
-		self.layout.add_widget(Label(text='Date (YYYY-MM-DD)')) 	#Date Entry
+		self.layout.add_widget(Label(text='Date (YYYY-MM-DD):')) 	#Date Entry
 		self.date = TextInput(multiline=False)
 		self.layout.add_widget(self.date)
 		
 		self.grid = GridLayout(cols=4)								#Time  Entry
-		self.grid.add_widget(Label(text='Start Time (HH:MM)'))	
+		self.grid.add_widget(Label(text='Start Time (HH:MM):'))	
 		self.startTime = TextInput(multiline=False)
 		self.grid.add_widget(self.startTime)
-		self.grid.add_widget(Label(text='Duration (minutes)'))
+		self.grid.add_widget(Label(text='Duration (minutes):'))
 		self.duration = TextInput(multiline=False)
 		self.grid.add_widget(self.duration)
 		
