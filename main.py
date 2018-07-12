@@ -202,7 +202,7 @@ def toDisplay(instance):
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Empty Field(s).'
 		return
-	if len(dateText) is not 10 or '.' in dateText or (dateText[0:3] + dateText[5:7] + dateText[8:-1]).isdigit() is False or dateText[4] + dateText[7] <> '--':
+	if len(dateText) is not 10 or '.' in dateText or (dateText[:3] + dateText[5:7] + dateText[8:10]).isdigit() is False or dateText[4] + dateText[7] <> '--':
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date Format.'
 		return
@@ -213,19 +213,19 @@ def toDisplay(instance):
 		return
 	if dateText[5:7] in ['04', '06', '09', '11']:
 		numdays = 30
-	elif dateText[5:6] == '02':
-		if float(dateText[0:3]) / 4. == 0.:
+	elif dateText[5:7] == '02':
+		if float(dateText[:4]) % 4. == 0.:
 			numdays = 29
 		else:
 			numdays = 28
 	else:
 		numdays = 31
-	if int(dateText[8:9]) > numdays:
+	if int(dateText[8:10]) > numdays:
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date.'
 		return
 	
-	if len(startText) is not 8 or '.' in startText or (startText[0:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[0:2]) > 23 or int(startText[3:5]) > 59:
+	if len(startText) is not 8 or '.' in startText or (startText[:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[:2]) > 23 or int(startText[3:5]) > 59:
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Start Time.'
 		return
@@ -372,7 +372,7 @@ class Error404(Screen):
 	def __init__(self, **kwargs):
 		super(Error404, self).__init__(**kwargs)
 		self.layout = GridLayout(cols=1)
-		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs")
+		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.")
 		self.message.halign = 'center'
 		self.button = Button(text='Return')
 		self.button.bind(on_press=toInputSimple)
