@@ -195,11 +195,15 @@ def toDisplay(instance):
 
 #toInput: transitions back to input screen; stops sound, resets picture
 def toInput(instance):
-	sm.transition.direction = 'right'
-	sm.current = 'Input Screen'
 	if sound.state is 'play':
 		sound.stop()
 	sm.get_screen('Display Screen').layout.remove_widget(im)
+	sm.transition.direction = 'right'
+	sm.current = 'Input Screen'
+	
+def toInputSimple(instance):
+	sm.transition.direction = 'right'
+	sm.current = 'Input Screen'
 	
 # Declare both screens
 class InputScreen(Screen):
@@ -277,17 +281,34 @@ class LoadingScreen(Screen):
 		#The Actual Transition Code
 		sm.transition.direction = 'left'
 		sm.current = 'Display Screen'
-		name = getSoundAndGraph(
-							sm.get_screen('Input Screen').location.text, 
-							sm.get_screen('Input Screen').date.text,
-							sm.get_screen('Input Screen').startTime.text,
-							sm.get_screen('Input Screen').duration.text)
-		#sm.get_screen('Loading Screen').message.text='Loading...'
-		im.source = name + '.png'
-		im.reload()
-		sound = SoundLoader.load(name + '_400_20000.wav')
-		sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
+		try:
+			name = getSoundAndGraph(
+								sm.get_screen('Input Screen').location.text, 
+								sm.get_screen('Input Screen').date.text,
+								sm.get_screen('Input Screen').startTime.text,
+								sm.get_screen('Input Screen').duration.text)
+		except urllib2.HTTPError:
+			sm.current = 'Error Screen'
+		else:	
+			#sm.get_screen('Loading Screen').message.text='Loading...'
+			im.source = name + '.png'
+			im.reload()
+			sound = SoundLoader.load(name + '_400_20000.wav')
+			sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 
+class Error404(Screen):
+	
+	def __init__(self, **kwargs):
+		super(Error404, self).__init__(**kwargs)
+		self.layout = GridLayout(cols=1)
+		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs")
+		self.message.halign = 'center'
+		self.button = Button(text='Return')
+		self.button.bind(on_press=toInputSimple)
+		self.layout.add_widget(self.message)
+		self.layout.add_widget(self.button)
+		self.add_widget(self.layout)
+		
 class DisplayScreen(Screen):
 
 	def __init__(self, **kwargs):
@@ -307,10 +328,12 @@ class DisplayScreen(Screen):
 input = InputScreen(name='Input Screen')
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
+error = Error404(name='Error Screen')
 
 sm.add_widget(input)
 sm.add_widget(loading)
 sm.add_widget(display)
+sm.add_widget(error)
 
 sm.current = 'Input Screen'
 
