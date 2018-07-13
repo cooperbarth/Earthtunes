@@ -60,7 +60,7 @@ def getSoundAndGraph(location, date, time, duration):
 		net = 'AI'
 		location = '04'
 		channel = 'BHZ'
-	elif location == 'Chile':
+	elif location == 'Cachiyuyo, Chile':
 		soundname = 'chile'
 		station = 'LCO'
 		net = 'IU'
@@ -68,10 +68,10 @@ def getSoundAndGraph(location, date, time, duration):
 		channel = 'BHZ'
 	elif location == 'Anchorage (AK,USA)':
 		soundname = 'alaska'
-		station = 'ARTY'
-		net = 'NP'
-		location = '01'
-		channel = 'HNZ'
+		station = 'SSN'
+		net = 'AK'
+		location = '--'
+		channel = 'BHZ'
 	elif location == "Kyoto, Japan":
 		soundname = 'japan'
 		station = 'JWT'
@@ -280,7 +280,7 @@ class ChooseScreen(Screen):
 							text='Select Location',
 							# available values
 							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
-									'Kyoto, Japan', 'Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
+									'Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
 									'Addis Ababa, Ethiopia', 'Antarctica')
 							)
 		self.layout.add_widget(self.location)
