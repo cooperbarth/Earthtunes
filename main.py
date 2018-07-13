@@ -23,6 +23,7 @@ from kivy.uix.slider import Slider
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 from datetime import datetime
+from kivy.graphics import Color, Rectangle
 
 # Create screen manager
 sm = ScreenManager()
@@ -241,6 +242,20 @@ def isNumber(number):
 	except:
 		return False
 	return True		
+	
+class BlueLabel(Label):
+	def on_size(self, *args):
+		self.canvas.before.clear()
+		with self.canvas.before:
+			Color(0, 0, 1, 0.25)
+			Rectangle(pos=self.pos, size=self.size)
+			
+class WhiteLabel(Label):
+	def on_size(self, *args):
+		self.canvas.before.clear()
+		with self.canvas.before:
+			Color(1, 1, 1, 1)
+			Rectangle(pos=self.pos, size=self.size)
 		
 #toDisplay: transitions to Loading Screen; calls earthtunes and reloads sound/image to match
 def toDisplay(instance):
@@ -359,28 +374,42 @@ class InputScreen(Screen):
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.layout.add_widget(Label(text='Location:'))				#Location Entry
+		self.title = BlueLabel(text="SonifyMe", font_size=self.height/3, size_hint=(1,0.28), valign='middle')
+		self.layout.add_widget(self.title)
+		self.buffer1 = WhiteLabel(size_hint=(1,0.002))
+		self.layout.add_widget(self.buffer1)
 		
-		txt = choose.location.text
-		self.location = Button(text=txt, font_size=14)
+		self.layout.add_widget(Label(text='Location:', font_size=self.height/5, size_hint=(1, 0.138), valign='middle'))				#Location Entry
+		self.location = Button(text=choose.location.text, font_size=self.height/7, size_hint=(1, 0.08), valign='middle')
 		self.location.bind(on_release=toChoose)
 		self.layout.add_widget(self.location)
+		self.buffer2 = WhiteLabel(size_hint=(1,0.002))
+		self.layout.add_widget(self.buffer2)
 		
-		self.layout.add_widget(Label(text='Date (YYYY-MM-DD):')) 	#Date Entry
-		self.date = TextInput(multiline=False)
-		self.layout.add_widget(self.date)
+		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.158))
+		self.grid1.add_widget(Label(text='Date (YYYY-MM-DD):', font_size=self.height/5, valign='middle')) 	#Date Entry
+		self.date = TextInput(multiline=False, font_size = self.height/7)
+		self.grid1.add_widget(self.date)
+		self.layout.add_widget(self.grid1)
+		self.buffer3 = WhiteLabel(size_hint=(1,0.002))
+		self.layout.add_widget(self.buffer3)
 		
-		self.grid = GridLayout(cols=4)								#Time  Entry
-		self.grid.add_widget(Label(text='Start Time (HH:MM):'))	
-		self.startTime = TextInput(multiline=False)
-		self.grid.add_widget(self.startTime)
-		self.grid.add_widget(Label(text='Duration (minutes):'))
-		self.duration = TextInput(multiline=False)
-		self.grid.add_widget(self.duration)
+		self.grid2 = GridLayout(cols=3, rows=1, size_hint=(1,0.158))								#Time  Entry
+		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, size_hint=(0.4995,0.158), valign='middle'))
+		self.grid2.add_widget(WhiteLabel(size_hint=(0.001,0.158)))
+		self.grid2.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, size_hint=(0.4995,0.158), valign='middle'))
+		self.layout.add_widget(self.grid2)
 		
-		self.layout.add_widget(self.grid)
+		self.grid3 = GridLayout(cols=3, rows=1, size_hint=(1,0.099))
+		self.startTime = TextInput(multiline=False, size_hint=(0.4995,0.1), font_size = self.height/7)
+		self.grid3.add_widget(self.startTime)
+		self.grid3.add_widget(WhiteLabel(size_hint=(0.001,0.1)))
+		self.duration = TextInput(multiline=False, size_hint=(0.4995,0.1), font_size = self.height/7)
+		self.grid3.add_widget(self.duration)
+		self.layout.add_widget(self.grid3)
+		self.layout.add_widget(WhiteLabel(size_hint=(1, 0.001)))
 		
-		self.button = Button(text='Submit',font_size=14)			#Submit Button
+		self.button = Button(text='Submit', font_size=self.height/7, size_hint=(1,0.08), valign='middle')			#Submit Button
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
 		
