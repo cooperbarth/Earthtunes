@@ -281,11 +281,15 @@ class ChooseScreen(Screen):
 							# available values
 							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
 									'Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
-									'Addis Ababa, Ethiopia', 'Antarctica')
+									'Addis Ababa, Ethiopia', 'Antarctica'),
+							size_hint = (1,0.16)
 							)
+		self.location.bold=True
+		self.location.font_size = 20
 		self.layout.add_widget(self.location)
 		
-		self.select = Button(text='Select', font_size=14)
+		self.layout.add_widget(Label(text = '', size_hint = (1, 0.72)))
+		self.select = Button(text='Select', font_size=20, size_hint=(1,0.12), bold=True)
 		self.select.bind(on_release=Selected)
 		self.layout.add_widget(self.select)
 		self.add_widget(self.layout)
