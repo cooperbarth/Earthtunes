@@ -33,23 +33,24 @@ im = Image(source="ryerson.png", size_hint=(1,0.8))
 
 #playSound: Play the currently loaded sound
 def playSound(instance):
-	if sound.state is 'play':
+	if sound.state is 'play': #Pause
 		sound.stop()
 		Clock.unschedule(slideUpdate)
 		sm.get_screen('Display Screen').play.text='Play'
 	elif sound: #Check if it exists
 		slider = sm.get_screen('Display Screen').seek
 		sound.play()
-		if slider.value <> 0:
+		if slider.value <> 0: #Play again after pause
 			sound.seek((slider.value/slider.max)*sound.length)
 		Clock.schedule_interval(slideUpdate, 0.5)
 		sm.get_screen('Display Screen').play.text='Pause'
 	else:
 		return
 		
-def jumpBack(instance): #Jump back button, goes back 10 seconds
+#jumpBack: Jump back button, goes back 10 seconds
+def jumpBack(instance): 
 	if sound.state is 'play':
-		if (sound.get_pos()-10)<0:
+		if (sound.get_pos()-10)<0: #Restarts if before 10 seconds pass
 			sound.stop()
 			sound.play()
 		else:
@@ -57,9 +58,10 @@ def jumpBack(instance): #Jump back button, goes back 10 seconds
 	else:
 		return
 
-def jumpForward(instance):
+#jumpForward: Jump forward button, goes forward 10 seconds
+def jumpForward(instance):	
 	if sound.state is 'play':
-		if (sound.get_pos()+10)>sound.length:
+		if (sound.get_pos()+10)>sound.length: #Stops if less than 10 seconds until end
 			sound.stop()
 			Clock.unschedule(slideUpdate)
 			sm.get_screen('Display Screen').seek.value=0
@@ -69,21 +71,25 @@ def jumpForward(instance):
 	else:
 		return
 		
-def slideUpdate(dt):
+#slideUpdate: Update function for slider to match audio		
+def slideUpdate(dt): 
 	slider = sm.get_screen('Display Screen').seek
 	slider.value = (sound.get_pos()/sound.length)*100
-		
-def slidePause(instance, touch):
+
+#slidePause: Moving slider pauses sound
+def slidePause(instance, touch): 
 	if instance.collide_point(*touch.pos):
 		if sound.state is 'play':
 			sound.stop()
-		
-def slideSeek(instance,touch):
+
+#slideSeek: Start playing audio at new location			
+def slideSeek(instance,touch):	
 	if instance.collide_point(*touch.pos):
 		slider = sm.get_screen('Display Screen').seek
 		sound.play()
 		sound.seek((slider.value/slider.max)*sound.length)
 
+#getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(location, date, time, duration):
 	halfpi = 0.5*numpy.pi
 	duration = str(float(duration) * 60)
@@ -418,7 +424,7 @@ class LoadingScreen(Screen):
 			im.reload()
 			im.size_hint=(1,0.7)
 			sound = SoundLoader.load(name + '_400_20000.wav')
-			sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
+			sm.get_screen('Display Screen').layout.add_widget(im, index=3) 
 
 class Error404(Screen):
 	
@@ -439,29 +445,30 @@ class DisplayScreen(Screen):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.bottom = GridLayout(cols=3,size_hint=(1,0.15))
+		self.bottom = GridLayout(cols=3,size_hint=(1,0.1))
 		
+		#Slider --> Allows moving through sound file
 		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.15))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=slidePause)
 		self.seek.bind(on_touch_up=slideSeek)
 		self.layout.add_widget(self.seek)
 		
-		self.backwards = Button(text='Jump Back')
+		self.backwards = Button(text='Jump Back')		#Jump Back button
 		self.backwards.bind(on_release=jumpBack)
 		self.bottom.add_widget(self.backwards)
 		self.play = Button(text='Play')					#Play Button
 		self.play.bind(on_release=playSound)
 		self.bottom.add_widget(self.play)
-		self.forwards = Button(text='Jump Forward')
+		self.forwards = Button(text='Jump Forward')		#Jump forward button
 		self.forwards.bind(on_release=jumpForward)
 		self.bottom.add_widget(self.forwards)
-		self.bottom.add_widget(Label())
-		self.button = Button(text='Return')				#Return button
+
+		self.button = Button(text='Return',size_hint=(1,0.05))				#Return button
 		self.button.bind(on_release=toInput)
-		self.bottom.add_widget(self.button)
 		
 		self.layout.add_widget(self.bottom)
+		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
 
 # Create screens and add to manager
