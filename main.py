@@ -90,55 +90,55 @@ def slideSeek(instance,touch):
 		sound.seek((slider.value/slider.max)*sound.length)
 
 #getSoundAndGraph: Script that pulls data and processes into image and audio
-def getSoundAndGraph(location, date, time, duration):
+def getSoundAndGraph(locate, date, time, duration):
 	halfpi = 0.5*numpy.pi
 	duration = str(float(duration) * 60)
-	disploc = location
+	disploc = locate
 	time = time + ':00'
 	
-	if location == 'Ryerson (IL,USA)':
+	if locate == 'Ryerson (IL,USA)':
 		soundname = 'ryerson'
 		station = "L44A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-	elif location == 'Yellowstone (WY,USA)':
+	elif locate == 'Yellowstone (WY,USA)':
 		soundname = 'yellowstone' 
 		station = "H17A"
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-	elif location == 'Antarctica':
+	elif locate == 'Antarctica':
 		soundname = 'antarctica'
 		station = 'BELA'
 		net = 'AI'
 		location = '04'
 		channel = 'BHZ'
-	elif location == 'Cachiyuyo, Chile':
+	elif locate == 'Cachiyuyo, Chile':
 		soundname = 'chile'
 		station = 'LCO'
 		net = 'IU'
 		location = '10'
 		channel = 'BHZ'
-	elif location == 'Anchorage (AK,USA)':
+	elif locate == 'Anchorage (AK,USA)':
 		soundname = 'alaska'
 		station = 'SSN'
 		net = 'AK'
 		location = '--'
 		channel = 'BHZ'
-	elif location == "Kyoto, Japan":
+	elif locate == "Kyoto, Japan":
 		soundname = 'japan'
 		station = 'JWT'
 		net = 'JP'
 		location = '--'
 		channel = 'BHZ'
-	elif location == 'London, UK':
+	elif locate == 'London, UK':
 		soundname = 'london'
 		station = 'HMNX'
 		net = 'GB'
 		location = '--'
 		channel = 'BHZ'
-	elif location == 'Ar Rayn, Saudi Arabia':
+	elif locate == 'Ar Rayn, Saudi Arabia':
 		soundname = 'saudiarabia'
 		station = 'RAYN'
 		net = 'II'
@@ -227,7 +227,7 @@ def getSoundAndGraph(location, date, time, duration):
 	ssps = bandstupto20Hz * fsps
 	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
 
-	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=location+', '+date)
+	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+', '+date)
 	# plot y in mm (or mm/s) rather than m:
 	plot(hours,1000.*sound)
 	
@@ -320,6 +320,8 @@ def toInput(instance):
 	if sound.state is 'play':
 		sound.stop()
 	sm.get_screen('Display Screen').layout.remove_widget(im)
+	sm.get_screen('Display Screen').play.text = 'Play'
+	sm.get_screen('Display Screen').seek.value = 0
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
 	
