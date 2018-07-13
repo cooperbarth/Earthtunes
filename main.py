@@ -219,7 +219,7 @@ def getSoundAndGraph(location, date, time, duration):
 	mxs = 1.01*numpy.max(sound)
 	mns = 1.01*numpy.min(sound)
 
-	# An arctan() function is used to keep sound from overshooting and destroying speakers (the IRIS audio service calls this "compression" -- I guess!)
+	# An arctan() function is used to compress sound
 	scaledsound = (2**31)*numpy.arctan(sound/fixedamp)/halfpi
 	s32 = numpy.int32(scaledsound)
 
@@ -227,9 +227,11 @@ def getSoundAndGraph(location, date, time, duration):
 	ssps = bandstupto20Hz * fsps
 	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
 
-	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="time (hours)",ylabel="ground velocity (mm/s)", title=station+' '+channel+' '+date)
+	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=location+', '+date)
 	# plot y in mm (or mm/s) rather than m:
 	plot(hours,1000.*sound)
+	
+	axishours = [time]
 	axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
 	savefig(soundname + ".png")
 	
