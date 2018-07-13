@@ -288,7 +288,7 @@ class ChooseScreen(Screen):
 		self.location.font_size = 20
 		self.layout.add_widget(self.location)
 		
-		self.layout.add_widget(Label(text = '', size_hint = (1, 0.72)))
+		self.layout.add_widget(Label(size_hint = (1, 0.72)))
 		self.select = Button(text='Select', font_size=20, size_hint=(1,0.12), bold=True)
 		self.select.bind(on_release=Selected)
 		self.layout.add_widget(self.select)
