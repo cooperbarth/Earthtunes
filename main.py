@@ -52,8 +52,7 @@ def playSound(instance):
 def jumpBack(instance): 
 	if sound.state is 'play':
 		if (sound.get_pos()-10)<0: #Restarts if before 10 seconds pass
-			sound.stop()
-			sound.play()
+			sound.seek(0)
 		else:
 			sound.seek(sound.get_pos()-10)
 	else:
