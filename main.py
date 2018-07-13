@@ -10,6 +10,7 @@ from datetime import datetime, timedelta
 from os import path, system
 
 from kivy.app import App
+from kivy.clock import Clock
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -18,6 +19,7 @@ from kivy.uix.button import Button
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
+from kivy.uix.slider import Slider
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 from datetime import datetime
@@ -27,14 +29,60 @@ sm = ScreenManager()
 
 #Preload sound and image. These will be reloaded later for correct files
 sound = SoundLoader.load('ryerson_400_20000.wav')
-im = Image(source="ryerson.png")
+im = Image(source="ryerson.png", size_hint=(1,0.8))
 
 #playSound: Play the currently loaded sound
 def playSound(instance):
-	if sound: #Check if it exists
+	if sound.state is 'play':
+		sound.stop()
+		Clock.unschedule(slideUpdate)
+		sm.get_screen('Display Screen').play.text='Play'
+	elif sound: #Check if it exists
+		slider = sm.get_screen('Display Screen').seek
 		sound.play()
+		if slider.value <> 0:
+			sound.seek((slider.value/slider.max)*sound.length)
+		Clock.schedule_interval(slideUpdate, 0.5)
+		sm.get_screen('Display Screen').play.text='Pause'
 	else:
 		return
+		
+def jumpBack(instance): #Jump back button, goes back 10 seconds
+	if sound.state is 'play':
+		if (sound.get_pos()-10)<0:
+			sound.stop()
+			sound.play()
+		else:
+			sound.seek(sound.get_pos()-10)
+	else:
+		return
+
+def jumpForward(instance):
+	if sound.state is 'play':
+		if (sound.get_pos()+10)>sound.length:
+			sound.stop()
+			Clock.unschedule(slideUpdate)
+			sm.get_screen('Display Screen').seek.value=0
+			sm.get_screen('Display Screen').play.text='Play'
+		else:
+			sound.seek(sound.get_pos()+10)
+	else:
+		return
+		
+def slideUpdate(dt):
+	slider = sm.get_screen('Display Screen').seek
+	slider.value = (sound.get_pos()/sound.length)*100
+		
+def slidePause(instance, touch):
+	if instance.collide_point(*touch.pos):
+		if sound.state is 'play':
+			sound.stop()
+		
+def slideSeek(instance,touch):
+	if instance.collide_point(*touch.pos):
+		slider = sm.get_screen('Display Screen').seek
+		sound.play()
+		sound.seek((slider.value/slider.max)*sound.length)
 
 def getSoundAndGraph(location, date, time, duration):
 	halfpi = 0.5*numpy.pi
@@ -368,6 +416,7 @@ class LoadingScreen(Screen):
 			#sm.get_screen('Loading Screen').message.text='Loading...'
 			im.source = name + '.png'
 			im.reload()
+			im.size_hint=(1,0.7)
 			sound = SoundLoader.load(name + '_400_20000.wav')
 			sm.get_screen('Display Screen').layout.add_widget(im, index=2) 
 
@@ -390,13 +439,29 @@ class DisplayScreen(Screen):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
+		self.bottom = GridLayout(cols=3,size_hint=(1,0.15))
+		
+		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.15))
+		self.seek.sensitivity='handle'
+		self.seek.bind(on_touch_down=slidePause)
+		self.seek.bind(on_touch_up=slideSeek)
+		self.layout.add_widget(self.seek)
+		
+		self.backwards = Button(text='Jump Back')
+		self.backwards.bind(on_release=jumpBack)
+		self.bottom.add_widget(self.backwards)
 		self.play = Button(text='Play')					#Play Button
 		self.play.bind(on_release=playSound)
-		self.layout.add_widget(self.play)
+		self.bottom.add_widget(self.play)
+		self.forwards = Button(text='Jump Forward')
+		self.forwards.bind(on_release=jumpForward)
+		self.bottom.add_widget(self.forwards)
+		self.bottom.add_widget(Label())
 		self.button = Button(text='Return')				#Return button
 		self.button.bind(on_release=toInput)
-		self.layout.add_widget(self.button)
+		self.bottom.add_widget(self.button)
 		
+		self.layout.add_widget(self.bottom)
 		self.add_widget(self.layout)
 
 # Create screens and add to manager
