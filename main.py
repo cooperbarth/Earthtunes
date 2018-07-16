@@ -452,6 +452,7 @@ class AdvancedScreen(Screen):
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
 		self.fixedlabel = Label(text='Fixed Amplitude:')
 		self.fixedlabel.font_size = self.fixedlabel.height/5
+		self.fixedlabel.padding = [6, self.fixedlabel.height/2 - self.fixedlabel.font_size/2, 6, 6]
 		self.grid.add_widget(self.fixedlabel)
 		self.fixedAmp = TextInput(multiline=False)
 		self.grid.add_widget(self.fixedAmp)
@@ -495,7 +496,8 @@ class InputScreen(Screen):
 		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
 		self.date = DateInput(multiline=False)
-		self.date.font_size = self.date.height/5
+		self.date.font_size = self.date.height/3
+		self.date.padding = [6, self.date.height/2 - self.date.font_size/2, 6, 6]
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -503,7 +505,8 @@ class InputScreen(Screen):
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TimeInput(multiline=False)
-		self.startTime.font_size = self.startTime.height/5
+		self.startTime.font_size = self.startTime.height/3
+		self.startTime.padding = [6, self.startTime.height/2 - self.date.font_size/2, 6, 6]
 		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -511,7 +514,8 @@ class InputScreen(Screen):
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False)
-		self.duration.font_size = self.duration.height/5
+		self.duration.font_size = self.duration.height/3
+		self.duration.padding = [6, self.duration.height/2 - self.date.font_size/2, 6, 6]
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
