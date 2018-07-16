@@ -27,9 +27,10 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
 from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
-from datetime import datetime
+from datetime import date, timedelta
 from kivy.graphics import Color, Rectangle
-from KivyCalendar import DatePicker
+from functools import partial
+from kivy.uix.popup import Popup
 
 # Create screen manager
 sm = ScreenManager()
@@ -267,16 +268,6 @@ class FloatInput(TextInput):
 		else:
 			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
 		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
-		
-class DateInput(TextInput):
-	pat = re.compile('[^0-9]')
-	def insert_text(self, substring, from_undo=False):
-		pat = self.pat
-		if self.text.count('-') > 1:
-			s = re.sub(pat, '', substring)
-		else:
-			s = '-'.join([re.sub(pat, '', s) for s in substring.split('-', 1)])
-		return super(DateInput, self).insert_text(s, from_undo=from_undo)
 
 class TimeInput(TextInput):
 	pat = re.compile('[^0-9]')
@@ -467,10 +458,90 @@ class AdvancedScreen(Screen):
 		self.layout.add_widget(self.returnbutton)
 		
 		self.add_widget(self.layout)
+		
+class DatePicker(BoxLayout):
+
+    def __init__(self, *args, **kwargs):
+        super(DatePicker, self).__init__(**kwargs)
+        self.date = date.today()
+        self.orientation = "vertical"
+        self.month_names = ('January',
+                            'February', 
+                            'March', 
+                            'April', 
+                            'May', 
+                            'June', 
+                            'July', 
+                            'August', 
+                            'September', 
+                            'October',
+                            'November',
+                            'December')
+        if kwargs.has_key("month_names"):
+            self.month_names = kwargs['month_names']
+        self.header = BoxLayout(orientation = 'horizontal', 
+                                size_hint = (1, 0.2))
+        self.body = GridLayout(cols = 7)
+        self.add_widget(self.header)
+        self.add_widget(self.body)
+
+        self.populate_body()
+        self.populate_header()
+
+    def populate_header(self, *args, **kwargs):
+        self.header.clear_widgets()
+        previous_month = Button(text = "<")
+        previous_month.bind(on_press=partial(self.move_previous_month))
+        next_month = Button(text = ">", on_press = self.move_next_month)
+        next_month.bind(on_press=partial(self.move_next_month))
+        month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
+        current_month = Label(text=month_year_text, size_hint = (2, 1))
+
+        self.header.add_widget(previous_month)
+        self.header.add_widget(current_month)
+        self.header.add_widget(next_month)
+
+    def populate_body(self, *args, **kwargs):
+        self.body.clear_widgets()
+        date_cursor = date(self.date.year, self.date.month, 1)
+        for filler in range(date_cursor.isoweekday()-1):
+            self.body.add_widget(Label(text=""))
+        while date_cursor.month == self.date.month:
+            date_label = Button(text = str(date_cursor.day))
+            date_label.bind(on_press=partial(self.set_date, 
+                                                  day=date_cursor.day))
+            if self.date.day == date_cursor.day:
+                date_label.background_normal, date_label.background_down = date_label.background_down, date_label.background_normal
+            self.body.add_widget(date_label)
+            date_cursor += timedelta(days = 1)
+
+    def set_date(self, *args, **kwargs):
+		self.date = date(self.date.year, self.date.month, kwargs['day'])
+		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
+		self.populate_body()
+		self.populate_header()
+
+    def move_next_month(self, *args, **kwargs):
+        if self.date.month == 12:
+            self.date = date(self.date.year + 1, 1, self.date.day)
+        else:
+            self.date = date(self.date.year, self.date.month + 1, self.date.day)
+        self.populate_header()
+        self.populate_body()
+
+    def move_previous_month(self, *args, **kwargs):
+        if self.date.month == 1:
+            self.date = date(self.date.year - 1, 12, self.date.day)
+        else:
+            self.date = date(self.date.year, self.date.month -1, self.date.day)
+        self.populate_header()
+        self.populate_body()
 
 class InputScreen(Screen):
+
 	def __init__(self, **kwargs):
 		global choose
+		global on_focus
 	
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
@@ -497,10 +568,15 @@ class InputScreen(Screen):
 		self.datelabel.font_size = self.datelabel.height/5
 		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
-		self.date = DateInput(multiline=False)
+		
+		self.calendar = DatePicker(as_popup=True)
+		self.popup=Popup(title='Choose Date', content = self.calendar, size_hint = (0.9,0.5))
+		self.date = TextInput(multiline=False)
+		self.date.bind(focus=on_focus)
 		self.date.font_size = self.date.height/3
 		self.date.padding = [6, self.date.height/2 - self.date.font_size/2, 6, 6]
 		self.grid1.add_widget(self.date)
+		
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 		
@@ -508,7 +584,7 @@ class InputScreen(Screen):
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TimeInput(multiline=False)
 		self.startTime.font_size = self.startTime.height/3
-		self.startTime.padding = [6, self.startTime.height/2 - self.date.font_size/2, 6, 6]
+		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
 		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -517,7 +593,7 @@ class InputScreen(Screen):
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False)
 		self.duration.font_size = self.duration.height/3
-		self.duration.padding = [6, self.duration.height/2 - self.date.font_size/2, 6, 6]
+		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2, 6, 6]
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -533,6 +609,12 @@ class InputScreen(Screen):
 		
 		self.add_widget(self.layout)
 
+def on_focus(instance, value):
+	if value:
+		sm.get_screen('Input Screen').popup.open()
+	else:
+		pass
+	
 class InputError(Screen):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
