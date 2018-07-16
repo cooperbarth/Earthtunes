@@ -350,6 +350,10 @@ def toInputError(instance):
 	sm.transition.direction = 'left'
 	sm.current = 'Input Error Screen'
 	
+def toAdvanced(instance):
+	sm.transition.direction = 'left'
+	sm.current = 'Advanced Screen'
+	
 class ChooseScreen(Screen):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
@@ -377,6 +381,17 @@ class ChooseScreen(Screen):
 choose = ChooseScreen(name='Choose Screen')
 sm.add_widget(choose)
 
+class AdvancedScreen(Screen):
+	def __init__(self, **kwargs):
+		super(AdvancedScreen, self).__init__(**kwargs)
+		self.layout = BoxLayout(orientation='vertical')
+		
+		self.returnbutton = Button(text='Return')
+		self.returnbutton.bind(on_release=toInputSimple)
+		self.layout.add_widget(self.returnbutton)
+		
+		self.add_widget(self.layout)
+
 class InputScreen(Screen):
     
 	def __init__(self, **kwargs):
@@ -385,47 +400,53 @@ class InputScreen(Screen):
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.title = BlueLabel(text="SonifyMe", font_size=self.height/3, size_hint=(1,0.28), valign='middle')
+		self.title = BlueLabel(text="SonifyMe", font_size=self.height/3, size_hint=(1,0.11), valign='middle', bold=True, halign = 'center')
+		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
-		self.buffer1 = WhiteLabel(size_hint=(1,0.002))
-		self.layout.add_widget(self.buffer1)
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
-		self.layout.add_widget(Label(text='Location:', font_size=self.height/5, size_hint=(1, 0.138), valign='middle'))				#Location Entry
-		self.location = Button(text=choose.location.text, font_size=self.height/7, size_hint=(1, 0.08), valign='middle')
+		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.189))
+		self.LocationLabel = Label(text='Location:', valign='middle')
+		self.LocationLabel.font_size = self.LocationLabel.height/5
+		self.grid0.add_widget(self.LocationLabel)
+		self.location = Button(text=choose.location.text, font_size=self.height/7, valign='middle')
 		self.location.bind(on_release=toChoose)
-		self.layout.add_widget(self.location)
-		self.buffer2 = WhiteLabel(size_hint=(1,0.002))
-		self.layout.add_widget(self.buffer2)
+		self.grid0.add_widget(self.location)
+		self.layout.add_widget(self.grid0)
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
-		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.158))
-		self.grid1.add_widget(Label(text='Date (YYYY-MM-DD):', font_size=self.height/5, valign='middle')) 	#Date Entry
+		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.189))
+		self.grid1.add_widget(Label(text='Date (YYYY-MM-DD):', font_size=self.height/5, valign='middle'))
 		self.date = TextInput(multiline=False, font_size = self.height/7)
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
-		self.buffer3 = WhiteLabel(size_hint=(1,0.002))
-		self.layout.add_widget(self.buffer3)
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
-		self.grid2 = GridLayout(cols=3, rows=1, size_hint=(1,0.158))								#Time  Entry
-		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, size_hint=(0.4995,0.158), valign='middle'))
-		self.grid2.add_widget(WhiteLabel(size_hint=(0.001,0.158)))
-		self.grid2.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, size_hint=(0.4995,0.158), valign='middle'))
+		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.189))
+		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
+		self.startTime = TextInput(multiline=False, font_size = self.height/7)
+		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
-		self.grid3 = GridLayout(cols=3, rows=1, size_hint=(1,0.099))
-		self.startTime = TextInput(multiline=False, size_hint=(0.4995,0.1), font_size = self.height/7)
-		self.grid3.add_widget(self.startTime)
-		self.grid3.add_widget(WhiteLabel(size_hint=(0.001,0.1)))
-		self.duration = TextInput(multiline=False, size_hint=(0.4995,0.1), font_size = self.height/7)
+		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.189))
+		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
+		self.duration = TextInput(multiline=False, font_size = self.height/7)
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
-		self.layout.add_widget(WhiteLabel(size_hint=(1, 0.001)))
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
-		self.button = Button(text='Submit', font_size=self.height/7, size_hint=(1,0.08), valign='middle')			#Submit Button
+		self.advanced = Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.039), valign='middle', background_color=(0, 0, 1, 1))
+		self.advanced.bind(on_release=toAdvanced)
+		self.layout.add_widget(self.advanced)
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
+		
+		self.button = Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle')
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
 		
 		self.add_widget(self.layout)
-		
+
 class InputError(Screen):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
@@ -517,11 +538,13 @@ loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 error = Error404(name='Error Screen')
 inputError = InputError(name='Input Error Screen')
+advanced = AdvancedScreen(name='Advanced Screen')
 
 sm.add_widget(loading)
 sm.add_widget(display)
 sm.add_widget(error)
 sm.add_widget(inputError)
+sm.add_widget(advanced)
 
 sm.current = 'Input Screen'
 
