@@ -86,8 +86,10 @@ def slidePause(instance, touch):
 def slideSeek(instance,touch):	
 	if instance.collide_point(*touch.pos):
 		slider = sm.get_screen('Display Screen').seek
-		sound.play()
-		sound.seek((slider.value/slider.max)*sound.length)
+		slider.value_pos = touch.pos
+		if sound.state is 'play':
+			sound.play()
+			sound.seek((slider.value/slider.max)*sound.length)
 
 #getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(locate, date, time, duration):
@@ -268,7 +270,7 @@ def toDisplay(instance):
 	startText = sm.get_screen('Input Screen').startTime.text + ":00"
 	durationText = sm.get_screen('Input Screen').duration.text
 	
-	if locationText == 'Select:' or dateText == '' or startText == '' or durationText == '':
+	if locationText == 'Select Location' or dateText == '' or startText == '' or durationText == '':
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Empty Field(s).'
 		return
