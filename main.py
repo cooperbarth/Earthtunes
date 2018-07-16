@@ -362,21 +362,26 @@ class ChooseScreen(Screen):
 		super(ChooseScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
+		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title.font_size = self.title.height/3
+		self.title.bind(size=self.title.setter('text_size'))
+		self.layout.add_widget(self.title)
+		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
+		
 		self.location = Spinner(
-							# default value shown
 							text='Select Location',
-							# available values
 							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
 									'Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
 									'Addis Ababa, Ethiopia', 'Antarctica'),
-							size_hint = (1,0.16)
+							size_hint = (1,0.08),
+							sync_height=True
 							)
 		self.location.bold=True
 		self.location.font_size = 20
 		self.layout.add_widget(self.location)
 		
-		self.layout.add_widget(Label(size_hint = (1, 0.72)))
-		self.select = Button(text='Select', font_size=20, size_hint=(1,0.12), bold=True)
+		self.layout.add_widget(Label(size_hint = (1, 0.71)))
+		self.select = Button(text='Select', font_size=20, size_hint=(1,0.11), bold=True)
 		self.select.bind(on_release=Selected)
 		self.layout.add_widget(self.select)
 		self.add_widget(self.layout)
@@ -403,7 +408,8 @@ class InputScreen(Screen):
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		
-		self.title = BlueLabel(text="SonifyMe", font_size=self.height/3, size_hint=(1,0.11), valign='middle', bold=True, halign = 'center')
+		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
