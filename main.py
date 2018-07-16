@@ -96,7 +96,7 @@ def slideSeek(instance,touch):
 			sound.seek((slider.value/slider.max)*sound.length)
 
 #getSoundAndGraph: Script that pulls data and processes into image and audio
-def getSoundAndGraph(locate, date, time, duration):
+def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	halfpi = 0.5*numpy.pi
 	duration = str(float(duration) * 60)
 	disploc = locate
@@ -172,12 +172,17 @@ def getSoundAndGraph(locate, date, time, duration):
 
 	# 6 different time series acceleration factors ("stretch" factors in the frequency domain).
 	# only one of them is used in line 99 and 110.
-	bandstupto50Hz = 160
-	bandstupto20Hz = 400
-	bandstupto10Hz = 800
-	bandstupto5Hz = 1600
-	bandstuptohalfHz = 16000
-	bandstuptotenthHz = 64000
+	if AF == '':
+		bandsHZ = 400
+	else:
+		bandsHZ = float(AF)
+	
+	#bandstupto50Hz = 160
+	#bandstupto20Hz = 400
+	#bandstupto10Hz = 800
+	#bandstupto5Hz = 1600
+	#bandstuptohalfHz = 16000
+	#bandstuptotenthHz = 64000
 
 	# request data from IRIS' timeseries web service
 	type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
@@ -212,14 +217,17 @@ def getSoundAndGraph(locate, date, time, duration):
 
 	# use a fixed amplitude scale for seismograms with physical (m/s) y-axis units (use "scale=AUTO" in web request)
 	# calculate signal level (in physical units (m/s)) to which you want sound to scale quasi-linearly (one-third of the maximum signal)
-	fixedamp = maxAmp / 3.
+	if FA == '':
+		fixedamp = maxAmp / 3.
+	else:
+		fixedamp = float(FA)
 	
 	# duration of data (in hours):
 	realduration = (tot/fsps)/3600.
 	print "original duration = %7.2f hours" % realduration
 	hours = numpy.linspace(0,realduration,tot)
 
-	soundduration = tot/(fsps*bandstupto20Hz)
+	soundduration = tot/(fsps*bandsHZ)
 	print "max 20Hz wav file duration = %8.1f seconds" % (soundduration)
 
 	mxs = 1.01*numpy.max(sound)
@@ -230,7 +238,7 @@ def getSoundAndGraph(locate, date, time, duration):
 	s32 = numpy.int32(scaledsound)
 
 	# filename explanation: numbers between underscores are freq range (in mHz) that's sonified in audible range.
-	ssps = bandstupto20Hz * fsps
+	ssps = bandsHZ * fsps
 	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
 
 	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+', '+date)
@@ -392,13 +400,29 @@ sm.add_widget(choose)
 class AdvancedScreen(Screen):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
-		self.layout = BoxLayout(orientation='vertical')
+		self.box = BoxLayout(orientation='vertical')
+		self.layout = GridLayout(cols=2, size_hint=(1,0.8))
 		
-		self.returnbutton = Button(text='Return')
+		self.layout.add_widget(Label())
+		self.layout.add_widget(Label())
+		self.layout.add_widget(Label(text='Acceleration Factor\n(160-64000)', halign='center'))
+		self.aFactor = TextInput(multiline=False)
+		self.layout.add_widget(self.aFactor)
+		self.layout.add_widget(Label())
+		self.layout.add_widget(Label())
+		self.layout.add_widget(Label(text='Fixed Amplitude'))
+		self.fixedAmp = TextInput(multiline=False)
+		self.layout.add_widget(self.fixedAmp)
+		self.layout.add_widget(Label())
+		self.layout.add_widget(Label())
+		
+		self.returnbutton = Button(text='Return', size_hint=(1,0.2))
 		self.returnbutton.bind(on_release=toInputSimple)
-		self.layout.add_widget(self.returnbutton)
 		
-		self.add_widget(self.layout)
+		self.box.add_widget(self.layout)
+		self.box.add_widget(self.returnbutton)
+		
+		self.add_widget(self.box)
 
 class InputScreen(Screen):
     
@@ -484,7 +508,9 @@ class LoadingScreen(Screen):
 								sm.get_screen('Input Screen').location.text, 
 								sm.get_screen('Input Screen').date.text,
 								sm.get_screen('Input Screen').startTime.text,
-								sm.get_screen('Input Screen').duration.text)
+								sm.get_screen('Input Screen').duration.text,
+								sm.get_screen('Advanced Screen').aFactor.text,
+								sm.get_screen('Advanced Screen').fixedAmp.text)
 		except urllib2.HTTPError:
 			sm.current = 'Error Screen'
 		else:	
