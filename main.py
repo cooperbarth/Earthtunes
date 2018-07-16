@@ -400,8 +400,13 @@ class AdvancedScreen(Screen):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
 		self.box = BoxLayout(orientation='vertical')
-		self.layout = GridLayout(cols=2, size_hint=(1,0.8))
+		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title.font_size = self.title.height/3
+		self.title.bind(size=self.title.setter('text_size'))
+		self.box.add_widget(self.title)
+		self.box.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
+		self.layout = GridLayout(cols=2, size_hint=(1,0.8))
 		self.layout.add_widget(Label())
 		self.layout.add_widget(Label())
 		self.layout.add_widget(Label(text='Acceleration Factor\n(160-64000)', halign='center'))
