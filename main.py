@@ -3,6 +3,7 @@ import kivy
 import numpy
 import urllib2
 kivy.require('1.10.1')
+import random
 
 from scipy.io import wavfile
 from matplotlib.pyplot import *
@@ -260,8 +261,12 @@ class WhiteLabel(Label):
 			Color(1, 1, 1, 1)
 			Rectangle(pos=self.pos, size=self.size)
 		
+geofacts = ['0','1','2','3','4','5','6','7','8','9']
+		
 #toDisplay: transitions to Loading Screen; calls earthtunes and reloads sound/image to match
 def toDisplay(instance):
+	global geofacts
+
 	sm.transition.direction = 'left'
 	
 	#Checking for Error in User Input
@@ -314,7 +319,8 @@ def toDisplay(instance):
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Date Out of Range.'
 		return
-
+	
+	sm.get_screen('Loading Screen').message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
 	sm.current = 'Loading Screen'
 
 #toInput: transitions back to input screen; stops sound, resets picture
@@ -429,21 +435,20 @@ class InputError(Screen):
 		self.returnbutton = Button(text='Return', font_size=14)
 		self.returnbutton.bind(on_release=toInputSimple)
 		self.layout.add_widget(self.returnbutton)
-		self.add_widget(self.layout)
+		self.add_widget(self.layout)		
+
+input = InputScreen(name='Input Screen')
+sm.add_widget(input)
 		
 class LoadingScreen(Screen):
-	
+	global geofacts
+
 	def __init__(self, **kwargs):
 		super(LoadingScreen, self).__init__(**kwargs)
-		self.message = Label(text='Loading...')
+		self.message = Label(text="Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)], halign='center')
 		self.add_widget(self.message)
 		
 	def on_enter(self):
-		global sound
-
-		#The Actual Transition Code
-		sm.transition.direction = 'left'
-		sm.current = 'Display Screen'
 		try:
 			name = getSoundAndGraph(
 								sm.get_screen('Input Screen').location.text, 
@@ -453,12 +458,14 @@ class LoadingScreen(Screen):
 		except urllib2.HTTPError:
 			sm.current = 'Error Screen'
 		else:	
-			#sm.get_screen('Loading Screen').message.text='Loading...'
+			global sound
 			im.source = name + '.png'
 			im.reload()
 			im.size_hint=(1,0.7)
 			sound = SoundLoader.load(name + '_400_20000.wav')
 			sm.get_screen('Display Screen').layout.add_widget(im, index=3) 
+			sm.transition.direction = 'left'
+			sm.current = 'Display Screen'
 
 class Error404(Screen):
 	
@@ -506,13 +513,11 @@ class DisplayScreen(Screen):
 		self.add_widget(self.layout)
 
 # Create screens and add to manager
-input = InputScreen(name='Input Screen')
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 error = Error404(name='Error Screen')
 inputError = InputError(name='Input Error Screen')
 
-sm.add_widget(input)
 sm.add_widget(loading)
 sm.add_widget(display)
 sm.add_widget(error)
