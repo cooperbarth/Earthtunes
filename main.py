@@ -29,6 +29,7 @@ from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 from datetime import datetime
 from kivy.graphics import Color, Rectangle
+from KivyCalendar import DatePicker
 
 # Create screen manager
 sm = ScreenManager()
@@ -452,9 +453,10 @@ class AdvancedScreen(Screen):
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
 		self.fixedlabel = Label(text='Fixed Amplitude:')
 		self.fixedlabel.font_size = self.fixedlabel.height/5
-		self.fixedlabel.padding = [6, self.fixedlabel.height/2 - self.fixedlabel.font_size/2, 6, 6]
 		self.grid.add_widget(self.fixedlabel)
 		self.fixedAmp = TextInput(multiline=False)
+		self.fixedAmp.font_size = self.fixedAmp.height/3
+		self.fixedAmp.padding = [6, self.fixedlabel.height/2 - self.fixedlabel.font_size/2, 6, 6]
 		self.grid.add_widget(self.fixedAmp)
 		self.layout.add_widget(self.grid)
 		
