@@ -1,9 +1,12 @@
 import kivy
+kivy.require('1.10.1')
 #import earthtunes27
 import numpy
 import urllib2
-kivy.require('1.10.1')
+import matplotlib.pyplot as plt
 import random
+
+plt.style.use(['dark_background'])
 
 from scipy.io import wavfile
 from matplotlib.pyplot import *
@@ -481,8 +484,9 @@ class LoadingScreen(Screen):
 		else:	
 			global sound
 			im.source = name + '.png'
+			#im.keep_ratio=False
 			im.reload()
-			im.size_hint=(1,0.7)
+			im.size_hint=(1,0.75)
 			sound = SoundLoader.load(name + '_400_20000.wav')
 			sm.get_screen('Display Screen').layout.add_widget(im, index=3) 
 			sm.transition.direction = 'left'
@@ -510,7 +514,7 @@ class DisplayScreen(Screen):
 		self.bottom = GridLayout(cols=3,size_hint=(1,0.1))
 		
 		#Slider --> Allows moving through sound file
-		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.15))
+		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.1))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=slidePause)
 		self.seek.bind(on_touch_up=slideSeek)
