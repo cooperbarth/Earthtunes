@@ -350,6 +350,12 @@ def toInputSimple(instance):
 	sm.current = 'Input Screen'
 	errpopup2.dismiss()
 	
+def openAdvanced(instance):
+	advancedScreen.open()
+
+def closeAdvanced(instance):
+	advancedScreen.dismiss()
+	
 def toChoose(instance):
 	sm.transition.direction = 'left'
 	sm.current = 'Choose Screen'
@@ -401,7 +407,7 @@ class ChooseScreen(Screen):
 choose = ChooseScreen(name='Choose Screen')
 sm.add_widget(choose)
 
-class AdvancedScreen(Screen):
+class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
@@ -434,10 +440,13 @@ class AdvancedScreen(Screen):
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		self.returnbutton = Button(text='Return', size_hint=(1,0.149))
 		self.returnbutton.font_size=self.returnbutton.height/5
-		self.returnbutton.bind(on_release=toInputSimple)
+		self.returnbutton.bind(on_release=closeAdvanced)
 		self.layout.add_widget(self.returnbutton)
 		
 		self.add_widget(self.layout)
+		
+advScreen = AdvancedScreen(as_popup = True)
+advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))		
 		
 class Calendar(BoxLayout):
 	def __init__(self, *args, **kwargs):
@@ -714,7 +723,7 @@ class InputScreen(Screen):
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 		
 		self.advanced = Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1))
-		self.advanced.bind(on_release=toAdvanced)
+		self.advanced.bind(on_release=openAdvanced)
 		self.layout.add_widget(self.advanced)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 		
@@ -772,8 +781,8 @@ class LoadingScreen(Screen):
 								sm.get_screen('Input Screen').date.text,
 								sm.get_screen('Input Screen').startTime.text,
 								sm.get_screen('Input Screen').duration.text,
-								sm.get_screen('Advanced Screen').aFactor.text,
-								sm.get_screen('Advanced Screen').fixedAmp.text)
+								advScreen.aFactor.text,
+								advScreen.fixedAmp.text)
 		except urllib2.HTTPError:
 			#sm.current = 'Error Screen'
 			errpopup2.open()
@@ -824,12 +833,12 @@ class DisplayScreen(Screen):
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 #error = Error404(name='Error Screen')
-advanced = AdvancedScreen(name='Advanced Screen')
+#advanced = AdvancedScreen(name='Advanced Screen')
 
 sm.add_widget(loading)
 sm.add_widget(display)
 #sm.add_widget(error)
-sm.add_widget(advanced)
+#sm.add_widget(advanced)
 
 sm.current = 'Input Screen'
 
