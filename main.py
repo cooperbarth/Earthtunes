@@ -758,14 +758,20 @@ class Error404(GridLayout):
 errscreen2 = Error404(as_popup = True)
 errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
 
+#def exitLoading(instance):
+	#loadPopup.dismiss()
+
 class LoadingScreen(GridLayout):
 	global geofacts
 
 	def __init__(self, **kwargs):
 		self.cols = 1
 		super(LoadingScreen, self).__init__(**kwargs)
-		self.message = Label(text="Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)], halign='center')
+		self.message = Label(text="Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)], halign='center', size_hint = (1, 0.8))
 		self.add_widget(self.message)
+		self.goBack = Button(text="Return", halign = 'center', size_hint = (1, 0.2))
+		#self.goBack.bind(on_release=exitLoading)
+		self.add_widget(self.goBack)
 
 def loadData(instance):
 	try:
