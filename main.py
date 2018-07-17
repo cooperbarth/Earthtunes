@@ -319,7 +319,7 @@ def toDisplay(instance):
 		errscreen.errorlabel.text = 'Input Error: Invalid Start Time.'
 		errpopup.open()
 		return
-	if float(durationtext) > 1440:
+	if float(durationText) > 1440:
 		errscreen.errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
 		errpopup.open()
 		return
@@ -348,6 +348,7 @@ def toInput(instance):
 def toInputSimple(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
+	errpopup2.dismiss()
 	
 def toChoose(instance):
 	sm.transition.direction = 'left'
@@ -541,9 +542,9 @@ class Calendar(BoxLayout):
 		self.populate_header()
 		self.populate_body()
 		
-class Clock(GridLayout):
+class TimePicker(GridLayout):
 	def __init__(self, **kwargs):
-		super(Clock, self).__init__(**kwargs)
+		super(TimePicker, self).__init__(**kwargs)
 		self.cols = 5
 		self.hrUp = Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle')
 		self.hrUp.bind(on_release=self.hourUp)
@@ -614,8 +615,7 @@ class Clock(GridLayout):
 		if currentHour < 10:
 			self.hour.text = '0'+str(currentHour)
 		else:
-			self.hour.text = str(currentHour)	
-			
+			self.hour.text = str(currentHour)			
 
 	def minuteDown(self, instance):
 		currentMinute = int(self.minute.text)
@@ -698,7 +698,7 @@ class InputScreen(Screen):
 		self.startTime.font_size = self.startTime.height/3
 		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
 		self.grid2.add_widget(self.startTime)
-		self.clock = Clock(as_popup=True)
+		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
 		self.layout.add_widget(self.grid2)
@@ -742,7 +742,21 @@ def on_focus_time(instance, value):
 
 input = InputScreen(name='Input Screen')
 sm.add_widget(input)
+
+class Error404(GridLayout):
+	def __init__(self, **kwargs):
+		super(Error404, self).__init__(**kwargs)
+		self.cols=1
+		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.")
+		self.message.halign = 'center'
+		self.button = Button(text='Return')
+		self.button.bind(on_release=toInputSimple)
+		self.add_widget(self.message)
+		self.add_widget(self.button)
 		
+errscreen2 = Error404(as_popup = True)
+errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
+
 class LoadingScreen(Screen):
 	global geofacts
 
@@ -761,7 +775,8 @@ class LoadingScreen(Screen):
 								sm.get_screen('Advanced Screen').aFactor.text,
 								sm.get_screen('Advanced Screen').fixedAmp.text)
 		except urllib2.HTTPError:
-			sm.current = 'Error Screen'
+			#sm.current = 'Error Screen'
+			errpopup2.open()
 		else:	
 			global sound
 			im.source = name + '.png'
@@ -773,17 +788,6 @@ class LoadingScreen(Screen):
 			sm.transition.direction = 'left'
 			sm.current = 'Display Screen'
 
-class Error404(Screen):
-	def __init__(self, **kwargs):
-		super(Error404, self).__init__(**kwargs)
-		self.layout = GridLayout(cols=1)
-		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.")
-		self.message.halign = 'center'
-		self.button = Button(text='Return')
-		self.button.bind(on_release=toInputSimple)
-		self.layout.add_widget(self.message)
-		self.layout.add_widget(self.button)
-		self.add_widget(self.layout)
 		
 class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
@@ -819,12 +823,12 @@ class DisplayScreen(Screen):
 # Create screens and add to manager
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
-error = Error404(name='Error Screen')
+#error = Error404(name='Error Screen')
 advanced = AdvancedScreen(name='Advanced Screen')
 
 sm.add_widget(loading)
 sm.add_widget(display)
-sm.add_widget(error)
+#sm.add_widget(error)
 sm.add_widget(advanced)
 
 sm.current = 'Input Screen'
