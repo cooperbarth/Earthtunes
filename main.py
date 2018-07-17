@@ -271,16 +271,6 @@ class FloatInput(TextInput):
 		else:
 			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
 		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
-
-class TimeInput(TextInput):
-	pat = re.compile('[^0-9]')
-	def insert_text(self, substring, from_undo=False):
-		pat = self.pat
-		if self.text.count(':') > 0:
-			s = re.sub(pat, '', substring)
-		else:
-			s = ':'.join([re.sub(pat, '', s) for s in substring.split(':', 1)])
-		return super(TimeInput, self).insert_text(s, from_undo=from_undo)
 		
 #list of geology facts for use on the loading screen
 geofacts = ['0',
@@ -334,7 +324,7 @@ def toDisplay(instance):
 		errscreen.errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
 		errpopup.open()
 		return
-	if int(durationText) == 0:
+	if float(durationText) == 0.:
 		errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
 		errpopup.open()
 		return
@@ -701,7 +691,7 @@ class InputScreen(Screen):
 		
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
-		self.startTime = TimeInput(multiline=False, text="00:00")
+		self.startTime = TextInput(multiline=False, text="00:00")
 		self.startTime.bind(focus=on_focus_time)
 		self.startTime.font_size = self.startTime.height/3
 		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
