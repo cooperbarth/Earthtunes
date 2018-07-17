@@ -322,12 +322,12 @@ def toDisplay(instance):
 	startText = sm.get_screen('Input Screen').startTime.text + ":00"
 	durationText = sm.get_screen('Input Screen').duration.text
 	
-	if locationText == 'Select Location' or startText == '' or durationText == '':
-		errscreen.errorlabel.text = 'Input Error: Empty Field(s).'
+	if locationText == 'Select Location':
+		errscreen.errorlabel.text = 'Input Error: Please Select a Location.'
 		errpopup.open()
 		return
-	if len(startText) is not 8 or (startText[:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[:2]) > 23 or int(startText[3:5]) > 59:
-		errscreen.errorlabel.text = 'Input Error: Invalid Start Time.'
+	if startText == '' or durationText == '':
+		errscreen.errorlabel.text = 'Input Error: Empty Field(s).'
 		errpopup.open()
 		return
 	if float(durationText) > 1440:
@@ -338,12 +338,6 @@ def toDisplay(instance):
 		errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
 		errpopup.open()
 		return
-	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
-	if thenDate >= datetime.now():
-		errscreen.errorlabel.text = 'Input Error: Date Out of Range.'
-		errpopup.open()
-		return
-	
 	sm.get_screen('Loading Screen').message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
 	sm.current = 'Loading Screen'
 
@@ -707,7 +701,7 @@ class InputScreen(Screen):
 		
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
-		self.startTime = TimeInput(multiline=False)
+		self.startTime = TimeInput(multiline=False, text="00:00")
 		self.startTime.bind(focus=on_focus_time)
 		self.startTime.font_size = self.startTime.height/3
 		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
@@ -720,7 +714,7 @@ class InputScreen(Screen):
 		
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
-		self.duration = FloatInput(multiline=False)
+		self.duration = FloatInput(multiline=False, text='60')
 		self.duration.font_size = self.duration.height/3
 		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2]
 		self.grid3.add_widget(self.duration)
