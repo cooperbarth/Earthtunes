@@ -496,8 +496,6 @@ class Calendar(BoxLayout):
 				date_label.background_color = [0, 0, 0, 1]
 			else:
 				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
-			if self.date.day == date_cursor.day:
-				date_label.background_normal, date_label.background_down = date_label.background_down, date_label.background_normal
 			self.body.add_widget(date_label)
 			date_cursor += timedelta(days = 1)
 			

@@ -1,5 +1,4 @@
 -make error/choosing windows popups **
--don't select same date for other months when switching months (very minor)
 -speed up year-skip calls (do all at once, not 12 fucking calls)
 -add button on loading screen to abort while loading
 -figure out how to horizontally align textinputs!!!!! (ARGH)
