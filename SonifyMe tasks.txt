@@ -1,8 +1,7 @@
--make error windows popups **
+-make error/choosing windows popups **
 -don't select same date for other months when switching months (very minor)
--make buttons after current date red/unselectable
 -speed up year-skip calls (do all at once, not 12 fucking calls)
 -add button on loading screen to abort while loading
 -figure out how to horizontally align textinputs!!!!! (ARGH)
 
--figure out building **
+-figure out building to phones **

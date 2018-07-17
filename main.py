@@ -430,10 +430,10 @@ class AdvancedScreen(Screen):
 		
 		self.add_widget(self.layout)
 		
-class DatePicker(BoxLayout):
+class Calendar(BoxLayout):
 
     def __init__(self, *args, **kwargs):
-        super(DatePicker, self).__init__(**kwargs)
+        super(Calendar, self).__init__(**kwargs)
         self.date = date.today()
         self.orientation = "vertical"
         self.month_names = ('January',
@@ -492,7 +492,10 @@ class DatePicker(BoxLayout):
 			self.body.add_widget(Label(text=""))
 		while date_cursor.month == self.date.month:
 			date_label = Button(text = str(date_cursor.day))
-			date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
+			if date_cursor > date.today():
+				date_label.background_color = [0, 0, 0, 1]
+			else:
+				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
 			if self.date.day == date_cursor.day:
 				date_label.background_normal, date_label.background_down = date_label.background_down, date_label.background_normal
 			self.body.add_widget(date_label)
@@ -552,7 +555,7 @@ class InputScreen(Screen):
 		self.datelabel.font_size = self.datelabel.height/5
 		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
-		self.calendar = DatePicker(as_popup=True)
+		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
 		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'))
 		self.date.bind(focus=on_focus)
