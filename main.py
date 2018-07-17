@@ -238,8 +238,6 @@ def isNumber(number):
 		return False
 	return True		
 	
-	
-	
 #define labels with different colored backgrounds
 class BlueLabel(Label):
 	def on_size(self, *args):
@@ -288,10 +286,23 @@ geofacts = ['0',
 			'8',
 			'9']
 		
+class InputError(BoxLayout):
+	def __init__(self, **kwargs):
+		super(InputError, self).__init__(**kwargs)
+		self.errorlabel = Label(text='Input Error')
+		self.add_widget(self.errorlabel)
+		self.returnbutton = Button(text='Return')
+		self.returnbutton.font_size = self.returnbutton.height/5
+		self.add_widget(self.returnbutton)
+		
+errscreen = InputError(as_popup = True)
+errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
 		
 #screen transition functions
 def toDisplay(instance):
 	global geofacts
+	global errscreen
+	global errpopup
 	sm.transition.direction = 'left'
 	
 	#Checking for Error in User Input
@@ -301,25 +312,31 @@ def toDisplay(instance):
 	durationText = sm.get_screen('Input Screen').duration.text
 	
 	if locationText == 'Select Location' or startText == '' or durationText == '':
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Empty Field(s).'
+		errscreen.errorlabel.text = 'Input Error: Empty Field(s).'
+		errpopup.open()
 		return
 	if len(startText) is not 8 or (startText[:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[:2]) > 23 or int(startText[3:5]) > 59:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Start Time.'
+		errscreen.errorlabel.text = 'Input Error: Invalid Start Time.'
+		errpopup.open()
 		return
+<<<<<<< HEAD
 	if float(durationText) > 1440:
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
+=======
+	if float(durationtext) > 1440:
+		errscreen.errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
+		errpopup.open()
+>>>>>>> 2191eff78ff57b27141a20e3f0048603f7b15384
 		return
 	if int(durationText) == 0:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
+		errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
+		errpopup.open()
 		return
 	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
 	if thenDate >= datetime.now():
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Date Out of Range.'
+		errscreen.errorlabel.text = 'Input Error: Date Out of Range.'
+		errpopup.open()
 		return
 	
 	sm.get_screen('Loading Screen').message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
@@ -354,8 +371,6 @@ def toInputError(instance):
 def toAdvanced(instance):
 	sm.transition.direction = 'left'
 	sm.current = 'Advanced Screen'
-	
-	
 	
 #screen classes
 class ChooseScreen(Screen):
@@ -417,7 +432,7 @@ class AdvancedScreen(Screen):
 		self.grid.add_widget(self.fixedlabel)
 		self.fixedAmp = FloatInput(multiline=False)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
-		self.fixedAmp.padding = [6, self.fixedlabel.height/2 - self.fixedlabel.font_size/2, 6, 6]
+		self.fixedAmp.padding = [6, self.fixedAmp.height/2 - self.fixedAmp.font_size/2]
 		self.grid.add_widget(self.fixedAmp)
 		self.layout.add_widget(self.grid)
 		
@@ -430,47 +445,42 @@ class AdvancedScreen(Screen):
 		self.add_widget(self.layout)
 		
 class Calendar(BoxLayout):
+	def __init__(self, *args, **kwargs):
+		super(Calendar, self).__init__(**kwargs)
+		self.date = date.today()
+		self.orientation = "vertical"
+		self.month_names = ('January',
+							'February', 
+							'March', 
+							'April', 
+							'May', 
+							'June', 
+							'July', 
+							'August', 
+							'September', 
+							'October',
+							'November',
+							'December')
+		if kwargs.has_key("month_names"):
+			self.month_names = kwargs['month_names']
+		self.header = BoxLayout(orientation = 'horizontal', 
+								size_hint = (1, 0.2))
+		self.body = GridLayout(cols = 7)
+		self.add_widget(self.header)
+		self.add_widget(self.body)
 
-    def __init__(self, *args, **kwargs):
-        super(Calendar, self).__init__(**kwargs)
-        self.date = date.today()
-        self.orientation = "vertical"
-        self.month_names = ('January',
-                            'February', 
-                            'March', 
-                            'April', 
-                            'May', 
-                            'June', 
-                            'July', 
-                            'August', 
-                            'September', 
-                            'October',
-                            'November',
-                            'December')
-        if kwargs.has_key("month_names"):
-            self.month_names = kwargs['month_names']
-        self.header = BoxLayout(orientation = 'horizontal', 
-                                size_hint = (1, 0.2))
-        self.body = GridLayout(cols = 7)
-        self.add_widget(self.header)
-        self.add_widget(self.body)
+		self.populate_body()
+		self.populate_header()
 
-        self.populate_body()
-        self.populate_header()
-
-    def populate_header(self, *args, **kwargs):
+	def populate_header(self, *args, **kwargs):
 		self.header.clear_widgets()
 		month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
 		current_month = Label(text=month_year_text, size_hint = (0.4, 1))
 		
-		previous_year = Button(text = "<<", size_hint = (0.15, 1))
-		for i in range(0,12):
-			previous_year.bind(on_release=partial(self.move_previous_month))
+		previous_year = Button(text = "<<", size_hint = (0.15, 1), on_release=partial(self.move_previous_year))
 		previous_month = Button(text = "<", size_hint = (0.15, 1), on_release=partial(self.move_previous_month))
 		next_month = Button(text = ">", size_hint = (0.15, 1), on_release=partial(self.move_next_month))
-		next_year = Button(text = ">>", size_hint = (0.15, 1))
-		for i in range(0,12):
-			next_year.bind(on_release=partial(self.move_next_month))
+		next_year = Button(text = ">>", size_hint = (0.15, 1), on_release=partial(self.move_next_year))
 		
 		self.header.add_widget(previous_year)
 		self.header.add_widget(previous_month)
@@ -478,7 +488,7 @@ class Calendar(BoxLayout):
 		self.header.add_widget(next_month)
 		self.header.add_widget(next_year)
 
-    def populate_body(self, *args, **kwargs):
+	def populate_body(self, *args, **kwargs):
 		self.body.clear_widgets()
 		self.days = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 		for dayLabel in self.days:
@@ -495,19 +505,17 @@ class Calendar(BoxLayout):
 				date_label.background_color = [0, 0, 0, 1]
 			else:
 				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
-			if self.date.day == date_cursor.day:
-				date_label.background_normal, date_label.background_down = date_label.background_down, date_label.background_normal
 			self.body.add_widget(date_label)
 			date_cursor += timedelta(days = 1)
 			
-    def set_date(self, *args, **kwargs):
+	def set_date(self, *args, **kwargs):
 		self.date = date(self.date.year, self.date.month, kwargs['day'])
 		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
 		sm.get_screen('Input Screen').popup.dismiss()
 		self.populate_body()
 		self.populate_header()
 
-    def move_next_month(self, *args, **kwargs):
+	def move_next_month(self, *args, **kwargs):
 		if self.date.month == 12:
 			self.date = date(self.date.year + 1, 1, self.date.day)
 		else:
@@ -515,6 +523,7 @@ class Calendar(BoxLayout):
 		self.populate_header()
 		self.populate_body()
 
+<<<<<<< HEAD
     def move_previous_month(self, *args, **kwargs):
         if self.date.month == 1:
             self.date = date(self.date.year - 1, 12, self.date.day)
@@ -631,12 +640,38 @@ class Clock(GridLayout):
 			hour = str(hour)
 		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
 		
+=======
+	def move_previous_month(self, *args, **kwargs):
+		if self.date.month == 1:
+			self.date = date(self.date.year - 1, 12, self.date.day)
+		else:
+			self.date = date(self.date.year, self.date.month -1, self.date.day)
+		self.populate_header()
+		self.populate_body()
+		
+	def move_next_year(self, *args, **kwargs):
+		if self.date.month == 2 and self.date.day == 29:
+			self.date = date(self.date.year + 1, self.date.month, self.date.day - 1)
+		else:
+			self.date = date(self.date.year + 1, self.date.month, self.date.day)
+		self.populate_header()
+		self.populate_body()
+		
+	def move_previous_year(self, *args, **kwargs):
+		if self.date.month == 2 and self.date.day == 29:
+			self.date = date(self.date.year - 1, self.date.month, self.date.day - 1)
+		else:
+			self.date = date(self.date.year - 1, self.date.month, self.date.day)
+		self.populate_header()
+		self.populate_body()
+>>>>>>> 2191eff78ff57b27141a20e3f0048603f7b15384
 		
 class InputScreen(Screen):
-
 	def __init__(self, **kwargs):
 		global choose
 		global on_focus
+		global errscreen
+		global errpopup
 	
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
@@ -663,12 +698,10 @@ class InputScreen(Screen):
 		self.datelabel.font_size = self.datelabel.height/5
 		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
-		self.calendar = Calendar(as_popup=True)
-		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'))
+		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'), text_align = 'center')
 		self.date.bind(focus=on_focus)
 		self.date.font_size = self.date.height/3
-		self.date.padding = [6, self.date.height/2 - self.date.font_size/2, 6, 6]
+		self.date.padding = [6, self.date.height/2 - self.date.font_size/2]
 		self.grid1.add_widget(self.date)
 		
 		self.layout.add_widget(self.grid1)
@@ -679,7 +712,7 @@ class InputScreen(Screen):
 		self.startTime = TimeInput(multiline=False)
 		self.startTime.bind(focus=on_focus_time)
 		self.startTime.font_size = self.startTime.height/3
-		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
+		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2]
 		self.grid2.add_widget(self.startTime)
 		self.clock = Clock(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
@@ -691,7 +724,7 @@ class InputScreen(Screen):
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False)
 		self.duration.font_size = self.duration.height/3
-		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2, 6, 6]
+		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2]
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -705,13 +738,18 @@ class InputScreen(Screen):
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
 		
+		self.calendar = Calendar(as_popup=True)
+		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
+		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
+		
 		self.add_widget(self.layout)
-
+		
 def on_focus(instance, value):
 	if value:
 		sm.get_screen('Input Screen').popup.open()
 	else:
 		pass
+<<<<<<< HEAD
 		
 def on_focus_time(instance, value):
 	if value:
@@ -729,6 +767,8 @@ class InputError(Screen):
 		self.returnbutton.bind(on_release=toInputSimple)
 		self.layout.add_widget(self.returnbutton)
 		self.add_widget(self.layout)		
+=======
+>>>>>>> 2191eff78ff57b27141a20e3f0048603f7b15384
 
 input = InputScreen(name='Input Screen')
 sm.add_widget(input)
@@ -806,18 +846,15 @@ class DisplayScreen(Screen):
 		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
 
-		
 # Create screens and add to manager
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 error = Error404(name='Error Screen')
-inputError = InputError(name='Input Error Screen')
 advanced = AdvancedScreen(name='Advanced Screen')
 
 sm.add_widget(loading)
 sm.add_widget(display)
 sm.add_widget(error)
-sm.add_widget(inputError)
 sm.add_widget(advanced)
 
 sm.current = 'Input Screen'
