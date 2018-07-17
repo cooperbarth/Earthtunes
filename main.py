@@ -432,46 +432,42 @@ class AdvancedScreen(Screen):
 		
 class Calendar(BoxLayout):
 
-    def __init__(self, *args, **kwargs):
-        super(Calendar, self).__init__(**kwargs)
-        self.date = date.today()
-        self.orientation = "vertical"
-        self.month_names = ('January',
-                            'February', 
-                            'March', 
-                            'April', 
-                            'May', 
-                            'June', 
-                            'July', 
-                            'August', 
-                            'September', 
-                            'October',
-                            'November',
-                            'December')
-        if kwargs.has_key("month_names"):
-            self.month_names = kwargs['month_names']
-        self.header = BoxLayout(orientation = 'horizontal', 
-                                size_hint = (1, 0.2))
-        self.body = GridLayout(cols = 7)
-        self.add_widget(self.header)
-        self.add_widget(self.body)
+	def __init__(self, *args, **kwargs):
+		super(Calendar, self).__init__(**kwargs)
+		self.date = date.today()
+		self.orientation = "vertical"
+		self.month_names = ('January',
+							'February', 
+							'March', 
+							'April', 
+							'May', 
+							'June', 
+							'July', 
+							'August', 
+							'September', 
+							'October',
+							'November',
+							'December')
+		if kwargs.has_key("month_names"):
+			self.month_names = kwargs['month_names']
+		self.header = BoxLayout(orientation = 'horizontal', 
+								size_hint = (1, 0.2))
+		self.body = GridLayout(cols = 7)
+		self.add_widget(self.header)
+		self.add_widget(self.body)
 
-        self.populate_body()
-        self.populate_header()
+		self.populate_body()
+		self.populate_header()
 
-    def populate_header(self, *args, **kwargs):
+	def populate_header(self, *args, **kwargs):
 		self.header.clear_widgets()
 		month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
 		current_month = Label(text=month_year_text, size_hint = (0.4, 1))
 		
-		previous_year = Button(text = "<<", size_hint = (0.15, 1))
-		for i in range(0,12):
-			previous_year.bind(on_release=partial(self.move_previous_month))
+		previous_year = Button(text = "<<", size_hint = (0.15, 1), on_release=partial(self.move_previous_year))
 		previous_month = Button(text = "<", size_hint = (0.15, 1), on_release=partial(self.move_previous_month))
 		next_month = Button(text = ">", size_hint = (0.15, 1), on_release=partial(self.move_next_month))
-		next_year = Button(text = ">>", size_hint = (0.15, 1))
-		for i in range(0,12):
-			next_year.bind(on_release=partial(self.move_next_month))
+		next_year = Button(text = ">>", size_hint = (0.15, 1), on_release=partial(self.move_next_year))
 		
 		self.header.add_widget(previous_year)
 		self.header.add_widget(previous_month)
@@ -479,7 +475,7 @@ class Calendar(BoxLayout):
 		self.header.add_widget(next_month)
 		self.header.add_widget(next_year)
 
-    def populate_body(self, *args, **kwargs):
+	def populate_body(self, *args, **kwargs):
 		self.body.clear_widgets()
 		self.days = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
 		for dayLabel in self.days:
@@ -499,14 +495,14 @@ class Calendar(BoxLayout):
 			self.body.add_widget(date_label)
 			date_cursor += timedelta(days = 1)
 			
-    def set_date(self, *args, **kwargs):
+	def set_date(self, *args, **kwargs):
 		self.date = date(self.date.year, self.date.month, kwargs['day'])
 		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
 		sm.get_screen('Input Screen').popup.dismiss()
 		self.populate_body()
 		self.populate_header()
 
-    def move_next_month(self, *args, **kwargs):
+	def move_next_month(self, *args, **kwargs):
 		if self.date.month == 12:
 			self.date = date(self.date.year + 1, 1, self.date.day)
 		else:
@@ -514,13 +510,29 @@ class Calendar(BoxLayout):
 		self.populate_header()
 		self.populate_body()
 
-    def move_previous_month(self, *args, **kwargs):
-        if self.date.month == 1:
-            self.date = date(self.date.year - 1, 12, self.date.day)
-        else:
-            self.date = date(self.date.year, self.date.month -1, self.date.day)
-        self.populate_header()
-        self.populate_body()
+	def move_previous_month(self, *args, **kwargs):
+		if self.date.month == 1:
+			self.date = date(self.date.year - 1, 12, self.date.day)
+		else:
+			self.date = date(self.date.year, self.date.month -1, self.date.day)
+		self.populate_header()
+		self.populate_body()
+		
+	def move_next_year(self, *args, **kwargs):
+		if self.date.month == 2 and self.date.day == 29:
+			self.date = date(self.date.year + 1, self.date.month, self.date.day - 1)
+		else:
+			self.date = date(self.date.year + 1, self.date.month, self.date.day)
+		self.populate_header()
+		self.populate_body()
+		
+	def move_previous_year(self, *args, **kwargs):
+		if self.date.month == 2 and self.date.day == 29:
+			self.date = date(self.date.year - 1, self.date.month, self.date.day - 1)
+		else:
+			self.date = date(self.date.year - 1, self.date.month, self.date.day)
+		self.populate_header()
+		self.populate_body()
 
 class InputScreen(Screen):
 
@@ -598,7 +610,7 @@ def on_focus(instance, value):
 		sm.get_screen('Input Screen').popup.open()
 	else:
 		pass
-	
+
 class InputError(Screen):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
