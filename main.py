@@ -304,8 +304,11 @@ def toDisplay(instance):
 	global geofacts
 	global errscreen
 	global errpopup
+	global loadScreen
+	global loadPopup
+
 	sm.transition.direction = 'left'
-	
+
 	#Checking for Error in User Input
 	locationText = sm.get_screen('Input Screen').location.text
 	dateText = sm.get_screen('Input Screen').date.text
@@ -328,8 +331,8 @@ def toDisplay(instance):
 		errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
 		errpopup.open()
 		return
-	sm.get_screen('Loading Screen').message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
-	sm.current = 'Loading Screen'
+	loadScreen.message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
+	loadPopup.open()
 
 #toInput: display to input screen transition
 def toInput(instance):
@@ -755,38 +758,42 @@ class Error404(GridLayout):
 errscreen2 = Error404(as_popup = True)
 errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
 
-class LoadingScreen(Screen):
+class LoadingScreen(GridLayout):
 	global geofacts
 
 	def __init__(self, **kwargs):
+		self.cols = 1
 		super(LoadingScreen, self).__init__(**kwargs)
 		self.message = Label(text="Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)], halign='center')
 		self.add_widget(self.message)
-		
-	def on_enter(self):
-		try:
-			name = getSoundAndGraph(
-								sm.get_screen('Input Screen').location.text, 
-								sm.get_screen('Input Screen').date.text,
-								sm.get_screen('Input Screen').startTime.text,
-								sm.get_screen('Input Screen').duration.text,
-								advScreen.aFactor.text,
-								advScreen.fixedAmp.text)
-		except urllib2.HTTPError:
-			#sm.current = 'Error Screen'
-			errpopup2.open()
-		else:	
-			global sound
-			im.source = name + '.png'
-			#im.keep_ratio=False
-			im.reload()
-			im.size_hint=(1,0.75)
-			sound = SoundLoader.load(name + '_400_20000.wav')
-			sm.get_screen('Display Screen').layout.add_widget(im, index=3) 
-			sm.transition.direction = 'left'
-			sm.current = 'Display Screen'
 
-		
+def loadData(instance):
+	try:
+		name = getSoundAndGraph(
+							sm.get_screen('Input Screen').location.text, 
+							sm.get_screen('Input Screen').date.text,
+							sm.get_screen('Input Screen').startTime.text,
+							sm.get_screen('Input Screen').duration.text,
+							advScreen.aFactor.text,
+							advScreen.fixedAmp.text)
+	except urllib2.HTTPError:
+		loadPopup.dismiss()
+		errpopup2.open()
+	else:	
+		global sound
+		im.source = name + '.png'
+		im.reload()
+		im.size_hint=(1,0.75)
+		sound = SoundLoader.load(name + '_400_20000.wav')
+		sm.get_screen('Display Screen').layout.add_widget(im, index=3)
+		loadPopup.dismiss()
+		sm.transition.direction = 'left'
+		sm.current = 'Display Screen'
+
+loadScreen = LoadingScreen(as_popup=True)
+loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5))
+loadPopup.bind(on_open=loadData)
+
 class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(DisplayScreen, self).__init__(**kwargs)
@@ -818,11 +825,7 @@ class DisplayScreen(Screen):
 		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
 
-# Create screens and add to manager
-loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
-
-sm.add_widget(loading)
 sm.add_widget(display)
 
 sm.current = 'Input Screen'
