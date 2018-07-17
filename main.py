@@ -358,34 +358,23 @@ def openAdvanced(instance):
 def closeAdvanced(instance):
 	advancedScreen.dismiss()
 	
-def toChoose(instance):
-	sm.transition.direction = 'left'
-	sm.current = 'Choose Screen'
+def openChoose(instance):
+	choosePopup.open()
 	
-def Selected(instance):
-	sm.transition.direction = 'right'
-	sm.current = 'Input Screen'
-	sm.get_screen('Input Screen').location.text = choose.location.text
-	
-def toInputError(instance):
-	sm.transition.direction = 'left'
-	sm.current = 'Input Error Screen'
-	
-def toAdvanced(instance):
-	sm.transition.direction = 'left'
-	sm.current = 'Advanced Screen'
+def closeChoose(instance):
+	sm.get_screen('Input Screen').location.text = chooseScreen.location.text
+	choosePopup.dismiss()
 	
 #screen classes
-class ChooseScreen(Screen):
+class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
-		self.layout = BoxLayout(orientation='vertical')
-		
+		self.cols=1
 		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
-		self.layout.add_widget(self.title)
-		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
+		self.add_widget(self.title)
+		self.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		
 		self.location = Spinner(
 							text='Select Location',
@@ -397,17 +386,16 @@ class ChooseScreen(Screen):
 							)
 		self.location.bold=True
 		self.location.font_size = 20
-		self.layout.add_widget(self.location)
-		self.layout.add_widget(Label(size_hint = (1, 0.702)))
+		self.add_widget(self.location)
+		self.add_widget(Label(size_hint = (1, 0.702)))
 		
-		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
+		self.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		self.select = Button(text='Select', font_size=20, size_hint=(1,0.109), bold=True)
-		self.select.bind(on_release=Selected)
-		self.layout.add_widget(self.select)
-		self.add_widget(self.layout)
-	
-choose = ChooseScreen(name='Choose Screen')
-sm.add_widget(choose)
+		self.select.bind(on_release=closeChoose)
+		self.add_widget(self.select)
+
+chooseScreen = ChooseScreen(as_popup=True)
+choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8))
 
 class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
@@ -667,6 +655,7 @@ class InputScreen(Screen):
 		global on_focus
 		global errscreen
 		global errpopup
+		global chooseScreen
 	
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
@@ -681,9 +670,9 @@ class InputScreen(Screen):
 		self.LocationLabel = Label(text='Location:', valign='middle')
 		self.LocationLabel.font_size = self.LocationLabel.height/5
 		self.grid0.add_widget(self.LocationLabel)
-		self.location = Button(text=choose.location.text, valign='middle')
+		self.location = Button(text=chooseScreen.location.text, valign='middle')
 		self.location.font_size=self.location.height/5
-		self.location.bind(on_release=toChoose)
+		self.location.bind(on_release=openChoose)
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -834,13 +823,9 @@ class DisplayScreen(Screen):
 # Create screens and add to manager
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
-#error = Error404(name='Error Screen')
-#advanced = AdvancedScreen(name='Advanced Screen')
 
 sm.add_widget(loading)
 sm.add_widget(display)
-#sm.add_widget(error)
-#sm.add_widget(advanced)
 
 sm.current = 'Input Screen'
 
