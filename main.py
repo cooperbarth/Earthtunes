@@ -286,16 +286,18 @@ geofacts = ['0',
 			'8',
 			'9']
 		
-class InputError(BoxLayout):
+class InputError(GridLayout):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
-		self.errorlabel = Label(text='Input Error')
+		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7))
+		self.errorlabel.font_size = self.errorlabel.height/4
+		self.cols = 1
 		self.add_widget(self.errorlabel)
-		self.returnbutton = Button(text='Return')
+		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
 		
-errscreen = InputError(as_popup = True)
+errscreen = InputError(as_popup = True, title="Input Error")
 errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
 		
 #screen transition functions
