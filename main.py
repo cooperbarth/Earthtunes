@@ -97,8 +97,6 @@ def slideSeek(instance,touch):
 		if sound.state is 'play':
 			sound.play()
 			sound.seek((slider.value/slider.max)*sound.length)
-
-			
 			
 #getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(locate, date, time, duration, AF, FA):
@@ -256,7 +254,6 @@ class WhiteLabel(Label):
 		with self.canvas.before:
 			Color(1, 1, 1, 1)
 			Rectangle(pos=self.pos, size=self.size)
-
 			
 #textinputs that can only accept certain arguments			
 class FloatInput(TextInput):
@@ -293,12 +290,9 @@ geofacts = ['0',
 			'9']
 		
 		
-		
-		
 #screen transition functions
 def toDisplay(instance):
 	global geofacts
-
 	sm.transition.direction = 'left'
 	
 	#Checking for Error in User Input
@@ -307,40 +301,17 @@ def toDisplay(instance):
 	startText = sm.get_screen('Input Screen').startTime.text + ":00"
 	durationText = sm.get_screen('Input Screen').duration.text
 	
-	if locationText == 'Select Location' or dateText == '' or startText == '' or durationText == '':
+	if locationText == 'Select Location' or startText == '' or durationText == '':
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Empty Field(s).'
 		return
-	if len(dateText) is not 10 or '.' in dateText or (dateText[:3] + dateText[5:7] + dateText[8:10]).isdigit() is False or dateText[4] + dateText[7] <> '--':
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date Format.'
-		return
-		
-	if int(dateText[5:7]) > 12 or int(dateText[5:7]) == 0:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date.'
-		return
-	if dateText[5:7] in ['04', '06', '09', '11']:
-		numdays = 30
-	elif dateText[5:7] == '02':
-		if float(dateText[:4]) % 4. == 0.:
-			numdays = 29
-		else:
-			numdays = 28
-	else:
-		numdays = 31
-	if int(dateText[8:10]) > numdays:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Date.'
-		return
-	
-	if len(startText) is not 8 or '.' in startText or (startText[:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[:2]) > 23 or int(startText[3:5]) > 59:
+	if len(startText) is not 8 or (startText[:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[:2]) > 23 or int(startText[3:5]) > 59:
 		sm.current = 'Input Error Screen'
 		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Start Time.'
 		return
-	if '-' in durationText or durationText.isdigit() is False:
+	if float(durationtext) > 1440:
 		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Duration Format.'
+		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
 		return
 	if int(durationText) == 0:
 		sm.current = 'Input Error Screen'
@@ -445,7 +416,7 @@ class AdvancedScreen(Screen):
 		self.fixedlabel = Label(text='Fixed Amplitude:')
 		self.fixedlabel.font_size = self.fixedlabel.height/5
 		self.grid.add_widget(self.fixedlabel)
-		self.fixedAmp = TextInput(multiline=False)
+		self.fixedAmp = FloatInput(multiline=False)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
 		self.fixedAmp.padding = [6, self.fixedlabel.height/2 - self.fixedlabel.font_size/2, 6, 6]
 		self.grid.add_widget(self.fixedAmp)
