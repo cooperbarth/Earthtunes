@@ -581,10 +581,9 @@ class InputScreen(Screen):
 		self.datelabel.font_size = self.datelabel.height/5
 		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
-		
 		self.calendar = DatePicker(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = TextInput(multiline=False)
+		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'))
 		self.date.bind(focus=on_focus)
 		self.date.font_size = self.date.height/3
 		self.date.padding = [6, self.date.height/2 - self.date.font_size/2, 6, 6]
