@@ -238,8 +238,6 @@ def isNumber(number):
 		return False
 	return True		
 	
-	
-	
 #define labels with different colored backgrounds
 class BlueLabel(Label):
 	def on_size(self, *args):
@@ -276,7 +274,6 @@ class TimeInput(TextInput):
 			s = ':'.join([re.sub(pat, '', s) for s in substring.split(':', 1)])
 		return super(TimeInput, self).insert_text(s, from_undo=from_undo)
 		
-		
 #list of geology facts for use on the loading screen
 geofacts = ['0',
 			'1',
@@ -289,10 +286,23 @@ geofacts = ['0',
 			'8',
 			'9']
 		
+class InputError(BoxLayout):
+	def __init__(self, **kwargs):
+		super(InputError, self).__init__(**kwargs)
+		self.errorlabel = Label(text='Input Error')
+		self.add_widget(self.errorlabel)
+		self.returnbutton = Button(text='Return')
+		self.returnbutton.font_size = self.returnbutton.height/5
+		self.add_widget(self.returnbutton)
+		
+errscreen = InputError(as_popup = True)
+errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
 		
 #screen transition functions
 def toDisplay(instance):
 	global geofacts
+	global errscreen
+	global errpopup
 	sm.transition.direction = 'left'
 	
 	#Checking for Error in User Input
@@ -302,25 +312,25 @@ def toDisplay(instance):
 	durationText = sm.get_screen('Input Screen').duration.text
 	
 	if locationText == 'Select Location' or startText == '' or durationText == '':
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Empty Field(s).'
+		errscreen.errorlabel.text = 'Input Error: Empty Field(s).'
+		errpopup.open()
 		return
 	if len(startText) is not 8 or (startText[:2] + startText[3:5]).isdigit() is False or startText[2] <> ':' or int(startText[:2]) > 23 or int(startText[3:5]) > 59:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Invalid Start Time.'
+		errscreen.errorlabel.text = 'Input Error: Invalid Start Time.'
+		errpopup.open()
 		return
 	if float(durationtext) > 1440:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
+		errscreen.errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
+		errpopup.open()
 		return
 	if int(durationText) == 0:
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
+		errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
+		errpopup.open()
 		return
 	thenDate = datetime.strptime(dateText + startText, '%Y-%m-%d%H:%M:%S')
 	if thenDate >= datetime.now():
-		sm.current = 'Input Error Screen'
-		sm.get_screen('Input Error Screen').errorlabel.text = 'Input Error: Date Out of Range.'
+		errscreen.errorlabel.text = 'Input Error: Date Out of Range.'
+		errpopup.open()
 		return
 	
 	sm.get_screen('Loading Screen').message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
@@ -355,8 +365,6 @@ def toInputError(instance):
 def toAdvanced(instance):
 	sm.transition.direction = 'left'
 	sm.current = 'Advanced Screen'
-	
-	
 	
 #screen classes
 class ChooseScreen(Screen):
@@ -431,7 +439,6 @@ class AdvancedScreen(Screen):
 		self.add_widget(self.layout)
 		
 class Calendar(BoxLayout):
-
 	def __init__(self, *args, **kwargs):
 		super(Calendar, self).__init__(**kwargs)
 		self.date = date.today()
@@ -533,12 +540,13 @@ class Calendar(BoxLayout):
 			self.date = date(self.date.year - 1, self.date.month, self.date.day)
 		self.populate_header()
 		self.populate_body()
-
+		
 class InputScreen(Screen):
-
 	def __init__(self, **kwargs):
 		global choose
 		global on_focus
+		global errscreen
+		global errpopup
 	
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
@@ -565,8 +573,6 @@ class InputScreen(Screen):
 		self.datelabel.font_size = self.datelabel.height/5
 		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
-		self.calendar = Calendar(as_popup=True)
-		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
 		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'), text_align = 'center')
 		self.date.bind(focus=on_focus)
 		self.date.font_size = self.date.height/3
@@ -603,24 +609,17 @@ class InputScreen(Screen):
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
 		
+		self.calendar = Calendar(as_popup=True)
+		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
+		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
+		
 		self.add_widget(self.layout)
-
+		
 def on_focus(instance, value):
 	if value:
 		sm.get_screen('Input Screen').popup.open()
 	else:
 		pass
-
-class InputError(Screen):
-	def __init__(self, **kwargs):
-		super(InputError, self).__init__(**kwargs)
-		self.layout = BoxLayout(orientation='vertical')
-		self.errorlabel = Label(text='Input Error')
-		self.layout.add_widget(self.errorlabel)
-		self.returnbutton = Button(text='Return', font_size=14)
-		self.returnbutton.bind(on_release=toInputSimple)
-		self.layout.add_widget(self.returnbutton)
-		self.add_widget(self.layout)		
 
 input = InputScreen(name='Input Screen')
 sm.add_widget(input)
@@ -698,18 +697,15 @@ class DisplayScreen(Screen):
 		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
 
-		
 # Create screens and add to manager
 loading = LoadingScreen(name='Loading Screen')
 display = DisplayScreen(name='Display Screen')
 error = Error404(name='Error Screen')
-inputError = InputError(name='Input Error Screen')
 advanced = AdvancedScreen(name='Advanced Screen')
 
 sm.add_widget(loading)
 sm.add_widget(display)
 sm.add_widget(error)
-sm.add_widget(inputError)
 sm.add_widget(advanced)
 
 sm.current = 'Input Screen'
