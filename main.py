@@ -418,7 +418,7 @@ class AdvancedScreen(Screen):
 		self.grid.add_widget(self.fixedlabel)
 		self.fixedAmp = FloatInput(multiline=False)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
-		self.fixedAmp.padding = [6, self.fixedlabel.height/2 - self.fixedlabel.font_size/2, 6, 6]
+		self.fixedAmp.padding = [6, self.fixedAmp.height/2 - self.fixedAmp.font_size/2]
 		self.grid.add_widget(self.fixedAmp)
 		self.layout.add_widget(self.grid)
 		
@@ -567,10 +567,10 @@ class InputScreen(Screen):
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'))
+		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'), text_align = 'center')
 		self.date.bind(focus=on_focus)
 		self.date.font_size = self.date.height/3
-		self.date.padding = [6, self.date.height/2 - self.date.font_size/2, 6, 6]
+		self.date.padding = [6, self.date.height/2 - self.date.font_size/2]
 		self.grid1.add_widget(self.date)
 		
 		self.layout.add_widget(self.grid1)
@@ -580,7 +580,7 @@ class InputScreen(Screen):
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TimeInput(multiline=False)
 		self.startTime.font_size = self.startTime.height/3
-		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
+		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2]
 		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -589,7 +589,7 @@ class InputScreen(Screen):
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False)
 		self.duration.font_size = self.duration.height/3
-		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2, 6, 6]
+		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2]
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
