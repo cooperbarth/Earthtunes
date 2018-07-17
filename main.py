@@ -489,45 +489,58 @@ class DatePicker(BoxLayout):
         self.populate_header()
 
     def populate_header(self, *args, **kwargs):
-        self.header.clear_widgets()
-        previous_month = Button(text = "<")
-        previous_month.bind(on_press=partial(self.move_previous_month))
-        next_month = Button(text = ">", on_press = self.move_next_month)
-        next_month.bind(on_press=partial(self.move_next_month))
-        month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
-        current_month = Label(text=month_year_text, size_hint = (2, 1))
-
-        self.header.add_widget(previous_month)
-        self.header.add_widget(current_month)
-        self.header.add_widget(next_month)
+		self.header.clear_widgets()
+		month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
+		current_month = Label(text=month_year_text, size_hint = (0.4, 1))
+		
+		previous_year = Button(text = "<<", size_hint = (0.15, 1))
+		for i in range(0,12):
+			previous_year.bind(on_release=partial(self.move_previous_month))
+		previous_month = Button(text = "<", size_hint = (0.15, 1), on_release=partial(self.move_previous_month))
+		next_month = Button(text = ">", size_hint = (0.15, 1), on_release=partial(self.move_next_month))
+		next_year = Button(text = ">>", size_hint = (0.15, 1))
+		for i in range(0,12):
+			next_year.bind(on_release=partial(self.move_next_month))
+		
+		self.header.add_widget(previous_year)
+		self.header.add_widget(previous_month)
+		self.header.add_widget(current_month)
+		self.header.add_widget(next_month)
+		self.header.add_widget(next_year)
 
     def populate_body(self, *args, **kwargs):
-        self.body.clear_widgets()
-        date_cursor = date(self.date.year, self.date.month, 1)
-        for filler in range(date_cursor.isoweekday()-1):
-            self.body.add_widget(Label(text=""))
-        while date_cursor.month == self.date.month:
-            date_label = Button(text = str(date_cursor.day))
-            date_label.bind(on_press=partial(self.set_date, 
-                                                  day=date_cursor.day))
-            if self.date.day == date_cursor.day:
-                date_label.background_normal, date_label.background_down = date_label.background_down, date_label.background_normal
-            self.body.add_widget(date_label)
-            date_cursor += timedelta(days = 1)
-
+		self.body.clear_widgets()
+		self.days = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+		for dayLabel in self.days:
+			self.body.add_widget(Label(text=dayLabel))
+		date_cursor = date(self.date.year, self.date.month, 1)
+		weekday = date_cursor.isoweekday()
+		if weekday is 7:
+			weekday = 0
+		for filler in range(weekday):
+			self.body.add_widget(Label(text=""))
+		while date_cursor.month == self.date.month:
+			date_label = Button(text = str(date_cursor.day))
+			date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
+			if self.date.day == date_cursor.day:
+				date_label.background_normal, date_label.background_down = date_label.background_down, date_label.background_normal
+			self.body.add_widget(date_label)
+			date_cursor += timedelta(days = 1)
+			
     def set_date(self, *args, **kwargs):
 		self.date = date(self.date.year, self.date.month, kwargs['day'])
 		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
+		sm.get_screen('Input Screen').popup.dismiss()
 		self.populate_body()
 		self.populate_header()
 
     def move_next_month(self, *args, **kwargs):
-        if self.date.month == 12:
-            self.date = date(self.date.year + 1, 1, self.date.day)
-        else:
-            self.date = date(self.date.year, self.date.month + 1, self.date.day)
-        self.populate_header()
-        self.populate_body()
+		if self.date.month == 12:
+			self.date = date(self.date.year + 1, 1, self.date.day)
+		else:
+			self.date = date(self.date.year, self.date.month + 1, self.date.day)
+		self.populate_header()
+		self.populate_body()
 
     def move_previous_month(self, *args, **kwargs):
         if self.date.month == 1:
@@ -570,7 +583,7 @@ class InputScreen(Screen):
 		self.grid1.add_widget(self.datelabel)
 		
 		self.calendar = DatePicker(as_popup=True)
-		self.popup=Popup(title='Choose Date', content = self.calendar, size_hint = (0.9,0.5))
+		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
 		self.date = TextInput(multiline=False)
 		self.date.bind(focus=on_focus)
 		self.date.font_size = self.date.height/3
@@ -666,7 +679,7 @@ class Error404(Screen):
 		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.")
 		self.message.halign = 'center'
 		self.button = Button(text='Return')
-		self.button.bind(on_press=toInputSimple)
+		self.button.bind(on_release=toInputSimple)
 		self.layout.add_widget(self.message)
 		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
