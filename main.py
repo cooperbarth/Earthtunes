@@ -293,22 +293,23 @@ geofacts = ['0',
 			'7',
 			'8',
 			'9']
-		
+
+#InputError popup			
 class InputError(GridLayout):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
-		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7))
+		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7)) #Label
 		self.errorlabel.font_size = self.errorlabel.height/4
 		self.cols = 1
 		self.add_widget(self.errorlabel)
-		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))
+		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))	#Button
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
 		
-errscreen = InputError(as_popup = True, title="Input Error")
+errscreen = InputError(as_popup = True, title="Input Error") #Create Popup
 errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
 		
-#screen transition functions
+#toDisplay: screen transition functions
 def toDisplay(instance):
 	global geofacts
 	global errscreen
@@ -346,20 +347,23 @@ def toDisplay(instance):
 	sm.get_screen('Loading Screen').message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
 	sm.current = 'Loading Screen'
 
+#toInput: display to input screen transition
 def toInput(instance):
-	if sound.state is 'play':
+	if sound.state is 'play':	#stop sound
 		sound.stop()
-	sm.get_screen('Display Screen').layout.remove_widget(im)
-	sm.get_screen('Display Screen').play.text = 'Play'
+	sm.get_screen('Display Screen').layout.remove_widget(im) 	#reset image
+	sm.get_screen('Display Screen').play.text = 'Play'			#Reset slider/pause button
 	sm.get_screen('Display Screen').seek.value = 0
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
 	
+#toInputSimple: error404 to input screen transition	
 def toInputSimple(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
-	errpopup2.dismiss()
+	errpopup2.dismiss()		#close popup
 	
+#dumb functions to open and close popups
 def openAdvanced(instance):
 	advancedScreen.open()
 
@@ -373,7 +377,7 @@ def closeChoose(instance):
 	sm.get_screen('Input Screen').location.text = chooseScreen.location.text
 	choosePopup.dismiss()
 	
-#screen classes
+#ChooseScreen: popup screen for choosing location
 class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
