@@ -83,20 +83,28 @@ def slideUpdate(dt):
 	slider = sm.get_screen('Display Screen').seek
 	slider.value = (sound.get_pos()/sound.length)*100
 
+#disgusting boolean variable to determine whether sound was paused by touch
+wasPlaying = False	
+	
 #slidePause: Moving slider pauses sound
 def slidePause(instance, touch): 
+	global wasPlaying
 	if instance.collide_point(*touch.pos):
 		if sound.state is 'play':
 			sound.stop()
+			wasPlaying = True
 
 #slideSeek: Start playing audio at new location			
 def slideSeek(instance,touch):	
+	global wasPlaying
 	if instance.collide_point(*touch.pos):
 		slider = sm.get_screen('Display Screen').seek
 		slider.value_pos = touch.pos
-		if sound.state is 'play':
+		if wasPlaying:
 			sound.play()
 			sound.seek((slider.value/slider.max)*sound.length)
+			
+		wasPlaying = False
 			
 #getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(locate, date, time, duration, AF, FA):
@@ -435,7 +443,7 @@ class AdvancedScreen(BoxLayout):
 		self.grid.add_widget(self.fixedlabel)
 		self.fixedAmp = FloatInput(multiline=False)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
-		self.fixedAmp.padding = [6, self.fixedAmp.height/2 - self.fixedAmp.font_size/2]
+		#self.fixedAmp.padding = [6, self.fixedAmp.height/2 - self.fixedAmp.font_size/2]
 		self.grid.add_widget(self.fixedAmp)
 		self.layout.add_widget(self.grid)
 		
@@ -598,9 +606,10 @@ class TimePicker(GridLayout):
 	def hourUp(self, instance):
 		currentHour = int(self.hour.text)
 		currentHour += 1
+		if currentHour == 12:
+			self.apSwitch(instance)
 		if currentHour == 13:
 			currentHour = 1
-			self.apSwitch(instance)
 		if currentHour < 10:
 			self.hour.text = '0'+str(currentHour)
 		else:
@@ -620,9 +629,10 @@ class TimePicker(GridLayout):
 	def hourDown(self, instance):
 		currentHour = int(self.hour.text)
 		currentHour -= 1
+		if currentHour == 11:
+			self.apSwitch(instance)
 		if currentHour == 0:
 			currentHour = 12
-			self.apSwitch(instance)
 		if currentHour < 10:
 			self.hour.text = '0'+str(currentHour)
 		else:
