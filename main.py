@@ -541,6 +541,115 @@ class Calendar(BoxLayout):
 		self.populate_header()
 		self.populate_body()
 		
+class Clock(GridLayout):
+	def __init__(self, **kwargs):
+		super(Clock, self).__init__(**kwargs)
+		self.cols = 5
+		self.hrUp = Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle')
+		self.hrUp.bind(on_release=self.hourUp)
+		self.add_widget(self.hrUp)
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.minUp = Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle')
+		self.minUp.bind(on_release=self.minuteUp)
+		self.add_widget(self.minUp)
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.AMPMup = Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle')
+		self.AMPMup.bind(on_release=self.apSwitch)
+		self.add_widget(self.AMPMup)
+		
+		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle')
+		self.hour.font_size = self.hour.height/3
+		self.add_widget(self.hour)
+		self.colon = Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle')
+		self.colon.font_size = self.colon.height/3
+		self.add_widget(self.colon)
+		self.minute = Label(text='00', size_hint=(0.4,0.6), halign='center', valign='middle')
+		self.minute.font_size = self.minute.height/3
+		self.add_widget(self.minute)
+		self.add_widget(Label(size_hint=(0.05,0.6)))
+		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle')
+		self.AMPM.font_size = self.minute.height/5
+		self.add_widget(self.AMPM)
+		
+		self.hrDown = Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle')
+		self.hrDown.bind(on_release=self.hourDown)
+		self.add_widget(self.hrDown)
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.minDown = Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle')
+		self.minDown.bind(on_release=self.minuteDown)
+		self.add_widget(self.minDown)
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.AMPMdown = Button(text='v', size_hint=(0.1,0.2), halign='center', valign='middle')
+		self.AMPMdown.bind(on_release=self.apSwitch)
+		self.add_widget(self.AMPMdown)
+	
+	def hourUp(self, instance):
+		currentHour = int(self.hour.text)
+		currentHour += 1
+		if currentHour == 13:
+			currentHour = 1
+			self.apSwitch(instance)
+		if currentHour < 10:
+			self.hour.text = '0'+str(currentHour)
+		else:
+			self.hour.text = str(currentHour)
+
+	def minuteUp(self, instance):
+		currentMinute = int(self.minute.text)
+		currentMinute += 1
+		if currentMinute == 60:
+			currentMinute = 0
+			
+		if currentMinute < 10:
+			self.minute.text = '0'+str(currentMinute)
+		else:
+			self.minute.text = str(currentMinute)
+
+	def hourDown(self, instance):
+		currentHour = int(self.hour.text)
+		currentHour -= 1
+		if currentHour == 0:
+			currentHour = 12
+			self.apSwitch(instance)
+		if currentHour < 10:
+			self.hour.text = '0'+str(currentHour)
+		else:
+			self.hour.text = str(currentHour)	
+			
+
+	def minuteDown(self, instance):
+		currentMinute = int(self.minute.text)
+		currentMinute -= 1
+		if currentMinute == -1:
+			currentMinute = 59
+			
+		if currentMinute < 10:
+			self.minute.text = '0'+str(currentMinute)
+		else:
+			self.minute.text = str(currentMinute)
+		
+	def apSwitch(self, instance):
+		if self.AMPM.text == 'AM':
+			self.AMPM.text = 'PM'
+		else:
+			self.AMPM.text = 'AM'
+	
+	def set_time(self, instance):
+		hour = int(self.hour.text)
+		if self.AMPM.text == 'PM':
+			hour += 12
+			if hour == 24:
+				hour = 12
+		if self.AMPM.text == 'AM':
+			if hour == 12:
+				hour = 0
+		if hour < 10:
+			hour = '0'+str(hour)
+		else:
+			hour = str(hour)	
+		
+		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
+		
 class InputScreen(Screen):
 	def __init__(self, **kwargs):
 		global choose
@@ -585,9 +694,13 @@ class InputScreen(Screen):
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TimeInput(multiline=False)
+		self.startTime.bind(focus=on_focus_time)
 		self.startTime.font_size = self.startTime.height/3
-		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2]
+		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
 		self.grid2.add_widget(self.startTime)
+		self.clock = Clock(as_popup=True)
+		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
+		self.timePop.bind(on_dismiss=self.clock.set_time)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 		
@@ -618,6 +731,12 @@ class InputScreen(Screen):
 def on_focus(instance, value):
 	if value:
 		sm.get_screen('Input Screen').popup.open()
+	else:
+		pass
+		
+def on_focus_time(instance, value):
+	if value:
+		sm.get_screen('Input Screen').timePop.open()
 	else:
 		pass
 
