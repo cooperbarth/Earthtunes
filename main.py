@@ -512,13 +512,6 @@ class InputScreen(Screen):
 	def openChoose(self,instance):
 		choosePopup.open()
 
-	#on_focus_time: open timepicker on selecting text_input for time
-	'''def on_focus_time(self, instance):
-		if value:
-			self.timePop.open()
-		else:
-			pass'''
-
 #Error404: Screen displayed when failing to download data from IRIS
 class Error404(GridLayout):
 	def __init__(self, **kwargs):
