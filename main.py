@@ -38,72 +38,6 @@ sm = ScreenManager()
 sound = SoundLoader.load('ryerson_400_20000.wav')
 im = Image(source="ryerson.png", size_hint=(1,0.8))
 
-#playSound: Play the currently loaded sound
-def playSound(instance):
-	if sound.state is 'play': #Pause
-		sound.stop()
-		Clock.unschedule(slideUpdate)
-		sm.get_screen('Display Screen').play.text='Play'
-	elif sound: #Check if it exists
-		slider = sm.get_screen('Display Screen').seek
-		sound.play()
-		if slider.value <> 0: #Play again after pause
-			sound.seek((slider.value/slider.max)*sound.length)
-		Clock.schedule_interval(slideUpdate, 0.5)
-		sm.get_screen('Display Screen').play.text='Pause'
-	else:
-		return
-
-#jumpBack: Jump back button, goes back 10 seconds
-def jumpBack(instance): 
-	if sound.state is 'play':
-		if (sound.get_pos()-10)<0: #Restarts if before 10 seconds pass
-			sound.seek(0)
-		else:
-			sound.seek(sound.get_pos()-10)
-	else:
-		return
-
-#jumpForward: Jump forward button, goes forward 10 seconds
-def jumpForward(instance):	
-	if sound.state is 'play':
-		if (sound.get_pos()+10)>sound.length: #Stops if less than 10 seconds until end
-			sound.stop()
-			Clock.unschedule(slideUpdate)
-			sm.get_screen('Display Screen').seek.value=0
-			sm.get_screen('Display Screen').play.text='Play'
-		else:
-			sound.seek(sound.get_pos()+10)
-	else:
-		return
-
-#slideUpdate: Update function for slider to match audio		
-def slideUpdate(dt): 
-	slider = sm.get_screen('Display Screen').seek
-	slider.value = (sound.get_pos()/sound.length)*100
-
-#disgusting boolean variable to determine whether sound was paused by touch
-wasPlaying = False	
-
-#slidePause: Moving slider pauses sound
-def slidePause(instance, touch): 
-	global wasPlaying
-	if instance.collide_point(*touch.pos):
-		if sound.state is 'play':
-			sound.stop()
-			wasPlaying = True
-
-#slideSeek: Start playing audio at new location (or move slider if paused)			
-def slideSeek(instance,touch):	
-	global wasPlaying
-	if instance.collide_point(*touch.pos):
-		slider = sm.get_screen('Display Screen').seek
-		slider.value_pos = touch.pos
-		if wasPlaying:
-			sound.play()
-			sound.seek((slider.value/slider.max)*sound.length)
-		wasPlaying = False
-
 #getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	halfpi = 0.5*numpy.pi
@@ -823,18 +757,18 @@ class DisplayScreen(Screen):
 		#Slider allows moving through sound file
 		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.1))
 		self.seek.sensitivity='handle'
-		self.seek.bind(on_touch_down=slidePause)
-		self.seek.bind(on_touch_up=slideSeek)
+		self.seek.bind(on_touch_down=self.slidePause)
+		self.seek.bind(on_touch_up=self.slideSeek)
 		self.layout.add_widget(self.seek)
 
 		self.backwards = Button(text='Jump Back')		#Jump Back button
-		self.backwards.bind(on_release=jumpBack)
+		self.backwards.bind(on_release=self.jumpBack)
 		self.bottom.add_widget(self.backwards)
 		self.play = Button(text='Play')					#Play Button
-		self.play.bind(on_release=playSound)
+		self.play.bind(on_release=self.playSound)
 		self.bottom.add_widget(self.play)
 		self.forwards = Button(text='Jump Forward')		#Jump forward button
-		self.forwards.bind(on_release=jumpForward)
+		self.forwards.bind(on_release=self.jumpForward)
 		self.bottom.add_widget(self.forwards)
 
 		self.button = Button(text='Return',size_hint=(1,0.05))				#Return button
@@ -843,6 +777,70 @@ class DisplayScreen(Screen):
 		self.layout.add_widget(self.bottom)
 		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
+		
+		#disgusting boolean variable to determine whether sound was paused by touch
+		self.wasPlaying = False	
+	
+	#playSound: Play the currently loaded sound
+	def playSound(self, instance):
+		if sound.state is 'play': #Pause
+			sound.stop()
+			Clock.unschedule(self.slideUpdate)
+			self.play.text='Play'
+		elif sound: #Check if it exists
+			slider = self.seek
+			sound.play()
+			if slider.value <> 0: #Play again after pause
+				sound.seek((slider.value/slider.max)*sound.length)
+			Clock.schedule_interval(self.slideUpdate, 0.5)
+			self.play.text='Pause'
+		else:
+			return
+
+	#jumpBack: Jump back button, goes back 10 seconds
+	def jumpBack(self, instance): 
+		if sound.state is 'play':
+			if (sound.get_pos()-10)<0: #Restarts if before 10 seconds pass
+				sound.seek(0)
+			else:
+				sound.seek(sound.get_pos()-10)
+		else:
+			return
+
+	#jumpForward: Jump forward button, goes forward 10 seconds
+	def jumpForward(self, instance):	
+		if sound.state is 'play':
+			if (sound.get_pos()+10)>sound.length: #Stops if less than 10 seconds until end
+				sound.stop()
+				Clock.unschedule(slideUpdate)
+				self.seek.value=0
+				self.play.text='Play'
+			else:
+				sound.seek(sound.get_pos()+10)
+		else:
+			return
+
+	#slideUpdate: Update function for slider to match audio		
+	def slideUpdate(self, dt): 
+		slider = self.seek
+		slider.value = (sound.get_pos()/sound.length)*100
+
+	#slidePause: Moving slider pauses sound
+	def slidePause(self, instance, touch): 
+		if instance.collide_point(*touch.pos):
+			if sound.state is 'play':
+				sound.stop()
+				self.wasPlaying = True
+
+	#slideSeek: Start playing audio at new location (or move slider if paused)			
+	def slideSeek(self,instance,touch):	
+		if instance.collide_point(*touch.pos):
+			slider = self.seek
+			slider.value_pos = touch.pos
+			if self.wasPlaying:
+				sound.play()
+				sound.seek((slider.value/slider.max)*sound.length)
+			self.wasPlaying = False
 
 #Create Display Screen
 display = DisplayScreen(name='Display Screen')
