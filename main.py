@@ -283,8 +283,8 @@ class InputError(GridLayout):
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
 
-errscreen = InputError(as_popup = True, title="Input Error") #Create InputError Popup
-errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
+errscreen = InputError(as_popup = True) #Create InputError Popup
+errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
 
 #toDisplay: screen transition functions
 def toDisplay(instance):
