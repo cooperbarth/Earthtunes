@@ -24,7 +24,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
-from kivy.lang import Builder
 from kivy.core.audio import SoundLoader
 from datetime import date, timedelta
 from kivy.graphics import Color, Rectangle
@@ -372,11 +371,6 @@ class TimePicker(GridLayout):
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
 	def __init__(self, **kwargs):
-		global choose
-		global chooseScreen
-		global on_focus
-		global errscreen
-		global errpopup
 
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
@@ -485,10 +479,6 @@ class InputScreen(Screen):
 
 	#toDisplay: screen transition functions
 	def toDisplay(self, instance):
-		global errscreen
-		global errpopup
-		global loadScreen
-		global loadPopup
 
 		sm.transition.direction = 'left'
 
@@ -579,7 +569,7 @@ class LoadingScreen(GridLayout):
 		
 	#loadData: Gets data and processes and prepares Display Screen
 	def loadData(self, instance):
-		global sound
+		sound = sm.get_screen('Display Screen').sound
 		try:
 			soundname = self.getSoundAndGraph(
 								sm.get_screen('Input Screen').location.text, 
@@ -738,6 +728,8 @@ class LoadingScreen(GridLayout):
 class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(DisplayScreen, self).__init__(**kwargs)
+		#Preload sound. This will be reloaded later for correct files
+		self.sound = SoundLoader.load('ryerson.wav')	
 		self.layout = BoxLayout(orientation='vertical')
 
 		self.im = Image(source="Blank", size_hint=(1,0.8))
@@ -774,15 +766,15 @@ class DisplayScreen(Screen):
 
 	#playSound: Play the currently loaded sound
 	def playSound(self, instance):
-		if sound.state is 'play': #Pause
-			sound.stop()
+		if self.sound.state is 'play': #Pause
+			self.sound.stop()
 			Clock.unschedule(self.slideUpdate)
 			self.play.text='Play'
-		elif sound: #Check if it exists
+		elif self.sound: #Check if it exists
 			slider = self.seek
-			sound.play()
+			self.sound.play()
 			if slider.value <> 0: #Play again after pause
-				sound.seek((slider.value/slider.max)*sound.length)
+				self.sound.seek((slider.value/slider.max)*self.sound.length)
 			Clock.schedule_interval(self.slideUpdate, 0.5)
 			self.play.text='Pause'
 		else:
@@ -790,37 +782,37 @@ class DisplayScreen(Screen):
 
 	#jumpBack: Jump back button, goes back 10 seconds
 	def jumpBack(self, instance): 
-		if sound.state is 'play':
-			if (sound.get_pos()-10)<0: #Restarts if before 10 seconds pass
-				sound.seek(0)
+		if self.sound.state is 'play':
+			if (self.sound.get_pos()-10)<0: #Restarts if before 10 seconds pass
+				self.sound.seek(0)
 			else:
-				sound.seek(sound.get_pos()-10)
+				self.sound.seek(self.sound.get_pos()-10)
 		else:
 			return
 
 	#jumpForward: Jump forward button, goes forward 10 seconds
 	def jumpForward(self, instance):	
-		if sound.state is 'play':
-			if (sound.get_pos()+10)>sound.length: #Stops if less than 10 seconds until end
-				sound.stop()
-				Clock.unschedule(slideUpdate)
+		if self.sound.state is 'play':
+			if (self.sound.get_pos()+10)>self.sound.length: #Stops if less than 10 seconds until end
+				self.sound.stop()
+				Clock.unschedule(self.slideUpdate)
 				self.seek.value=0
 				self.play.text='Play'
 			else:
-				sound.seek(sound.get_pos()+10)
+				self.sound.seek(self.sound.get_pos()+10)
 		else:
 			return
 
 	#slideUpdate: Update function for slider to match audio		
 	def slideUpdate(self, dt): 
 		slider = self.seek
-		slider.value = (sound.get_pos()/sound.length)*100
+		slider.value = (self.sound.get_pos()/self.sound.length)*100
 
 	#slidePause: Moving slider pauses sound
 	def slidePause(self, instance, touch): 
 		if instance.collide_point(*touch.pos):
-			if sound.state is 'play':
-				sound.stop()
+			if self.sound.state is 'play':
+				self.sound.stop()
 				self.wasPlaying = True
 
 	#slideSeek: Start playing audio at new location (or move slider if paused)			
@@ -829,24 +821,21 @@ class DisplayScreen(Screen):
 			slider = self.seek
 			slider.value_pos = touch.pos
 			if self.wasPlaying:
-				sound.play()
-				sound.seek((slider.value/slider.max)*sound.length)
+				self.sound.play()
+				self.sound.seek((slider.value/slider.max)*self.sound.length)
 			self.wasPlaying = False
 	
 	#toInput: display to input screen transition
 	def toInput(self, instance):
-		if sound.state is 'play':	#stop sound
-			sound.stop()
+		if self.sound.state is 'play':	#stop sound
+			self.sound.stop()
 		self.play.text = 'Play'			#Reset slider/pause button
 		self.seek.value = 0
 		sm.transition.direction = 'right'
 		sm.current = 'Input Screen'
 
 # Create screen manager
-sm = ScreenManager()
-
-#Preload sound and image. These will be reloaded later for correct files
-sound = SoundLoader.load('ryerson.wav')		
+sm = ScreenManager()	
 
 #Creating ErrorScreen popup	
 errscreen = InputError(as_popup = True) #Create InputError Popup
