@@ -402,7 +402,6 @@ class InputScreen(Screen):
 		self.grid1.add_widget(self.datelabel)
 		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'), text_align = 'center')
 		self.date.bind(focus=self.on_focus)
-		self.date.bind(focus=self.updatePaddingDate)
 		self.date.font_size = self.date.height/3
 		self.date.padding = [self.date.width/2, self.date.height/2 - self.date.font_size/2]
 		self.grid1.add_widget(self.date)
@@ -414,7 +413,6 @@ class InputScreen(Screen):
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TextInput(multiline=False, text="00:00")
 		self.startTime.bind(focus=self.on_focus_time)
-		self.startTime.bind(focus=self.updatePaddingStartTime)
 		self.startTime.font_size = self.startTime.height/3
 		self.startTime.padding = [self.date.width/2, self.startTime.height/2 - self.startTime.font_size/2]
 		self.grid2.add_widget(self.startTime)
@@ -427,11 +425,12 @@ class InputScreen(Screen):
 		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid3.add_widget(Label(text='Duration (hours):', font_size=self.height/5, valign='middle'))
-		self.duration = FloatInput(multiline=False, text='2')
-		self.duration.bind(focus=self.updatePaddingDuration)
-		self.duration.font_size = self.duration.height/3
-		self.duration.padding = [self.date.width/2, self.duration.height/2 - self.duration.font_size/2]
-		self.grid3.add_widget(self.duration)
+		self.duration = FloatInput(multiline=False, text='')
+		self.duration.bind(text=self.setDurText)
+		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1))
+		self.durButton.font_size = self.durButton.height/5
+		self.durButton.bind(on_release=self.focusDuration)
+		self.grid3.add_widget(self.durButton)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
@@ -453,29 +452,20 @@ class InputScreen(Screen):
 
 		self.add_widget(self.layout)
 
-	def updatePaddingDate(self, *args):
-		text_width = self.date._get_text_width(
-			self.date.text,
-			self.date.tab_width,
-			self.date._label_cached
-		)
-		self.date.padding = [(self.date.width - text_width) / 2, self.date.height/2 - self.date.font_size/2]
+	def focusDate(self, instance):
+		self.duration.focus = True
+	def setDateText(self, instance, value):
+		self.durButton.text = self.duration.text
 
-	def updatePaddingStartTime(self, *args):
-		text_width = self.startTime._get_text_width(
-			self.startTime.text,
-			self.startTime.tab_width,
-			self.startTime._label_cached
-		)
-		self.startTime.padding = [(self.startTime.width - text_width) / 2, self.startTime.height/2 - self.startTime.font_size/2]
+	def focusStartTime(self, instance):
+		self.duration.focus = True
+	def setStartText(self, instance, value):
+		self.durButton.text = self.duration.text
 
-	def updatePaddingDuration(self, *args):
-		text_width = self.duration._get_text_width(
-			self.duration.text,
-			self.duration.tab_width,
-			self.duration._label_cached
-		)
-		self.duration.padding = [(self.duration.width - text_width) / 2, self.duration.height/2 - self.duration.font_size/2]
+	def focusDuration(self, instance):
+		self.duration.focus = True
+	def setDurText(self, instance, value):
+		self.durButton.text = self.duration.text
 
 	#toDisplay: screen transition functions
 	def toDisplay(self, instance):
