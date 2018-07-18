@@ -60,9 +60,8 @@ class FloatInput(TextInput):
 class InputError(GridLayout):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
-		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7)) #Label
-		self.errorlabel.font_size = self.errorlabel.height/4
 		self.cols = 1
+		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7), font_size = self.height/4)
 		self.add_widget(self.errorlabel)
 		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))	#Button
 		self.returnbutton.font_size = self.returnbutton.height/5
@@ -72,7 +71,7 @@ class InputError(GridLayout):
 class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
-		self.cols=1 #One column grid layout
+		self.cols=1
 		#SonifyMe header
 		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
@@ -86,10 +85,10 @@ class ChooseScreen(GridLayout):
 									'Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
 									'Addis Ababa, Ethiopia', 'Antarctica'),
 							size_hint = (1,0.078),
-							sync_height=True
+							sync_height=True,
+							font_size = self.height/5
 							)
 		self.location.bold=True
-		self.location.font_size = 20
 		self.add_widget(self.location)
 		self.add_widget(Label(size_hint = (1, 0.702)))
 		
@@ -259,31 +258,24 @@ class TimePicker(GridLayout):
 	def __init__(self, **kwargs):
 		super(TimePicker, self).__init__(**kwargs)
 		self.cols = 5
-		#Up buttons and spacing
-		self.hrUp = Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle')
-		self.hrUp.bind(on_release=self.hourUp)
-		self.add_widget(self.hrUp)
+
+		#Up buttons and spacing 
+		self.add_widget(Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.hourUp))
 		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.minUp = Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle')
-		self.minUp.bind(on_release=self.minuteUp)
-		self.add_widget(self.minUp)
+		self.add_widget(Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.minuteUp))
 		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.AMPMup = Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle')
-		self.AMPMup.bind(on_release=self.apSwitch)
-		self.add_widget(self.AMPMup)
+		self.add_widget(Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
+
 		#Value display, ":", and spacing
 		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle')
 		self.hour.font_size = self.hour.height/3
 		self.add_widget(self.hour)
-		self.colon = Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle')
-		self.colon.font_size = self.colon.height/3
+		self.colon = Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle', font_size = self.height/3)
 		self.add_widget(self.colon)
-		self.minute = Label(text='00', size_hint=(0.4,0.6), halign='center', valign='middle')
-		self.minute.font_size = self.minute.height/3
+		self.minute = Label(text='00', size_hint=(0.4,0.6), halign='center', valign='middle', font_size = self.height/3)
 		self.add_widget(self.minute)
 		self.add_widget(Label(size_hint=(0.05,0.6)))
-		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle')
-		self.AMPM.font_size = self.minute.height/5
+		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle', font_size = self.height/5)
 		self.add_widget(self.AMPM)
 		#Down buttons and spacing
 		self.hrDown = Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle')
@@ -369,30 +361,20 @@ class TimePicker(GridLayout):
 
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
-	# def focusDate(self, instance):
-		# self.date.focus = True
-	# def setDateText(self, instance, value):
-		# self.durButton.text = self.duration.text
-
 	def __init__(self, **kwargs):
-
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 
 		#SonifyMe header
-		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center')
-		self.title.font_size = self.title.height/3
+		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.LocationLabel = Label(text='Location:', valign='middle')
-		self.LocationLabel.font_size = self.LocationLabel.height/5
-		self.grid0.add_widget(self.LocationLabel)
-		self.location = Button(text="Ryerson (IL,USA)", valign='middle')
-		self.location.font_size=self.location.height/5
+		self.grid0.add_widget(Label(text='Location:', valign='middle', font_size = self.height/5))
+		self.location = Button(text="Ryerson (IL,USA)", valign='middle', font_size = self.height/3)
 		self.location.bind(on_release=self.openChoose)
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
@@ -400,13 +382,11 @@ class InputScreen(Screen):
 
 		#Date Input
 		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.datelabel = Label(text='Date (YYYY-MM-DD):', valign = 'middle')
-		self.datelabel.font_size = self.datelabel.height/5
+		self.datelabel = Label(text='Date (YYYY-MM-DD):', valign = 'middle', font_size = self.height/5)
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (0,0,1,0.25), color = (1,1,1,1))
-		self.date.font_size = self.date.height/3
+		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (0,0,1,0.25), font_size = self.height/3)
 		self.date.bind(on_release=lambda x:self.popup.open())
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
@@ -418,7 +398,7 @@ class InputScreen(Screen):
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
-		self.startButton = Button(text = '00:00', background_normal = '', background_color = (0,0,1,0.25), color = (1,1,1,1))
+		self.startButton = Button(text = '00:00', background_normal = '', background_color = (0,0,1,0.25))
 		self.startButton.font_size = self.startButton.height/3
 		self.startButton.bind(on_release=lambda x:self.timePop.open())
 		self.grid2.add_widget(self.startButton)
@@ -431,8 +411,7 @@ class InputScreen(Screen):
 		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(text=self.setDurText)
 		self.firstClickHappened = False
-		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1))
-		self.durButton.font_size = self.durButton.height/3
+		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3)
 		self.durButton.bind(on_release=self.focusDuration)
 		self.grid3.add_widget(self.durButton)
 		self.layout.add_widget(self.grid3)
