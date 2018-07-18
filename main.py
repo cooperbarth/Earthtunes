@@ -53,7 +53,7 @@ def playSound(instance):
 		sm.get_screen('Display Screen').play.text='Pause'
 	else:
 		return
-		
+
 #jumpBack: Jump back button, goes back 10 seconds
 def jumpBack(instance): 
 	if sound.state is 'play':
@@ -76,7 +76,7 @@ def jumpForward(instance):
 			sound.seek(sound.get_pos()+10)
 	else:
 		return
-		
+
 #slideUpdate: Update function for slider to match audio		
 def slideUpdate(dt): 
 	slider = sm.get_screen('Display Screen').seek
@@ -84,7 +84,7 @@ def slideUpdate(dt):
 
 #disgusting boolean variable to determine whether sound was paused by touch
 wasPlaying = False	
-	
+
 #slidePause: Moving slider pauses sound
 def slidePause(instance, touch): 
 	global wasPlaying
@@ -102,16 +102,15 @@ def slideSeek(instance,touch):
 		if wasPlaying:
 			sound.play()
 			sound.seek((slider.value/slider.max)*sound.length)
-			
 		wasPlaying = False
-			
+
 #getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	halfpi = 0.5*numpy.pi
 	duration = str(float(duration) * 60)
 	disploc = locate
 	time = time + ':00'
-	
+
 	#setting location and station based on user input
 	if locate == 'Ryerson (IL,USA)':
 		soundname = 'ryerson'
@@ -168,7 +167,7 @@ def getSoundAndGraph(locate, date, time, duration, AF, FA):
 		net = "TA"
 		location = "--"
 		channel = "BHZ"
-		
+
 	#getting data from online
 	print "Getting data from",disploc,'on',date
 	type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
@@ -180,7 +179,7 @@ def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	df = ws.read()
 	print "processing data..."
 	dflines = df.split('\n')
-	   
+
 	#getting the data from the doc
 	head = dflines[0]
 	fsps = numpy.float(head.split()[4])
@@ -209,12 +208,12 @@ def getSoundAndGraph(locate, date, time, duration, AF, FA):
 		bandsHZ = 160
 	else:
 		bandsHZ = 400
-		
+
 	if FA == '':
 		fixedamp = maxAmp / 3.
 	else:
 		fixedamp = float(FA)
-	
+
 	#creating the sound file
 	realduration = (tot/fsps)/3600.
 	print "original duration = %7.2f hours" % realduration
@@ -227,14 +226,14 @@ def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	s32 = numpy.int32(scaledsound)
 	ssps = bandsHZ * fsps
 	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
-	
+
 	#plotting the graph
 	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+', '+date)
 	plot(hours,1000.*sound)
 	axishours = [time]
 	axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
 	savefig(soundname + ".png")
-	
+
 	return soundname
 
 #isNumber: isdigit function that works with scientific notation
@@ -243,8 +242,8 @@ def isNumber(number):
 		float(number)
 	except:
 		return False
-	return True		
-	
+	return True
+
 #define labels with different colored backgrounds
 class BlueLabel(Label):
 	def on_size(self, *args):
@@ -252,15 +251,15 @@ class BlueLabel(Label):
 		with self.canvas.before:
 			Color(0, 0, 1, 0.25)
 			Rectangle(pos=self.pos, size=self.size)
-			
+
 class WhiteLabel(Label):
 	def on_size(self, *args):
 		self.canvas.before.clear()
 		with self.canvas.before:
 			Color(1, 1, 1, 1)
 			Rectangle(pos=self.pos, size=self.size)
-			
-#FloatInput: TextInput that can only accept certain arguments			
+
+#FloatInput: TextInput that can only accept certain arguments
 class FloatInput(TextInput):
 	pat = re.compile('[^0-9]')
 	def insert_text(self, substring, from_undo=False):
@@ -270,20 +269,9 @@ class FloatInput(TextInput):
 		else:
 			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
 		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
-		
-#list of geology facts for use on the loading screen
-geofacts = ['0',
-			'1',
-			'2',
-			'3',
-			'4',
-			'5',
-			'6',
-			'7',
-			'8',
-			'9']
 
-#InputError: popup when input errors detected			
+
+#InputError: popup when input errors detected
 class InputError(GridLayout):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
@@ -294,13 +282,12 @@ class InputError(GridLayout):
 		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))	#Button
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
-		
+
 errscreen = InputError(as_popup = True, title="Input Error") #Create InputError Popup
 errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
-		
+
 #toDisplay: screen transition functions
 def toDisplay(instance):
-	global geofacts
 	global errscreen
 	global errpopup
 	global loadScreen
@@ -313,7 +300,19 @@ def toDisplay(instance):
 	dateText = sm.get_screen('Input Screen').date.text
 	startText = sm.get_screen('Input Screen').startTime.text + ":00"
 	durationText = sm.get_screen('Input Screen').duration.text
-	
+
+	#list of geology facts for use on the loading screen
+	geofacts = ['0',
+				'1',
+				'2',
+				'3',
+				'4',
+				'5',
+				'6',
+				'7',
+				'8',
+				'9']
+
 	if locationText == 'Select Location':
 		errscreen.errorlabel.text = 'Input Error: Please Select a Location.'
 		errpopup.open()
@@ -343,27 +342,27 @@ def toInput(instance):
 	sm.get_screen('Display Screen').seek.value = 0
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
-	
+
 #toInputSimple: error404 to input screen transition	
 def toInputSimple(instance):
 	sm.transition.direction = 'right'
 	sm.current = 'Input Screen'
-	errpopup2.dismiss()		#close popup
-	
+	errpopup2.dismiss()	#close popup
+
 #dumb functions to open and close popups
 def openAdvanced(instance):
 	advancedScreen.open()
 
 def closeAdvanced(instance):
 	advancedScreen.dismiss()
-	
+
 def openChoose(instance):
 	choosePopup.open()
-	
+
 def closeChoose(instance):
 	sm.get_screen('Input Screen').location.text = chooseScreen.location.text
 	choosePopup.dismiss()
-	
+
 #ChooseScreen: popup screen for choosing location
 class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
@@ -438,12 +437,12 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.returnbutton)
 		
 		self.add_widget(self.layout)
-		
+
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
-advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))		
+advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))
 
-#Calendar: Cooper's "God Tier" Calendar for use to pick date		
+#Calendar: Cooper's "God Tier" Calendar for use to pick date
 class Calendar(BoxLayout):
 	def __init__(self, *args, **kwargs):
 		super(Calendar, self).__init__(**kwargs)
@@ -550,7 +549,7 @@ class Calendar(BoxLayout):
 			self.date = date(self.date.year - 1, self.date.month, self.date.day)
 		self.populate_header()
 		self.populate_body()
-		
+
 #TimePicker: clock that allows selection of time
 class TimePicker(GridLayout):
 	def __init__(self, **kwargs):
@@ -663,8 +662,8 @@ class TimePicker(GridLayout):
 			hour = str(hour)	
 		
 		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
-	
-#InputScreen: Screen for all inputs to be entered	
+
+#InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
 	def __init__(self, **kwargs):
 		global choose
@@ -742,13 +741,15 @@ class InputScreen(Screen):
 		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
 		
 		self.add_widget(self.layout)
+
 #on_focus: open calendar on selecting text_input for date
 def on_focus(instance, value):
 	if value:
 		sm.get_screen('Input Screen').popup.open()
 	else:
 		pass
-#on_focus_time: open timepicker on selecting text_input for time		
+
+#on_focus_time: open timepicker on selecting text_input for time
 def on_focus_time(instance, value):
 	if value:
 		sm.get_screen('Input Screen').timePop.open()
@@ -770,25 +771,17 @@ class Error404(GridLayout):
 		self.add_widget(self.message)
 		self.add_widget(self.button)
 
-#Creating Error404 popup		
+#Creating Error404 popup
 errscreen2 = Error404(as_popup = True)
 errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
 
-#def exitLoading(instance):
-	#loadPopup.dismiss()
-
 #LoadingScreen: popup loading screen
 class LoadingScreen(GridLayout):
-	global geofacts
-
 	def __init__(self, **kwargs):
 		self.cols = 1
 		super(LoadingScreen, self).__init__(**kwargs)
-		self.message = Label(text="Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)], halign='center', size_hint = (1, 0.8))
+		self.message = Label(halign = 'center')
 		self.add_widget(self.message)
-		self.goBack = Button(text="Return", halign = 'center', size_hint = (1, 0.2))
-		#self.goBack.bind(on_release=exitLoading)
-		self.add_widget(self.goBack)
 
 #loadData: Gets data and processes and prepares Display Screen
 def loadData(instance):
@@ -803,7 +796,7 @@ def loadData(instance):
 	except urllib2.HTTPError:
 		loadPopup.dismiss()
 		errpopup2.open()
-	else:	
+	else:
 		global sound
 		im.source = name + '.png'
 		im.reload()
@@ -824,16 +817,16 @@ class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
-		
+
 		self.bottom = GridLayout(cols=3,size_hint=(1,0.1))
-		
+
 		#Slider allows moving through sound file
 		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.1))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=slidePause)
 		self.seek.bind(on_touch_up=slideSeek)
 		self.layout.add_widget(self.seek)
-		
+
 		self.backwards = Button(text='Jump Back')		#Jump Back button
 		self.backwards.bind(on_release=jumpBack)
 		self.bottom.add_widget(self.backwards)
