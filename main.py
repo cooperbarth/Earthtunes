@@ -56,7 +56,6 @@ class FloatInput(TextInput):
 			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
 		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
-
 #InputError: popup when input errors detected
 class InputError(GridLayout):
 	def __init__(self, **kwargs):
@@ -370,6 +369,11 @@ class TimePicker(GridLayout):
 
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
+	# def focusDate(self, instance):
+		# self.date.focus = True
+	# def setDateText(self, instance, value):
+		# self.durButton.text = self.duration.text
+
 	def __init__(self, **kwargs):
 
 		super(InputScreen, self).__init__(**kwargs)
@@ -396,14 +400,14 @@ class InputScreen(Screen):
 
 		#Date Input
 		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.datelabel = Label(text='Date (YYYY-MM-DD):')
+		self.datelabel = Label(text='Date (YYYY-MM-DD):', valign = 'middle')
 		self.datelabel.font_size = self.datelabel.height/5
-		self.datelabel.valign = 'middle'
 		self.grid1.add_widget(self.datelabel)
-		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'), text_align = 'center')
-		self.date.bind(focus=self.on_focus)
+		self.calendar = Calendar(as_popup=True)
+		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
+		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (0,0,1,0.25), color = (1,1,1,1))
 		self.date.font_size = self.date.height/3
-		self.date.padding = [self.date.width/2, self.date.height/2 - self.date.font_size/2]
+		self.date.bind(on_release=lambda x:self.popup.open())
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -411,12 +415,10 @@ class InputScreen(Screen):
 		#Time Input
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
-		self.startTime = TextInput(multiline=False, text="00:00")
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
-		self.startButton = Button(text = '', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1))
-		self.setStartText()
+		self.startButton = Button(text = '00:00', background_normal = '', background_color = (0,0,1,0.25), color = (1,1,1,1))
 		self.startButton.font_size = self.startButton.height/3
 		self.startButton.bind(on_release=lambda x:self.timePop.open())
 		self.grid2.add_widget(self.startButton)
@@ -447,40 +449,27 @@ class InputScreen(Screen):
 		self.button.bind(on_release=self.toDisplay)
 		self.layout.add_widget(self.button)
 
-		#Create calendar popup
-		self.calendar = Calendar(as_popup=True)
-		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
 		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
 
 		self.add_widget(self.layout)
-
-	'''def focusDate(self, instance):
-		self.date.focus = True
-	def setDateText(self, instance, value):
-		self.durButton.text = self.duration.text'''
-
-	def focusStartTime(self, instance):
-		self.startTime.focus = True
-	def setStartText(self):
-		self.startButton.text = self.startTime.text
 
 	def focusDuration(self, instance):
 		self.duration.focus = True
 		if self.firstClickHappened is False:
 			self.firstClickHappened is True
 			self.duration.text = ''
+
 	def setDurText(self, instance, value):
 		self.durButton.text = self.duration.text
 
 	#toDisplay: screen transition functions
 	def toDisplay(self, instance):
-
 		sm.transition.direction = 'left'
 
 		#Checking for Error in User Input
 		locationText = self.location.text
 		dateText = self.date.text
-		startText = self.startTime.text + ":00"
+		startText = self.startButton.text + ":00"
 		durationText = self.duration.text
 
 		#list of geology facts for use on the loading screen
@@ -523,13 +512,6 @@ class InputScreen(Screen):
 	def openChoose(self,instance):
 		choosePopup.open()
 
-	#on_focus: open calendar on selecting text_input for date
-	def on_focus(self, instance, value):
-		if value:
-			self.popup.open()
-		else:
-			pass
-
 	#on_focus_time: open timepicker on selecting text_input for time
 	'''def on_focus_time(self, instance):
 		if value:
@@ -569,7 +551,7 @@ class LoadingScreen(GridLayout):
 			soundname = self.getSoundAndGraph(
 								sm.get_screen('Input Screen').location.text, 
 								sm.get_screen('Input Screen').date.text,
-								sm.get_screen('Input Screen').startTime.text,
+								sm.get_screen('Input Screen').startButton.text,
 								sm.get_screen('Input Screen').duration.text,
 								advScreen.aFactor.text,
 								advScreen.fixedAmp.text)
@@ -830,9 +812,9 @@ class DisplayScreen(Screen):
 		sm.current = 'Input Screen'
 
 # Create screen manager
-sm = ScreenManager()	
+sm = ScreenManager()
 
-#Creating ErrorScreen popup	
+#Creating ErrorScreen popup
 errscreen = InputError(as_popup = True) #Create InputError Popup
 errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
 
