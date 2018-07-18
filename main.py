@@ -767,25 +767,22 @@ errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
 #Creating Error404 popup
 errscreen2 = Error404(as_popup = True)
 errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
-		
+
 #Creating ChooseScreen popup
 chooseScreen = ChooseScreen(as_popup=True)
 choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8))
-		
+
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
 advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))	
 
 #Create LoadingScreen popup
 loadScreen = LoadingScreen(as_popup=True)
-loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5))
-loadPopup.bind(on_open=loadScreen.loadData)	
-		
-#Creating Input Screen
+loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), on_open=loadScreen.loadData)
+
+#Creating Screens
 input = InputScreen(name='Input Screen')
 sm.add_widget(input)
-		
-#Create Display Screen
 display = DisplayScreen(name='Display Screen')
 sm.add_widget(display)
 
