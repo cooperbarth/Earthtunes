@@ -31,12 +31,6 @@ from kivy.graphics import Color, Rectangle
 from functools import partial
 from kivy.uix.popup import Popup
 
-# Create screen manager
-sm = ScreenManager()
-
-#Preload sound and image. These will be reloaded later for correct files
-sound = SoundLoader.load('ryerson_400_20000.wav')
-
 #define labels with different colored backgrounds
 class BlueLabel(Label):
 	def on_size(self, *args):
@@ -76,9 +70,6 @@ class InputError(GridLayout):
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
 
-errscreen = InputError(as_popup = True) #Create InputError Popup
-errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
-
 #ChooseScreen: popup screen for choosing location
 class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
@@ -112,10 +103,6 @@ class ChooseScreen(GridLayout):
 	def closeChoose(self, instance):
 		sm.get_screen('Input Screen').location.text = self.location.text
 		choosePopup.dismiss()
-
-#Creating ChooseScreen popup
-chooseScreen = ChooseScreen(as_popup=True)
-choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8))
 
 #AdvancedScreen: Advanced options (like acceleration factor and amplitude)
 class AdvancedScreen(BoxLayout):
@@ -160,11 +147,6 @@ class AdvancedScreen(BoxLayout):
 		
 	def closeAdvanced(self, instance):
 		advancedScreen.dismiss()
-
-
-#Creating AdvancedScreen popup
-advScreen = AdvancedScreen(as_popup = True)
-advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))
 
 #Calendar: Cooper's "God Tier" Calendar for use to pick date
 class Calendar(BoxLayout):
@@ -533,10 +515,6 @@ class InputScreen(Screen):
 		else:
 			pass
 
-#Creating Input Screen
-input = InputScreen(name='Input Screen')
-sm.add_widget(input)
-
 #Error404: Screen displayed when failing to download data from IRIS
 class Error404(GridLayout):
 	def __init__(self, **kwargs):
@@ -553,10 +531,6 @@ class Error404(GridLayout):
 		sm.transition.direction = 'right'
 		sm.current = 'Input Screen'
 		errpopup2.dismiss()	#close popup
-
-#Creating Error404 popup
-errscreen2 = Error404(as_popup = True)
-errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
 
 #LoadingScreen: popup loading screen
 class LoadingScreen(GridLayout):
@@ -645,12 +619,7 @@ class LoadingScreen(GridLayout):
 			location = '10'
 			channel = 'BHZ'
 		else:
-			print('Defaulting to Ryerson Station...')
-			soundname = 'ryerson'
-			station = "L44A"
-			net = "TA"
-			location = "--"
-			channel = "BHZ"
+			return
 
 		#getting data from online
 		print "Getting data from",disploc,'on',date
@@ -727,11 +696,6 @@ class LoadingScreen(GridLayout):
 		except:
 			return False
 		return True
-
-#Create LoadingScreen popup
-loadScreen = LoadingScreen(as_popup=True)
-loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5))
-loadPopup.bind(on_open=loadScreen.loadData)
 
 #DisplayScreen: Screen that displays graph and controls for playing associated sound
 class DisplayScreen(Screen):
@@ -841,6 +805,37 @@ class DisplayScreen(Screen):
 		sm.transition.direction = 'right'
 		sm.current = 'Input Screen'
 
+# Create screen manager
+sm = ScreenManager()
+
+#Preload sound and image. These will be reloaded later for correct files
+sound = SoundLoader.load('ryerson.wav')		
+
+#Creating ErrorScreen popup	
+errscreen = InputError(as_popup = True) #Create InputError Popup
+errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
+
+#Creating Error404 popup
+errscreen2 = Error404(as_popup = True)
+errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
+		
+#Creating ChooseScreen popup
+chooseScreen = ChooseScreen(as_popup=True)
+choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8))
+		
+#Creating AdvancedScreen popup
+advScreen = AdvancedScreen(as_popup = True)
+advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))	
+
+#Create LoadingScreen popup
+loadScreen = LoadingScreen(as_popup=True)
+loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5))
+loadPopup.bind(on_open=loadScreen.loadData)	
+		
+#Creating Input Screen
+input = InputScreen(name='Input Screen')
+sm.add_widget(input)
+		
 #Create Display Screen
 display = DisplayScreen(name='Display Screen')
 sm.add_widget(display)
