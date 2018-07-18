@@ -267,29 +267,22 @@ class TimePicker(GridLayout):
 		self.add_widget(Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
 
 		#Value display, ":", and spacing
-		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle')
-		self.hour.font_size = self.hour.height/3
+		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle', font_size=self.height/3)
 		self.add_widget(self.hour)
-		self.colon = Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle', font_size = self.height/3)
-		self.add_widget(self.colon)
+		self.add_widget(Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle', font_size = self.height/3))
 		self.minute = Label(text='00', size_hint=(0.4,0.6), halign='center', valign='middle', font_size = self.height/3)
 		self.add_widget(self.minute)
 		self.add_widget(Label(size_hint=(0.05,0.6)))
 		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle', font_size = self.height/5)
 		self.add_widget(self.AMPM)
+
 		#Down buttons and spacing
-		self.hrDown = Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle')
-		self.hrDown.bind(on_release=self.hourDown)
-		self.add_widget(self.hrDown)
+		self.add_widget(Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.hourDown))
 		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.minDown = Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle')
-		self.minDown.bind(on_release=self.minuteDown)
-		self.add_widget(self.minDown)
+		self.add_widget(Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.minuteDown))
 		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.AMPMdown = Button(text='v', size_hint=(0.1,0.2), halign='center', valign='middle')
-		self.AMPMdown.bind(on_release=self.apSwitch)
-		self.add_widget(self.AMPMdown)
-	
+		self.add_widget(Button(text='v', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
+
 	#Functions that corresponds to buttons that change hour, minute, or AM/PM
 	def hourUp(self, instance):
 		currentHour = int(self.hour.text)
@@ -357,7 +350,7 @@ class TimePicker(GridLayout):
 		else:
 			hour = str(hour)	
 		
-		sm.get_screen('Input Screen').startButton.text = hour + ':' + self.minute.text
+		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
 
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
@@ -386,8 +379,7 @@ class InputScreen(Screen):
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (0,0,1,0.25), font_size = self.height/3)
-		self.date.bind(on_release=lambda x:self.popup.open())
+		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', color = (0,0,0,1), font_size = self.height/3,on_release=lambda x:self.popup.open())
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -398,10 +390,8 @@ class InputScreen(Screen):
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
-		self.startButton = Button(text = '00:00', background_normal = '', background_color = (0,0,1,0.25))
-		self.startButton.font_size = self.startButton.height/3
-		self.startButton.bind(on_release=lambda x:self.timePop.open())
-		self.grid2.add_widget(self.startButton)
+		self.startTime = Button(text = '00:00', background_normal = '', color = (0,0,0,1), font_size = self.height/3, on_release=lambda x:self.timePop.open())
+		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
@@ -411,22 +401,15 @@ class InputScreen(Screen):
 		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(text=self.setDurText)
 		self.firstClickHappened = False
-		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3)
-		self.durButton.bind(on_release=self.focusDuration)
+		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=self.focusDuration)
 		self.grid3.add_widget(self.durButton)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
-		#Advanced Options Button
-		self.advanced = Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1))
-		self.advanced.bind(on_release=self.openAdvanced)
-		self.layout.add_widget(self.advanced)
+		#Advanced Options and Submit Buttons
+		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1), on_release=self.openAdvanced))
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-
-		#Submit Button
-		self.button = Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle')
-		self.button.bind(on_release=self.toDisplay)
-		self.layout.add_widget(self.button)
+		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay))
 
 		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
 
@@ -448,7 +431,7 @@ class InputScreen(Screen):
 		#Checking for Error in User Input
 		locationText = self.location.text
 		dateText = self.date.text
-		startText = self.startButton.text + ":00"
+		startText = self.startTime.text + ":00"
 		durationText = self.duration.text
 
 		#list of geology facts for use on the loading screen
@@ -496,17 +479,8 @@ class Error404(GridLayout):
 	def __init__(self, **kwargs):
 		super(Error404, self).__init__(**kwargs)
 		self.cols=1
-		self.message = Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.")
-		self.message.halign = 'center'
-		self.button = Button(text='Return')
-		self.button.bind(on_release=self.toInputSimple)
-		self.add_widget(self.message)
-		self.add_widget(self.button)
-	#toInputSimple: error404 to input screen transition	
-	def toInputSimple(self,instance):
-		sm.transition.direction = 'right'
-		sm.current = 'Input Screen'
-		errpopup2.dismiss()	#close popup
+		self.add_widget(Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.", halign = 'center'))
+		self.add_widget(Button(text='Return', on_release=lambda x:errpopup2.dismiss()))
 
 #LoadingScreen: popup loading screen
 class LoadingScreen(GridLayout):
@@ -523,7 +497,7 @@ class LoadingScreen(GridLayout):
 			soundname = self.getSoundAndGraph(
 								sm.get_screen('Input Screen').location.text, 
 								sm.get_screen('Input Screen').date.text,
-								sm.get_screen('Input Screen').startButton.text,
+								sm.get_screen('Input Screen').startTime.text,
 								sm.get_screen('Input Screen').duration.text,
 								advScreen.aFactor.text,
 								advScreen.fixedAmp.text)

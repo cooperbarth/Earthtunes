@@ -1,6 +1,6 @@
--add cursor to textinput?
--do center-align thing for advanced screen
--consistent formatting :)
+-add cursor to textinput
+-do center-align for advanced screen textinput
+-more formatting
 
 -figure out building to phones **IMPORTANT
 -add button on loading screen to abort while loading (please don't try this at home)
