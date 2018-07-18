@@ -36,7 +36,6 @@ sm = ScreenManager()
 
 #Preload sound and image. These will be reloaded later for correct files
 sound = SoundLoader.load('ryerson_400_20000.wav')
-im = Image(source="ryerson.png", size_hint=(1,0.8))
 
 #getSoundAndGraph: Script that pulls data and processes into image and audio
 def getSoundAndGraph(locate, date, time, duration, AF, FA):
@@ -159,7 +158,7 @@ def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	scaledsound = (2**31)*numpy.arctan(sound/fixedamp)/halfpi
 	s32 = numpy.int32(scaledsound)
 	ssps = bandsHZ * fsps
-	wavfile.write(soundname + "_400_20000.wav",ssps,s32)
+	wavfile.write(soundname + ".wav",ssps,s32)
 
 	#plotting the graph
 	axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+', '+date)
@@ -271,7 +270,6 @@ def toDisplay(instance):
 def toInput(instance):
 	if sound.state is 'play':	#stop sound
 		sound.stop()
-	sm.get_screen('Display Screen').layout.remove_widget(im) 	#reset image
 	sm.get_screen('Display Screen').play.text = 'Play'			#Reset slider/pause button
 	sm.get_screen('Display Screen').seek.value = 0
 	sm.transition.direction = 'right'
@@ -348,8 +346,8 @@ class AdvancedScreen(BoxLayout):
 				text='Acceleration Factor:',
 				values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
 				size_hint = (1,0.08),
-				sync_height=True	
-				)	
+				sync_height=True
+				)
 		self.layout.add_widget(self.aFactor)
 		self.layout.add_widget(Label(size_hint=(1,0.49)))
 		
@@ -601,11 +599,11 @@ class TimePicker(GridLayout):
 class InputScreen(Screen):
 	def __init__(self, **kwargs):
 		global choose
+		global chooseScreen
 		global on_focus
 		global errscreen
 		global errpopup
-		global chooseScreen
-	
+
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
 		#SonifyMe header
@@ -720,7 +718,7 @@ class LoadingScreen(GridLayout):
 #loadData: Gets data and processes and prepares Display Screen
 def loadData(instance):
 	try:
-		name = getSoundAndGraph(
+		soundname = getSoundAndGraph(
 							sm.get_screen('Input Screen').location.text, 
 							sm.get_screen('Input Screen').date.text,
 							sm.get_screen('Input Screen').startTime.text,
@@ -731,12 +729,9 @@ def loadData(instance):
 		loadPopup.dismiss()
 		errpopup2.open()
 	else:
-		global sound
-		im.source = name + '.png'
-		im.reload()
-		im.size_hint=(1,0.75)
-		sound = SoundLoader.load(name + '_400_20000.wav')
-		sm.get_screen('Display Screen').layout.add_widget(im, index=3)
+		sm.get_screen('Display Screen').im.source = soundname + '.png'
+		sm.get_screen('Display Screen').im.reload()
+		sound = SoundLoader.load(soundname + '.wav')
 		loadPopup.dismiss()
 		sm.transition.direction = 'left'
 		sm.current = 'Display Screen'
@@ -751,6 +746,9 @@ class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(DisplayScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
+
+		self.im = Image(source="Blank", size_hint=(1,0.8))
+		self.layout.add_widget(self.im, index=3)
 
 		self.bottom = GridLayout(cols=3,size_hint=(1,0.1))
 
@@ -780,7 +778,7 @@ class DisplayScreen(Screen):
 		
 		#disgusting boolean variable to determine whether sound was paused by touch
 		self.wasPlaying = False	
-	
+
 	#playSound: Play the currently loaded sound
 	def playSound(self, instance):
 		if sound.state is 'play': #Pause
