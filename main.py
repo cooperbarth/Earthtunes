@@ -1,6 +1,5 @@
 import kivy
 kivy.require('1.10.1')
-#import earthtunes27
 import numpy
 import urllib2
 import matplotlib.pyplot as plt
@@ -94,7 +93,7 @@ def slidePause(instance, touch):
 			sound.stop()
 			wasPlaying = True
 
-#slideSeek: Start playing audio at new location			
+#slideSeek: Start playing audio at new location (or move slider if paused)			
 def slideSeek(instance,touch):	
 	global wasPlaying
 	if instance.collide_point(*touch.pos):
@@ -238,7 +237,7 @@ def getSoundAndGraph(locate, date, time, duration, AF, FA):
 	
 	return soundname
 
-#isdigit function that works with scientific notation
+#isNumber: isdigit function that works with scientific notation
 def isNumber(number):
 	try:
 		float(number)
@@ -261,7 +260,7 @@ class WhiteLabel(Label):
 			Color(1, 1, 1, 1)
 			Rectangle(pos=self.pos, size=self.size)
 			
-#textinputs that can only accept certain arguments			
+#FloatInput: TextInput that can only accept certain arguments			
 class FloatInput(TextInput):
 	pat = re.compile('[^0-9]')
 	def insert_text(self, substring, from_undo=False):
@@ -284,7 +283,7 @@ geofacts = ['0',
 			'8',
 			'9']
 
-#InputError popup			
+#InputError: popup when input errors detected			
 class InputError(GridLayout):
 	def __init__(self, **kwargs):
 		super(InputError, self).__init__(**kwargs)
@@ -296,7 +295,7 @@ class InputError(GridLayout):
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
 		
-errscreen = InputError(as_popup = True, title="Input Error") #Create Popup
+errscreen = InputError(as_popup = True, title="Input Error") #Create InputError Popup
 errpopup=Popup(content = errscreen, size_hint = (0.9,0.5))
 		
 #toDisplay: screen transition functions
@@ -331,6 +330,7 @@ def toDisplay(instance):
 		errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
 		errpopup.open()
 		return
+	#Open loading popup
 	loadScreen.message.text= "Loading data from " + sm.get_screen('Input Screen').location.text + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
 	loadPopup.open()
 
@@ -368,13 +368,14 @@ def closeChoose(instance):
 class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
-		self.cols=1
+		self.cols=1 #One column grid layout
+		#SonifyMe header
 		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.add_widget(self.title)
 		self.add_widget(WhiteLabel(size_hint=(1,0.001)))
-		
+		#Spinner with all available locations
 		self.location = Spinner(
 							text='Select Location',
 							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
@@ -393,19 +394,23 @@ class ChooseScreen(GridLayout):
 		self.select.bind(on_release=closeChoose)
 		self.add_widget(self.select)
 
+#Creating ChooseScreen popup
 chooseScreen = ChooseScreen(as_popup=True)
 choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8))
 
+#AdvancedScreen: Advanced options (like acceleration factor and amplitude)
 class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
+		#vertical box layout
 		self.layout = BoxLayout(orientation='vertical')
+		#SonifyMe header
 		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
-		
+		#Spinner with acceleration factor choices
 		self.aFactor = Spinner(
 				text='Acceleration Factor:',
 				values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
@@ -416,27 +421,29 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(Label(size_hint=(1,0.49)))
 		
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
+		#Fixed amplitude input as another grid layout
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
-		self.fixedlabel = Label(text='Fixed Amplitude:')
+		self.fixedlabel = Label(text='Fixed Amplitude:') 			#Label
 		self.fixedlabel.font_size = self.fixedlabel.height/5
 		self.grid.add_widget(self.fixedlabel)
-		self.fixedAmp = FloatInput(multiline=False)
+		self.fixedAmp = FloatInput(multiline=False)					#FloatInput (textinput)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
-		#self.fixedAmp.padding = [6, self.fixedAmp.height/2 - self.fixedAmp.font_size/2]
 		self.grid.add_widget(self.fixedAmp)
 		self.layout.add_widget(self.grid)
 		
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
-		self.returnbutton = Button(text='Return', size_hint=(1,0.149))
+		self.returnbutton = Button(text='Return', size_hint=(1,0.149))	#Return button
 		self.returnbutton.font_size=self.returnbutton.height/5
 		self.returnbutton.bind(on_release=closeAdvanced)
 		self.layout.add_widget(self.returnbutton)
 		
 		self.add_widget(self.layout)
 		
+#Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
 advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))		
-		
+
+#Calendar: Cooper's "God Tier" Calendar for use to pick date		
 class Calendar(BoxLayout):
 	def __init__(self, *args, **kwargs):
 		super(Calendar, self).__init__(**kwargs)
@@ -465,6 +472,7 @@ class Calendar(BoxLayout):
 		self.populate_body()
 		self.populate_header()
 
+	#populate_header: Fills header with correct data (Month, Year), buttons
 	def populate_header(self, *args, **kwargs):
 		self.header.clear_widgets()
 		month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
@@ -481,6 +489,7 @@ class Calendar(BoxLayout):
 		self.header.add_widget(next_month)
 		self.header.add_widget(next_year)
 
+	#populate_body: Fills body with calendar given the month and year. Select date by clicking on a day)
 	def populate_body(self, *args, **kwargs):
 		self.body.clear_widgets()
 		self.days = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
@@ -494,20 +503,22 @@ class Calendar(BoxLayout):
 			self.body.add_widget(Label(text=""))
 		while date_cursor.month == self.date.month:
 			date_label = Button(text = str(date_cursor.day))
-			if date_cursor > date.today():
+			if date_cursor > date.today():	#Make future dates unable to be selected
 				date_label.background_color = [0, 0, 0, 1]
 			else:
 				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
 			self.body.add_widget(date_label)
 			date_cursor += timedelta(days = 1)
-			
+	
+	#set_date: Transfers date selected into text_input on Input Screen
 	def set_date(self, *args, **kwargs):
 		self.date = date(self.date.year, self.date.month, kwargs['day'])
 		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
 		sm.get_screen('Input Screen').popup.dismiss()
 		self.populate_body()
 		self.populate_header()
-
+	
+	#Functions that correspond to buttons that change month or year
 	def move_next_month(self, *args, **kwargs):
 		if self.date.month == 12:
 			self.date = date(self.date.year + 1, 1, self.date.day)
@@ -540,10 +551,12 @@ class Calendar(BoxLayout):
 		self.populate_header()
 		self.populate_body()
 		
+#TimePicker: clock that allows selection of time
 class TimePicker(GridLayout):
 	def __init__(self, **kwargs):
 		super(TimePicker, self).__init__(**kwargs)
 		self.cols = 5
+		#Up buttons and spacing
 		self.hrUp = Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle')
 		self.hrUp.bind(on_release=self.hourUp)
 		self.add_widget(self.hrUp)
@@ -555,7 +568,7 @@ class TimePicker(GridLayout):
 		self.AMPMup = Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle')
 		self.AMPMup.bind(on_release=self.apSwitch)
 		self.add_widget(self.AMPMup)
-		
+		#Value display, ":", and spacing
 		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle')
 		self.hour.font_size = self.hour.height/3
 		self.add_widget(self.hour)
@@ -569,7 +582,7 @@ class TimePicker(GridLayout):
 		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle')
 		self.AMPM.font_size = self.minute.height/5
 		self.add_widget(self.AMPM)
-		
+		#Down buttons and spacing
 		self.hrDown = Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle')
 		self.hrDown.bind(on_release=self.hourDown)
 		self.add_widget(self.hrDown)
@@ -582,6 +595,7 @@ class TimePicker(GridLayout):
 		self.AMPMdown.bind(on_release=self.apSwitch)
 		self.add_widget(self.AMPMdown)
 	
+	#Functions that corresponds to buttons that change hour, minute, or AM/PM
 	def hourUp(self, instance):
 		currentHour = int(self.hour.text)
 		currentHour += 1
@@ -649,7 +663,8 @@ class TimePicker(GridLayout):
 			hour = str(hour)	
 		
 		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
-		
+	
+#InputScreen: Screen for all inputs to be entered	
 class InputScreen(Screen):
 	def __init__(self, **kwargs):
 		global choose
@@ -660,13 +675,13 @@ class InputScreen(Screen):
 	
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
-		
+		#SonifyMe header
 		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-		
+		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.LocationLabel = Label(text='Location:', valign='middle')
 		self.LocationLabel.font_size = self.LocationLabel.height/5
@@ -677,7 +692,7 @@ class InputScreen(Screen):
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-		
+		#Date Input
 		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.datelabel = Label(text='Date (YYYY-MM-DD):')
 		self.datelabel.font_size = self.datelabel.height/5
@@ -688,10 +703,9 @@ class InputScreen(Screen):
 		self.date.font_size = self.date.height/3
 		self.date.padding = [6, self.date.height/2 - self.date.font_size/2]
 		self.grid1.add_widget(self.date)
-		
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-		
+		#Time Input
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TextInput(multiline=False, text="00:00")
@@ -704,7 +718,7 @@ class InputScreen(Screen):
 		self.timePop.bind(on_dismiss=self.clock.set_time)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-		
+		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False, text='60')
@@ -713,37 +727,38 @@ class InputScreen(Screen):
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-		
+		#Advanced Options Button
 		self.advanced = Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1))
 		self.advanced.bind(on_release=openAdvanced)
 		self.layout.add_widget(self.advanced)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
-		
+		#Submit Button
 		self.button = Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle')
 		self.button.bind(on_release=toDisplay)
 		self.layout.add_widget(self.button)
-		
+		#Create calendar popup
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
 		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
 		
 		self.add_widget(self.layout)
-		
+#on_focus: open calendar on selecting text_input for date
 def on_focus(instance, value):
 	if value:
 		sm.get_screen('Input Screen').popup.open()
 	else:
 		pass
-		
+#on_focus_time: open timepicker on selecting text_input for time		
 def on_focus_time(instance, value):
 	if value:
 		sm.get_screen('Input Screen').timePop.open()
 	else:
 		pass
-
+#Creating Input Screen
 input = InputScreen(name='Input Screen')
 sm.add_widget(input)
 
+#Error404: Screen displayed when failing to download data from IRIS
 class Error404(GridLayout):
 	def __init__(self, **kwargs):
 		super(Error404, self).__init__(**kwargs)
@@ -754,13 +769,15 @@ class Error404(GridLayout):
 		self.button.bind(on_release=toInputSimple)
 		self.add_widget(self.message)
 		self.add_widget(self.button)
-		
+
+#Creating Error404 popup		
 errscreen2 = Error404(as_popup = True)
 errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
 
 #def exitLoading(instance):
 	#loadPopup.dismiss()
 
+#LoadingScreen: popup loading screen
 class LoadingScreen(GridLayout):
 	global geofacts
 
@@ -773,6 +790,7 @@ class LoadingScreen(GridLayout):
 		#self.goBack.bind(on_release=exitLoading)
 		self.add_widget(self.goBack)
 
+#loadData: Gets data and processes and prepares Display Screen
 def loadData(instance):
 	try:
 		name = getSoundAndGraph(
@@ -796,10 +814,12 @@ def loadData(instance):
 		sm.transition.direction = 'left'
 		sm.current = 'Display Screen'
 
+#Create LoadingScreen popup
 loadScreen = LoadingScreen(as_popup=True)
 loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5))
 loadPopup.bind(on_open=loadData)
 
+#DisplayScreen: Screen that displays graph and controls for playing associated sound
 class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(DisplayScreen, self).__init__(**kwargs)
@@ -807,7 +827,7 @@ class DisplayScreen(Screen):
 		
 		self.bottom = GridLayout(cols=3,size_hint=(1,0.1))
 		
-		#Slider --> Allows moving through sound file
+		#Slider allows moving through sound file
 		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.1))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=slidePause)
@@ -831,6 +851,7 @@ class DisplayScreen(Screen):
 		self.layout.add_widget(self.button)
 		self.add_widget(self.layout)
 
+#Create Display Screen
 display = DisplayScreen(name='Display Screen')
 sm.add_widget(display)
 
