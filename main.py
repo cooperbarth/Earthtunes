@@ -380,23 +380,26 @@ class InputScreen(Screen):
 
 		super(InputScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
+
 		#SonifyMe header
 		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
+
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.LocationLabel = Label(text='Location:', valign='middle')
 		self.LocationLabel.font_size = self.LocationLabel.height/5
 		self.grid0.add_widget(self.LocationLabel)
-		self.location = Button(text=chooseScreen.location.text, valign='middle')
+		self.location = Button(text="Ryerson (IL,USA)", valign='middle')
 		self.location.font_size=self.location.height/5
 		self.location.bind(on_release=self.openChoose)
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
+
 		#Date Input
 		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.datelabel = Label(text='Date (YYYY-MM-DD):')
@@ -405,48 +408,63 @@ class InputScreen(Screen):
 		self.grid1.add_widget(self.datelabel)
 		self.date = TextInput(multiline=False, text = date.today().strftime('%Y-%m-%d'), text_align = 'center')
 		self.date.bind(focus=self.on_focus)
+		self.date.bind(focus=self.updatePadding)
 		self.date.font_size = self.date.height/3
-		self.date.padding = [6, self.date.height/2 - self.date.font_size/2]
+		self.date.padding = [self.date.width/2, self.date.height/2 - self.date.font_size/2]
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
+
 		#Time Input
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TextInput(multiline=False, text="00:00")
 		self.startTime.bind(focus=self.on_focus_time)
 		self.startTime.font_size = self.startTime.height/3
-		self.startTime.padding = [6, self.startTime.height/2 - self.startTime.font_size/2, 6, 6]
+		self.startTime.padding = [self.date.width/2, self.startTime.height/2 - self.startTime.font_size/2]
 		self.grid2.add_widget(self.startTime)
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
+
 		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False, text='60')
 		self.duration.font_size = self.duration.height/3
-		self.duration.padding = [6, self.duration.height/2 - self.duration.font_size/2]
+		self.duration.padding = [self.date.width/2, self.duration.height/2 - self.duration.font_size/2]
 		self.grid3.add_widget(self.duration)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
+
 		#Advanced Options Button
 		self.advanced = Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1))
 		self.advanced.bind(on_release=self.openAdvanced)
 		self.layout.add_widget(self.advanced)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
+
 		#Submit Button
 		self.button = Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle')
 		self.button.bind(on_release=self.toDisplay)
 		self.layout.add_widget(self.button)
+
 		#Create calendar popup
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
 		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
-		
+
 		self.add_widget(self.layout)
+
+	def updatePadding(self, text_input, *args):
+		text_width = self.date._get_text_width(
+			self.date.text,
+			self.date.tab_width,
+			self.date._label_cached
+		)
+		self.date.padding = [(self.date.width - text_width) / 2, self.date.height/2 - self.date.font_size/2]
+
 	#toDisplay: screen transition functions
 	def toDisplay(self, instance):
 		global errscreen
@@ -490,17 +508,18 @@ class InputScreen(Screen):
 			errscreen.errorlabel.text = 'Input Error: Duration Cannot Be Zero.'
 			errpopup.open()
 			return
+
 		#Open loading popup
 		loadScreen.message.text= "Loading data from " + locationText + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
 		loadPopup.open()
-	
+
 	#dumb functions to open popups
 	def openAdvanced(self,instance):
 		advancedScreen.open()
-		
+
 	def openChoose(self,instance):
 		choosePopup.open()
-		
+
 	#on_focus: open calendar on selecting text_input for date
 	def on_focus(self, instance, value):
 		if value:
