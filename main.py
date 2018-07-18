@@ -426,8 +426,8 @@ class InputScreen(Screen):
 
 		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
-		self.grid3.add_widget(Label(text='Duration (minutes):', font_size=self.height/5, valign='middle'))
-		self.duration = FloatInput(multiline=False, text='60')
+		self.grid3.add_widget(Label(text='Duration (hours):', font_size=self.height/5, valign='middle'))
+		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(focus=self.updatePaddingDuration)
 		self.duration.font_size = self.duration.height/3
 		self.duration.padding = [self.date.width/2, self.duration.height/2 - self.duration.font_size/2]
@@ -508,7 +508,7 @@ class InputScreen(Screen):
 			errscreen.errorlabel.text = 'Input Error: Empty Field(s).'
 			errpopup.open()
 			return
-		if float(durationText) > 1440:
+		if float(durationText) > 24.:
 			errscreen.errorlabel.text = 'Input Error: Please Choose a Shorter Duration.'
 			errpopup.open()
 			return
@@ -592,7 +592,7 @@ class LoadingScreen(GridLayout):
 	#getSoundAndGraph: Script that pulls data and processes into image and audio
 	def getSoundAndGraph(self, locate, date, time, duration, AF, FA):
 		halfpi = 0.5*numpy.pi
-		duration = str(float(duration) * 60)
+		duration = str(float(duration) * 3600)
 		disploc = locate
 		time = time + ':00'
 
