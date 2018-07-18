@@ -366,7 +366,7 @@ class TimePicker(GridLayout):
 		else:
 			hour = str(hour)	
 		
-		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
+		sm.get_screen('Input Screen').startButton.text = hour + ':' + self.minute.text
 
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
@@ -412,23 +412,25 @@ class InputScreen(Screen):
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.startTime = TextInput(multiline=False, text="00:00")
-		self.startTime.bind(focus=self.on_focus_time)
-		self.startTime.font_size = self.startTime.height/3
-		self.startTime.padding = [self.date.width/2, self.startTime.height/2 - self.startTime.font_size/2]
-		self.grid2.add_widget(self.startTime)
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
+		self.startButton = Button(text = '', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1))
+		self.setStartText()
+		self.startButton.font_size = self.startButton.height/3
+		self.startButton.bind(on_release=lambda x:self.timePop.open())
+		self.grid2.add_widget(self.startButton)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
 		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid3.add_widget(Label(text='Duration (hours):', font_size=self.height/5, valign='middle'))
-		self.duration = FloatInput(multiline=False, text='')
+		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(text=self.setDurText)
+		self.firstClickHappened = False
 		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1))
-		self.durButton.font_size = self.durButton.height/5
+		self.durButton.font_size = self.durButton.height/3
 		self.durButton.bind(on_release=self.focusDuration)
 		self.grid3.add_widget(self.durButton)
 		self.layout.add_widget(self.grid3)
@@ -452,18 +454,21 @@ class InputScreen(Screen):
 
 		self.add_widget(self.layout)
 
-	def focusDate(self, instance):
-		self.duration.focus = True
+	'''def focusDate(self, instance):
+		self.date.focus = True
 	def setDateText(self, instance, value):
-		self.durButton.text = self.duration.text
+		self.durButton.text = self.duration.text'''
 
 	def focusStartTime(self, instance):
-		self.duration.focus = True
-	def setStartText(self, instance, value):
-		self.durButton.text = self.duration.text
+		self.startTime.focus = True
+	def setStartText(self):
+		self.startButton.text = self.startTime.text
 
 	def focusDuration(self, instance):
 		self.duration.focus = True
+		if self.firstClickHappened is False:
+			self.firstClickHappened is True
+			self.duration.text = ''
 	def setDurText(self, instance, value):
 		self.durButton.text = self.duration.text
 
@@ -526,11 +531,11 @@ class InputScreen(Screen):
 			pass
 
 	#on_focus_time: open timepicker on selecting text_input for time
-	def on_focus_time(self, instance, value):
+	'''def on_focus_time(self, instance):
 		if value:
 			self.timePop.open()
 		else:
-			pass
+			pass'''
 
 #Error404: Screen displayed when failing to download data from IRIS
 class Error404(GridLayout):
