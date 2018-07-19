@@ -42,6 +42,7 @@ class BlueLabel(Label):
 		with self.canvas.before:
 			Color(0, 0.5, 1, 0.2)
 			Rectangle(pos=self.pos, size=self.size)
+
 #FloatInput: TextInput that can only accept certain arguments
 class FloatInput(TextInput):
 	pat = re.compile('[^0-9]')
@@ -797,7 +798,7 @@ choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (
 
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
-advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.7,0.95))	
+advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95))	
 
 #Create LoadingScreen popup
 loadScreen = LoadingScreen(as_popup=True)

@@ -1,4 +1,5 @@
 -more formatting
+-geology facts
 
 -figure out building to phones **IMPORTANT
 -add button on loading screen to abort while loading (please don't try this at home)
