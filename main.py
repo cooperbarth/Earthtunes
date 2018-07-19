@@ -362,7 +362,7 @@ class InputScreen(Screen):
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.grid0.add_widget(Label(text='Location:', valign='middle', font_size = self.height/5))
-		self.location = Button(text="Ryerson (IL,USA)", valign='middle', background_normal = '', color = (0,0,0,1),font_size = self.height/4)
+		self.location = Button(text="Ryerson (IL,USA)", valign='middle', background_normal = '', background_color = (0.5,0,1,0.25),font_size = self.height/4)
 		self.location.bind(on_release=lambda x:choosePopup.open())
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
@@ -374,7 +374,7 @@ class InputScreen(Screen):
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', color = (0,0,0,1), font_size = self.height/3,on_release=lambda x:self.popup.open())
+		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (0.5,0,1,0.25), font_size = self.height/3,on_release=lambda x:self.popup.open())
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -385,7 +385,7 @@ class InputScreen(Screen):
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
-		self.startTime = Button(text = '00:00', background_normal = '', color = (0,0,0,1), font_size = self.height/3, on_release=lambda x:self.timePop.open())
+		self.startTime = Button(text = '00:00', background_normal = '', background_color = (0.5,0,1,0.25), font_size = self.height/3, on_release=lambda x:self.timePop.open())
 		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -396,13 +396,13 @@ class InputScreen(Screen):
 		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(text=self.setDurText)
 		self.firstClickHappened = False
-		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=self.focusDuration)
+		self.durButton = Button(text='2', background_normal = '', background_color = (0.5,0,1,0.25), font_size = self.height/3, on_release=self.focusDuration)
 		self.grid3.add_widget(self.durButton)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
 		#Advanced Options and Submit Buttons
-		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1), on_release=lambda x:advancedScreen.open()))
+		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0, 0, 1, 0.25), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay))
 
