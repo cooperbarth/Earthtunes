@@ -33,7 +33,7 @@ class PurpleLabel(Label):
 	def on_size(self, *args):
 		self.canvas.before.clear()
 		with self.canvas.before:
-			Color(1, 0, 1, 0.2)
+			Color(1, 0, 1, 0.25)
 			Rectangle(pos=self.pos, size=self.size)
 
 class BlueLabel(Label):
@@ -156,6 +156,8 @@ class AdvancedScreen(BoxLayout):
 			self.cur = False
 
 	def setTextEqual(self, instance, value):
+		if len(self.fixedAmpText.text) > 7:
+			self.fixedAmpText.text = self.fixedAmpText.text[0:-1]
 		self.fixedAmp.text = self.fixedAmpText.text
 
 	def focusButton(self, instance):
@@ -425,7 +427,7 @@ class InputScreen(Screen):
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Advanced Options and Submit Buttons
-		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0.2, 0, 0.2, 1), on_release=lambda x:advancedScreen.open()))
+		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0.25, 0, 0.25, 1), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay))
 
@@ -453,6 +455,8 @@ class InputScreen(Screen):
 			self.duration.text = ''
 
 	def setDurText(self, instance, value):
+		if len(self.duration.text) > 7:
+			self.duration.text = self.duration.text[0:-1]
 		self.durButton.text = self.duration.text
 
 	#toDisplay: screen transition functions
