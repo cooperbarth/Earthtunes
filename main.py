@@ -623,7 +623,7 @@ class LoadingScreen(GridLayout):
 		plot(hours,1000.*sound)
 		axishours = [time]
 		axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
-		savefig(soundname + ".png")
+		savefig(soundname + ".png",bbox_inches='tight')
 
 		return soundname
 
@@ -646,10 +646,10 @@ class DisplayScreen(Screen):
 		self.im = Image(source="Blank", size_hint=(1,0.8))
 		self.layout.add_widget(self.im, index=3)
 
-		self.bottom = GridLayout(cols=3,size_hint=(1,0.1))
+		self.bottom = GridLayout(cols=3,size_hint=(1,0.08))
 
 		#Slider allows moving through sound file
-		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.1))
+		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.07))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=self.slidePause)
 		self.seek.bind(on_touch_up=self.slideSeek)
