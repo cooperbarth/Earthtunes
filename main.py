@@ -10,11 +10,14 @@ plt.style.use(['dark_background'])
 
 from scipy.io import wavfile
 from matplotlib.pyplot import *
-from datetime import datetime, timedelta
+from datetime import date, datetime, timedelta
+from functools import partial
 from os import path, system
 
 from kivy.app import App
 from kivy.clock import Clock
+from kivy.core.audio import SoundLoader
+from kivy.graphics import Color, Rectangle
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
@@ -24,10 +27,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
-from kivy.core.audio import SoundLoader
-from datetime import date, timedelta
-from kivy.graphics import Color, Rectangle
-from functools import partial
 from kivy.uix.popup import Popup
 
 #define labels with different colored backgrounds
@@ -760,8 +759,8 @@ class DisplayScreen(Screen):
 # Create screen manager
 sm = ScreenManager()
 
-#Creating ErrorScreen popup
-errscreen = InputError(as_popup = True) #Create InputError Popup
+#Creating InputError popup
+errscreen = InputError(as_popup = True) 
 errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
 
 #Creating Error404 popup
