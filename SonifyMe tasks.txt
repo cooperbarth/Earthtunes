@@ -1,5 +1,3 @@
--add cursor to textinput
--do center-align for advanced screen textinput
 -more formatting
 
 -figure out building to phones **IMPORTANT
