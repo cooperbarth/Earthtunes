@@ -362,7 +362,7 @@ class InputScreen(Screen):
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.grid0.add_widget(Label(text='Location:', valign='middle', font_size = self.height/5))
-		self.location = Button(text="Ryerson (IL,USA)", valign='middle', font_size = self.height/4)
+		self.location = Button(text="Ryerson (IL,USA)", valign='middle', background_normal = '', color = (0,0,0,1),font_size = self.height/4)
 		self.location.bind(on_release=lambda x:choosePopup.open())
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
