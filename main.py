@@ -2,17 +2,16 @@ import kivy
 kivy.require('1.10.1')
 import numpy
 import urllib2
-import matplotlib.pyplot as plt
 import random
 import re
-
-plt.style.use(['dark_background'])
 
 from scipy.io import wavfile
 from matplotlib.pyplot import *
 from datetime import date, datetime, timedelta
 from functools import partial
 from os import path, system
+
+matplotlib.pyplot.style.use(['dark_background'])
 
 from kivy.app import App
 from kivy.clock import Clock
