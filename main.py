@@ -120,7 +120,7 @@ class AdvancedScreen(BoxLayout):
 		self.grid.add_widget(Label(text='Fixed Amplitude:', font_size = self.height/5))
 		self.fixedAmpText = FloatInput(multiline=False)					#FloatInput (textinput)
 		self.fixedAmpText.bind(text=self.setTextEqual)
-		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.setTextEqual)
+		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
 		self.grid.add_widget(self.fixedAmp)
 		self.layout.add_widget(self.grid)
