@@ -418,8 +418,8 @@ class InputScreen(Screen):
 				self.durButton.text = self.duration.text[:position] + "|" + self.duration.text[position:]
 				self.cur = True
 			else:
-				self.durButton.text = self.duration.text[:position] + "|" + self.duration.text[position:]
-				self.cur = True
+				self.durButton.text = self.duration.text[:position] + " " + self.duration.text[position:]
+				self.cur = False
 		else:
 			self.durButton.text = self.duration.text
 			self.cur = False
