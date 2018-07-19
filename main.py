@@ -122,7 +122,9 @@ class AdvancedScreen(BoxLayout):
 		self.fixedAmpText.bind(text=self.setTextEqual)
 		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
+		self.cur = False
 		self.grid.add_widget(self.fixedAmp)
+		Clock.schedule_interval(self.cursor, 0.5)
 		self.layout.add_widget(self.grid)
 
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
@@ -132,6 +134,19 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.returnbutton)
 
 		self.add_widget(self.layout)
+
+	def cursor(self, dt):
+		if self.fixedAmpText.focus:
+			position = self.fixedAmpText.cursor[0]
+			if not self.cur:
+				self.fixedAmp.text = self.fixedAmpText.text[:position] + "|" + self.fixedAmpText.text[position:]
+				self.cur = True
+			else:
+				self.fixedAmp.text = self.fixedAmpText.text[:position] + " " + self.fixedAmpText.text[position:]
+				self.cur = False
+		else:
+			self.fixedAmp.text = self.fixedAmpText.text
+			self.cur = False
 
 	def setTextEqual(self, instance, value):
 		self.fixedAmp.text = self.fixedAmpText.text
