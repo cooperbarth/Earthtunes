@@ -396,7 +396,9 @@ class InputScreen(Screen):
 		self.duration.bind(text=self.setDurText)
 		self.firstClickHappened = False
 		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=self.focusDuration)
+		self.cur = False
 		self.grid3.add_widget(self.durButton)
+		Clock.schedule_interval(self.cursor, 0.5)
 		self.layout.add_widget(self.grid3)
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
@@ -408,6 +410,19 @@ class InputScreen(Screen):
 		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
 
 		self.add_widget(self.layout)
+
+	def cursor(self, dt):
+		if self.duration.focus:
+			position = self.duration.cursor[0]
+			if not self.cur:
+				self.durButton.text = self.duration.text[:position] + "|" + self.duration.text[position:]
+				self.cur = True
+			else:
+				self.durButton.text = self.duration.text[:position] + "|" + self.duration.text[position:]
+				self.cur = True
+		else:
+			self.durButton.text = self.duration.text
+			self.cur = False
 
 	def focusDuration(self, instance):
 		self.duration.focus = True
