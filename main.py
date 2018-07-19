@@ -137,13 +137,10 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.001)))
 		self.returnbutton = Button(text='Return', size_hint=(1,0.149))	#Return button
 		self.returnbutton.font_size=self.returnbutton.height/5
-		self.returnbutton.bind(on_release=self.closeAdvanced)
+		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
 		self.layout.add_widget(self.returnbutton)
 		
 		self.add_widget(self.layout)
-		
-	def closeAdvanced(self, instance):
-		advancedScreen.dismiss()
 
 #Calendar: Cooper's "God Tier" Calendar for use to pick date
 class Calendar(BoxLayout):
@@ -367,8 +364,8 @@ class InputScreen(Screen):
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
 		self.grid0.add_widget(Label(text='Location:', valign='middle', font_size = self.height/5))
-		self.location = Button(text="Ryerson (IL,USA)", valign='middle', font_size = self.height/3)
-		self.location.bind(on_release=self.openChoose)
+		self.location = Button(text="Ryerson (IL,USA)", valign='middle', font_size = self.height/4)
+		self.location.bind(on_release=lambda x:choosePopup.open())
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
@@ -407,7 +404,7 @@ class InputScreen(Screen):
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 
 		#Advanced Options and Submit Buttons
-		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1), on_release=self.openAdvanced))
+		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), valign='middle', background_color=(0, 0, 1, 1), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(WhiteLabel(size_hint=(1,0.0015)))
 		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay))
 
@@ -466,13 +463,6 @@ class InputScreen(Screen):
 		#Open loading popup
 		loadScreen.message.text= "Loading data from " + locationText + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
 		loadPopup.open()
-
-	#dumb functions to open popups
-	def openAdvanced(self,instance):
-		advancedScreen.open()
-
-	def openChoose(self,instance):
-		choosePopup.open()
 
 #Error404: Screen displayed when failing to download data from IRIS
 class Error404(GridLayout):
