@@ -29,13 +29,19 @@ from kivy.uix.slider import Slider
 from kivy.uix.popup import Popup
 
 #define labels with different colored backgrounds
+class PurpleLabel(Label):
+	def on_size(self, *args):
+		self.canvas.before.clear()
+		with self.canvas.before:
+			Color(1, 0, 1, 0.25)
+			Rectangle(pos=self.pos, size=self.size)
+
 class BlueLabel(Label):
 	def on_size(self, *args):
 		self.canvas.before.clear()
 		with self.canvas.before:
-			Color(0, 0, 1, 0.25)
+			Color(0, 0.5, 1, 0.2)
 			Rectangle(pos=self.pos, size=self.size)
-
 #FloatInput: TextInput that can only accept certain arguments
 class FloatInput(TextInput):
 	pat = re.compile('[^0-9]')
@@ -64,7 +70,7 @@ class ChooseScreen(GridLayout):
 		super(ChooseScreen, self).__init__(**kwargs)
 		self.cols=1
 		#SonifyMe header
-		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.add_widget(self.title)
@@ -99,7 +105,7 @@ class AdvancedScreen(BoxLayout):
 		#vertical box layout
 		self.layout = BoxLayout(orientation='vertical')
 		#SonifyMe header
-		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
@@ -368,14 +374,14 @@ class InputScreen(Screen):
 		self.layout = BoxLayout(orientation='vertical')
 
 		#SonifyMe header
-		self.title = BlueLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
+		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.grid0.add_widget(Label(text='Location:', valign='middle', font_size = self.height/5))
+		self.grid0.add_widget(BlueLabel(text='Location:', valign='middle', font_size = self.height/5))
 		self.location = Button(text="Ryerson (IL,USA)", valign='middle', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/4)
 		self.location.bind(on_release=lambda x:choosePopup.open())
 		self.grid0.add_widget(self.location)
@@ -384,7 +390,7 @@ class InputScreen(Screen):
 
 		#Date Input
 		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.datelabel = Label(text='Date (YYYY-MM-DD):', valign = 'middle', font_size = self.height/5)
+		self.datelabel = BlueLabel(text='Date (YYYY-MM-DD):', valign = 'middle', font_size = self.height/5)
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
@@ -395,7 +401,7 @@ class InputScreen(Screen):
 
 		#Time Input
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
-		self.grid2.add_widget(Label(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
+		self.grid2.add_widget(BlueLabel(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
@@ -406,7 +412,7 @@ class InputScreen(Screen):
 
 		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
-		self.grid3.add_widget(Label(text='Duration (hours):', font_size=self.height/5, valign='middle'))
+		self.grid3.add_widget(BlueLabel(text='Duration (hours):', font_size=self.height/5, valign='middle'))
 		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(text=self.setDurText)
 		self.firstClickHappened = False
@@ -418,7 +424,7 @@ class InputScreen(Screen):
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Advanced Options and Submit Buttons
-		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0, 0, 1, 0.25), on_release=lambda x:advancedScreen.open()))
+		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0.2, 0, 0.2, 1), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay))
 
