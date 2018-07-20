@@ -61,7 +61,7 @@ class InputError(GridLayout):
 		self.cols = 1
 		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7), font_size = self.height/4)
 		self.add_widget(self.errorlabel)
-		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))	#Button
+		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))
 		self.returnbutton.font_size = self.returnbutton.height/5
 		self.add_widget(self.returnbutton)
 
@@ -127,7 +127,7 @@ class AdvancedScreen(BoxLayout):
 		#Fixed amplitude input as another grid layout
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
 		self.grid.add_widget(Label(text='Fixed Amplitude:', font_size = self.height/5))
-		self.fixedAmpText = FloatInput(multiline=False)					#FloatInput (textinput)
+		self.fixedAmpText = FloatInput(multiline=False)
 		self.fixedAmpText.bind(text=self.setTextEqual)
 		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
@@ -137,7 +137,7 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.grid)
 
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		self.returnbutton = Button(text='Return', size_hint=(1,0.149))	#Return button
+		self.returnbutton = Button(text='Return', size_hint=(1,0.149))
 		self.returnbutton.font_size=self.returnbutton.height/5
 		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
 		self.layout.add_widget(self.returnbutton)
@@ -185,8 +185,7 @@ class Calendar(BoxLayout):
 							'December')
 		if kwargs.has_key("month_names"):
 			self.month_names = kwargs['month_names']
-		self.header = BoxLayout(orientation = 'horizontal', 
-								size_hint = (1, 0.2))
+		self.header = BoxLayout(orientation = 'horizontal', size_hint = (1, 0.2))
 		self.body = GridLayout(cols = 7)
 		self.add_widget(self.header)
 		self.add_widget(self.body)
@@ -337,7 +336,7 @@ class TimePicker(GridLayout):
 		if currentHour < 10:
 			self.hour.text = '0'+str(currentHour)
 		else:
-			self.hour.text = str(currentHour)			
+			self.hour.text = str(currentHour)
 
 	def minuteDown(self, instance):
 		currentMinute = int(self.minute.text)
@@ -368,7 +367,7 @@ class TimePicker(GridLayout):
 		if hour < 10:
 			hour = '0'+str(hour)
 		else:
-			hour = str(hour)	
+			hour = str(hour)
 		
 		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
 
@@ -682,7 +681,7 @@ class DisplayScreen(Screen):
 	def __init__(self, **kwargs):
 		super(DisplayScreen, self).__init__(**kwargs)
 		#Preload sound. This will be reloaded later for correct files
-		self.sound = SoundLoader.load('ryerson.wav')	
+		self.sound = SoundLoader.load('ryerson.wav')
 		self.layout = BoxLayout(orientation='vertical')
 
 		self.im = Image(source="Blank", size_hint=(1,0.8))
@@ -744,7 +743,7 @@ class DisplayScreen(Screen):
 			return
 
 	#jumpForward: Jump forward button, goes forward 10 seconds
-	def jumpForward(self, instance):	
+	def jumpForward(self, instance):
 		if self.sound.state is 'play':
 			if (self.sound.get_pos()+10)>self.sound.length: #Stops if less than 10 seconds until end
 				self.sound.stop()
@@ -756,7 +755,7 @@ class DisplayScreen(Screen):
 		else:
 			return
 
-	#slideUpdate: Update function for slider to match audio		
+	#slideUpdate: Update function for slider to match audio
 	def slideUpdate(self, dt): 
 		slider = self.seek
 		slider.value = (self.sound.get_pos()/self.sound.length)*100
@@ -770,8 +769,8 @@ class DisplayScreen(Screen):
 				self.sound.stop()
 				self.wasPlaying = True
 
-	#slideSeek: Start playing audio at new location (or move slider if paused)			
-	def slideSeek(self,instance,touch):	
+	#slideSeek: Start playing audio at new location (or move slider if paused)
+	def slideSeek(self,instance,touch):
 		if instance.collide_point(*touch.pos):
 			slider = self.seek
 			slider.value_pos = touch.pos
