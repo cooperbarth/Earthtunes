@@ -61,9 +61,7 @@ class InputError(GridLayout):
 		self.cols = 1
 		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7), font_size = self.height/4)
 		self.add_widget(self.errorlabel)
-		self.returnbutton = Button(text='Return', size_hint=(1, 0.3))
-		self.returnbutton.font_size = self.returnbutton.height/5
-		self.add_widget(self.returnbutton)
+		self.add_widget(Button(text='Return', size_hint=(1, 0.3), on_release=lambda x:errpopup.dismiss(), font_size = self.height/5))
 
 #ChooseScreen: popup screen for choosing location
 class ChooseScreen(GridLayout):
@@ -71,8 +69,7 @@ class ChooseScreen(GridLayout):
 		super(ChooseScreen, self).__init__(**kwargs)
 		self.cols=1
 		#SonifyMe header
-		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
-		self.title.font_size = self.title.height/3
+		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
 		self.title.bind(size=self.title.setter('text_size'))
 		self.add_widget(self.title)
 		self.add_widget(Label(size_hint=(1,0.001)))
@@ -84,17 +81,15 @@ class ChooseScreen(GridLayout):
 									'Addis Ababa, Ethiopia', 'Antarctica'),
 							size_hint = (1,0.078),
 							sync_height=True,
-							font_size = self.height/5
+							font_size = self.height/7
 							)
 		self.location.bold=True
 		self.add_widget(self.location)
 		self.add_widget(Label(size_hint = (1, 0.702)))
-		
+
 		self.add_widget(Label(size_hint=(1,0.001)))
-		self.select = Button(text='Select', font_size=20, size_hint=(1,0.109), bold=True)
-		self.select.bind(on_release=self.closeChoose)
-		self.add_widget(self.select)
-	
+		self.add_widget(Button(text='Select', font_size=self.height/5, size_hint=(1,0.109), bold=True,on_release=self.closeChoose))
+
 	def closeChoose(self, instance):
 		sm.get_screen('Input Screen').location.text = self.location.text
 		choosePopup.dismiss()
@@ -137,7 +132,7 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.grid)
 
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		self.returnbutton = Button(text='Return', size_hint=(1,0.149))
+		self.returnbutton = Button(text='Return', size_hint=(1,0.149), background_normal = '', background_color = (0, 0.5, 1, 0.2))
 		self.returnbutton.font_size=self.returnbutton.height/5
 		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
 		self.layout.add_widget(self.returnbutton)
@@ -430,9 +425,7 @@ class InputScreen(Screen):
 		#Advanced Options and Submit Buttons
 		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0.25, 0, 0.25, 1), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
-		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay))
-
-		errscreen.returnbutton.bind(on_release=lambda x:errpopup.dismiss())
+		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay, background_normal = '', background_color = (0, 0.5, 1, 0.2)))
 
 		self.add_widget(self.layout)
 
