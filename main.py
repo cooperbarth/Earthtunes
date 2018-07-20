@@ -522,7 +522,7 @@ class LoadingScreen(GridLayout):
 		
 	#loadData: Gets data and processes and prepares Display Screen
 	def loadData(self, instance):
-		sound = sm.get_screen('Display Screen').sound
+		DS = sm.get_screen('Display Screen')
 		try:
 			soundname = self.getSoundAndGraph(
 								sm.get_screen('Input Screen').location.text, 
@@ -535,9 +535,9 @@ class LoadingScreen(GridLayout):
 			loadPopup.dismiss()
 			errpopup2.open()
 		else:
-			sm.get_screen('Display Screen').im.source = soundname + '.png'
-			sm.get_screen('Display Screen').im.reload()
-			sound = SoundLoader.load(soundname + '.wav')
+			DS.im.source = soundname + '.png'
+			DS.im.reload()
+			DS.sound = SoundLoader.load(soundname + '.wav')
 			loadPopup.dismiss()
 			sm.transition.direction = 'left'
 			sm.current = 'Display Screen'
@@ -760,6 +760,8 @@ class DisplayScreen(Screen):
 	def slideUpdate(self, dt): 
 		slider = self.seek
 		slider.value = (self.sound.get_pos()/self.sound.length)*100
+		if self.sound.state is 'stop':
+			self.play.text='Play'
 
 	#slidePause: Moving slider pauses sound
 	def slidePause(self, instance, touch): 
