@@ -408,7 +408,7 @@ class InputScreen(Screen):
 		#Advanced Options and Submit Buttons
 		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0.25, 0, 0.25, 1), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
-		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay, background_normal = '', background_color = (0, 0.5, 1, 0.2)))
+		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay, background_normal = '', background_color = (0, 0.5, 1, 0.28)))
 
 		self.add_widget(self.layout)
 
