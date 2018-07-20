@@ -156,7 +156,7 @@ class AdvancedScreen(BoxLayout):
 			self.cur = False
 
 	def setTextEqual(self, instance, value):
-		if len(self.fixedAmpText.text) > 7:
+		if len(self.fixedAmpText.text) > 8:
 			self.fixedAmpText.text = self.fixedAmpText.text[0:-1]
 		self.fixedAmp.text = self.fixedAmpText.text
 
@@ -455,7 +455,7 @@ class InputScreen(Screen):
 			self.duration.text = ''
 
 	def setDurText(self, instance, value):
-		if len(self.duration.text) > 7:
+		if len(self.duration.text) > 2:
 			self.duration.text = self.duration.text[0:-1]
 		self.durButton.text = self.duration.text
 
