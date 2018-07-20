@@ -74,15 +74,11 @@ class ChooseScreen(GridLayout):
 		self.add_widget(self.title)
 		self.add_widget(Label(size_hint=(1,0.001)))
 		#Spinner with all available locations
-		self.location = Spinner(
-							text='Select Location',
-							values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)',
-									'Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 
-									'Addis Ababa, Ethiopia', 'Antarctica'),
-							size_hint = (1,0.078),
-							sync_height=True,
-							font_size = self.height/7
-							)
+		self.location = Spinner(text='Select Location',
+								values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)','Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 'Addis Ababa, Ethiopia', 'Antarctica'),
+								size_hint = (1,0.078),
+								sync_height=True,
+								font_size = self.height/7)
 		self.location.bold=True
 		self.add_widget(self.location)
 		self.add_widget(Label(size_hint = (1, 0.702)))
@@ -107,14 +103,12 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
 		#Spinner with acceleration factor choices
-		self.aFactor = Spinner(
-				text='Acceleration Factor:',
-				values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
-				size_hint = (1,0.08),
-				sync_height=True,
-				background_normal = '',
-				background_color = (0, 0.5, 1, 0.2)
-				)
+		self.aFactor = Spinner( text='Acceleration Factor:',
+								values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
+								size_hint = (1,0.08),
+								sync_height=True,
+								background_normal = '',
+								background_color = (0, 0.5, 1, 0.2))
 		self.layout.add_widget(self.aFactor)
 		self.layout.add_widget(Label(size_hint=(1,0.49)))
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
@@ -166,18 +160,7 @@ class Calendar(BoxLayout):
 		super(Calendar, self).__init__(**kwargs)
 		self.date = date.today()
 		self.orientation = "vertical"
-		self.month_names = ('January',
-							'February', 
-							'March', 
-							'April', 
-							'May', 
-							'June', 
-							'July', 
-							'August', 
-							'September', 
-							'October',
-							'November',
-							'December')
+		self.month_names = ('January','February','March','April','May','June','July','August','September','October','November','December')
 		if kwargs.has_key("month_names"):
 			self.month_names = kwargs['month_names']
 		self.header = BoxLayout(orientation = 'horizontal', size_hint = (1, 0.2))
@@ -516,13 +499,7 @@ class LoadingScreen(GridLayout):
 	def loadData(self, instance):
 		DS = sm.get_screen('Display Screen')
 		try:
-			soundname = self.getSoundAndGraph(
-								sm.get_screen('Input Screen').location.text, 
-								sm.get_screen('Input Screen').date.text,
-								sm.get_screen('Input Screen').startTime.text,
-								sm.get_screen('Input Screen').duration.text,
-								advScreen.aFactor.text,
-								advScreen.fixedAmp.text)
+			soundname = self.getSoundAndGraph(sm.get_screen('Input Screen').location.text,sm.get_screen('Input Screen').date.text,sm.get_screen('Input Screen').startTime.text,sm.get_screen('Input Screen').duration.text,advScreen.aFactor.text,advScreen.fixedAmp.text)
 		except urllib2.HTTPError:
 			loadPopup.dismiss()
 			errpopup2.open()
