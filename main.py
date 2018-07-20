@@ -27,14 +27,7 @@ from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
 from kivy.uix.popup import Popup
-
-#define labels with different colored backgrounds
-class PurpleLabel(Label):
-	def on_size(self, *args):
-		self.canvas.before.clear()
-		with self.canvas.before:
-			Color(1, 0, 1, 0.25)
-			Rectangle(pos=self.pos, size=self.size)
+from kivy.properties import ObjectProperty
 
 class BlueLabel(Label):
 	def on_size(self, *args):
@@ -69,7 +62,7 @@ class ChooseScreen(GridLayout):
 		super(ChooseScreen, self).__init__(**kwargs)
 		self.cols=1
 		#SonifyMe header
-		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
+		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
 		self.title.bind(size=self.title.setter('text_size'))
 		self.add_widget(self.title)
 		self.add_widget(Label(size_hint=(1,0.001)))
@@ -97,25 +90,26 @@ class AdvancedScreen(BoxLayout):
 		#vertical box layout
 		self.layout = BoxLayout(orientation='vertical')
 		#SonifyMe header
-		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		#Spinner with acceleration factor choices
-		self.aFactor = Spinner( text='Acceleration Factor:',
+
+		#self.whiteButton = WhiteButton(background_normal = '', background_color = (1,1,1,1))
+		self.aFactor = Spinner(text='Acceleration Factor:',
 								values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
 								size_hint = (1,0.08),
 								sync_height=True,
 								background_normal = '',
-								background_color = (0, 0.5, 1, 0.2))
+								background_color = (0, 0.13, 0.26, 1))
 		self.layout.add_widget(self.aFactor)
 		self.layout.add_widget(Label(size_hint=(1,0.49)))
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
 
 		#Fixed amplitude input as another grid layout
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
-		self.grid.add_widget(Label(text='Fixed Amplitude:', font_size = self.height/5))
+		self.grid.add_widget(BlueLabel(text='Fixed Amplitude:', font_size = self.height/5))
 		self.fixedAmpText = FloatInput(multiline=False)
 		self.fixedAmpText.bind(text=self.setTextEqual)
 		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
@@ -126,12 +120,19 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.grid)
 
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		self.returnbutton = Button(text='Return', size_hint=(1,0.149), background_normal = '', background_color = (0, 0.5, 1, 0.2))
+		self.returnbutton = Button(text='Return', size_hint=(1,0.149), background_normal = '', background_color = (0, 0, 0, 1))
 		self.returnbutton.font_size=self.returnbutton.height/5
 		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
 		self.layout.add_widget(self.returnbutton)
 
 		self.add_widget(self.layout)
+
+	# class WhiteButton(Button):
+		# background_normal = ''
+		# background_color = (1,1,1,1)
+
+	# class WhiteSpinner(Spinner):
+		# option_cls = ObjectProperty(WhiteButton)
 
 	def cursor(self, dt):
 		if self.fixedAmpText.focus:
@@ -356,15 +357,13 @@ class InputScreen(Screen):
 		self.layout = BoxLayout(orientation='vertical')
 
 		#SonifyMe header
-		self.title = PurpleLabel(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
-		self.title.bind(size=self.title.setter('text_size'))
-		self.layout.add_widget(self.title)
+		self.layout.add_widget(Label(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Location Input
 		self.grid0 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.grid0.add_widget(BlueLabel(text='Location:', valign='middle', font_size = self.height/5))
-		self.location = Button(text="Ryerson (IL,USA)", valign='middle', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/4)
+		self.grid0.add_widget(BlueLabel(text='Location:', valign='middle', font_size = self.height/5, size_hint = (0.35, 0.1885)))
+		self.location = Button(text="Ryerson (IL,USA)", valign='middle', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/4, size_hint = (0.65, 0.1885))
 		self.location.bind(on_release=lambda x:choosePopup.open())
 		self.grid0.add_widget(self.location)
 		self.layout.add_widget(self.grid0)
@@ -372,33 +371,33 @@ class InputScreen(Screen):
 
 		#Date Input
 		self.grid1 = GridLayout(cols=2, rows=1, size_hint=(1, 0.1885))
-		self.datelabel = BlueLabel(text='Date (YYYY-MM-DD):', valign = 'middle', font_size = self.height/5)
+		self.datelabel = BlueLabel(text='Date:', valign = 'middle', font_size = self.height/5, size_hint = (0.35, 0.1885))
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
 		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
-		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3,on_release=lambda x:self.popup.open())
+		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3,on_release=lambda x:self.popup.open(), size_hint = (0.65, 0.1885))
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Time Input
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
-		self.grid2.add_widget(BlueLabel(text='Start Time (HH:MM):', font_size=self.height/5, valign='middle'))
+		self.grid2.add_widget(BlueLabel(text='Start Time:', font_size=self.height/5, valign='middle', size_hint = (0.35, 0.1885)))
 		self.clock = TimePicker(as_popup=True)
 		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
-		self.startTime = Button(text = '00:00', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=lambda x:self.timePop.open())
+		self.startTime = Button(text = '00:00', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=lambda x:self.timePop.open(), size_hint = (0.65, 0.1885))
 		self.grid2.add_widget(self.startTime)
 		self.layout.add_widget(self.grid2)
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Duration Input
 		self.grid3 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
-		self.grid3.add_widget(BlueLabel(text='Duration (hours):', font_size=self.height/5, valign='middle'))
+		self.grid3.add_widget(BlueLabel(text='Duration (hours):', font_size=self.height/5, valign='middle',size_hint = (0.35, 0.1885)))
 		self.duration = FloatInput(multiline=False, text='2')
 		self.duration.bind(text=self.setDurText)
 		self.firstClickHappened = False
-		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=self.focusDuration)
+		self.durButton = Button(text='2', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=self.focusDuration, size_hint = (0.65, 0.1885))
 		self.cur = False
 		self.grid3.add_widget(self.durButton)
 		Clock.schedule_interval(self.cursor, 0.5)
@@ -406,9 +405,9 @@ class InputScreen(Screen):
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Advanced Options and Submit Buttons
-		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0.25, 0, 0.25, 1), on_release=lambda x:advancedScreen.open()))
+		self.layout.add_widget(Button(text='Advanced Options', font_size = self.height/7, size_hint=(1, 0.0385), background_normal = '', background_color=(0, 0, 0, 1), on_release=lambda x:advancedScreen.open()))
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
-		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay, background_normal = '', background_color = (0, 0.5, 1, 0.28)))
+		self.layout.add_widget(Button(text='Submit', font_size=self.height/7, size_hint=(1,0.089), valign='middle', on_release=self.toDisplay, background_normal = '', background_color = (1, 1, 1, 1), color = (0,0,0,1)))
 
 		self.add_widget(self.layout)
 
@@ -476,7 +475,7 @@ class InputScreen(Screen):
 			return
 
 		#Open loading popup
-		loadScreen.message.text= "Loading data from " + locationText + '\n\n\n\n\n' + geofacts[random.randint(0,9)]
+		loadScreen.message.text= "Loading data from " + locationText + '...\n\n\n\n' + geofacts[random.randint(0,9)]
 		loadPopup.open()
 
 #Error404: Screen displayed when failing to download data from IRIS
@@ -492,9 +491,9 @@ class LoadingScreen(GridLayout):
 	def __init__(self, **kwargs):
 		self.cols = 1
 		super(LoadingScreen, self).__init__(**kwargs)
-		self.message = Label(halign = 'center')
+		self.message = Label(halign = 'center', font_size = self.height/5)
 		self.add_widget(self.message)
-		
+
 	#loadData: Gets data and processes and prepares Display Screen
 	def loadData(self, instance):
 		DS = sm.get_screen('Display Screen')
@@ -775,7 +774,7 @@ choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (
 
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
-advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95))	
+advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
 
 #Create LoadingScreen popup
 loadScreen = LoadingScreen(as_popup=True)
