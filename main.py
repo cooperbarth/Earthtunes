@@ -83,6 +83,13 @@ class ChooseScreen(GridLayout):
 		sm.get_screen('Input Screen').location.text = self.location.text
 		choosePopup.dismiss()
 
+class WhiteLabel(Button):
+	background_normal = ''
+	background_color = (1,1,1,1)
+
+class WhiteSpinner(Spinner):
+	option_cls = ObjectProperty(WhiteLabel)
+
 #AdvancedScreen: Advanced options (like acceleration factor and amplitude)
 class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
@@ -95,9 +102,8 @@ class AdvancedScreen(BoxLayout):
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-
-		#self.whiteButton = WhiteButton(background_normal = '', background_color = (1,1,1,1))
-		self.aFactor = Spinner(text='Acceleration Factor:',
+		#Spinner with acceleration factor choices
+		self.aFactor = WhiteSpinner(text='Acceleration Factor:',
 								values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
 								size_hint = (1,0.08),
 								sync_height=True,
@@ -126,13 +132,6 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.returnbutton)
 
 		self.add_widget(self.layout)
-
-	# class WhiteButton(Button):
-		# background_normal = ''
-		# background_color = (1,1,1,1)
-
-	# class WhiteSpinner(Spinner):
-		# option_cls = ObjectProperty(WhiteButton)
 
 	def cursor(self, dt):
 		if self.fixedAmpText.focus:
