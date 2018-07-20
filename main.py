@@ -40,7 +40,7 @@ class BlueLabel(Label):
 	def on_size(self, *args):
 		self.canvas.before.clear()
 		with self.canvas.before:
-			Color(0, 0.5, 1, 0.2)
+			Color(0, 0.5, 1, 0.28)
 			Rectangle(pos=self.pos, size=self.size)
 
 #FloatInput: TextInput that can only accept certain arguments
@@ -116,7 +116,9 @@ class AdvancedScreen(BoxLayout):
 				text='Acceleration Factor:',
 				values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
 				size_hint = (1,0.08),
-				sync_height=True
+				sync_height=True,
+				background_normal = '',
+				background_color = (0, 0.5, 1, 0.2)
 				)
 		self.layout.add_widget(self.aFactor)
 		self.layout.add_widget(Label(size_hint=(1,0.49)))
