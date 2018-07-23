@@ -66,17 +66,49 @@ class ChooseScreen(GridLayout):
 		self.add_widget(self.title)
 		self.add_widget(Label(size_hint=(1,0.001)))
 		# self.location = Spinner(text='Select Location',
-								# values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)','Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 'Addis Ababa, Ethiopia', 'Antarctica'),
 								# size_hint = (1,0.078),
 								# sync_height=True,
 								# font_size = self.height/7,
 								# bold = True)
-		self.location = Button(text = 'Select Location', size_hint = (1, 0.078), font_size = self.height/7, bold = True, background_normal = '')
+		self.off = True
+		self.location = Button(text = 'Select Location', size_hint = (1, 0.078), font_size = self.height/7, bold = True, background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
 		self.add_widget(self.location)
-		self.add_widget(Label(size_hint = (1, 0.702)))
+		self.one = Button(text = 'Ryerson (IL,USA)', on_release = lambda x:self.setUpButton(1))
+		self.two = Button(text = 'Yellowstone (WY,USA)',on_release = lambda x:self.setUpButton(2))
+		self.three = Button(text = 'Anchorage (AK,USA)', on_release = lambda x:self.setUpButton(3))
+		self.four = Button(text = 'Kyoto, Japan', on_release = lambda x:self.setUpButton(4))
+		self.five = Button(text = 'Cachiyuyo, Chile', on_release = lambda x:self.setUpButton(5))
+		self.six = Button(text = 'London, UK',on_release = lambda x:self.setUpButton(6))
+		self.seven = Button(text = 'Ar Rayn, Saudi Arabia', on_release = lambda x:self.setUpButton(1))
+		self.eight = Button(text = 'Addis Ababa, Ethiopia',on_release = lambda x:self.setUpButton(2))
+		self.nine = Button(text = 'Antarctica', on_release = lambda x:self.setUpButton(3))
+		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six, self.seven, self.eight, self.nine]
+		for button in self.buttons:
+			button.size_hint = (1, 0.078)
+			button.background_normal = ''
+			button.background_color = (0, 0, 0, 1)
+			button.color = (0, 0, 0, 1)
+			self.add_widget(button)
 
 		self.add_widget(Label(size_hint=(1,0.001)))
 		self.add_widget(Button(text='Select', font_size=self.height/5, size_hint=(1,0.109), bold=True,on_release=self.closeChoose))
+
+	def setUpButton(self, value):
+		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six, 7:self.seven, 8:self.eight, 9:self.nine}
+		self.location.text = dict[value].text
+		self.showChoices()
+
+	def showChoices(self):
+		if self.off:
+			for button in self.buttons:
+				button.background_color = (0, 0.13, 0.26, 1)
+				button.color = (1, 1, 1, 1)
+			self.off = False
+		else:
+			for button in self.buttons:
+				button.background_color = (0, 0, 0, 1)
+				button.color = (0, 0, 0, 1)
+			self.off = True
 
 	def closeChoose(self, instance):
 		sm.get_screen('Input Screen').location.text = self.location.text
