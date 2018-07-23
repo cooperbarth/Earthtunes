@@ -466,7 +466,7 @@ class ChooseScreen(GridLayout):
 			self.add_widget(button)
 
 		self.add_widget(Label(size_hint=(1,0.001)))
-		self.add_widget(Button(text='Select', font_size=self.height/5, size_hint=(1,0.109), bold=True,on_release=self.closeChoose))
+		self.add_widget(Button(text='Select', font_size=self.height/5, size_hint=(1,0.109), on_release=self.closeChoose, background_color=(1,1,1,1),color=(0,0,0,1),background_normal=''))
 
 	def setUpButton(self, value):
 		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six, 7:self.seven, 8:self.eight, 9:self.nine}
@@ -583,7 +583,7 @@ class InputError(GridLayout):
 		self.cols = 1
 		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7), font_size = self.height/4)
 		self.add_widget(self.errorlabel)
-		self.add_widget(Button(text='Return', size_hint=(1, 0.3), on_release=lambda x:errpopup.dismiss(), font_size = self.height/5))
+		self.add_widget(Button(text='Return', size_hint=(1, 0.3), on_release=lambda x:errpopup.dismiss(), font_size = self.height/5, background_color=(1,1,1,1),color=(0,0,0,1),background_normal=''))
 
 #Error404: Screen displayed when failing to download data from IRIS
 class Error404(GridLayout):
@@ -591,7 +591,7 @@ class Error404(GridLayout):
 		super(Error404, self).__init__(**kwargs)
 		self.cols=1
 		self.add_widget(Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.", halign = 'center'))
-		self.add_widget(Button(text='Return', on_release=lambda x:errpopup2.dismiss()))
+		self.add_widget(Button(text='Return', on_release=lambda x:errpopup2.dismiss(), background_color=(1,1,1,1),color=(0,0,0,1),background_normal=''))
 
 #Calendar: Cooper's "God Tier" Calendar for use to pick date
 class Calendar(BoxLayout):
