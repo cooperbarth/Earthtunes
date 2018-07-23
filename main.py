@@ -743,7 +743,7 @@ class DisplayScreen(Screen):
 	def slideUpdate(self, dt): 
 		slider = self.seek
 		slider.value = (self.sound.get_pos()/self.sound.length)*100
-		if self.sound.state is 'stop':
+		if self.sound.state is 'stop' and not self.wasPlaying::
 			self.play.text='Play'
 
 	#slidePause: Moving slider pauses sound
