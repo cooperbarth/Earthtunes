@@ -255,7 +255,7 @@ class Calendar(BoxLayout):
 				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
 			self.body.add_widget(date_label)
 			date_cursor += timedelta(days = 1)
-	
+
 	#set_date: Transfers date selected into text_input on Input Screen
 	def set_date(self, *args, **kwargs):
 		self.date = date(self.date.year, self.date.month, kwargs['day'])
@@ -263,7 +263,7 @@ class Calendar(BoxLayout):
 		sm.get_screen('Input Screen').popup.dismiss()
 		self.populate_body()
 		self.populate_header()
-	
+
 	#Functions that correspond to buttons that change month or year
 	def move_next_month(self, *args, **kwargs):
 		if self.date.month == 12:
@@ -280,7 +280,7 @@ class Calendar(BoxLayout):
 			self.date = date(self.date.year, self.date.month -1, self.date.day)
 		self.populate_header()
 		self.populate_body()
-		
+
 	def move_next_year(self, *args, **kwargs):
 		if self.date.month == 2 and self.date.day == 29:
 			self.date = date(self.date.year + 1, self.date.month, self.date.day - 1)
@@ -288,7 +288,7 @@ class Calendar(BoxLayout):
 			self.date = date(self.date.year + 1, self.date.month, self.date.day)
 		self.populate_header()
 		self.populate_body()
-		
+
 	def move_previous_year(self, *args, **kwargs):
 		if self.date.month == 2 and self.date.day == 29:
 			self.date = date(self.date.year - 1, self.date.month, self.date.day - 1)
@@ -373,7 +373,7 @@ class TimePicker(GridLayout):
 			self.minute.text = '0'+str(currentMinute)
 		else:
 			self.minute.text = str(currentMinute)
-		
+
 	def apSwitch(self, instance):
 		if self.AMPM.text == 'AM':
 			self.AMPM.text = 'PM'
@@ -555,7 +555,7 @@ class LoadingScreen(GridLayout):
 			loadPopup.dismiss()
 			sm.transition.direction = 'left'
 			sm.current = 'Display Screen'
-			
+
 	#getSoundAndGraph: Script that pulls data and processes into image and audio
 	def getSoundAndGraph(self, locate, date, time, duration, AF, FA):
 		halfpi = 0.5*numpy.pi
@@ -702,7 +702,7 @@ class DisplayScreen(Screen):
 		self.im = Image(source="Blank", size_hint=(1,0.8))
 		self.layout.add_widget(self.im, index=3)
 
-		self.bottom = GridLayout(cols=3,size_hint=(1,0.08))
+		self.bottom = GridLayout(cols=7,size_hint=(1,0.08))
 
 		#Slider allows moving through sound file
 		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.07))
@@ -711,17 +711,21 @@ class DisplayScreen(Screen):
 		self.seek.bind(on_touch_up=self.slideSeek)
 		self.layout.add_widget(self.seek)
 
-		self.backwards = Button(text='Jump Back')		#Jump Back button
+		self.bottom.add_widget(Label(size_hint=(0.05,1)))
+		self.backwards = Button(text='Jump Back',background_normal='', background_color=(1,1,1,1), color=(0,0,0,1))		#Jump Back button
 		self.backwards.bind(on_release=self.jumpBack)
 		self.bottom.add_widget(self.backwards)
-		self.play = Button(text='Play')					#Play Button
+		self.bottom.add_widget(Label(size_hint=(0.05,1)))
+		self.play = Button(text='Play',background_normal='', background_color=(1,1,1,1), color=(0,0,0,1))					#Play Button
 		self.play.bind(on_release=self.playSound)
 		self.bottom.add_widget(self.play)
-		self.forwards = Button(text='Jump Forward')		#Jump forward button
+		self.bottom.add_widget(Label(size_hint=(0.05,1)))
+		self.forwards = Button(text='Jump Forward',background_normal='', background_color=(1,1,1,1), color=(0,0,0,1))		#Jump forward button
 		self.forwards.bind(on_release=self.jumpForward)
 		self.bottom.add_widget(self.forwards)
+		self.bottom.add_widget(Label(size_hint=(0.05,1)))
 
-		self.button = Button(text='Return',size_hint=(1,0.05))				#Return button
+		self.button = Button(text='Return',size_hint=(1,0.05), background_color=(0,0,0,1))				#Return button
 		self.button.bind(on_release=self.toInput)
 		
 		self.layout.add_widget(self.bottom)
