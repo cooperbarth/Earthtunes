@@ -87,39 +87,32 @@ class ChooseScreen(GridLayout):
 class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
-		#vertical box layout
 		self.layout = BoxLayout(orientation='vertical')
-		#SonifyMe header
 		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		#Spinner with acceleration factor choices
-		# self.aFactor = WhiteSpinner(text='Acceleration Factor:',
-								# values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
-								# size_hint = (1,0.08),
-								# sync_height=True,
-								# background_normal = '',
-								# background_color = (0, 0.13, 0.26, 1))
 
+		#Spinner with acceleration factor choices
 		self.off = True
 		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
 		self.layout.add_widget(self.aFactor)
-		self.one = Button(text = '0.1 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(1))
-		self.two = Button(text = '0.5 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(2))
-		self.three = Button(text = '5 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(3))
-		self.four = Button(text = '10 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(4))
-		self.five = Button(text = '20 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(5))
-		self.six = Button(text = '50 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(6))
+		self.one = Button(text = '0.1 Hz', on_release = lambda x:self.setUpButton(1))
+		self.two = Button(text = '0.5 Hz',on_release = lambda x:self.setUpButton(2))
+		self.three = Button(text = '5 Hz', on_release = lambda x:self.setUpButton(3))
+		self.four = Button(text = '10 Hz', on_release = lambda x:self.setUpButton(4))
+		self.five = Button(text = '20 Hz', on_release = lambda x:self.setUpButton(5))
+		self.six = Button(text = '50 Hz',on_release = lambda x:self.setUpButton(6))
 		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six]
 		for button in self.buttons:
+			button.size_hint = (1, 0.1)
+			button.background_normal = ''
+			button.background_color = (0, 0, 0, 1)
+			button.color = (0, 0, 0, 1)
 			self.layout.add_widget(button)
 
-		self.layout.add_widget(Label(size_hint=(1,0.49)))
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
-
-		#Fixed amplitude input as another grid layout
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
 		self.grid.add_widget(BlueLabel(text='Fixed Amplitude:', font_size = self.height/5))
 		self.fixedAmpText = FloatInput(multiline=False)
@@ -139,19 +132,9 @@ class AdvancedScreen(BoxLayout):
 
 		self.add_widget(self.layout)
 
-	def setUpOne(self, value):
-		if value == 1:
-			self.aFactor.text = self.one.text
-		elif value == 2:
-			self.aFactor.text = self.two.text
-		elif value == 3:
-			self.aFactor.text = self.three.text
-		elif value == 4:
-			self.aFactor.text = self.four.text
-		elif value == 5:
-			self.aFactor.text = self.five.text
-		else:
-			self.aFactor.text = self.six.text
+	def setUpButton(self, value):
+		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six}
+		self.aFactor.text = dict[value].text
 		self.showChoices()
 
 	def showChoices(self):
