@@ -27,13 +27,19 @@ from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
 from kivy.uix.popup import Popup
-from kivy.properties import ObjectProperty
 
 class BlueLabel(Label):
 	def on_size(self, *args):
 		self.canvas.before.clear()
 		with self.canvas.before:
 			Color(0, 0.5, 1, 0.28)
+			Rectangle(pos=self.pos, size=self.size)
+
+class WhiteLabel(Label):
+	def on_size(self, *args):
+		self.canvas.before.clear()
+		with self.canvas.before:
+			Color(1, 1, 1, 1)
 			Rectangle(pos=self.pos, size=self.size)
 
 #FloatInput: TextInput that can only accept certain arguments
@@ -137,14 +143,15 @@ class AdvancedScreen(BoxLayout):
 		self.six = Button(text = '50 Hz',on_release = lambda x:self.setUpButton(6))
 		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six]
 		for button in self.buttons:
-			button.size_hint = (1, 0.1)
+			button.size_hint = (1, 0.095)
 			button.background_normal = ''
 			button.background_color = (0, 0, 0, 1)
 			button.color = (0, 0, 0, 1)
+			self.layout.add_widget(Label(size_hint = (1, 0.005)))
 			self.layout.add_widget(button)
+		self.layout.add_widget(Label(size_hint = (1, 0.005)))
 
-		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		self.grid = GridLayout(cols=2, size_hint=(1, 0.149))
+		self.grid = GridLayout(cols=2, size_hint=(1, 0.14))
 		self.grid.add_widget(BlueLabel(text='Fixed Amplitude:', font_size = self.height/5))
 		self.fixedAmpText = FloatInput(multiline=False)
 		self.fixedAmpText.bind(text=self.setTextEqual)
@@ -155,8 +162,7 @@ class AdvancedScreen(BoxLayout):
 		Clock.schedule_interval(self.cursor, 0.5)
 		self.layout.add_widget(self.grid)
 
-		self.layout.add_widget(Label(size_hint=(1,0.001)))
-		self.returnbutton = Button(text='Return', size_hint=(1,0.149), background_normal = '', background_color = (0, 0, 0, 1))
+		self.returnbutton = Button(text='Return', size_hint=(1,0.15), background_normal = '', background_color = (0, 0, 0, 1), valign = 'middle')
 		self.returnbutton.font_size=self.returnbutton.height/5
 		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
 		self.layout.add_widget(self.returnbutton)
