@@ -61,18 +61,17 @@ class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
 		self.cols=1
-		#SonifyMe header
 		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
 		self.title.bind(size=self.title.setter('text_size'))
 		self.add_widget(self.title)
 		self.add_widget(Label(size_hint=(1,0.001)))
-		#Spinner with all available locations
-		self.location = Spinner(text='Select Location',
-								values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)','Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 'Addis Ababa, Ethiopia', 'Antarctica'),
-								size_hint = (1,0.078),
-								sync_height=True,
-								font_size = self.height/7)
-		self.location.bold=True
+		# self.location = Spinner(text='Select Location',
+								# values=('Ryerson (IL,USA)', 'Yellowstone (WY,USA)', 'Anchorage (AK,USA)','Kyoto, Japan', 'Cachiyuyo, Chile', 'London, UK', 'Ar Rayn, Saudi Arabia', 'Addis Ababa, Ethiopia', 'Antarctica'),
+								# size_hint = (1,0.078),
+								# sync_height=True,
+								# font_size = self.height/7,
+								# bold = True)
+		self.location = Button(text = 'Select Location', size_hint = (1, 0.078), font_size = self.height/7, bold = True, background_normal = '')
 		self.add_widget(self.location)
 		self.add_widget(Label(size_hint = (1, 0.702)))
 
@@ -96,7 +95,7 @@ class AdvancedScreen(BoxLayout):
 
 		#Spinner with acceleration factor choices
 		self.off = True
-		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
+		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), bold = True, on_release = lambda x:self.showChoices())
 		self.layout.add_widget(self.aFactor)
 		self.one = Button(text = '0.1 Hz', on_release = lambda x:self.setUpButton(1))
 		self.two = Button(text = '0.5 Hz',on_release = lambda x:self.setUpButton(2))
@@ -389,7 +388,7 @@ class InputScreen(Screen):
 		self.datelabel = BlueLabel(text='Date:', valign = 'middle', font_size = self.height/5, size_hint = (0.35, 0.1885))
 		self.grid1.add_widget(self.datelabel)
 		self.calendar = Calendar(as_popup=True)
-		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5))
+		self.popup=Popup(title='Select Date:', content = self.calendar, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
 		self.date = Button(text = date.today().strftime('%Y-%m-%d'), background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3,on_release=lambda x:self.popup.open(), size_hint = (0.65, 0.1885))
 		self.grid1.add_widget(self.date)
 		self.layout.add_widget(self.grid1)
@@ -399,7 +398,7 @@ class InputScreen(Screen):
 		self.grid2 = GridLayout(cols=2, rows=1, size_hint=(1,0.1885))
 		self.grid2.add_widget(BlueLabel(text='Start Time:', font_size=self.height/5, valign='middle', size_hint = (0.35, 0.1885)))
 		self.clock = TimePicker(as_popup=True)
-		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5))
+		self.timePop=Popup(title='Select Time:', content = self.clock, size_hint=(0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
 		self.timePop.bind(on_dismiss=self.clock.set_time)
 		self.startTime = Button(text = '00:00', background_normal = '', background_color = (1,1,1,1), color = (0,0,0,1), font_size = self.height/3, on_release=lambda x:self.timePop.open(), size_hint = (0.65, 0.1885))
 		self.grid2.add_widget(self.startTime)
@@ -777,15 +776,15 @@ sm = ScreenManager()
 
 #Creating InputError popup
 errscreen = InputError(as_popup = True) 
-errpopup=Popup(content = errscreen, title="Input Error", size_hint = (0.9,0.5))
+errpopup=Popup(title="Input Error", content = errscreen, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
 
 #Creating Error404 popup
 errscreen2 = Error404(as_popup = True)
-errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5))
+errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
 
 #Creating ChooseScreen popup
 chooseScreen = ChooseScreen(as_popup=True)
-choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8))
+choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8), background = "black.jpg", separator_color = (1,1,1,1))
 
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
@@ -793,7 +792,7 @@ advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint 
 
 #Create LoadingScreen popup
 loadScreen = LoadingScreen(as_popup=True)
-loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), on_open=loadScreen.loadData)
+loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), background = "black.jpg", separator_color = (1,1,1,1), on_open=loadScreen.loadData)
 
 #Creating Screens
 input = InputScreen(name='Input Screen')
