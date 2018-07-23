@@ -28,380 +28,6 @@ from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
 from kivy.uix.popup import Popup
 
-class BlueLabel(Label):
-	def on_size(self, *args):
-		self.canvas.before.clear()
-		with self.canvas.before:
-			Color(0, 0.5, 1, 0.28)
-			Rectangle(pos=self.pos, size=self.size)
-
-class WhiteLabel(Label):
-	def on_size(self, *args):
-		self.canvas.before.clear()
-		with self.canvas.before:
-			Color(1, 1, 1, 1)
-			Rectangle(pos=self.pos, size=self.size)
-
-#FloatInput: TextInput that can only accept certain arguments
-class FloatInput(TextInput):
-	pat = re.compile('[^0-9]')
-	def insert_text(self, substring, from_undo=False):
-		pat = self.pat
-		if self.text.count('.') > 0:
-			s = re.sub(pat, '', substring)
-		else:
-			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
-		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
-
-#InputError: popup when input errors detected
-class InputError(GridLayout):
-	def __init__(self, **kwargs):
-		super(InputError, self).__init__(**kwargs)
-		self.cols = 1
-		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7), font_size = self.height/4)
-		self.add_widget(self.errorlabel)
-		self.add_widget(Button(text='Return', size_hint=(1, 0.3), on_release=lambda x:errpopup.dismiss(), font_size = self.height/5))
-
-#ChooseScreen: popup screen for choosing location
-class ChooseScreen(GridLayout):
-	def __init__(self, **kwargs):
-		super(ChooseScreen, self).__init__(**kwargs)
-		self.cols=1
-		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
-		self.title.bind(size=self.title.setter('text_size'))
-		self.add_widget(self.title)
-		self.add_widget(Label(size_hint=(1,0.001)))
-		# self.location = Spinner(text='Select Location',
-								# size_hint = (1,0.078),
-								# sync_height=True,
-								# font_size = self.height/7,
-								# bold = True)
-		self.off = True
-		self.location = Button(text = 'Select Location', size_hint = (1, 0.078), font_size = self.height/7, bold = True, background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
-		self.add_widget(self.location)
-		self.one = Button(text = 'Ryerson (IL,USA)', on_release = lambda x:self.setUpButton(1))
-		self.two = Button(text = 'Yellowstone (WY,USA)',on_release = lambda x:self.setUpButton(2))
-		self.three = Button(text = 'Anchorage (AK,USA)', on_release = lambda x:self.setUpButton(3))
-		self.four = Button(text = 'Kyoto, Japan', on_release = lambda x:self.setUpButton(4))
-		self.five = Button(text = 'Cachiyuyo, Chile', on_release = lambda x:self.setUpButton(5))
-		self.six = Button(text = 'London, UK',on_release = lambda x:self.setUpButton(6))
-		self.seven = Button(text = 'Ar Rayn, Saudi Arabia', on_release = lambda x:self.setUpButton(1))
-		self.eight = Button(text = 'Addis Ababa, Ethiopia',on_release = lambda x:self.setUpButton(2))
-		self.nine = Button(text = 'Antarctica', on_release = lambda x:self.setUpButton(3))
-		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six, self.seven, self.eight, self.nine]
-		for button in self.buttons:
-			button.size_hint = (1, 0.078)
-			button.background_normal = ''
-			button.background_color = (0, 0, 0, 1)
-			button.color = (0, 0, 0, 1)
-			self.add_widget(button)
-
-		self.add_widget(Label(size_hint=(1,0.001)))
-		self.add_widget(Button(text='Select', font_size=self.height/5, size_hint=(1,0.109), bold=True,on_release=self.closeChoose))
-
-	def setUpButton(self, value):
-		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six, 7:self.seven, 8:self.eight, 9:self.nine}
-		self.location.text = dict[value].text
-		self.showChoices()
-
-	def showChoices(self):
-		if self.off:
-			for button in self.buttons:
-				button.background_color = (0, 0.13, 0.26, 1)
-				button.color = (1, 1, 1, 1)
-			self.off = False
-		else:
-			for button in self.buttons:
-				button.background_color = (0, 0, 0, 1)
-				button.color = (0, 0, 0, 1)
-			self.off = True
-
-	def closeChoose(self, instance):
-		sm.get_screen('Input Screen').location.text = self.location.text
-		choosePopup.dismiss()
-
-#AdvancedScreen: Advanced options (like acceleration factor and amplitude)
-class AdvancedScreen(BoxLayout):
-	def __init__(self, **kwargs):
-		super(AdvancedScreen, self).__init__(**kwargs)
-		self.layout = BoxLayout(orientation='vertical')
-		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
-		self.title.font_size = self.title.height/3
-		self.title.bind(size=self.title.setter('text_size'))
-		self.layout.add_widget(self.title)
-		self.layout.add_widget(Label(size_hint=(1,0.001)))
-
-		#Spinner with acceleration factor choices
-		self.off = True
-		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), bold = True, on_release = lambda x:self.showChoices())
-		self.layout.add_widget(self.aFactor)
-		self.one = Button(text = '0.1 Hz', on_release = lambda x:self.setUpButton(1))
-		self.two = Button(text = '0.5 Hz',on_release = lambda x:self.setUpButton(2))
-		self.three = Button(text = '5 Hz', on_release = lambda x:self.setUpButton(3))
-		self.four = Button(text = '10 Hz', on_release = lambda x:self.setUpButton(4))
-		self.five = Button(text = '20 Hz', on_release = lambda x:self.setUpButton(5))
-		self.six = Button(text = '50 Hz',on_release = lambda x:self.setUpButton(6))
-		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six]
-		for button in self.buttons:
-			button.size_hint = (1, 0.095)
-			button.background_normal = ''
-			button.background_color = (0, 0, 0, 1)
-			button.color = (0, 0, 0, 1)
-			self.layout.add_widget(Label(size_hint = (1, 0.005)))
-			self.layout.add_widget(button)
-		self.layout.add_widget(Label(size_hint = (1, 0.005)))
-
-		self.grid = GridLayout(cols=2, size_hint=(1, 0.14))
-		self.grid.add_widget(BlueLabel(text='Fixed Amplitude:', font_size = self.height/5))
-		self.fixedAmpText = FloatInput(multiline=False)
-		self.fixedAmpText.bind(text=self.setTextEqual)
-		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
-		self.fixedAmp.font_size = self.fixedAmp.height/3
-		self.cur = False
-		self.grid.add_widget(self.fixedAmp)
-		Clock.schedule_interval(self.cursor, 0.5)
-		self.layout.add_widget(self.grid)
-
-		self.returnbutton = Button(text='Return', size_hint=(1,0.15), background_normal = '', background_color = (0, 0, 0, 1), valign = 'middle')
-		self.returnbutton.font_size=self.returnbutton.height/5
-		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
-		self.layout.add_widget(self.returnbutton)
-
-		self.add_widget(self.layout)
-
-	def setUpButton(self, value):
-		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six}
-		self.aFactor.text = dict[value].text
-		self.showChoices()
-
-	def showChoices(self):
-		if self.off:
-			for button in self.buttons:
-				button.background_color = (0, 0.13, 0.26, 1)
-				button.color = (1, 1, 1, 1)
-			self.off = False
-		else:
-			for button in self.buttons:
-				button.background_color = (0, 0, 0, 1)
-				button.color = (0, 0, 0, 1)
-			self.off = True
-
-	def cursor(self, dt):
-		if self.fixedAmpText.focus:
-			position = self.fixedAmpText.cursor[0]
-			if not self.cur:
-				self.fixedAmp.text = self.fixedAmpText.text[:position] + "|" + self.fixedAmpText.text[position:]
-				self.cur = True
-			else:
-				self.fixedAmp.text = self.fixedAmpText.text[:position] + " " + self.fixedAmpText.text[position:]
-				self.cur = False
-		else:
-			self.fixedAmp.text = self.fixedAmpText.text
-			self.cur = False
-
-	def setTextEqual(self, instance, value):
-		if len(self.fixedAmpText.text) > 8:
-			self.fixedAmpText.text = self.fixedAmpText.text[0:-1]
-		self.fixedAmp.text = self.fixedAmpText.text
-
-	def focusButton(self, instance):
-		self.fixedAmpText.focus = True
-
-#Calendar: Cooper's "God Tier" Calendar for use to pick date
-class Calendar(BoxLayout):
-	def __init__(self, *args, **kwargs):
-		super(Calendar, self).__init__(**kwargs)
-		self.date = date.today()
-		self.orientation = "vertical"
-		self.month_names = ('January','February','March','April','May','June','July','August','September','October','November','December')
-		if kwargs.has_key("month_names"):
-			self.month_names = kwargs['month_names']
-		self.header = BoxLayout(orientation = 'horizontal', size_hint = (1, 0.2))
-		self.body = GridLayout(cols = 7)
-		self.add_widget(self.header)
-		self.add_widget(self.body)
-
-		self.populate_body()
-		self.populate_header()
-
-	#populate_header: Fills header with correct data (Month, Year), buttons
-	def populate_header(self, *args, **kwargs):
-		self.header.clear_widgets()
-		month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
-		current_month = Label(text=month_year_text, size_hint = (0.4, 1))
-		
-		previous_year = Button(text = "<<", size_hint = (0.15, 1), on_release=partial(self.move_previous_year))
-		previous_month = Button(text = "<", size_hint = (0.15, 1), on_release=partial(self.move_previous_month))
-		next_month = Button(text = ">", size_hint = (0.15, 1), on_release=partial(self.move_next_month))
-		next_year = Button(text = ">>", size_hint = (0.15, 1), on_release=partial(self.move_next_year))
-		
-		self.header.add_widget(previous_year)
-		self.header.add_widget(previous_month)
-		self.header.add_widget(current_month)
-		self.header.add_widget(next_month)
-		self.header.add_widget(next_year)
-
-	#populate_body: Fills body with calendar given the month and year. Select date by clicking on a day)
-	def populate_body(self, *args, **kwargs):
-		self.body.clear_widgets()
-		self.days = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
-		for dayLabel in self.days:
-			self.body.add_widget(Label(text=dayLabel))
-		date_cursor = date(self.date.year, self.date.month, 1)
-		weekday = date_cursor.isoweekday()
-		if weekday is 7:
-			weekday = 0
-		for filler in range(weekday):
-			self.body.add_widget(Label(text=""))
-		while date_cursor.month == self.date.month:
-			date_label = Button(text = str(date_cursor.day))
-			if date_cursor > date.today():	#Make future dates unable to be selected
-				date_label.background_color = [0, 0, 0, 1]
-			else:
-				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
-			self.body.add_widget(date_label)
-			date_cursor += timedelta(days = 1)
-
-	#set_date: Transfers date selected into text_input on Input Screen
-	def set_date(self, *args, **kwargs):
-		self.date = date(self.date.year, self.date.month, kwargs['day'])
-		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
-		sm.get_screen('Input Screen').popup.dismiss()
-		self.populate_body()
-		self.populate_header()
-
-	#Functions that correspond to buttons that change month or year
-	def move_next_month(self, *args, **kwargs):
-		if self.date.month == 12:
-			self.date = date(self.date.year + 1, 1, self.date.day)
-		else:
-			self.date = date(self.date.year, self.date.month + 1, self.date.day)
-		self.populate_header()
-		self.populate_body()
-
-	def move_previous_month(self, *args, **kwargs):
-		if self.date.month == 1:
-			self.date = date(self.date.year - 1, 12, self.date.day)
-		else:
-			self.date = date(self.date.year, self.date.month -1, self.date.day)
-		self.populate_header()
-		self.populate_body()
-
-	def move_next_year(self, *args, **kwargs):
-		if self.date.month == 2 and self.date.day == 29:
-			self.date = date(self.date.year + 1, self.date.month, self.date.day - 1)
-		else:
-			self.date = date(self.date.year + 1, self.date.month, self.date.day)
-		self.populate_header()
-		self.populate_body()
-
-	def move_previous_year(self, *args, **kwargs):
-		if self.date.month == 2 and self.date.day == 29:
-			self.date = date(self.date.year - 1, self.date.month, self.date.day - 1)
-		else:
-			self.date = date(self.date.year - 1, self.date.month, self.date.day)
-		self.populate_header()
-		self.populate_body()
-
-#TimePicker: clock that allows selection of time
-class TimePicker(GridLayout):
-	def __init__(self, **kwargs):
-		super(TimePicker, self).__init__(**kwargs)
-		self.cols = 5
-
-		#Up buttons and spacing 
-		self.add_widget(Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.hourUp))
-		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.add_widget(Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.minuteUp))
-		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.add_widget(Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
-
-		#Value display, ":", and spacing
-		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle', font_size=self.height/3)
-		self.add_widget(self.hour)
-		self.add_widget(Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle', font_size = self.height/3))
-		self.minute = Label(text='00', size_hint=(0.4,0.6), halign='center', valign='middle', font_size = self.height/3)
-		self.add_widget(self.minute)
-		self.add_widget(Label(size_hint=(0.05,0.6)))
-		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle', font_size = self.height/5)
-		self.add_widget(self.AMPM)
-
-		#Down buttons and spacing
-		self.add_widget(Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.hourDown))
-		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.add_widget(Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.minuteDown))
-		self.add_widget(Label(size_hint=(0.05,0.2)))
-		self.add_widget(Button(text='v', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
-
-	#Functions that corresponds to buttons that change hour, minute, or AM/PM
-	def hourUp(self, instance):
-		currentHour = int(self.hour.text)
-		currentHour += 1
-		if currentHour == 12:
-			self.apSwitch(instance)
-		if currentHour == 13:
-			currentHour = 1
-		if currentHour < 10:
-			self.hour.text = '0'+str(currentHour)
-		else:
-			self.hour.text = str(currentHour)
-
-	def minuteUp(self, instance):
-		currentMinute = int(self.minute.text)
-		currentMinute += 1
-		if currentMinute == 60:
-			currentMinute = 0
-			
-		if currentMinute < 10:
-			self.minute.text = '0'+str(currentMinute)
-		else:
-			self.minute.text = str(currentMinute)
-
-	def hourDown(self, instance):
-		currentHour = int(self.hour.text)
-		currentHour -= 1
-		if currentHour == 11:
-			self.apSwitch(instance)
-		if currentHour == 0:
-			currentHour = 12
-		if currentHour < 10:
-			self.hour.text = '0'+str(currentHour)
-		else:
-			self.hour.text = str(currentHour)
-
-	def minuteDown(self, instance):
-		currentMinute = int(self.minute.text)
-		currentMinute -= 1
-		if currentMinute == -1:
-			currentMinute = 59
-			
-		if currentMinute < 10:
-			self.minute.text = '0'+str(currentMinute)
-		else:
-			self.minute.text = str(currentMinute)
-
-	def apSwitch(self, instance):
-		if self.AMPM.text == 'AM':
-			self.AMPM.text = 'PM'
-		else:
-			self.AMPM.text = 'AM'
-	
-	def set_time(self, instance):
-		hour = int(self.hour.text)
-		if self.AMPM.text == 'PM':
-			hour += 12
-			if hour == 24:
-				hour = 12
-		if self.AMPM.text == 'AM':
-			if hour == 12:
-				hour = 0
-		if hour < 10:
-			hour = '0'+str(hour)
-		else:
-			hour = str(hour)
-		
-		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
-
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
 	def __init__(self, **kwargs):
@@ -529,14 +155,6 @@ class InputScreen(Screen):
 		#Open loading popup
 		loadScreen.message.text= "Loading data from " + locationText + '...\n\n\n\n' + geofacts[random.randint(0,9)]
 		loadPopup.open()
-
-#Error404: Screen displayed when failing to download data from IRIS
-class Error404(GridLayout):
-	def __init__(self, **kwargs):
-		super(Error404, self).__init__(**kwargs)
-		self.cols=1
-		self.add_widget(Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.", halign = 'center'))
-		self.add_widget(Button(text='Return', on_release=lambda x:errpopup2.dismiss()))
 
 #LoadingScreen: popup loading screen
 class LoadingScreen(GridLayout):
@@ -812,6 +430,388 @@ class DisplayScreen(Screen):
 		self.seek.value = 0
 		sm.transition.direction = 'right'
 		sm.current = 'Input Screen'
+
+#ChooseScreen: popup screen for choosing location
+class ChooseScreen(GridLayout):
+	def __init__(self, **kwargs):
+		super(ChooseScreen, self).__init__(**kwargs)
+		self.cols=1
+		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
+		self.title.bind(size=self.title.setter('text_size'))
+		self.add_widget(self.title)
+		self.add_widget(Label(size_hint=(1,0.001)))
+		# self.location = Spinner(text='Select Location',
+								# size_hint = (1,0.078),
+								# sync_height=True,
+								# font_size = self.height/7,
+								# bold = True)
+		self.off = True
+		self.location = Button(text = 'Select Location', size_hint = (1, 0.078), font_size = self.height/7, bold = True, background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
+		self.add_widget(self.location)
+		self.one = Button(text = 'Ryerson (IL,USA)', on_release = lambda x:self.setUpButton(1))
+		self.two = Button(text = 'Yellowstone (WY,USA)',on_release = lambda x:self.setUpButton(2))
+		self.three = Button(text = 'Anchorage (AK,USA)', on_release = lambda x:self.setUpButton(3))
+		self.four = Button(text = 'Kyoto, Japan', on_release = lambda x:self.setUpButton(4))
+		self.five = Button(text = 'Cachiyuyo, Chile', on_release = lambda x:self.setUpButton(5))
+		self.six = Button(text = 'London, UK',on_release = lambda x:self.setUpButton(6))
+		self.seven = Button(text = 'Ar Rayn, Saudi Arabia', on_release = lambda x:self.setUpButton(1))
+		self.eight = Button(text = 'Addis Ababa, Ethiopia',on_release = lambda x:self.setUpButton(2))
+		self.nine = Button(text = 'Antarctica', on_release = lambda x:self.setUpButton(3))
+		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six, self.seven, self.eight, self.nine]
+		for button in self.buttons:
+			button.size_hint = (1, 0.078)
+			button.background_normal = ''
+			button.background_color = (0, 0, 0, 1)
+			button.color = (0, 0, 0, 1)
+			self.add_widget(button)
+
+		self.add_widget(Label(size_hint=(1,0.001)))
+		self.add_widget(Button(text='Select', font_size=self.height/5, size_hint=(1,0.109), bold=True,on_release=self.closeChoose))
+
+	def setUpButton(self, value):
+		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six, 7:self.seven, 8:self.eight, 9:self.nine}
+		self.location.text = dict[value].text
+		self.showChoices()
+
+	def showChoices(self):
+		if self.off:
+			for button in self.buttons:
+				button.background_color = (0, 0.13, 0.26, 1)
+				button.color = (1, 1, 1, 1)
+			self.off = False
+		else:
+			for button in self.buttons:
+				button.background_color = (0, 0, 0, 1)
+				button.color = (0, 0, 0, 1)
+			self.off = True
+
+	def closeChoose(self, instance):
+		sm.get_screen('Input Screen').location.text = self.location.text
+		choosePopup.dismiss()
+
+#AdvancedScreen: Advanced options (like acceleration factor and amplitude)
+class AdvancedScreen(BoxLayout):
+	def __init__(self, **kwargs):
+		super(AdvancedScreen, self).__init__(**kwargs)
+		self.layout = BoxLayout(orientation='vertical')
+		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		self.title.font_size = self.title.height/3
+		self.title.bind(size=self.title.setter('text_size'))
+		self.layout.add_widget(self.title)
+		self.layout.add_widget(Label(size_hint=(1,0.001)))
+
+		#Spinner with acceleration factor choices
+		self.off = True
+		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), bold = True, on_release = lambda x:self.showChoices())
+		self.layout.add_widget(self.aFactor)
+		self.one = Button(text = '0.1 Hz', on_release = lambda x:self.setUpButton(1))
+		self.two = Button(text = '0.5 Hz',on_release = lambda x:self.setUpButton(2))
+		self.three = Button(text = '5 Hz', on_release = lambda x:self.setUpButton(3))
+		self.four = Button(text = '10 Hz', on_release = lambda x:self.setUpButton(4))
+		self.five = Button(text = '20 Hz', on_release = lambda x:self.setUpButton(5))
+		self.six = Button(text = '50 Hz',on_release = lambda x:self.setUpButton(6))
+		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six]
+		for button in self.buttons:
+			button.size_hint = (1, 0.095)
+			button.background_normal = ''
+			button.background_color = (0, 0, 0, 1)
+			button.color = (0, 0, 0, 1)
+			self.layout.add_widget(Label(size_hint = (1, 0.005)))
+			self.layout.add_widget(button)
+		self.layout.add_widget(Label(size_hint = (1, 0.005)))
+
+		self.grid = GridLayout(cols=2, size_hint=(1, 0.14))
+		self.grid.add_widget(BlueLabel(text='Fixed Amplitude:', font_size = self.height/5))
+		self.fixedAmpText = FloatInput(multiline=False)
+		self.fixedAmpText.bind(text=self.setTextEqual)
+		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
+		self.fixedAmp.font_size = self.fixedAmp.height/3
+		self.cur = False
+		self.grid.add_widget(self.fixedAmp)
+		Clock.schedule_interval(self.cursor, 0.5)
+		self.layout.add_widget(self.grid)
+
+		self.returnbutton = Button(text='Return', size_hint=(1,0.15), background_normal = '', background_color = (0, 0, 0, 1), valign = 'middle')
+		self.returnbutton.font_size=self.returnbutton.height/5
+		self.returnbutton.bind(on_release=lambda x:advancedScreen.dismiss())
+		self.layout.add_widget(self.returnbutton)
+
+		self.add_widget(self.layout)
+
+	def setUpButton(self, value):
+		dict = {1:self.one, 2:self.two, 3:self.three, 4:self.four, 5:self.five, 6:self.six}
+		self.aFactor.text = dict[value].text
+		self.showChoices()
+
+	def showChoices(self):
+		if self.off:
+			for button in self.buttons:
+				button.background_color = (0, 0.13, 0.26, 1)
+				button.color = (1, 1, 1, 1)
+			self.off = False
+		else:
+			for button in self.buttons:
+				button.background_color = (0, 0, 0, 1)
+				button.color = (0, 0, 0, 1)
+			self.off = True
+
+	def cursor(self, dt):
+		if self.fixedAmpText.focus:
+			position = self.fixedAmpText.cursor[0]
+			if not self.cur:
+				self.fixedAmp.text = self.fixedAmpText.text[:position] + "|" + self.fixedAmpText.text[position:]
+				self.cur = True
+			else:
+				self.fixedAmp.text = self.fixedAmpText.text[:position] + " " + self.fixedAmpText.text[position:]
+				self.cur = False
+		else:
+			self.fixedAmp.text = self.fixedAmpText.text
+			self.cur = False
+
+	def setTextEqual(self, instance, value):
+		if len(self.fixedAmpText.text) > 8:
+			self.fixedAmpText.text = self.fixedAmpText.text[0:-1]
+		self.fixedAmp.text = self.fixedAmpText.text
+
+	def focusButton(self, instance):
+		self.fixedAmpText.focus = True
+
+#InputError: popup when input errors detected
+class InputError(GridLayout):
+	def __init__(self, **kwargs):
+		super(InputError, self).__init__(**kwargs)
+		self.cols = 1
+		self.errorlabel = Label(text='Input Error', size_hint=(1, 0.7), font_size = self.height/4)
+		self.add_widget(self.errorlabel)
+		self.add_widget(Button(text='Return', size_hint=(1, 0.3), on_release=lambda x:errpopup.dismiss(), font_size = self.height/5))
+
+#Error404: Screen displayed when failing to download data from IRIS
+class Error404(GridLayout):
+	def __init__(self, **kwargs):
+		super(Error404, self).__init__(**kwargs)
+		self.cols=1
+		self.add_widget(Label(text="Sorry, your data couldn\'t be found!\nIt may be possible that the station was offline or had not yet been established at your requested time.\nRecheck your inputs.", halign = 'center'))
+		self.add_widget(Button(text='Return', on_release=lambda x:errpopup2.dismiss()))
+
+#Calendar: Cooper's "God Tier" Calendar for use to pick date
+class Calendar(BoxLayout):
+	def __init__(self, *args, **kwargs):
+		super(Calendar, self).__init__(**kwargs)
+		self.date = date.today()
+		self.orientation = "vertical"
+		self.month_names = ('January','February','March','April','May','June','July','August','September','October','November','December')
+		if kwargs.has_key("month_names"):
+			self.month_names = kwargs['month_names']
+		self.header = BoxLayout(orientation = 'horizontal', size_hint = (1, 0.2))
+		self.body = GridLayout(cols = 7)
+		self.add_widget(self.header)
+		self.add_widget(self.body)
+
+		self.populate_body()
+		self.populate_header()
+
+	#populate_header: Fills header with correct data (Month, Year), buttons
+	def populate_header(self, *args, **kwargs):
+		self.header.clear_widgets()
+		month_year_text = self.month_names[self.date.month -1] + ' ' + str(self.date.year)
+		current_month = Label(text=month_year_text, size_hint = (0.4, 1))
+		
+		previous_year = Button(text = "<<", size_hint = (0.15, 1), on_release=partial(self.move_previous_year))
+		previous_month = Button(text = "<", size_hint = (0.15, 1), on_release=partial(self.move_previous_month))
+		next_month = Button(text = ">", size_hint = (0.15, 1), on_release=partial(self.move_next_month))
+		next_year = Button(text = ">>", size_hint = (0.15, 1), on_release=partial(self.move_next_year))
+		
+		self.header.add_widget(previous_year)
+		self.header.add_widget(previous_month)
+		self.header.add_widget(current_month)
+		self.header.add_widget(next_month)
+		self.header.add_widget(next_year)
+
+	#populate_body: Fills body with calendar given the month and year. Select date by clicking on a day)
+	def populate_body(self, *args, **kwargs):
+		self.body.clear_widgets()
+		self.days = ("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+		for dayLabel in self.days:
+			self.body.add_widget(Label(text=dayLabel))
+		date_cursor = date(self.date.year, self.date.month, 1)
+		weekday = date_cursor.isoweekday()
+		if weekday is 7:
+			weekday = 0
+		for filler in range(weekday):
+			self.body.add_widget(Label(text=""))
+		while date_cursor.month == self.date.month:
+			date_label = Button(text = str(date_cursor.day))
+			if date_cursor > date.today():	#Make future dates unable to be selected
+				date_label.background_color = [0, 0, 0, 1]
+			else:
+				date_label.bind(on_release=partial(self.set_date, day=date_cursor.day))
+			self.body.add_widget(date_label)
+			date_cursor += timedelta(days = 1)
+
+	#set_date: Transfers date selected into text_input on Input Screen
+	def set_date(self, *args, **kwargs):
+		self.date = date(self.date.year, self.date.month, kwargs['day'])
+		sm.get_screen('Input Screen').date.text = self.date.strftime('%Y-%m-%d')
+		sm.get_screen('Input Screen').popup.dismiss()
+		self.populate_body()
+		self.populate_header()
+
+	#Functions that correspond to buttons that change month or year
+	def move_next_month(self, *args, **kwargs):
+		if self.date.month == 12:
+			self.date = date(self.date.year + 1, 1, self.date.day)
+		else:
+			self.date = date(self.date.year, self.date.month + 1, self.date.day)
+		self.populate_header()
+		self.populate_body()
+
+	def move_previous_month(self, *args, **kwargs):
+		if self.date.month == 1:
+			self.date = date(self.date.year - 1, 12, self.date.day)
+		else:
+			self.date = date(self.date.year, self.date.month -1, self.date.day)
+		self.populate_header()
+		self.populate_body()
+
+	def move_next_year(self, *args, **kwargs):
+		if self.date.month == 2 and self.date.day == 29:
+			self.date = date(self.date.year + 1, self.date.month, self.date.day - 1)
+		else:
+			self.date = date(self.date.year + 1, self.date.month, self.date.day)
+		self.populate_header()
+		self.populate_body()
+
+	def move_previous_year(self, *args, **kwargs):
+		if self.date.month == 2 and self.date.day == 29:
+			self.date = date(self.date.year - 1, self.date.month, self.date.day - 1)
+		else:
+			self.date = date(self.date.year - 1, self.date.month, self.date.day)
+		self.populate_header()
+		self.populate_body()
+
+#TimePicker: clock that allows selection of time
+class TimePicker(GridLayout):
+	def __init__(self, **kwargs):
+		super(TimePicker, self).__init__(**kwargs)
+		self.cols = 5
+
+		#Up buttons and spacing 
+		self.add_widget(Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.hourUp))
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.add_widget(Button(text='^', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.minuteUp))
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.add_widget(Button(text='^', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
+
+		#Value display, ":", and spacing
+		self.hour = Label(text='12', size_hint=(0.4, 0.6), halign='center', valign='middle', font_size=self.height/3)
+		self.add_widget(self.hour)
+		self.add_widget(Label(text=':', size_hint=(0.05, 0.6), halign='center', valign='middle', font_size = self.height/3))
+		self.minute = Label(text='00', size_hint=(0.4,0.6), halign='center', valign='middle', font_size = self.height/3)
+		self.add_widget(self.minute)
+		self.add_widget(Label(size_hint=(0.05,0.6)))
+		self.AMPM = Label(text='AM', size_hint=(0.1,0.6), halign='center', valign='middle', font_size = self.height/5)
+		self.add_widget(self.AMPM)
+
+		#Down buttons and spacing
+		self.add_widget(Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.hourDown))
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.add_widget(Button(text='v', size_hint=(0.4,0.2), halign='center', valign='middle', on_release=self.minuteDown))
+		self.add_widget(Label(size_hint=(0.05,0.2)))
+		self.add_widget(Button(text='v', size_hint=(0.1,0.2), halign='center', valign='middle', on_release=self.apSwitch))
+
+	#Functions that corresponds to buttons that change hour, minute, or AM/PM
+	def hourUp(self, instance):
+		currentHour = int(self.hour.text)
+		currentHour += 1
+		if currentHour == 12:
+			self.apSwitch(instance)
+		if currentHour == 13:
+			currentHour = 1
+		if currentHour < 10:
+			self.hour.text = '0'+str(currentHour)
+		else:
+			self.hour.text = str(currentHour)
+
+	def minuteUp(self, instance):
+		currentMinute = int(self.minute.text)
+		currentMinute += 1
+		if currentMinute == 60:
+			currentMinute = 0
+			
+		if currentMinute < 10:
+			self.minute.text = '0'+str(currentMinute)
+		else:
+			self.minute.text = str(currentMinute)
+
+	def hourDown(self, instance):
+		currentHour = int(self.hour.text)
+		currentHour -= 1
+		if currentHour == 11:
+			self.apSwitch(instance)
+		if currentHour == 0:
+			currentHour = 12
+		if currentHour < 10:
+			self.hour.text = '0'+str(currentHour)
+		else:
+			self.hour.text = str(currentHour)
+
+	def minuteDown(self, instance):
+		currentMinute = int(self.minute.text)
+		currentMinute -= 1
+		if currentMinute == -1:
+			currentMinute = 59
+			
+		if currentMinute < 10:
+			self.minute.text = '0'+str(currentMinute)
+		else:
+			self.minute.text = str(currentMinute)
+
+	def apSwitch(self, instance):
+		if self.AMPM.text == 'AM':
+			self.AMPM.text = 'PM'
+		else:
+			self.AMPM.text = 'AM'
+	
+	def set_time(self, instance):
+		hour = int(self.hour.text)
+		if self.AMPM.text == 'PM':
+			hour += 12
+			if hour == 24:
+				hour = 12
+		if self.AMPM.text == 'AM':
+			if hour == 12:
+				hour = 0
+		if hour < 10:
+			hour = '0'+str(hour)
+		else:
+			hour = str(hour)
+		
+		sm.get_screen('Input Screen').startTime.text = hour + ':' + self.minute.text
+
+class BlueLabel(Label):
+	def on_size(self, *args):
+		self.canvas.before.clear()
+		with self.canvas.before:
+			Color(0, 0.5, 1, 0.28)
+			Rectangle(pos=self.pos, size=self.size)
+
+class WhiteLabel(Label):
+	def on_size(self, *args):
+		self.canvas.before.clear()
+		with self.canvas.before:
+			Color(1, 1, 1, 1)
+			Rectangle(pos=self.pos, size=self.size)
+
+#FloatInput: TextInput that can only accept certain arguments
+class FloatInput(TextInput):
+	pat = re.compile('[^0-9]')
+	def insert_text(self, substring, from_undo=False):
+		pat = self.pat
+		if self.text.count('.') > 0:
+			s = re.sub(pat, '', substring)
+		else:
+			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
+		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
 # Create screen manager
 sm = ScreenManager()
