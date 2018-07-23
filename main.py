@@ -83,13 +83,6 @@ class ChooseScreen(GridLayout):
 		sm.get_screen('Input Screen').location.text = self.location.text
 		choosePopup.dismiss()
 
-class WhiteLabel(Button):
-	background_normal = ''
-	background_color = (1,1,1,1)
-
-class WhiteSpinner(Spinner):
-	option_cls = ObjectProperty(WhiteLabel)
-
 #AdvancedScreen: Advanced options (like acceleration factor and amplitude)
 class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
@@ -103,13 +96,26 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.title)
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
 		#Spinner with acceleration factor choices
-		self.aFactor = WhiteSpinner(text='Acceleration Factor:',
-								values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
-								size_hint = (1,0.08),
-								sync_height=True,
-								background_normal = '',
-								background_color = (0, 0.13, 0.26, 1))
+		# self.aFactor = WhiteSpinner(text='Acceleration Factor:',
+								# values=('0.1 Hz', '0.5 Hz', '5 Hz', '10 Hz', '20 Hz', '50 Hz'),
+								# size_hint = (1,0.08),
+								# sync_height=True,
+								# background_normal = '',
+								# background_color = (0, 0.13, 0.26, 1))
+
+		self.off = True
+		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
 		self.layout.add_widget(self.aFactor)
+		self.one = Button(text = '0.1 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(1))
+		self.two = Button(text = '0.5 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(2))
+		self.three = Button(text = '5 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(3))
+		self.four = Button(text = '10 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(4))
+		self.five = Button(text = '20 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(5))
+		self.six = Button(text = '50 Hz', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0, 0, 1), color = (0,0,0,1), on_release=lambda x:self.setUpOne(6))
+		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six]
+		for button in self.buttons:
+			self.layout.add_widget(button)
+
 		self.layout.add_widget(Label(size_hint=(1,0.49)))
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
 
@@ -132,6 +138,33 @@ class AdvancedScreen(BoxLayout):
 		self.layout.add_widget(self.returnbutton)
 
 		self.add_widget(self.layout)
+
+	def setUpOne(self, value):
+		if value == 1:
+			self.aFactor.text = self.one.text
+		elif value == 2:
+			self.aFactor.text = self.two.text
+		elif value == 3:
+			self.aFactor.text = self.three.text
+		elif value == 4:
+			self.aFactor.text = self.four.text
+		elif value == 5:
+			self.aFactor.text = self.five.text
+		else:
+			self.aFactor.text = self.six.text
+		self.showChoices()
+
+	def showChoices(self):
+		if self.off:
+			for button in self.buttons:
+				button.background_color = (0, 0.13, 0.26, 1)
+				button.color = (1, 1, 1, 1)
+			self.off = False
+		else:
+			for button in self.buttons:
+				button.background_color = (0, 0, 0, 1)
+				button.color = (0, 0, 0, 1)
+			self.off = True
 
 	def cursor(self, dt):
 		if self.fixedAmpText.focus:
