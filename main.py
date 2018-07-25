@@ -523,7 +523,7 @@ class SampleScreen(GridLayout):
 		self.layout.add_widget(self.five)
 		self.add_widget(self.layout)
 		
-		self.returnbutton = Button(text='Return', size_hint=(1,0.1), background_normal = '', background_color = (1, 1, 1, 1), color = (0,0,0,1), valign = 'middle')
+		self.returnbutton = Button(text='Submit', size_hint=(1,0.1), background_normal = '', background_color = (1, 1, 1, 1), color = (0,0,0,1), valign = 'middle')
 		self.returnbutton.font_size=self.returnbutton.height/5
 		self.returnbutton.bind(on_release=self.closeSample)
 		self.add_widget(self.returnbutton)
@@ -552,10 +552,22 @@ class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
-		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center')
+		
+		#Creating InofScreen popup
+		self.infoScreen = InfoScreen(as_popup=True)
+		self.infoPopup=Popup(title='Information', content = self.infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
+		self.infoPopup.bind(on_dismiss=self.infoClose)
+
+		self.topGrid=GridLayout(cols=3, size_hint=(1,0.109))
+		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
+		self.title = Label(text="SonifyMe", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
-		self.layout.add_widget(self.title)
+		self.topGrid.add_widget(self.title)
+		self.infoButton = Button(text='Info', size_hint=(0.1,1), background_normal='', background_color=(0,0,0,1))
+		self.infoButton.bind(on_release=self.infoOpen)
+		self.topGrid.add_widget(self.infoButton)
+		self.layout.add_widget(self.topGrid)
 		self.layout.add_widget(Label(size_hint=(1,0.001)))
 
 		#Spinner with acceleration factor choices
@@ -633,6 +645,21 @@ class AdvancedScreen(BoxLayout):
 
 	def focusButton(self, instance):
 		self.fixedAmpText.focus = True
+
+	def infoOpen(self,instance):
+		self.infoPopup.open()
+		advancedScreen.dismiss()
+	
+	def infoClose(self,instance):
+		advancedScreen.open()
+
+#InfoScreen: Information about advanced options
+class InfoScreen(GridLayout):
+	def __init__(self, **kwargs):
+		super(InfoScreen, self).__init__(**kwargs)
+		self.cols=1
+		self.add_widget(Label(text='Acceleration Factor:'))
+		self.add_widget(Label(text='Fixed Amplitude:'))
 
 #InputError: popup when input errors detected
 class InputError(GridLayout):
@@ -891,7 +918,7 @@ sampleScreen = SampleScreen(as_popup=True)
 samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.8,0.8), background = 'black.jpg', separator_color = (1,1,1,1))
 
 #Creating AdvancedScreen popup
-advScreen = AdvancedScreen(as_popup = True)
+advScreen = AdvancedScreen(as_popup=True)
 advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
 
 #Create LoadingScreen popup
