@@ -4,6 +4,11 @@ import Foundation
 import AudioToolbox
 
 class LoadingScreen : ViewController {
+    var inputLocation = ""
+    var inputDate = ""
+    var inputTime = ""
+    var inputDuration = ""
+    
     func isNumber(num:String) -> Bool {
         var theNum = ""
         if (num[num.startIndex] == "-") {
