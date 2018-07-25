@@ -41,31 +41,10 @@ class LoadingScreen : ViewController {
                 location = "--"
                 channel = "BHZ"
                 break
-            case "Antarctica":
-                soundname = "antarctica"
-                station = "BELA"
-                net = "AI"
-                location = "04"
-                channel = "BHZ"
-                break
-            case "Cachiyuyo, Chile":
-                soundname = "chile"
-                station = "LCO"
-                net = "IU"
-                location = "10"
-                channel = "BHZ"
-                break
             case "Anchorage (AK,USA)":
                 soundname = "alaska"
                 station = "SSN"
                 net = "AK"
-                location = "--"
-                channel = "BHZ"
-                break
-            case "Kyoto, Japan":
-                soundname = "japan"
-                station = "JWT"
-                net = "JP"
                 location = "--"
                 channel = "BHZ"
                 break
@@ -76,11 +55,32 @@ class LoadingScreen : ViewController {
                 location = "--"
                 channel = "BHZ"
                 break
+            case "Kyoto, Japan":
+                soundname = "japan"
+                station = "JWT"
+                net = "JP"
+                location = "--"
+                channel = "BHZ"
+                break
+            case "Cachiyuyo, Chile":
+                soundname = "chile"
+                station = "LCO"
+                net = "IU"
+                location = "10"
+                channel = "BHZ"
+                break
             case "Ar Rayn, Saudi Arabia":
                 soundname = "saudiarabia"
                 station = "RAYN"
                 net = "II"
                 location = "10"
+                channel = "BHZ"
+                break
+            case "Antarctica":
+                soundname = "antarctica"
+                station = "BELA"
+                net = "AI"
+                location = "04"
                 channel = "BHZ"
                 break
             default:
@@ -102,7 +102,7 @@ class LoadingScreen : ViewController {
         do {
             df = try String(contentsOf: Url!)
         } catch {
-            print("uh oh")
+            print("Invalid URL")
         }
         let dflines = df.split(separator: "\n")
         
@@ -111,7 +111,7 @@ class LoadingScreen : ViewController {
         var tot = Float64(head.split(separator: " ")[2])
         var sound = [Float64]()
         var maxAmp = 0.0
-        for i in 1...(dflines.count - 1) {
+        for i in 1..<dflines.count {
             if (isNumber(num: String(dflines[i]))) {
                 let f = Float64(dflines[i])
                 sound.append(f!)
@@ -121,27 +121,13 @@ class LoadingScreen : ViewController {
             }
         }
         
-        var bandsHZ : Float64
-        switch AF {
-        case "0.1 Hz":
-            bandsHZ = 64000.0
-            break
-        case "0.5 Hz":
-            bandsHZ = 16000.0
-            break
-        case "5 Hz":
-            bandsHZ = 1600.0
-            break
-        case "10 Hz":
-            bandsHZ = 800.0
-            break
-        case "50 Hz":
-            bandsHZ = 160.0
-            break
-        default:
-            bandsHZ = 400.0
-            break
-        }
+        let frequencies : [String : Float64] = ["0.1 Hz" : 64000.0,
+                                                "0.5 Hz" : 16000.0,
+                                                "5 Hz" : 1600.0,
+                                                "10 Hz" : 800.0,
+                                                "50 Hz" : 160.0]
+        var bandsHZ = frequencies[AF]
+        if (bandsHZ == nil) {bandsHZ = 400.0}
         
         var fixedamp: Float64
         if (FA == "") {
@@ -162,11 +148,11 @@ class LoadingScreen : ViewController {
         //let mxs = 1.01*Double(maxAmp)
         //let mns = 0.0
         var s32 = [Float64]()
-        for ii in 0...(sound.count - 1) {
+        for ii in 0..<sound.count {
             s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/halfpi)
         }
         
-        let ssps = bandsHZ * fsps!
+        let ssps = bandsHZ! * fsps!
         saveFile(buff: s32, sample_rate: ssps)
         /*axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+", "+date)
          plot(hours,1000.*sound)
@@ -192,19 +178,14 @@ class LoadingScreen : ViewController {
         let audioFile = try? AVAudioFile(forWriting: url!, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
         
         let bufferFormat = AVAudioFormat(settings: outputFormatSettings)
-        
         let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat!, frameCapacity: AVAudioFrameCount(buff.count))
-        
-        for i in 0..<buff.count {
-            outputBuffer!.floatChannelData!.pointee[i] = Float(buff[i])
-        }
-        
+        for i in 0..<buff.count {outputBuffer!.floatChannelData!.pointee[i] = Float(buff[i])}
         outputBuffer?.frameLength = AVAudioFrameCount(buff.count)
         
         do {
             try audioFile?.write(from: outputBuffer!)
-        } catch let error as NSError {
-            print("error:", error.localizedDescription)
+        } catch {
+            print("Error writing audio file")
         }
     }
     

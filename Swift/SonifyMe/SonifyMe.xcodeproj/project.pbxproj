@@ -15,7 +15,6 @@
 		CD01B89821077767000EFCC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89621077767000EFCC9 /* LaunchScreen.storyboard */; };
 		F25818112108EA4E00EB66D7 /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F25818102108EA4E00EB66D7 /* sound.wav */; };
 		F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818122108ED6900EB66D7 /* InputScreen.swift */; };
-		F25818152108ED7B00EB66D7 /* StartScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818142108ED7B00EB66D7 /* StartScreen.swift */; };
 		F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818162108ED9000EB66D7 /* LoadingScreen.swift */; };
 		F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818182108EE2500EB66D7 /* DisplayScreen.swift */; };
 /* End PBXBuildFile section */
@@ -32,7 +31,6 @@
 		CD01B89921077767000EFCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F25818102108EA4E00EB66D7 /* sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound.wav; sourceTree = "<group>"; };
 		F25818122108ED6900EB66D7 /* InputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScreen.swift; sourceTree = "<group>"; };
-		F25818142108ED7B00EB66D7 /* StartScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreen.swift; sourceTree = "<group>"; };
 		F25818162108ED9000EB66D7 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		F25818182108EE2500EB66D7 /* DisplayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayScreen.swift; sourceTree = "<group>"; };
 		FAF48E3B5253A7818872C2F6 /* Pods_SonifyMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SonifyMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,7 +88,6 @@
 			children = (
 				CD01B89121077766000EFCC9 /* Main.storyboard */,
 				CD01B88F21077766000EFCC9 /* ViewController.swift */,
-				F25818142108ED7B00EB66D7 /* StartScreen.swift */,
 				F25818122108ED6900EB66D7 /* InputScreen.swift */,
 				F25818162108ED9000EB66D7 /* LoadingScreen.swift */,
 				F25818182108EE2500EB66D7 /* DisplayScreen.swift */,
@@ -219,7 +216,6 @@
 				F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */,
 				CD01B89021077766000EFCC9 /* ViewController.swift in Sources */,
 				CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */,
-				F25818152108ED7B00EB66D7 /* StartScreen.swift in Sources */,
 				F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */,
 				F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */,
 			);
