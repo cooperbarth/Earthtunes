@@ -18,13 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
-                                <rect key="frame" x="163" y="581" width="49" height="30"/>
-                                <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HtV-ae-cWu"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FCg-OH-hWr">
                                 <rect key="frame" x="112.5" y="148" width="150" height="30"/>
                                 <constraints>
@@ -85,6 +78,13 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
+                                <rect key="frame" x="163" y="51" width="49" height="30"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HtV-ae-cWu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -100,7 +100,6 @@
                             <constraint firstItem="7XT-FV-SdI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="99" id="ZPa-q0-687"/>
                             <constraint firstItem="2aj-Cx-t33" firstAttribute="top" secondItem="CNF-vs-PLB" secondAttribute="bottom" constant="26" id="cUW-iy-JmJ"/>
                             <constraint firstItem="FCg-OH-hWr" firstAttribute="top" secondItem="7XT-FV-SdI" secondAttribute="bottom" constant="8" id="jiu-OY-SYV"/>
-                            <constraint firstItem="2fb-gI-jCh" firstAttribute="top" secondItem="2wP-Ta-uhh" secondAttribute="bottom" constant="153" id="k8w-io-etn"/>
                             <constraint firstItem="CNF-vs-PLB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pvq-fr-DC5"/>
                             <constraint firstItem="2wP-Ta-uhh" firstAttribute="top" secondItem="On6-n7-VNJ" secondAttribute="bottom" constant="1" id="rCe-J0-Q0I"/>
                             <constraint firstItem="FCg-OH-hWr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ulm-V4-TAL"/>
@@ -110,6 +109,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="DateField" destination="CNF-vs-PLB" id="MDf-9P-rB7"/>
+                        <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
+                        <outlet property="LocationField" destination="FCg-OH-hWr" id="Act-1D-g3z"/>
+                        <outlet property="TimeField" destination="KFP-fK-QLU" id="qDz-X7-Ljz"/>
                         <segue destination="Ky7-K0-5BQ" kind="presentation" identifier="ToLoading" id="oiZ-qh-wIF"/>
                     </connections>
                 </viewController>
@@ -136,6 +139,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="3tH-mJ-Hx7"/>
                     </view>
+                    <connections>
+                        <segue destination="0vR-sf-a3A" kind="presentation" identifier="ToDisplay" id="g2J-KY-UGA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1E-EU-c7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
