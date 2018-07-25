@@ -33,58 +33,64 @@ class LoadingScreen : ViewController {
         var net = ""
         var location = ""
         var channel = ""
-        if (locate == "Ryerson (IL,USA)") {
-            soundname = "ryerson"
-            station = "L44A"
-            net = "TA"
-            location = "--"
-            channel = "BHZ"
-        } else if (locate == "Yellowstone (WY,USA)") {
-            soundname = "yellowstone"
-            station = "H17A"
-            net = "TA"
-            location = "--"
-            channel = "BHZ"
-        } else if (locate == "Antarctica") {
-            soundname = "antarctica"
-            station = "BELA"
-            net = "AI"
-            location = "04"
-            channel = "BHZ"
-        } else if (locate == "Cachiyuyo, Chile") {
-            soundname = "chile"
-            station = "LCO"
-            net = "IU"
-            location = "10"
-            channel = "BHZ"
-        }
-        else if (locate == "Anchorage (AK,USA)") {
-            soundname = "alaska"
-            station = "SSN"
-            net = "AK"
-            location = "--"
-            channel = "BHZ"
-        }
-        else if (locate == "Kyoto, Japan") {
-            soundname = "japan"
-            station = "JWT"
-            net = "JP"
-            location = "--"
-            channel = "BHZ"
-        }
-        else if (locate == "London, UK") {
-            soundname = "london"
-            station = "HMNX"
-            net = "GB"
-            location = "--"
-            channel = "BHZ"
-        }
-        else if (locate == "Ar Rayn, Saudi Arabia") {
-            soundname = "saudiarabia"
-            station = "RAYN"
-            net = "II"
-            location = "10"
-            channel = "BHZ"
+        switch locate {
+            case "Yellowstone (WY,USA)":
+                soundname = "yellowstone"
+                station = "H17A"
+                net = "TA"
+                location = "--"
+                channel = "BHZ"
+                break
+            case "Antarctica":
+                soundname = "antarctica"
+                station = "BELA"
+                net = "AI"
+                location = "04"
+                channel = "BHZ"
+                break
+            case "Cachiyuyo, Chile":
+                soundname = "chile"
+                station = "LCO"
+                net = "IU"
+                location = "10"
+                channel = "BHZ"
+                break
+            case "Anchorage (AK,USA)":
+                soundname = "alaska"
+                station = "SSN"
+                net = "AK"
+                location = "--"
+                channel = "BHZ"
+                break
+            case "Kyoto, Japan":
+                soundname = "japan"
+                station = "JWT"
+                net = "JP"
+                location = "--"
+                channel = "BHZ"
+                break
+            case "London, UK":
+                soundname = "london"
+                station = "HMNX"
+                net = "GB"
+                location = "--"
+                channel = "BHZ"
+                break
+            case "Ar Rayn, Saudi Arabia":
+                soundname = "saudiarabia"
+                station = "RAYN"
+                net = "II"
+                location = "10"
+                channel = "BHZ"
+                break
+            default:
+                soundname = "ryerson"
+                station = "L44A"
+                net = "TA"
+                location = "--"
+                channel = "BHZ"
+                print("Defaulting to Ryerson Station...")
+                break
         }
         print(soundname)
         
