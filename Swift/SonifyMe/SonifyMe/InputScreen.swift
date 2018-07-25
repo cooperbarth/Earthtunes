@@ -3,17 +3,17 @@ import AVKit
 import Foundation
 import AudioToolbox
 
-class ViewController: UIViewController {
+class InputScreen : ViewController {
     
-    let url = Bundle.main.url(forResource: "sound", withExtension: "wav")
-    var player : AVAudioPlayer?
+    @IBAction func ButtonPressed(_ sender: Any) {
+        //transition to loading screen
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
 }
-
