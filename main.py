@@ -27,6 +27,7 @@ from kivy.uix.image import Image
 from kivy.uix.spinner import Spinner
 from kivy.uix.slider import Slider
 from kivy.uix.popup import Popup
+from kivy.uix.checkbox import CheckBox
 
 #InputScreen: Screen for all inputs to be entered
 class InputScreen(Screen):
@@ -35,7 +36,13 @@ class InputScreen(Screen):
 		self.layout = BoxLayout(orientation='vertical')
 
 		#SonifyMe header
-		self.layout.add_widget(Label(text="SonifyMe", size_hint=(1,0.1085), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
+		self.topGrid=BoxLayout(size_hint=(1,0.1085))
+		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
+		self.topGrid.add_widget(Label(text="SonifyMe", size_hint=(0.9,1), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
+		self.info = Button(text='Explore',background_normal='',background_color=(0,0,0,1),size_hint=(0.1085,1))
+		self.info.bind(on_release=lambda x:samplePopup.open())
+		self.topGrid.add_widget(self.info)
+		self.layout.add_widget(self.topGrid)
 		self.layout.add_widget(Label(size_hint=(1,0.0015)))
 
 		#Location Input
@@ -328,12 +335,16 @@ class DisplayScreen(Screen):
 
 		self.bottom = GridLayout(cols=7,size_hint=(1,0.08))
 
-		#Slider allows moving through sound file
-		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(1,0.07))
+		#Slider allows moving through sound files
+		self.slide = GridLayout(cols=3,size_hint=(1,0.07))
+		self.slide.add_widget(Label(size_hint=(0.206,1)))
+		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(0.65,1))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=self.slidePause)
 		self.seek.bind(on_touch_up=self.slideSeek)
-		self.layout.add_widget(self.seek)
+		self.slide.add_widget(self.seek)
+		self.slide.add_widget(Label(size_hint=(0.124,1)))
+		self.layout.add_widget(self.slide)
 
 		self.bottom.add_widget(Label(size_hint=(0.05,1)))
 		self.backwards = Button(text='Jump Back',background_normal='', background_color=(1,1,1,1), color=(0,0,0,1))		#Jump Back button
@@ -489,6 +500,53 @@ class ChooseScreen(GridLayout):
 		sm.get_screen('Input Screen').location.text = self.location.text
 		choosePopup.dismiss()
 
+#SampleScreen: popup screen with sample inputs
+class SampleScreen(GridLayout):
+	def __init__(self, **kwargs):
+		super(SampleScreen, self).__init__(**kwargs)
+		self.cols=1
+		self.layout=GridLayout(cols=2,size_hint=(1,0.9))
+		self.layout.add_widget(Label(text='Earthquake at _\nDate: January 23rd, 2018 Time: 08:00 Duration: 4 hours',size_hint=(0.7,0.2), halign='center'))
+		self.one=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(self.one)
+		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
+		self.two=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(self.two)
+		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
+		self.three=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(self.three)
+		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
+		self.four=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(self.four)
+		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
+		self.five=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(self.five)
+		self.add_widget(self.layout)
+		
+		self.returnbutton = Button(text='Return', size_hint=(1,0.1), background_normal = '', background_color = (1, 1, 1, 1), color = (0,0,0,1), valign = 'middle')
+		self.returnbutton.font_size=self.returnbutton.height/5
+		self.returnbutton.bind(on_release=self.closeSample)
+		self.add_widget(self.returnbutton)
+		
+	def closeSample(self,instance):
+		input = sm.get_screen('Input Screen')
+		if self.one.active:
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2018-01-23'
+			input.startTime.text = '08:00'
+			input.duration.text = '4'
+		elif self.two.active:
+			pass
+		elif self.three.active:
+			pass
+		elif self.four.active:
+			pass
+		elif self.five.active:
+			pass
+		else:
+			pass
+		samplePopup.dismiss()
+
 #AdvancedScreen: Advanced options (like acceleration factor and amplitude)
 class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
@@ -522,7 +580,7 @@ class AdvancedScreen(BoxLayout):
 
 		self.grid = GridLayout(cols=2, size_hint=(1, 0.14))
 		self.grid.add_widget(BlueLabel(text='Fixed Amplitude:', font_size = self.height/5))
-		self.fixedAmpText = FloatInput(multiline=False)
+		self.fixedAmpText = FloatInput(multiline=False,text='0.00005')
 		self.fixedAmpText.bind(text=self.setTextEqual)
 		self.fixedAmp = Button(background_normal = '', color = (0,0,0,1), on_release=self.focusButton)
 		self.fixedAmp.font_size = self.fixedAmp.height/3
@@ -827,6 +885,10 @@ errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5)
 #Creating ChooseScreen popup
 chooseScreen = ChooseScreen(as_popup=True)
 choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8), background = "black.jpg", separator_color = (1,1,1,1))
+
+#Creating SampleScreen popup
+sampleScreen = SampleScreen(as_popup=True)
+samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.8,0.8), background = 'black.jpg', separator_color = (1,1,1,1))
 
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup = True)
