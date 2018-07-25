@@ -4,6 +4,11 @@ import Foundation
 import AudioToolbox
 
 class LoadingScreen : ViewController {
+    var inputLocation = ""
+    var inputDate = ""
+    var inputTime = ""
+    var inputDuration = ""
+    
     func isNumber(num:String) -> Bool {
         var theNum = ""
         if (num[num.startIndex] == "-") {
@@ -199,8 +204,8 @@ class LoadingScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        getSoundAndGraph(locate: "Ryerson (IL,USA)", date: "2018-07-07", time: "00:00", duration: "1", AF: "", FA: "")
-        //transition to playing screen
+        getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
+        performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
     override func viewDidLoad() {
