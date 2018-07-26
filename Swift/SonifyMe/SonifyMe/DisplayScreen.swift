@@ -30,26 +30,3 @@ class DisplayScreen : ViewController {
     
     @IBOutlet weak var hostView: CPTGraphHostingView!
 }
-
-extension DisplayScreen: CPTPieChartDataSource, CPTPieChartDelegate {
-    
-    func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return 0
-    }
-    
-    func number(for plot: CPTPlot, field fieldEnum: UInt, record idx: UInt) -> Any? {
-        return 0
-    }
-    
-    func dataLabel(for plot: CPTPlot, record idx: UInt) -> CPTLayer? {
-        return nil
-    }
-    
-    func sliceFill(for pieChart: CPTPieChart, record idx: UInt) -> CPTFill? {
-        return nil
-    }
-    
-    func legendTitle(for pieChart: CPTPieChart, record idx: UInt) -> String? {
-        return nil
-    }
-}
