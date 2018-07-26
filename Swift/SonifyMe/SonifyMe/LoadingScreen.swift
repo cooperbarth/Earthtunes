@@ -2,14 +2,14 @@ import UIKit
 import AVKit
 import Foundation
 import AudioToolbox
-import CorePlot
 
 class LoadingScreen : ViewController {
     var inputLocation = ""
     var inputDate = ""
     var inputTime = ""
     var inputDuration = ""
-    
+    var initData : [Float64] = [Float64]()
+
     func isNumber(num:String) -> Bool {
         var theNum = ""
         if (num[num.startIndex] == "-") {
@@ -23,7 +23,7 @@ class LoadingScreen : ViewController {
         return true
     }
     
-    func getSoundAndGraph(locate:String, date:String, time:String, duration:String, AF:String, FA:String) -> String {
+    func getSoundAndGraph(locate:String, date:String, time:String, duration:String, AF:String, FA:String) -> [Float64] {
         let halfpi = 0.5*Double.pi
         let duration = String(Float64(duration)! * 3600)
         //let disploc = locate
@@ -93,6 +93,7 @@ class LoadingScreen : ViewController {
                 print("Defaulting to Ryerson Station...")
                 break
         }
+        print(soundname)
         
         let type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
@@ -160,7 +161,7 @@ class LoadingScreen : ViewController {
          axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
          savefig(soundname + ".png",bbox_inches="tight")*/
         
-        return soundname
+        return s32
     }
     
     func saveFile(buff: [Float64], sample_rate: Float64) {
@@ -189,9 +190,16 @@ class LoadingScreen : ViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if ((segue.destination as? DisplayScreen) != nil) {
+            let displayScreen = segue.destination as? DisplayScreen
+            displayScreen?.data = initData
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        print(self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: ""))
+        initData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
@@ -201,30 +209,5 @@ class LoadingScreen : ViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    @IBOutlet weak var hostView: CPTGraphHostingView!
-}
-
-extension LoadingScreen: CPTPieChartDataSource, CPTPieChartDelegate {
-    
-    func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return 0
-    }
-    
-    func number(for plot: CPTPlot, field fieldEnum: UInt, record idx: UInt) -> Any? {
-        return 0
-    }
-    
-    func dataLabel(for plot: CPTPlot, record idx: UInt) -> CPTLayer? {
-        return nil
-    }
-    
-    func sliceFill(for pieChart: CPTPieChart, record idx: UInt) -> CPTFill? {
-        return nil
-    }
-    
-    func legendTitle(for pieChart: CPTPieChart, record idx: UInt) -> String? {
-        return nil
     }
 }
