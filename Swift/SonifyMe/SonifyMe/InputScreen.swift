@@ -22,7 +22,9 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func ButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "ToLoading", sender: self)
+        if (validInputs()) {
+            performSegue(withIdentifier: "ToLoading", sender: self)
+        }
     }
     
     //Adding "Done" button to text fields
@@ -72,7 +74,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     
     
-    func invalidInputs() -> Bool {
+    func validInputs() -> Bool {
+        if (LocationValue == "Select Location:" || DateField.text == "" || TimeField.text == "" || TimeField.text == "") {return false}
         return true
     }
 
