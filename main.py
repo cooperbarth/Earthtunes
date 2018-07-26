@@ -552,11 +552,6 @@ class AdvancedScreen(BoxLayout):
 	def __init__(self, **kwargs):
 		super(AdvancedScreen, self).__init__(**kwargs)
 		self.layout = BoxLayout(orientation='vertical')
-		
-		#Creating InofScreen popup
-		self.infoScreen = InfoScreen(as_popup=True)
-		self.infoPopup=Popup(title='Information', content = self.infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
-		self.infoPopup.bind(on_dismiss=self.infoClose)
 
 		self.topGrid=GridLayout(cols=3, size_hint=(1,0.109))
 		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
@@ -647,19 +642,23 @@ class AdvancedScreen(BoxLayout):
 		self.fixedAmpText.focus = True
 
 	def infoOpen(self,instance):
-		self.infoPopup.open()
+		infoPopup.open()
 		advancedScreen.dismiss()
-	
-	def infoClose(self,instance):
-		advancedScreen.open()
 
 #InfoScreen: Information about advanced options
 class InfoScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(InfoScreen, self).__init__(**kwargs)
 		self.cols=1
-		self.add_widget(Label(text='Acceleration Factor:'))
-		self.add_widget(Label(text='Fixed Amplitude:'))
+		self.Label1=Label(text='Acceleration Factor:\nThe range of frequencies that are recorded is to wide to fit into the audible range.\nWe use a factor in calculations to listen to specific ranges of frequencies;\nlower frequencies (higher multiplier) are better to hear earthquakes.\nKeep in mind not all stations record at all of these frequencies,\nso data may be sparse for some choices',
+								size_hint=(1,0.4),halign='center')
+		self.add_widget(self.Label1)
+		self.Label2=Label(text='Fixed Amplitude:\nThe fixed amplitude is a number used in calculations to help scale the amplitude of the sound.\nSmaller numbers lead to louder sounds, but may distort sounds that are already loud.\nHigher numbers lead to quieter sound, but more detail on louder sounds',
+								size_hint=(1,0.4),halign='center')
+		self.add_widget(self.Label2)
+		self.back = Button(text='Close', background_normal='', background_color=(1,1,1,1), color=(0,0,0,1),size_hint=(1,0.2))
+		self.back.bind(on_release=lambda x:infoPopup.dismiss())
+		self.add_widget(self.back)
 
 #InputError: popup when input errors detected
 class InputError(GridLayout):
@@ -920,6 +919,11 @@ samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.
 #Creating AdvancedScreen popup
 advScreen = AdvancedScreen(as_popup=True)
 advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
+
+#Creating InofScreen popup
+infoScreen = InfoScreen(as_popup=True)
+infoPopup=Popup(title='Information', content = infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
+infoPopup.bind(on_dismiss=lambda x:advancedScreen.open())
 
 #Create LoadingScreen popup
 loadScreen = LoadingScreen(as_popup=True)
