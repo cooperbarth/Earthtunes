@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="LavaBackground" translatesAutoresizingMaskIntoConstraints="NO" id="frG-l4-uVP">
-                                <rect key="frame" x="0.0" y="0.0" width="375.00000000000011" height="667"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LavaBackground" translatesAutoresizingMaskIntoConstraints="NO" id="frG-l4-uVP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SonifyMe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="McY-0C-Gm9">
                                 <rect key="frame" x="203" y="502" width="163" height="48"/>
@@ -31,6 +30,12 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="frG-l4-uVP" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="0ft-TU-enO"/>
+                            <constraint firstAttribute="trailing" secondItem="frG-l4-uVP" secondAttribute="trailing" id="Ccm-6T-LB3"/>
+                            <constraint firstItem="frG-l4-uVP" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="EKS-qG-7Zu"/>
+                            <constraint firstItem="frG-l4-uVP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="opN-yL-hkw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
