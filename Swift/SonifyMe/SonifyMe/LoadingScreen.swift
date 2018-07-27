@@ -13,6 +13,8 @@ class LoadingScreen : ViewController {
     var mxs : Float64 = 0.0
     var passTitle : String = "Seismic Data"
     
+    @IBOutlet weak var LoadingLabel: UILabel!
+    
     func isNumber(num:String) -> Bool {
         var theNum = ""
         if (num[num.startIndex] == "-") {
@@ -35,61 +37,57 @@ class LoadingScreen : ViewController {
         var station = ""
         var net = ""
         var location = ""
-        var channel = ""
         switch locate {
             case "Yellowstone (WY,USA)":
                 station = "H17A"
                 net = "TA"
                 location = "--"
-                channel = "LHZ"
                 break
             case "Anchorage (AK,USA)":
                 station = "SSN"
                 net = "AK"
                 location = "--"
-                channel = "LHZ"
                 break
-            case "London, UK":
-                station = "HMNX"
-                net = "GB"
-                location = "--"
-                channel = "BHZ"
+            case "Paris, France":
+                station = "CLF"
+                net = "G"
+                location = "00"
                 break
             case "Inuyama, Japan":
                 station = "INU"
                 net = "G"
                 location = "00"
-                channel = "LHZ"
                 break
             case "Cachiyuyo, Chile":
                 station = "LCO"
                 net = "IU"
                 location = "10"
-                channel = "LHZ"
+                break
+            case "Addis Ababa, Ethiopia":
+                station = "FURI"
+                net = "IU"
+                location = "00"
                 break
             case "Ar Rayn, Saudi Arabia":
                 station = "RAYN"
                 net = "II"
                 location = "10"
-                channel = "LHZ"
                 break
             case "Antarctica":
-                station = "BELA"
-                net = "AI"
-                location = "04"
-                channel = "BHZ"
+                station = "CASY"
+                net = "IU"
+                location = "10"
                 break
             default:
                 station = "L44A"
                 net = "TA"
                 location = "--"
-                channel = "LHZ"
                 print("Defaulting to Ryerson Station...")
                 break
         }
         passTitle = locate
         
-        let type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
+        let type = net + "&sta=" + station + "&loc=" + location + "&cha=LHZ"
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
         let url = "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
         print(url)
@@ -192,7 +190,13 @@ class LoadingScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        
         initData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
         performSegue(withIdentifier: "ToDisplay", sender: self)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        LoadingLabel.text! = "Loading Data From " + inputLocation + "..."
     }
 }

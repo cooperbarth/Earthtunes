@@ -55,9 +55,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
                           "Ryerson (IL,USA)",
                           "Yellowstone (WY,USA)",
                           "Anchorage (AK,USA)",
-                          "London, UK",
+                          "Paris, France",
                           "Inuyama, Japan",
                           "Cachiyuyo, Chile",
+                          "Addis Ababa, Ethiopia",
                           "Ar Rayn, Saudi Arabia",
                           "Antarctica"]
     func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
