@@ -9,6 +9,9 @@ class DisplayScreen : ViewController {
     var imgg : UIImage = UIImage()
     var yMax : Float64 = 0.0
     var yMin : Float64 = 0.0
+    var TitleText : String = "Seismic Data"
+    
+    @IBOutlet weak var GraphTitle: UILabel!
     
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
@@ -34,6 +37,7 @@ class DisplayScreen : ViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         initplot()
+        GraphTitle.text = TitleText
     }
     
     @IBOutlet weak var hostView: CPTGraphHostingView!

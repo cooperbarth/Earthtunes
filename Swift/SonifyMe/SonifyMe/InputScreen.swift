@@ -56,7 +56,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
                           "Yellowstone (WY,USA)",
                           "Anchorage (AK,USA)",
                           "London, UK",
-                          "Kyoto, Japan",
+                          "Inuyama, Japan",
                           "Cachiyuyo, Chile",
                           "Ar Rayn, Saudi Arabia",
                           "Antarctica"]
@@ -72,8 +72,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         LocationValue = ScrollMenuData[row]
     }
     
-    
-    
     func validInputs() -> Bool {
         if (LocationValue == "Select Location:" || DateField.text == "" || TimeField.text == "" || TimeField.text == "") {return false}
         return true
@@ -82,15 +80,13 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        DateField.text! = "2017-07-07"
+        TimeField.text! = "00:00"
+        DurationField.text! = "6"
+        
         addDoneButton()
         
         self.LocationField.delegate = self
         self.LocationField.dataSource = self
-    }
-    
-    override func viewDidLayoutSubviews() {
-        DateField.text! = "2017-07-07"
-        TimeField.text! = "00:00"
-        DurationField.text! = "1"
     }
 }

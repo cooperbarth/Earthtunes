@@ -185,6 +185,7 @@
                         <viewLayoutGuide key="safeArea" id="gih-OP-X9R"/>
                     </view>
                     <connections>
+                        <outlet property="GraphTitle" destination="5o0-Lw-Qfm" id="RkT-Lo-hPo"/>
                         <outlet property="hostView" destination="7Rb-o0-4gi" id="5dw-fZ-05G"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="pqc-BN-sav"/>
                     </connections>

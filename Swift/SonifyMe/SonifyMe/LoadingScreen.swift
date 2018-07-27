@@ -11,6 +11,7 @@ class LoadingScreen : ViewController {
     var initData : [Float64] = [Float64]()
     var img = UIImage()
     var mxs : Float64 = 0.0
+    var passTitle : String = "Seismic Data"
     
     func isNumber(num:String) -> Bool {
         var theNum = ""
@@ -31,63 +32,54 @@ class LoadingScreen : ViewController {
         //let disploc = locate
         let time = time + ":00"
         
-        var soundname = ""
         var station = ""
         var net = ""
         var location = ""
         var channel = ""
         switch locate {
             case "Yellowstone (WY,USA)":
-                soundname = "yellowstone"
                 station = "H17A"
                 net = "TA"
                 location = "--"
                 channel = "LHZ"
                 break
             case "Anchorage (AK,USA)":
-                soundname = "alaska"
                 station = "SSN"
                 net = "AK"
                 location = "--"
                 channel = "LHZ"
                 break
             case "London, UK":
-                soundname = "london"
                 station = "HMNX"
                 net = "GB"
                 location = "--"
                 channel = "BHZ"
                 break
-            case "Kyoto, Japan":
-                soundname = "japan"
-                station = "JWT"
-                net = "JP"
-                location = "--"
-                channel = "BHZ"
+            case "Inuyama, Japan":
+                station = "INU"
+                net = "G"
+                location = "00"
+                channel = "LHZ"
                 break
             case "Cachiyuyo, Chile":
-                soundname = "chile"
                 station = "LCO"
                 net = "IU"
                 location = "10"
                 channel = "LHZ"
                 break
             case "Ar Rayn, Saudi Arabia":
-                soundname = "saudiarabia"
                 station = "RAYN"
                 net = "II"
                 location = "10"
                 channel = "LHZ"
                 break
             case "Antarctica":
-                soundname = "antarctica"
                 station = "BELA"
                 net = "AI"
                 location = "04"
                 channel = "BHZ"
                 break
             default:
-                soundname = "ryerson"
                 station = "L44A"
                 net = "TA"
                 location = "--"
@@ -95,11 +87,12 @@ class LoadingScreen : ViewController {
                 print("Defaulting to Ryerson Station...")
                 break
         }
-        print(soundname)
+        passTitle = locate
         
         let type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
-        let url = "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
+        let url = "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
+        print(url)
         let Url = URL(string: url)
         var df = ""
         do {
@@ -193,6 +186,7 @@ class LoadingScreen : ViewController {
             displayScreen?.imgg = img
             displayScreen?.yMax = mxs
             displayScreen?.yMin = -mxs
+            displayScreen?.TitleText = passTitle
         }
     }
     
