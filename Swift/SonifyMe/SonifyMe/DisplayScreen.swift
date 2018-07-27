@@ -126,8 +126,8 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
     
     func symbol(for plot: CPTScatterPlot, record idx: UInt) -> CPTPlotSymbol? {
         let symbol : CPTPlotSymbol = CPTPlotSymbol()
-        symbol.symbolType = CPTPlotSymbolType(rawValue: 4)!
-        symbol.size = CGSize(width: 10, height: 10)
+        symbol.symbolType = CPTPlotSymbolType(rawValue: 1)!
+        symbol.size = CGSize(width: 1, height: 1)
         symbol.fill = CPTFill(color: CPTColor.blue())
         return symbol
     }
