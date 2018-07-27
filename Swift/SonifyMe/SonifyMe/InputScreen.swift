@@ -48,8 +48,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
-    
-    
     //Scroll Menu Setup
     let ScrollMenuData = ["Select Location:",
                           "Ryerson (IL,USA)",

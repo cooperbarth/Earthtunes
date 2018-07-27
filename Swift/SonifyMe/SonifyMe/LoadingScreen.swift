@@ -90,7 +90,6 @@ class LoadingScreen : ViewController {
         let type = net + "&sta=" + station + "&loc=" + location + "&cha=LHZ"
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
         let url = "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
-        print(url)
         let Url = URL(string: url)
         var df = ""
         do {
