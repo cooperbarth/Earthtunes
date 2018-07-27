@@ -91,7 +91,7 @@ class DisplayScreen : ViewController {
         
         let plotLineStyle = CPTMutableLineStyle()
         plotLineStyle.lineWidth = 1
-        plotLineStyle.lineColor = CPTColor.clear()
+        plotLineStyle.lineColor = CPTColor.black()
         plot.dataLineStyle = plotLineStyle
         
         /*
