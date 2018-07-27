@@ -10,8 +10,6 @@ class DisplayScreen : ViewController {
     var yMax : Float64 = 0.0
     var yMin : Float64 = 0.0
     
-    @IBOutlet weak var Image: UIImageView!
-    
     func playSound() {
         do {
             player = try AVAudioPlayer(contentsOf: url!)
@@ -26,8 +24,6 @@ class DisplayScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        //Image.contentMode = .scaleAspectFit
-        //Image.image = imgg
         playSound()
     }
     
@@ -52,7 +48,7 @@ class DisplayScreen : ViewController {
     
     func configureGraph() {
         let graph = CPTXYGraph(frame: hostView.bounds)
-        //graph.plotAreaFrame?.masksToBorder = false
+        graph.plotAreaFrame?.masksToBorder = false
         hostView.hostedGraph = graph
         
         graph.apply(CPTTheme(named: CPTThemeName.plainWhiteTheme))
@@ -93,13 +89,6 @@ class DisplayScreen : ViewController {
         plotLineStyle.lineWidth = 1
         plotLineStyle.lineColor = CPTColor.black()
         plot.dataLineStyle = plotLineStyle
-        
-        /*
-        let textstyle =
-        textstyle.color = CPTColor.black()
-        textstyle.textAlignment = .center
-         plot.labelTextStyle = CPTMutableTextStyle(color:CPTColor.black())
-        */
 
         graph.add(plot, to: graph.defaultPlotSpace)
     }
