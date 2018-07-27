@@ -13,7 +13,6 @@
 		CD01B89321077766000EFCC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89121077766000EFCC9 /* Main.storyboard */; };
 		CD01B89521077767000EFCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89421077767000EFCC9 /* Assets.xcassets */; };
 		CD01B89821077767000EFCC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89621077767000EFCC9 /* LaunchScreen.storyboard */; };
-		CDD6C12B210B6BBF00A312D8 /* img.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CDD6C12A210B6BBE00A312D8 /* img.jpg */; };
 		F25818112108EA4E00EB66D7 /* sound.wav in Resources */ = {isa = PBXBuildFile; fileRef = F25818102108EA4E00EB66D7 /* sound.wav */; };
 		F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818122108ED6900EB66D7 /* InputScreen.swift */; };
 		F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818162108ED9000EB66D7 /* LoadingScreen.swift */; };
@@ -30,7 +29,6 @@
 		CD01B89421077767000EFCC9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CD01B89721077767000EFCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CD01B89921077767000EFCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CDD6C12A210B6BBE00A312D8 /* img.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = img.jpg; sourceTree = "<group>"; };
 		F25818102108EA4E00EB66D7 /* sound.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = sound.wav; sourceTree = "<group>"; };
 		F25818122108ED6900EB66D7 /* InputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScreen.swift; sourceTree = "<group>"; };
 		F25818162108ED9000EB66D7 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
@@ -97,7 +95,6 @@
 				CD01B88D21077766000EFCC9 /* AppDelegate.swift */,
 				CD01B89421077767000EFCC9 /* Assets.xcassets */,
 				CD01B89921077767000EFCC9 /* Info.plist */,
-				CDD6C12A210B6BBE00A312D8 /* img.jpg */,
 				F25818102108EA4E00EB66D7 /* sound.wav */,
 			);
 			path = SonifyMe;
@@ -163,7 +160,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CDD6C12B210B6BBF00A312D8 /* img.jpg in Resources */,
 				CD01B89821077767000EFCC9 /* LaunchScreen.storyboard in Resources */,
 				CD01B89521077767000EFCC9 /* Assets.xcassets in Resources */,
 				F25818112108EA4E00EB66D7 /* sound.wav in Resources */,

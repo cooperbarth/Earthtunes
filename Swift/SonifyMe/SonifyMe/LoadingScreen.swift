@@ -109,8 +109,6 @@ class LoadingScreen : ViewController {
         }
         let dflines = df.split(separator: "\n")
         
-        //let ploturl = URL(string: "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=plot")
-        
         let head = dflines[0]
         let fsps = Float64(head.split(separator: " ")[4])
         var tot = Float64(head.split(separator: " ")[2])
