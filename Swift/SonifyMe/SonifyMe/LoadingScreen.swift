@@ -9,7 +9,9 @@ class LoadingScreen : ViewController {
     var inputTime = ""
     var inputDuration = ""
     var initData : [Float64] = [Float64]()
-
+    var img = UIImage()
+    var mxs : Float64 = 0.0
+    
     func isNumber(num:String) -> Bool {
         var theNum = ""
         if (num[num.startIndex] == "-") {
@@ -107,6 +109,8 @@ class LoadingScreen : ViewController {
         }
         let dflines = df.split(separator: "\n")
         
+        //let ploturl = URL(string: "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=plot")
+        
         let head = dflines[0]
         let fsps = Float64(head.split(separator: " ")[4])
         var tot = Float64(head.split(separator: " ")[2])
@@ -145,9 +149,8 @@ class LoadingScreen : ViewController {
             hours.append(marker)
             marker = marker + increment
         }
-        //let soundduration = tot!/(fsps!*bandsHZ)
-        //let mxs = 1.01*Double(maxAmp)
-        //let mns = 0.0
+
+        mxs = 1.01*Double(Float64((2^31))*atan(maxAmp/fixedamp)/halfpi)
         var s32 = [Float64]()
         for ii in 0..<sound.count {
             s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/halfpi)
@@ -155,11 +158,6 @@ class LoadingScreen : ViewController {
         
         let ssps = bandsHZ! * fsps!
         saveFile(buff: s32, sample_rate: ssps)
-        /*axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+", "+date)
-         plot(hours,1000.*sound)
-         axishours = [time]
-         axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
-         savefig(soundname + ".png",bbox_inches="tight")*/
         
         return s32
     }
@@ -194,6 +192,9 @@ class LoadingScreen : ViewController {
         if ((segue.destination as? DisplayScreen) != nil) {
             let displayScreen = segue.destination as? DisplayScreen
             displayScreen?.data = initData
+            displayScreen?.imgg = img
+            displayScreen?.yMax = mxs
+            displayScreen?.yMin = -mxs
         }
     }
     
@@ -201,13 +202,5 @@ class LoadingScreen : ViewController {
         super.viewDidAppear(true)
         initData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
         performSegue(withIdentifier: "ToDisplay", sender: self)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
     }
 }

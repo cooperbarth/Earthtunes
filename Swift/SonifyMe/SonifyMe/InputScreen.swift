@@ -87,8 +87,4 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.LocationField.delegate = self
         self.LocationField.dataSource = self
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }

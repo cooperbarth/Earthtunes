@@ -1,11 +1,4 @@
 //
-//  AppDelegate.swift
-//  SonifyMe
-//
-//  Created by Cooper Barth on 7/24/18.
-//  Copyright © 2018 Cooper Barth. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
