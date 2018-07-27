@@ -243,6 +243,12 @@ class LoadingScreen(GridLayout):
 			net = 'II'
 			location = '10'
 			channel = 'BHZ'
+		elif locate == 'Addis Ababa, Ethiopia':
+			soundname = 'ethiopia'
+			station = 'FURI'
+			net = 'IU'
+			location = '00'
+			channel = 'BHZ'
 		else:
 			return
 
@@ -250,7 +256,7 @@ class LoadingScreen(GridLayout):
 		print "Getting data from",disploc,'on',date
 		type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
 		when = "&starttime=" + date + "T" + time + "&duration=" + duration
-		url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
+		url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.0001&scale=auto&output=ascii1"
 		print "requesting data from IRIS...please be patient..."
 		ws = urllib2.urlopen(url)
 		print "loading data ..."
@@ -465,9 +471,9 @@ class ChooseScreen(GridLayout):
 		self.four = Button(text = 'Kyoto, Japan', on_release = lambda x:self.setUpButton(4))
 		self.five = Button(text = 'Cachiyuyo, Chile', on_release = lambda x:self.setUpButton(5))
 		self.six = Button(text = 'London, UK',on_release = lambda x:self.setUpButton(6))
-		self.seven = Button(text = 'Ar Rayn, Saudi Arabia', on_release = lambda x:self.setUpButton(1))
-		self.eight = Button(text = 'Addis Ababa, Ethiopia',on_release = lambda x:self.setUpButton(2))
-		self.nine = Button(text = 'Antarctica', on_release = lambda x:self.setUpButton(3))
+		self.seven = Button(text = 'Ar Rayn, Saudi Arabia', on_release = lambda x:self.setUpButton(7))
+		self.eight = Button(text = 'Addis Ababa, Ethiopia',on_release = lambda x:self.setUpButton(8))
+		self.nine = Button(text = 'Antarctica', on_release = lambda x:self.setUpButton(9))
 		self.buttons = [self.one, self.two, self.three, self.four, self.five, self.six, self.seven, self.eight, self.nine]
 		for button in self.buttons:
 			button.size_hint = (1, 0.078)
