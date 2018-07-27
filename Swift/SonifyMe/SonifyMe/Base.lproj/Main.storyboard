@@ -154,16 +154,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Rb-o0-4gi" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="54" width="375" height="266"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5o0-Lw-Qfm">
+                                <rect key="frame" x="170.5" y="25" width="34" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
+                                <rect key="frame" x="170" y="617" width="34" height="30"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <action selector="BackButton:" destination="0vR-sf-a3A" eventType="touchUpInside" id="pOG-SV-hxz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="7Rb-o0-4gi" secondAttribute="bottom" id="6pU-Jv-bG1"/>
-                            <constraint firstItem="7Rb-o0-4gi" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="DBe-vo-2Lf"/>
-                            <constraint firstItem="7Rb-o0-4gi" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" id="Jdl-Hm-f7P"/>
-                            <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="7Rb-o0-4gi" secondAttribute="trailing" id="c7i-Go-4kp"/>
+                            <constraint firstItem="7Rb-o0-4gi" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="1Oy-sr-Po9"/>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="cVj-gJ-gnv" secondAttribute="bottom" constant="20" id="G7B-6v-uiZ"/>
+                            <constraint firstItem="7Rb-o0-4gi" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="34" id="RTL-tE-IaG"/>
+                            <constraint firstItem="5o0-Lw-Qfm" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="5" id="W4O-Fw-DvM"/>
+                            <constraint firstItem="7Rb-o0-4gi" firstAttribute="trailing" secondItem="gih-OP-X9R" secondAttribute="trailing" id="X8J-qD-ULX"/>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="347" id="X9L-Ht-Abz"/>
+                            <constraint firstItem="5o0-Lw-Qfm" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="Y4h-Pm-n2O"/>
+                            <constraint firstItem="cVj-gJ-gnv" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="lWL-gK-2Sf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gih-OP-X9R"/>
                     </view>

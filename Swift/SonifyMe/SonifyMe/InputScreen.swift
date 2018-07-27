@@ -87,4 +87,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.LocationField.delegate = self
         self.LocationField.dataSource = self
     }
+    
+    override func viewDidLayoutSubviews() {
+        DateField.text! = "2017-07-07"
+        TimeField.text! = "00:00"
+        DurationField.text! = "1"
+    }
 }

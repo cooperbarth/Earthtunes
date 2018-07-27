@@ -42,14 +42,14 @@ class LoadingScreen : ViewController {
                 station = "H17A"
                 net = "TA"
                 location = "--"
-                channel = "BHZ"
+                channel = "LHZ"
                 break
             case "Anchorage (AK,USA)":
                 soundname = "alaska"
                 station = "SSN"
                 net = "AK"
                 location = "--"
-                channel = "BHZ"
+                channel = "LHZ"
                 break
             case "London, UK":
                 soundname = "london"
@@ -70,14 +70,14 @@ class LoadingScreen : ViewController {
                 station = "LCO"
                 net = "IU"
                 location = "10"
-                channel = "BHZ"
+                channel = "LHZ"
                 break
             case "Ar Rayn, Saudi Arabia":
                 soundname = "saudiarabia"
                 station = "RAYN"
                 net = "II"
                 location = "10"
-                channel = "BHZ"
+                channel = "LHZ"
                 break
             case "Antarctica":
                 soundname = "antarctica"
@@ -91,7 +91,7 @@ class LoadingScreen : ViewController {
                 station = "L44A"
                 net = "TA"
                 location = "--"
-                channel = "BHZ"
+                channel = "LHZ"
                 print("Defaulting to Ryerson Station...")
                 break
         }

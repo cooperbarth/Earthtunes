@@ -10,6 +10,10 @@ class DisplayScreen : ViewController {
     var yMax : Float64 = 0.0
     var yMin : Float64 = 0.0
     
+    @IBAction func BackButton(_ sender: Any) {
+        performSegue(withIdentifier: "BackToInput", sender: self)
+    }
+    
     func playSound() {
         do {
             player = try AVAudioPlayer(contentsOf: url!)
@@ -65,14 +69,8 @@ class DisplayScreen : ViewController {
         titleStyle.fontSize = 16.0
         titleStyle.textAlignment = .center
         
-        graph.title = "Insert Title Here"
-        graph.titleTextStyle = titleStyle
-        graph.titlePlotAreaFrameAnchor = .top
-        
         let xMin = 0.0
         let xMax = Double(data.count)
-        print(yMin)
-        print(yMax)
         guard let plotSpace = graph.defaultPlotSpace as? CPTXYPlotSpace else {return}
         plotSpace.xRange = CPTPlotRange(locationDecimal: CPTDecimalFromDouble(xMin), lengthDecimal: CPTDecimalFromDouble(xMax - xMin))
         plotSpace.yRange = CPTPlotRange(locationDecimal: CPTDecimalFromDouble(yMin), lengthDecimal: CPTDecimalFromDouble(yMax - yMin))
