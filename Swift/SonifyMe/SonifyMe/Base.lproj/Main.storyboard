@@ -174,21 +174,27 @@
                                     <action selector="BackButton:" destination="0vR-sf-a3A" eventType="touchUpInside" id="pOG-SV-hxz"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yzT-4x-1I2">
+                                <rect key="frame" x="67" y="429" width="240" height="128"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="1Oy-sr-Po9"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="cVj-gJ-gnv" secondAttribute="bottom" constant="20" id="G7B-6v-uiZ"/>
+                            <constraint firstItem="cVj-gJ-gnv" firstAttribute="top" secondItem="yzT-4x-1I2" secondAttribute="bottom" constant="60" id="IHK-Dr-Hkq"/>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="34" id="RTL-tE-IaG"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="5" id="W4O-Fw-DvM"/>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="trailing" secondItem="gih-OP-X9R" secondAttribute="trailing" id="X8J-qD-ULX"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="347" id="X9L-Ht-Abz"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="Y4h-Pm-n2O"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="lWL-gK-2Sf"/>
+                            <constraint firstItem="yzT-4x-1I2" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="zr9-j4-7w5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gih-OP-X9R"/>
                     </view>
                     <connections>
+                        <outlet property="GraphImage" destination="yzT-4x-1I2" id="WFP-Jg-8TR"/>
                         <outlet property="GraphTitle" destination="5o0-Lw-Qfm" id="RkT-Lo-hPo"/>
                         <outlet property="hostView" destination="7Rb-o0-4gi" id="5dw-fZ-05G"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="pqc-BN-sav"/>

@@ -10,8 +10,11 @@ class DisplayScreen : ViewController {
     var yMax : Float64 = 0.0
     var yMin : Float64 = 0.0
     var TitleText : String = "Seismic Data"
+    //var imgURL : String = ""
     
     @IBOutlet weak var GraphTitle: UILabel!
+    
+    @IBOutlet weak var GraphImage: UIImageView!
     
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
