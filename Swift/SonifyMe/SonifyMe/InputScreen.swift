@@ -13,25 +13,22 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var svalue : String = "BHZ"
     var gvalue : String = "LHZ"
     
-    var LocationValue : String = "Ryerson (IL,USA)"
-    var DateValue : String = "2017-07-07"
-    var TimeValue : String = "00:00"
-    var DurationValue : String = "6"
-    
     @IBOutlet weak var LocationField: UIPickerView!
     @IBOutlet weak var DateField: UITextField!
     @IBOutlet weak var TimeField: UITextField!
     @IBOutlet weak var DurationField: UITextField!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        textChanged()
-        print(DateValue)
+        let ud = UserDefaults.standard
+        ud.set(DateField.text!, forKey: "Date")
+        ud.set(TimeField.text!, forKey: "Time")
+        ud.set(DurationField.text!, forKey: "Duration")
         if ((segue.destination as? LoadingScreen) != nil) {
             let loadingScreen = segue.destination as? LoadingScreen
-            loadingScreen?.inputLocation = LocationValue
-            loadingScreen?.inputDate = DateField.text!
-            loadingScreen?.inputTime = TimeField.text!
-            loadingScreen?.inputDuration = DurationField.text!
+            loadingScreen?.inputLocation = ud.string(forKey: "Location")!
+            loadingScreen?.inputDate = ud.string(forKey: "Date")!
+            loadingScreen?.inputTime = ud.string(forKey: "Time")!
+            loadingScreen?.inputDuration = ud.string(forKey: "Duration")!
             loadingScreen?.inputFreq = freqvalue
             loadingScreen?.inputAmp = amp
             loadingScreen?.inputRate = rate
@@ -99,7 +96,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var locationChosen : Bool = false
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        LocationValue = ScrollMenuData[row]
+        let ud = UserDefaults.standard
+        ud.set(ScrollMenuData[row], forKey: "Location")
     }
     
     override func validInputs() -> Bool {
@@ -107,19 +105,26 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         return true
     }
     
-    func textChanged() {
-        DateValue = DateField.text!
-        TimeValue = TimeField.text!
-        DurationValue = DurationField.text!
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print(DateValue)
-        DateField.text! = DateValue
-        TimeField.text! = TimeValue
-        DurationField.text! = DurationValue
+        let ud = UserDefaults.standard
+        let d = ud.string(forKey: "Date")
+        let t = ud.string(forKey: "Time")
+        let u = ud.string(forKey: "Duration")
+        if (d == nil) {
+            ud.set("2018-07-07", forKey: "Date")
+        }
+        if (t == nil) {
+            ud.set("00:00", forKey: "Time")
+        }
+        if (u == nil) {
+            ud.set("6", forKey: "Duration")
+        }
+        
+        DateField.text! = ud.string(forKey: "Date")!
+        TimeField.text! = ud.string(forKey: "Time")!
+        DurationField.text! = ud.string(forKey: "Duration")!
         
         addDoneButton()
         

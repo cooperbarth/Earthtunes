@@ -10,6 +10,21 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Suggestion Screen-->
+        <scene sceneID="f85-RJ-Uqq">
+            <objects>
+                <viewController id="QAi-SF-yzZ" customClass="SuggestionScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SnJ-7P-q0i">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="9Lo-Ib-uej"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1aZ-eO-LeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="673" y="-678"/>
+        </scene>
         <!--Input Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -137,37 +152,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFc-qa-KfA">
-                                <rect key="frame" x="147" y="91" width="81" height="21"/>
+                                <rect key="frame" x="147" y="86" width="81" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Amplitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-Lb-3iE">
-                                <rect key="frame" x="130" y="178" width="115" height="21"/>
+                                <rect key="frame" x="130" y="173" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-bS-ZC3">
-                                <rect key="frame" x="143" y="265" width="89" height="21"/>
+                                <rect key="frame" x="143" y="260" width="89" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="High-Pass Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RT-w2-Lb8">
-                                <rect key="frame" x="126" y="352" width="122" height="21"/>
+                                <rect key="frame" x="126" y="347" width="122" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-w4-sfo">
-                                <rect key="frame" x="129" y="439" width="117" height="21"/>
+                                <rect key="frame" x="129" y="434" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
-                                <rect key="frame" x="125" y="553" width="125" height="29"/>
+                                <rect key="frame" x="125" y="548" width="125" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
@@ -175,13 +190,13 @@
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graph Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-Pc-6co">
-                                <rect key="frame" x="130" y="524" width="115" height="21"/>
+                                <rect key="frame" x="130" y="519" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLK-eC-Gmr">
-                                <rect key="frame" x="112.5" y="207" width="150" height="30"/>
+                                <rect key="frame" x="112.5" y="202" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4sz-5P-SnK"/>
                                 </constraints>
@@ -190,7 +205,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B3l-w6-bKW">
-                                <rect key="frame" x="112.5" y="294" width="150" height="30"/>
+                                <rect key="frame" x="112.5" y="289" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4dB-iL-saf"/>
                                 </constraints>
@@ -199,7 +214,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rik-Kh-VK5">
-                                <rect key="frame" x="112.5" y="381" width="150" height="30"/>
+                                <rect key="frame" x="112.5" y="376" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="caa-9W-HBG"/>
                                 </constraints>
@@ -207,13 +222,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
-                                <rect key="frame" x="164" y="628" width="46" height="30"/>
-                                <state key="normal" title="Return"/>
-                                <connections>
-                                    <action selector="ReturnButton:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="pTO-1U-NKh"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advanced Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9i5-kO-K9H">
                                 <rect key="frame" x="112.5" y="33" width="150" height="21"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -221,7 +229,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
-                                <rect key="frame" x="125" y="468" width="125" height="29"/>
+                                <rect key="frame" x="125" y="463" width="125" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
@@ -229,7 +237,7 @@
                                 </segments>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="nvp-mp-dIE">
-                                <rect key="frame" x="23" y="120" width="329" height="29"/>
+                                <rect key="frame" x="23" y="115" width="329" height="29"/>
                                 <segments>
                                     <segment title="0.1 Hz"/>
                                     <segment title="0.5 Hz"/>
@@ -239,6 +247,17 @@
                                     <segment title="50 Hz"/>
                                 </segments>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-qg-R60">
+                                <rect key="frame" x="129" y="605" width="118" height="30"/>
+                                <state key="normal" title="Reset to Defaults"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
+                                <rect key="frame" x="165" y="637" width="46" height="30"/>
+                                <state key="normal" title="Return"/>
+                                <connections>
+                                    <action selector="ReturnButton:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="pTO-1U-NKh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -247,9 +266,8 @@
                             <constraint firstItem="uFl-Pc-6co" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="6ov-B1-Itr"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="AOe-cD-HbL"/>
                             <constraint firstItem="fyq-w4-sfo" firstAttribute="top" secondItem="Rik-Kh-VK5" secondAttribute="bottom" constant="28" id="CCI-pn-c5Y"/>
-                            <constraint firstItem="Ano-M4-rzf" firstAttribute="top" secondItem="ztt-rI-awL" secondAttribute="bottom" constant="47" id="DII-DI-hDJ"/>
                             <constraint firstItem="6RT-w2-Lb8" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Fi6-lj-D0S"/>
-                            <constraint firstItem="gFc-qa-KfA" firstAttribute="top" secondItem="9i5-kO-K9H" secondAttribute="bottom" constant="37" id="ID3-dd-Pmg"/>
+                            <constraint firstItem="gFc-qa-KfA" firstAttribute="top" secondItem="9i5-kO-K9H" secondAttribute="bottom" constant="32" id="ID3-dd-Pmg"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="MOx-Jj-nSq"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Odf-wf-kih"/>
                             <constraint firstItem="uFl-Pc-6co" firstAttribute="top" secondItem="2ve-Gc-hQk" secondAttribute="bottom" constant="28" id="Pk6-7W-yQ5"/>
@@ -258,12 +276,15 @@
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upc-DM-0nB"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upe-5T-rnr"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="top" secondItem="gFc-qa-KfA" secondAttribute="bottom" constant="8" id="Va9-wX-KtH"/>
+                            <constraint firstItem="2xX-qg-R60" firstAttribute="top" secondItem="ztt-rI-awL" secondAttribute="bottom" constant="29" id="X3e-Lr-AgO"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="YeY-2f-07O"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="top" secondItem="nvp-mp-dIE" secondAttribute="bottom" constant="30" id="YmX-sH-bPQ"/>
                             <constraint firstItem="6RT-w2-Lb8" firstAttribute="top" secondItem="B3l-w6-bKW" secondAttribute="bottom" constant="28" id="dax-73-mAj"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="top" secondItem="fyq-w4-sfo" secondAttribute="bottom" constant="8" id="f89-tx-cmd"/>
                             <constraint firstItem="ztt-rI-awL" firstAttribute="top" secondItem="uFl-Pc-6co" secondAttribute="bottom" constant="8" id="gy6-M7-SGj"/>
                             <constraint firstItem="gFc-qa-KfA" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="mVa-JG-3Lp"/>
+                            <constraint firstItem="Ano-M4-rzf" firstAttribute="top" secondItem="2xX-qg-R60" secondAttribute="bottom" constant="2" id="o0F-Ej-sOa"/>
+                            <constraint firstItem="2xX-qg-R60" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="pcY-Su-dMu"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="top" secondItem="IBm-h0-0fi" secondAttribute="top" constant="13" id="r71-ZE-8Sc"/>
                             <constraint firstItem="ztt-rI-awL" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="rY1-Z4-dMJ"/>
                             <constraint firstItem="Ano-M4-rzf" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="uC7-Ij-6Ib"/>
