@@ -13,13 +13,19 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var svalue : String = "BHZ"
     var gvalue : String = "LHZ"
     
+    var LocationValue : String = "Ryerson (IL,USA)"
+    var DateValue : String = "2017-07-07"
+    var TimeValue : String = "00:00"
+    var DurationValue : String = "6"
+    
     @IBOutlet weak var LocationField: UIPickerView!
-    var LocationValue : String = "Select Location:"
     @IBOutlet weak var DateField: UITextField!
     @IBOutlet weak var TimeField: UITextField!
     @IBOutlet weak var DurationField: UITextField!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        textChanged()
+        print(DateValue)
         if ((segue.destination as? LoadingScreen) != nil) {
             let loadingScreen = segue.destination as? LoadingScreen
             loadingScreen?.inputLocation = LocationValue
@@ -75,8 +81,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     //Scroll Menu Setup
-    let ScrollMenuData = ["Select Location:",
-                          "Ryerson (IL,USA)",
+    let ScrollMenuData = ["Ryerson (IL,USA)",
                           "Yellowstone (WY,USA)",
                           "Anchorage (AK,USA)",
                           "Paris, France",
@@ -98,16 +103,23 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     override func validInputs() -> Bool {
-        if (LocationValue == "Select Location:" || DateField.text == "" || TimeField.text == "" || TimeField.text == "") {return false}
+        if (DateField.text == "" || TimeField.text == "" || TimeField.text == "") {return false}
         return true
     }
-
+    
+    func textChanged() {
+        DateValue = DateField.text!
+        TimeValue = TimeField.text!
+        DurationValue = DurationField.text!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        DateField.text! = "2017-07-07"
-        TimeField.text! = "00:00"
-        DurationField.text! = "6"
+        print(DateValue)
+        DateField.text! = DateValue
+        TimeField.text! = TimeValue
+        DurationField.text! = DurationValue
         
         addDoneButton()
         
