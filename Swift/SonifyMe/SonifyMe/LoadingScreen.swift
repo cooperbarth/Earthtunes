@@ -32,7 +32,6 @@ class LoadingScreen : ViewController {
     func getSoundAndGraph(locate:String, date:String, time:String, duration:String, AF:String, FA:String) -> [Float64] {
         let halfpi = 0.5*Double.pi
         let duration = String(Float64(duration)! * 3600)
-        //let disploc = locate
         let time = time + ":00"
         
         var station = ""
@@ -91,13 +90,6 @@ class LoadingScreen : ViewController {
         let type = net + "&sta=" + station + "&loc=" + location + "&cha=LHZ"
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
         let url = "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
-        
-        /*
-        let imgwhen = ""
-        passImgURL = "https://service.iris.edu/irisws/timeseriesplot/1/query?net=" + type +  "&unitscale=0.002" + "&start=2004-12-26T00%3A00%3A00&end=2004-12-26T13%3A01%3A00"
-        */
- 
-        
         let Url = URL(string: url)
         var df = ""
         do {
@@ -158,11 +150,6 @@ class LoadingScreen : ViewController {
         return s32
     }
     
-    /*
-    func saveImage(imageURL: String) {
-    }
-    */
-    
     func saveFile(buff: [Float64], sample_rate: Float64) {
         let SAMPLE_RATE = sample_rate
         
@@ -197,7 +184,6 @@ class LoadingScreen : ViewController {
             displayScreen?.yMax = mxs
             displayScreen?.yMin = -mxs
             displayScreen?.TitleText = passTitle
-            //displayScreen?.imgURL = passImgURL
         }
     }
     

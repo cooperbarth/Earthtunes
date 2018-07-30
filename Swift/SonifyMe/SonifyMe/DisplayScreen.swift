@@ -10,37 +10,66 @@ class DisplayScreen : ViewController {
     var yMax : Float64 = 0.0
     var yMin : Float64 = 0.0
     var TitleText : String = "Seismic Data"
-    //var imgURL : String = ""
+    var playing : Bool = false
     
     @IBOutlet weak var GraphTitle: UILabel!
+    @IBOutlet weak var SoundSlideLayout: UISlider!
+    @IBOutlet weak var PlayPause: UIButton!
     
-    @IBOutlet weak var GraphImage: UIImageView!
+    @IBAction func PlayPausePressed(_ sender: Any) {
+        if (self.playing) {
+            pauseSound()
+        } else {
+            playSound()
+        }
+    }
     
-    @IBAction func BackButton(_ sender: Any) {
-        performSegue(withIdentifier: "BackToInput", sender: self)
+    @IBAction func SoundSlider(_ sender: Any) {
+        player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
     
     func playSound() {
-        do {
-            player = try AVAudioPlayer(contentsOf: url!)
-            player?.play()
-            if (player?.isPlaying)! {
-                print("playing")
-            }
-        } catch {
-            print("whoops")
+        SoundSlideLayout.maximumValue = Float((player?.duration)!)
+        player?.prepareToPlay()
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        player?.play()
+        self.playing = true
+        PlayPause.setTitle("Pause", for: .normal)
+    }
+    
+    @objc func updateSlider(_ timer: Timer) {
+        SoundSlideLayout.value = Float((player?.currentTime)!)
+    }
+    
+    func pauseSound() {
+        if (player?.isPlaying)! {
+            PlayPause.setTitle("Play", for: .normal)
+            self.playing = false
+            player?.stop()
         }
+    }
+    
+    @IBAction func BackButton(_ sender: Any) {
+        pauseSound()
+        performSegue(withIdentifier: "BackToInput", sender: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        playSound()
+        do {
+            player = try AVAudioPlayer(contentsOf: url!)
+            player?.numberOfLoops = -1
+            playSound()
+        } catch {
+            print("Audio Player Not Found.")
+        }
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         initplot()
         GraphTitle.text = TitleText
+        SoundSlideLayout.value = 0.0
     }
     
     @IBOutlet weak var hostView: CPTGraphHostingView!
