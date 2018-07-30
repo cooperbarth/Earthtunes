@@ -125,7 +125,71 @@
                     <view key="view" contentMode="scaleToFill" id="fLL-Xt-cNN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Frequency" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFc-qa-KfA">
+                                <rect key="frame" x="147" y="48" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Max Amplitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-Lb-3iE">
+                                <rect key="frame" x="130" y="121" width="115" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sound Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-bS-ZC3">
+                                <rect key="frame" x="143" y="216" width="89" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="High-Pass Filter" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6RT-w2-Lb8">
+                                <rect key="frame" x="126.5" y="291" width="122" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sound Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-w4-sfo">
+                                <rect key="frame" x="129" y="438" width="117" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
+                                <rect key="frame" x="125" y="474" width="125" height="29"/>
+                                <segments>
+                                    <segment title="BHZ"/>
+                                    <segment title="LHZ"/>
+                                    <segment title="VHZ"/>
+                                </segments>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
+                                <rect key="frame" x="125" y="590" width="125" height="29"/>
+                                <segments>
+                                    <segment title="BHZ"/>
+                                    <segment title="LHZ"/>
+                                    <segment title="VHZ"/>
+                                </segments>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Graph Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-Pc-6co">
+                                <rect key="frame" x="130" y="561" width="115" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uFl-Pc-6co" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="6ov-B1-Itr"/>
+                            <constraint firstItem="dlt-Lb-3iE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="AOe-cD-HbL"/>
+                            <constraint firstItem="6RT-w2-Lb8" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Fi6-lj-D0S"/>
+                            <constraint firstItem="FDh-bS-ZC3" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Odf-wf-kih"/>
+                            <constraint firstItem="2ve-Gc-hQk" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="YeY-2f-07O"/>
+                            <constraint firstItem="gFc-qa-KfA" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="mVa-JG-3Lp"/>
+                            <constraint firstItem="ztt-rI-awL" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="rY1-Z4-dMJ"/>
+                            <constraint firstItem="fyq-w4-sfo" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="uvZ-WS-np6"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="IBm-h0-0fi"/>
                     </view>
                 </viewController>
