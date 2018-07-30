@@ -180,18 +180,33 @@
                                     <action selector="SoundSlider:" destination="0vR-sf-a3A" eventType="valueChanged" id="mmk-yP-I3g"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPU-Gb-YcJ">
-                                <rect key="frame" x="166" y="414" width="42" height="30"/>
-                                <state key="normal" title="Pause"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPU-Gb-YcJ">
+                                <rect key="frame" x="140" y="409" width="95" height="95"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="bgC-c8-kZK"/>
+                                    <constraint firstAttribute="width" constant="95" id="qPh-gb-4V0"/>
+                                </constraints>
+                                <state key="normal" title="Pause" image="Pause"/>
                                 <connections>
-                                    <action selector="PlayPausePressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="xL6-UZ-BMx"/>
+                                    <action selector="PauseButtonPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="lRT-W1-4DS"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NId-aO-pDk">
+                                <rect key="frame" x="140" y="409" width="95" height="95"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="95" id="GWd-8w-bhR"/>
+                                    <constraint firstAttribute="width" constant="95" id="fGI-lT-wBg"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="Play"/>
+                                <connections>
+                                    <action selector="PlayButtonPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="8ZG-a8-QVj"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="EPU-Gb-YcJ" firstAttribute="top" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="94" id="0Pt-76-GOp"/>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="1Oy-sr-Po9"/>
+                            <constraint firstItem="EPU-Gb-YcJ" firstAttribute="top" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="89" id="3HQ-qG-BD5"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="cVj-gJ-gnv" secondAttribute="bottom" constant="20" id="G7B-6v-uiZ"/>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="34" id="RTL-tE-IaG"/>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="top" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="28" id="Vyz-Xm-wUZ"/>
@@ -199,6 +214,8 @@
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="trailing" secondItem="gih-OP-X9R" secondAttribute="trailing" id="X8J-qD-ULX"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="347" id="X9L-Ht-Abz"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="Y4h-Pm-n2O"/>
+                            <constraint firstItem="NId-aO-pDk" firstAttribute="leading" secondItem="EPU-Gb-YcJ" secondAttribute="trailing" constant="-95" id="YMO-8k-Rx7"/>
+                            <constraint firstItem="NId-aO-pDk" firstAttribute="top" secondItem="EPU-Gb-YcJ" secondAttribute="bottom" constant="-95" id="aRv-aO-tYQ"/>
                             <constraint firstItem="EPU-Gb-YcJ" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="hn3-aa-8wv"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="lWL-gK-2Sf"/>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="width" secondItem="7Rb-o0-4gi" secondAttribute="width" id="n3O-F4-S5U"/>
@@ -208,7 +225,8 @@
                     </view>
                     <connections>
                         <outlet property="GraphTitle" destination="5o0-Lw-Qfm" id="RkT-Lo-hPo"/>
-                        <outlet property="PlayPause" destination="EPU-Gb-YcJ" id="Hs1-nM-iWq"/>
+                        <outlet property="PauseButton" destination="EPU-Gb-YcJ" id="jvy-I9-Ovj"/>
+                        <outlet property="PlayButton" destination="NId-aO-pDk" id="uge-oP-vDo"/>
                         <outlet property="SoundSlideLayout" destination="vWu-Zt-Aje" id="d1s-BO-OTO"/>
                         <outlet property="hostView" destination="7Rb-o0-4gi" id="5dw-fZ-05G"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="pqc-BN-sav"/>
@@ -219,4 +237,8 @@
             <point key="canvasLocation" x="2173.5999999999999" y="59.820089955022496"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Pause" width="183" height="181"/>
+        <image name="Play" width="192" height="185"/>
+    </resources>
 </document>

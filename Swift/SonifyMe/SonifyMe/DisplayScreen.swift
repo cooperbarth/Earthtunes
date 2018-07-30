@@ -4,28 +4,32 @@ import Foundation
 import AudioToolbox
 import CorePlot
 
-class DisplayScreen : ViewController {
+class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     var data : [Float64] = [Float64]()
     var imgg : UIImage = UIImage()
     var yMax : Float64 = 0.0
     var yMin : Float64 = 0.0
     var TitleText : String = "Seismic Data"
-    var playing : Bool = false
     
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
-    @IBOutlet weak var PlayPause: UIButton!
+    @IBOutlet weak var PauseButton: UIButton!
+    @IBOutlet weak var PlayButton: UIButton!
     
-    @IBAction func PlayPausePressed(_ sender: Any) {
-        if (self.playing) {
-            pauseSound()
-        } else {
-            playSound()
-        }
+    @IBAction func PauseButtonPressed(_ sender: Any) {
+        pauseSound()
+    }
+    
+    @IBAction func PlayButtonPressed(_ sender: Any) {
+        playSound()
     }
     
     @IBAction func SoundSlider(_ sender: Any) {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        pauseSound()
     }
     
     func playSound() {
@@ -33,8 +37,10 @@ class DisplayScreen : ViewController {
         player?.prepareToPlay()
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         player?.play()
-        self.playing = true
-        PlayPause.setTitle("Pause", for: .normal)
+        PlayButton.isHidden = true
+        PlayButton.isEnabled = false
+        PauseButton.isHidden = false
+        PauseButton.isEnabled = true
     }
     
     @objc func updateSlider(_ timer: Timer) {
@@ -43,10 +49,12 @@ class DisplayScreen : ViewController {
     
     func pauseSound() {
         if (player?.isPlaying)! {
-            PlayPause.setTitle("Play", for: .normal)
-            self.playing = false
             player?.stop()
         }
+        PauseButton.isHidden = true
+        PauseButton.isEnabled = false
+        PlayButton.isHidden = false
+        PlayButton.isEnabled = true
     }
     
     @IBAction func BackButton(_ sender: Any) {
@@ -58,11 +66,11 @@ class DisplayScreen : ViewController {
         super.viewDidAppear(true)
         do {
             player = try AVAudioPlayer(contentsOf: url!)
-            player?.numberOfLoops = -1
             playSound()
         } catch {
             print("Audio Player Not Found.")
         }
+        player?.delegate = self
     }
     
     override func viewDidLayoutSubviews() {
