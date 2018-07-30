@@ -15,6 +15,8 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var SoundSlideLayout: UISlider!
     @IBOutlet weak var PauseButton: UIButton!
     @IBOutlet weak var PlayButton: UIButton!
+    @IBOutlet weak var FFButton: UIButton!
+    @IBOutlet weak var RewindButton: UIButton!
     
     @IBAction func PauseButtonPressed(_ sender: Any) {
         pauseSound()
@@ -22,6 +24,25 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     
     @IBAction func PlayButtonPressed(_ sender: Any) {
         playSound()
+    }
+    
+    @IBAction func FFButtonPressed(_ sender: Any) {
+        let newTime = (player?.currentTime)! + TimeInterval(1.0)
+        if (Float(newTime) < Float((player?.duration)!)) {
+            player?.currentTime = newTime
+        } else {
+            player?.currentTime = TimeInterval(0.0)
+            pauseSound()
+        }
+    }
+    
+    @IBAction func RewindButtonPressed(_ sender: Any) {
+        let newTime = (player?.currentTime)! - TimeInterval(1.0)
+        if (Float(newTime) > 0.0) {
+            player?.currentTime = newTime
+        } else {
+            player?.currentTime = TimeInterval(0.0)
+        }
     }
     
     @IBAction func SoundSlider(_ sender: Any) {
