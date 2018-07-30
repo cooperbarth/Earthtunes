@@ -97,6 +97,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let ud = UserDefaults.standard
+        ud.set(row, forKey: "Location Index")
         ud.set(ScrollMenuData[row], forKey: "Location")
     }
     
@@ -108,7 +109,12 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LocationField.delegate = self
+        LocationField.dataSource = self
+        
         let ud = UserDefaults.standard
+        let l = ud.integer(forKey: "Location Index")
+        LocationField.selectRow(l, inComponent: 0, animated: false)
         let d = ud.string(forKey: "Date")
         let t = ud.string(forKey: "Time")
         let u = ud.string(forKey: "Duration")
@@ -128,7 +134,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         
         addDoneButton()
         
-        self.LocationField.delegate = self
-        self.LocationField.dataSource = self
+
     }
 }
