@@ -9,6 +9,7 @@ class ViewController: UIViewController {
     var player : AVAudioPlayer?
 
     func isNumber(num:String) -> Bool {
+        if (Float(num) != nil) {return true}
         var theNum = ""
         if (num[num.startIndex] == "-") {
             theNum = String(num[num.index(num.startIndex, offsetBy: 1)..<num.endIndex])
@@ -19,6 +20,12 @@ class ViewController: UIViewController {
         if (!numbers.contains(String(theNum[num.index(num.startIndex, offsetBy: 0)]))) {return false}
         let secondChar = String(theNum[num.index(num.startIndex, offsetBy: 1)])
         if (secondChar != "." && secondChar != "e") {return false}
+        let lastChar = String(theNum[num.index(num.startIndex, offsetBy: num.count - 1)])
+        if (!isNumber(num: lastChar)) {return false}
+        return true
+    }
+    
+    func validInputs() -> Bool {
         return true
     }
     

@@ -8,6 +8,13 @@ class LoadingScreen : ViewController {
     var inputDate = ""
     var inputTime = ""
     var inputDuration = ""
+    var inputFreq = ""
+    var inputAmp = ""
+    var inputRate = "" //doesn't do anything yet
+    var inputHP = ""
+    var inputSChannel = ""
+    var inputGChannel = ""
+    
     var graphData : [Float64] = [Float64]()
     var mxs : Float64 = 0.0
     var passTitle : String = "Seismic Data"
@@ -18,8 +25,8 @@ class LoadingScreen : ViewController {
     @IBOutlet weak var LoadingLabel: UILabel!
     @IBOutlet weak var Spinner: UIActivityIndicatorView!
     
-    func getSoundAndGraph(locate:String, date:String, time:String, duration:String, AF:String, FA:String) -> [Float64] {
-        let duration = String(Float64(duration)! * 3600)
+    func getSoundAndGraph(locate:String, date:String, time:String) -> [Float64] {
+        let duration = String(Float64(inputDuration)! * 3600)
         let time = time + ":00"
         
         var station = ""
@@ -75,11 +82,11 @@ class LoadingScreen : ViewController {
         }
         passTitle = locate
         
-        let graphType = net + "&sta=" + station + "&loc=" + location + "&cha=LHZ"
-        let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=BHZ"
+        let graphType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputGChannel
+        let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputSChannel
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
         
-        let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
+        let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
         var dfGraph = ""
         do {
             dfGraph = try String(contentsOf: URL(string: graphUrl)!)
@@ -95,16 +102,16 @@ class LoadingScreen : ViewController {
             print("Invalid URL for Graph")
         }
         
-        let g32 = processData(data: dfGraph, AF: AF, FA: FA)
+        let g32 = processData(data: dfGraph)
         
-        let s32 = processData(data: dfSound, AF: AF, FA: FA)
+        let s32 = processData(data: dfSound)
         let ssps = bandsHZ * fsps
         saveFile(buff: s32, sample_rate: ssps)
         
         return g32
     }
     
-    func processData(data: String, AF: String, FA: String) -> [Float64] {
+    func processData(data: String) -> [Float64] {
         let halfpi = 0.5*Double.pi
         let dflines = data.split(separator: "\n")
         let head = dflines[0]
@@ -128,21 +135,11 @@ class LoadingScreen : ViewController {
                                                 "0.5 Hz" : 16000.0,
                                                 "5 Hz" : 1600.0,
                                                 "10 Hz" : 800.0,
+                                                "20 Hz" : 400.0,
                                                 "50 Hz" : 160.0]
-        let optbandsHZ = frequencies[AF]
-        if (optbandsHZ == nil) {
-            bandsHZ = 400.0
-        } else {
-            bandsHZ = optbandsHZ!
-        }
+        bandsHZ = frequencies[inputFreq]!
         
-        var fixedamp: Float64
-        if (FA == "") {
-            fixedamp = 0.0001
-        } else {
-            fixedamp = Float64(FA)!
-        }
-        
+        let fixedamp = Float64(inputAmp)!
         let realduration = (tot!/fsps)/3600
         var hours = [Float64]()
         var marker = 0.0
@@ -198,7 +195,7 @@ class LoadingScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        graphData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
+        graphData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime)
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     

@@ -9,6 +9,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     var schannel : Int = 0
     var gchannel : Int = 1
     
+    var freqvalue : String = "20 Hz"
+    var svalue : String = "BHZ"
+    var gvalue : String = "LHZ"
+    
     @IBOutlet weak var LocationField: UIPickerView!
     var LocationValue : String = "Select Location:"
     @IBOutlet weak var DateField: UITextField!
@@ -22,14 +26,20 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             loadingScreen?.inputDate = DateField.text!
             loadingScreen?.inputTime = TimeField.text!
             loadingScreen?.inputDuration = DurationField.text!
+            loadingScreen?.inputFreq = freqvalue
+            loadingScreen?.inputAmp = amp
+            loadingScreen?.inputRate = rate
+            loadingScreen?.inputHP = hp
+            loadingScreen?.inputSChannel = svalue
+            loadingScreen?.inputGChannel = gvalue
         } else if ((segue.destination as? AdvancedScreen) != nil) {
             let advancedScreen = segue.destination as? AdvancedScreen
-            advancedScreen?.inputFreq = freq
-            advancedScreen?.inputAmp = amp
-            advancedScreen?.inputRate = rate
-            advancedScreen?.inputHP = hp
-            advancedScreen?.inputSChannel = schannel
-            advancedScreen?.inputGChannel = gchannel
+            advancedScreen?.inpFreq = freq
+            advancedScreen?.inpAmp = amp
+            advancedScreen?.inpRate = rate
+            advancedScreen?.inpHP = hp
+            advancedScreen?.inpSChannel = schannel
+            advancedScreen?.inpGChannel = gchannel
         }
     }
     
@@ -87,7 +97,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         LocationValue = ScrollMenuData[row]
     }
     
-    func validInputs() -> Bool {
+    override func validInputs() -> Bool {
         if (LocationValue == "Select Location:" || DateField.text == "" || TimeField.text == "" || TimeField.text == "") {return false}
         return true
     }
