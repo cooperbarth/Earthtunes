@@ -16,7 +16,7 @@ class LoadingScreen : ViewController {
     var bandsHZ : Double = 0.0
     
     @IBOutlet weak var LoadingLabel: UILabel!
-    @IBOutlet weak var ProgressBar: UIProgressView!
+    @IBOutlet weak var Spinner: UIActivityIndicatorView!
     
     func getSoundAndGraph(locate:String, date:String, time:String, duration:String, AF:String, FA:String) -> [Float64] {
         let duration = String(Float64(duration)! * 3600)
@@ -186,6 +186,7 @@ class LoadingScreen : ViewController {
         }
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if ((segue.destination as? DisplayScreen) != nil) {
             let displayScreen = segue.destination as? DisplayScreen
@@ -198,7 +199,6 @@ class LoadingScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        
         graphData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }

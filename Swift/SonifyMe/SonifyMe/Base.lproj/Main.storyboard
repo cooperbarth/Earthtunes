@@ -147,22 +147,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bnm-mN-SmN">
-                                <rect key="frame" x="112" y="302" width="150" height="2"/>
-                            </progressView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
+                                <rect key="frame" x="177.5" y="293.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="OTG-ax-qu6" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="243" id="3v6-7g-qlc"/>
                             <constraint firstItem="OTG-ax-qu6" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="4Iz-5E-O1U"/>
-                            <constraint firstItem="Bnm-mN-SmN" firstAttribute="top" secondItem="OTG-ax-qu6" secondAttribute="bottom" constant="18.5" id="YbS-y7-1sD"/>
-                            <constraint firstItem="Bnm-mN-SmN" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="cgJ-JK-XHH"/>
+                            <constraint firstItem="YW0-QI-0l3" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="sZW-2V-CKx"/>
+                            <constraint firstItem="YW0-QI-0l3" firstAttribute="top" secondItem="OTG-ax-qu6" secondAttribute="bottom" constant="10" id="ufc-9b-STb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3tH-mJ-Hx7"/>
                     </view>
                     <connections>
                         <outlet property="LoadingLabel" destination="OTG-ax-qu6" id="GHJ-jJ-QcL"/>
-                        <outlet property="ProgressBar" destination="Bnm-mN-SmN" id="l5e-lj-gwb"/>
+                        <outlet property="Spinner" destination="YW0-QI-0l3" id="3pM-ad-9kL"/>
                         <segue destination="0vR-sf-a3A" kind="presentation" identifier="ToDisplay" id="g2J-KY-UGA"/>
                     </connections>
                 </viewController>
