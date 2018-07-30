@@ -186,7 +186,6 @@ class LoadingScreen : ViewController {
         }
     }
     
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if ((segue.destination as? DisplayScreen) != nil) {
             let displayScreen = segue.destination as? DisplayScreen

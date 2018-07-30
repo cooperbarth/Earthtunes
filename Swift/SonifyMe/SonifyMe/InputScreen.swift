@@ -2,6 +2,12 @@ import UIKit
 import Foundation
 
 class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    var freq : Int = 4
+    var amp : String = "0.0001"
+    var rate : String = "1.0"
+    var hp : String = "0.001"
+    var schannel : Int = 0
+    var gchannel : Int = 1
     
     @IBOutlet weak var LocationField: UIPickerView!
     var LocationValue : String = "Select Location:"
@@ -16,7 +22,19 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             loadingScreen?.inputDate = DateField.text!
             loadingScreen?.inputTime = TimeField.text!
             loadingScreen?.inputDuration = DurationField.text!
+        } else if ((segue.destination as? AdvancedScreen) != nil) {
+            let advancedScreen = segue.destination as? AdvancedScreen
+            advancedScreen?.inputFreq = freq
+            advancedScreen?.inputAmp = amp
+            advancedScreen?.inputRate = rate
+            advancedScreen?.inputHP = hp
+            advancedScreen?.inputSChannel = schannel
+            advancedScreen?.inputGChannel = gchannel
         }
+    }
+    
+    @IBAction func AdvancedPressed(_ sender: Any) {
+        performSegue(withIdentifier: "ToAdvanced", sender: self)
     }
     
     @IBAction func ButtonPressed(_ sender: Any) {
