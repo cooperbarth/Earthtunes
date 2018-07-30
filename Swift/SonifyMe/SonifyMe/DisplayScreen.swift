@@ -27,7 +27,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func FFButtonPressed(_ sender: Any) {
-        let newTime = (player?.currentTime)! + TimeInterval(1.0)
+        let newTime = (player?.currentTime)! + TimeInterval(7.5)
         if (Float(newTime) < Float((player?.duration)!)) {
             player?.currentTime = newTime
         } else {
@@ -37,7 +37,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func RewindButtonPressed(_ sender: Any) {
-        let newTime = (player?.currentTime)! - TimeInterval(1.0)
+        let newTime = (player?.currentTime)! - TimeInterval(7.5)
         if (Float(newTime) > 0.0) {
             player?.currentTime = newTime
         } else {

@@ -8,29 +8,17 @@ class LoadingScreen : ViewController {
     var inputDate = ""
     var inputTime = ""
     var inputDuration = ""
-    var initData : [Float64] = [Float64]()
-    var img = UIImage()
+    var graphData : [Float64] = [Float64]()
     var mxs : Float64 = 0.0
     var passTitle : String = "Seismic Data"
     var passImgURL : String = ""
+    var fsps : Double = 0.0
+    var bandsHZ : Double = 0.0
     
     @IBOutlet weak var LoadingLabel: UILabel!
-    
-    func isNumber(num:String) -> Bool {
-        var theNum = ""
-        if (num[num.startIndex] == "-") {
-            theNum = String(num[num.index(num.startIndex, offsetBy: 1)..<num.endIndex])
-        } else {
-            theNum = num
-        }
-        let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        if (!numbers.contains(String(theNum[num.index(num.startIndex, offsetBy: 0)]))) {return false}
-        if (String(theNum[num.index(num.startIndex, offsetBy: 1)]) != ".") {return false}
-        return true
-    }
+    @IBOutlet weak var ProgressBar: UIProgressView!
     
     func getSoundAndGraph(locate:String, date:String, time:String, duration:String, AF:String, FA:String) -> [Float64] {
-        let halfpi = 0.5*Double.pi
         let duration = String(Float64(duration)! * 3600)
         let time = time + ":00"
         
@@ -87,30 +75,52 @@ class LoadingScreen : ViewController {
         }
         passTitle = locate
         
-        let type = net + "&sta=" + station + "&loc=" + location + "&cha=LHZ"
+        let graphType = net + "&sta=" + station + "&loc=" + location + "&cha=LHZ"
+        let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=BHZ"
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
-        let url = "https://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
-        let Url = URL(string: url)
-        var df = ""
-        do {
-            df = try String(contentsOf: Url!)
-        } catch {
-            print("Invalid URL")
-        }
-        let dflines = df.split(separator: "\n")
         
+        let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
+        var dfGraph = ""
+        do {
+            dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+        } catch {
+            print("Invalid URL for Graph")
+        }
+        
+        let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
+        var dfSound = ""
+        do {
+            dfSound = try String(contentsOf: URL(string: soundUrl)!)
+        } catch {
+            print("Invalid URL for Graph")
+        }
+        
+        let g32 = processData(data: dfGraph, AF: AF, FA: FA)
+        
+        let s32 = processData(data: dfSound, AF: AF, FA: FA)
+        let ssps = bandsHZ * fsps
+        saveFile(buff: s32, sample_rate: ssps)
+        
+        return g32
+    }
+    
+    func processData(data: String, AF: String, FA: String) -> [Float64] {
+        let halfpi = 0.5*Double.pi
+        let dflines = data.split(separator: "\n")
         let head = dflines[0]
-        let fsps = Float64(head.split(separator: " ")[4])
+        fsps = Float64(head.split(separator: " ")[4])!
         var tot = Float64(head.split(separator: " ")[2])
         var sound = [Float64]()
         var maxAmp = 0.0
         for i in 1..<dflines.count {
-            if (isNumber(num: String(dflines[i]))) {
+            if (self.isNumber(num: String(dflines[i]))) {
                 let f = Float64(dflines[i])
                 sound.append(f!)
                 maxAmp = max(maxAmp, abs(f!))
             } else {
-                tot = tot! + Float64(dflines[i].split(separator: " ")[2])!
+                print(dflines[i].split(separator: " "))
+                let curr = Float64(dflines[i].split(separator: " ")[2])!
+                tot = tot! + curr
             }
         }
         
@@ -119,17 +129,21 @@ class LoadingScreen : ViewController {
                                                 "5 Hz" : 1600.0,
                                                 "10 Hz" : 800.0,
                                                 "50 Hz" : 160.0]
-        var bandsHZ = frequencies[AF]
-        if (bandsHZ == nil) {bandsHZ = 400.0}
+        let optbandsHZ = frequencies[AF]
+        if (optbandsHZ == nil) {
+            bandsHZ = 400.0
+        } else {
+            bandsHZ = optbandsHZ!
+        }
         
         var fixedamp: Float64
         if (FA == "") {
-            fixedamp = maxAmp / 3
+            fixedamp = 0.0001
         } else {
             fixedamp = Float64(FA)!
         }
         
-        let realduration = (tot!/fsps!)/3600
+        let realduration = (tot!/fsps)/3600
         var hours = [Float64]()
         var marker = 0.0
         let increment = realduration / tot!
@@ -137,16 +151,12 @@ class LoadingScreen : ViewController {
             hours.append(marker)
             marker = marker + increment
         }
-
+        
         mxs = 1.01*Double(Float64((2^31))*atan(maxAmp/fixedamp)/halfpi)
         var s32 = [Float64]()
         for ii in 0..<sound.count {
             s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/halfpi)
         }
-        
-        let ssps = bandsHZ! * fsps!
-        saveFile(buff: s32, sample_rate: ssps)
-        
         return s32
     }
     
@@ -179,8 +189,7 @@ class LoadingScreen : ViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if ((segue.destination as? DisplayScreen) != nil) {
             let displayScreen = segue.destination as? DisplayScreen
-            displayScreen?.data = initData
-            displayScreen?.imgg = img
+            displayScreen?.data = graphData
             displayScreen?.yMax = mxs
             displayScreen?.yMin = -mxs
             displayScreen?.TitleText = passTitle
@@ -190,7 +199,7 @@ class LoadingScreen : ViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
-        initData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
+        graphData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime, duration: inputDuration, AF: "", FA: "")
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
