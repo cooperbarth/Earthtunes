@@ -12,7 +12,7 @@ class Error404Screen : ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.2)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
         InputErrorLabel.text = "Error 404: The Requested\n Data is Unavailable"
         self.showAnimate()
     }

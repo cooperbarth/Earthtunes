@@ -30,16 +30,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             self.view.addSubview(popOverVC.view)
             popOverVC.didMove(toParentViewController: self)
         }
-
     }
     
     @IBAction func AdvancedPressed(_ sender: Any) {
         performSegue(withIdentifier: "ToAdvanced", sender: self)
-    }
-    
-    //Adding "Done" button to text fields
-    func addDoneButton() {
-        self.DurationField.inputAccessoryView = initDoneButton()
     }
     
     override func viewDidLoad() {
@@ -53,7 +47,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         df1.dateFormat = "YYYY-MM-dd"
         df2.dateFormat = "HH:mm"
         
-        addDoneButton()
+        self.DurationField.inputAccessoryView = initDoneButton()
         
         if (ud.string(forKey: "Location") == nil) {
             ud.set("Ryerson (IL,USA)", forKey: "Location")

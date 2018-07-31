@@ -16,6 +16,8 @@ class AdvancedScreen : ViewController {
         Rate.delegate = self
         HP.delegate = self
         
+        addDoneButtons()
+        
         if (ud.string(forKey: "Amplitude") == nil) {
             ud.set("0.0001", forKey: "Amplitude")
         }
@@ -83,6 +85,12 @@ class AdvancedScreen : ViewController {
             self.view.addSubview(popOverVC.view)
             popOverVC.didMove(toParentViewController: self)
         }
+    }
+    
+    func addDoneButtons() {
+        self.Amp.inputAccessoryView = initDoneButton()
+        self.Rate.inputAccessoryView = initDoneButton()
+        self.HP.inputAccessoryView = initDoneButton()
     }
     
     func validInputs() -> Bool {
