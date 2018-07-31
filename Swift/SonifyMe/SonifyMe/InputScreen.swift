@@ -24,6 +24,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             self.view.addSubview(popOverVC.view)
             popOverVC.didMove(toParentViewController: self)
         } else {
+            ud.set(DurationField.text!, forKey: "Duration")
             let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading Screen") as! LoadingScreen
             self.addChildViewController(popOverVC)
             popOverVC.view.frame = self.view.frame
@@ -33,6 +34,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func AdvancedPressed(_ sender: Any) {
+        ud.set(DurationField.text!, forKey: "Duration")
         performSegue(withIdentifier: "ToAdvanced", sender: self)
     }
     
@@ -68,7 +70,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        ud.set(DurationField.text!, forKey: "Duration")
+        
     }
     
     func validInputs() -> Bool {
