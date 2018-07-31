@@ -25,10 +25,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         ud.set(DurationField.text!, forKey: "Duration")
         if ((segue.destination as? LoadingScreen) != nil) {
             let loadingScreen = segue.destination as? LoadingScreen
-            loadingScreen?.inputLocation = ud.string(forKey: "Location")!
-            loadingScreen?.inputDate = ud.string(forKey: "Date")!
-            loadingScreen?.inputTime = ud.string(forKey: "Time")!
-            loadingScreen?.inputDuration = ud.string(forKey: "Duration")!
             loadingScreen?.inputFreq = freqvalue
             loadingScreen?.inputAmp = amp
             loadingScreen?.inputRate = rate

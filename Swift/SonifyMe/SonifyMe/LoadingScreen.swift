@@ -4,10 +4,6 @@ import Foundation
 import AudioToolbox
 
 class LoadingScreen : ViewController {
-    var inputLocation = ""
-    var inputDate = ""
-    var inputTime = ""
-    var inputDuration = ""
     var inputFreq = ""
     var inputAmp = ""
     var inputRate = "" //doesn't do anything yet
@@ -25,9 +21,13 @@ class LoadingScreen : ViewController {
     @IBOutlet weak var LoadingLabel: UILabel!
     @IBOutlet weak var Spinner: UIActivityIndicatorView!
     
-    func getSoundAndGraph(locate:String, date:String, time:String) -> [Float64] {
-        let duration = String(Float64(inputDuration)! * 3600)
-        let time = time + ":00"
+    func getSoundAndGraph() -> [Float64] {
+        let ud = UserDefaults.standard
+        let locate = ud.string(forKey: "Location")!
+        let date = ud.string(forKey: "Date")!
+        let time = ud.string(forKey: "Time")! + ":00"
+        let u = ud.string(forKey: "Duration")!
+        let duration = String(Float64(u)! * 3600)
         
         var station = ""
         var net = ""
@@ -195,12 +195,13 @@ class LoadingScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        graphData = self.getSoundAndGraph(locate: inputLocation, date: inputDate, time: inputTime)
+        graphData = self.getSoundAndGraph()
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoadingLabel.text! = "Loading Data From " + inputLocation + "..."
+        let ud = UserDefaults.standard
+        LoadingLabel.text! = "Loading Data From " + ud.string(forKey: "Location")! + "..."
     }
 }
