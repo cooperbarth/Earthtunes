@@ -3,12 +3,16 @@ import Foundation
 
 class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var LocationField: UIPickerView!
-    @IBOutlet weak var DateField: UITextField!
+    @IBOutlet weak var DateField: UIDatePicker!
     @IBOutlet weak var TimeField: UITextField!
     @IBOutlet weak var DurationField: UITextField!
     
+    @IBAction func DateChanged(_ sender: Any) {
+        ud.set(df.string(from: DateField.date), forKey: "Date")
+        print("hello")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        ud.set(DateField.text!, forKey: "Date")
         ud.set(TimeField.text!, forKey: "Time")
         ud.set(DurationField.text!, forKey: "Duration")
     }
@@ -44,7 +48,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
-    //Scroll Menu Setup
+    //Location Picker Setup
     let ScrollMenuData = ["Ryerson (IL,USA)",
                           "Yellowstone (WY,USA)",
                           "Anchorage (AK,USA)",
@@ -68,8 +72,9 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         ud.set(ScrollMenuData[row], forKey: "Location")
     }
     
+    //Date Picker Setup
     override func validInputs() -> Bool {
-        if (DateField.text == "" || TimeField.text == "" || TimeField.text == "") {return false}
+        if (TimeField.text == "" || DurationField.text == "") {return false}
         return true
     }
     
@@ -79,8 +84,16 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         LocationField.delegate = self
         LocationField.dataSource = self
         
+        DateField.maximumDate = Date()
+        df.dateFormat = "YYYY-MM-dd"
+        
+        addDoneButton()
+        
+        if (ud.string(forKey: "Location") == nil) {
+            ud.set("Ryerson (IL,USA)", forKey: "Location")
+        }
         if (ud.string(forKey: "Date") == nil) {
-            ud.set("2018-07-07", forKey: "Date")
+            ud.set(df.string(from: Date()), forKey: "Date")
         }
         if (ud.string(forKey: "Time") == nil) {
             ud.set("00:00", forKey: "Time")
@@ -89,11 +102,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("3", forKey: "Duration")
         }
         LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
-        DateField.text! = ud.string(forKey: "Date")!
+        DateField.date = df.date(from: ud.string(forKey: "Date")!)!
         TimeField.text! = ud.string(forKey: "Time")!
         DurationField.text! = ud.string(forKey: "Duration")!
-        
-        addDoneButton()
-
     }
 }

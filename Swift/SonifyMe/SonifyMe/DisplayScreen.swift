@@ -5,11 +5,6 @@ import AudioToolbox
 import CorePlot
 
 class DisplayScreen : ViewController, AVAudioPlayerDelegate {
-    var data : [Float64] = [Float64]()
-    var imgg : UIImage = UIImage()
-    var yMax : Float64 = 0.0
-    var yMin : Float64 = 0.0
-    var TitleText : String = "Seismic Data"
     
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
@@ -17,6 +12,9 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var PlayButton: UIButton!
     @IBOutlet weak var FFButton: UIButton!
     @IBOutlet weak var RewindButton: UIButton!
+    
+    let data = UserDefaults.standard.array(forKey: "Data")!
+    let yMax = UserDefaults.standard.double(forKey: "Max")
     
     @IBAction func PauseButtonPressed(_ sender: Any) {
         pauseSound()
@@ -97,7 +95,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         initplot()
-        GraphTitle.text = TitleText
+        GraphTitle.text = ud.string(forKey: "Title")
         SoundSlideLayout.value = 0.0
     }
     
@@ -136,6 +134,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         
         let xMin = 0.0
         let xMax = Double(data.count)
+        let yMin = -yMax
         guard let plotSpace = graph.defaultPlotSpace as? CPTXYPlotSpace else {return}
         plotSpace.xRange = CPTPlotRange(locationDecimal: CPTDecimalFromDouble(xMin), lengthDecimal: CPTDecimalFromDouble(xMax - xMin))
         plotSpace.yRange = CPTPlotRange(locationDecimal: CPTDecimalFromDouble(yMin), lengthDecimal: CPTDecimalFromDouble(yMax - yMin))
@@ -170,7 +169,7 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         case .X?:
             return idx
         case .Y?:
-            return self.data[Int(idx)] as NSNumber
+            return self.data[Int(idx)] as! NSNumber
         default:
             return 0.0 as NSNumber
         }

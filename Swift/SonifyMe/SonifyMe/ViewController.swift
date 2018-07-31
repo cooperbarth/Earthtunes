@@ -3,11 +3,25 @@ import AVKit
 import Foundation
 import AudioToolbox
 
+/*
+ Things to Implement:
+ -Input Error Checking/Change Input Types
+    -Future Dates
+    -Invalid URL dates/stations/whatever
+ -Aesthetics
+ -Graph Axes
+ -Suggestion Screen
+ -Repeated inputs/requests
+ -Fix for non-iPhone 8
+ -Put tips as to what the advanced options actually do
+ */
+
 class ViewController: UIViewController {
     let ud = UserDefaults.standard
     let url = Bundle.main.url(forResource: "sound", withExtension: "wav")
     let imgUrl = Bundle.main.url(forResource: "img", withExtension: "jpeg")
     var player : AVAudioPlayer?
+    let df = DateFormatter()
 
     func isNumber(num:String) -> Bool {
         if (Float(num) != nil) {return true}

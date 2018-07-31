@@ -4,6 +4,9 @@ import Foundation
 import AudioToolbox
 
 class LoadingScreen : ViewController {
+    @IBOutlet weak var LoadingLabel: UILabel!
+    @IBOutlet weak var Spinner: UIActivityIndicatorView!
+    
     let locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")! + ":00"
@@ -16,17 +19,10 @@ class LoadingScreen : ViewController {
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     
-    var graphData : [Float64] = [Float64]()
-    var mxs : Float64 = 0.0
-    var passTitle : String = "Seismic Data"
-    var passImgURL : String = ""
     var fsps : Double = 0.0
     var bandsHZ : Double = 0.0
     
-    @IBOutlet weak var LoadingLabel: UILabel!
-    @IBOutlet weak var Spinner: UIActivityIndicatorView!
-    
-    func getSoundAndGraph() -> [Float64] {
+    func getSoundAndGraph() {
         var station = ""
         var net = ""
         var location = ""
@@ -78,7 +74,7 @@ class LoadingScreen : ViewController {
                 print("Defaulting to Ryerson Station...")
                 break
         }
-        passTitle = locate
+        ud.set(locate, forKey: "Title")
         
         let graphType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputGChannel
         let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputSChannel
@@ -106,9 +102,9 @@ class LoadingScreen : ViewController {
                 print("Invalid URL for Graph")
             }
             let g32 = processData(data: dfGraph)
-            return g32
+            ud.set(g32, forKey: "Data")
         } else {
-            return s32
+            ud.set(s32, forKey: "Data")
         }
     }
     
@@ -150,7 +146,8 @@ class LoadingScreen : ViewController {
             marker = marker + increment
         }
         
-        mxs = 1.01*Double(Float64((2^31))*atan(maxAmp/fixedamp)/halfpi)
+        let mxs = 1.01*Double(Float64((2^31))*atan(maxAmp/fixedamp)/halfpi)
+        ud.set(mxs, forKey: "Max")
         var s32 = [Float64]()
         for ii in 0..<sound.count {
             s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/halfpi)
@@ -184,19 +181,9 @@ class LoadingScreen : ViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if ((segue.destination as? DisplayScreen) != nil) {
-            let displayScreen = segue.destination as? DisplayScreen
-            displayScreen?.data = graphData
-            displayScreen?.yMax = mxs
-            displayScreen?.yMin = -mxs
-            displayScreen?.TitleText = passTitle
-        }
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        graphData = self.getSoundAndGraph()
+        self.getSoundAndGraph()
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
