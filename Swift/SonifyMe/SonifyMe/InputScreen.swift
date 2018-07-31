@@ -2,44 +2,15 @@ import UIKit
 import Foundation
 
 class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    var freq : Int = 4
-    var amp : String = "0.0001"
-    var rate : String = "1.0"
-    var hp : String = "0.001"
-    var schannel : Int = 0
-    var gchannel : Int = 1
-    
-    var freqvalue : String = "20 Hz"
-    var svalue : String = "BHZ"
-    var gvalue : String = "LHZ"
-    
     @IBOutlet weak var LocationField: UIPickerView!
     @IBOutlet weak var DateField: UITextField!
     @IBOutlet weak var TimeField: UITextField!
     @IBOutlet weak var DurationField: UITextField!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let ud = UserDefaults.standard
         ud.set(DateField.text!, forKey: "Date")
         ud.set(TimeField.text!, forKey: "Time")
         ud.set(DurationField.text!, forKey: "Duration")
-        if ((segue.destination as? LoadingScreen) != nil) {
-            let loadingScreen = segue.destination as? LoadingScreen
-            loadingScreen?.inputFreq = freqvalue
-            loadingScreen?.inputAmp = amp
-            loadingScreen?.inputRate = rate
-            loadingScreen?.inputHP = hp
-            loadingScreen?.inputSChannel = svalue
-            loadingScreen?.inputGChannel = gvalue
-        } else if ((segue.destination as? AdvancedScreen) != nil) {
-            let advancedScreen = segue.destination as? AdvancedScreen
-            advancedScreen?.inpFreq = freq
-            advancedScreen?.inpAmp = amp
-            advancedScreen?.inpRate = rate
-            advancedScreen?.inpHP = hp
-            advancedScreen?.inpSChannel = schannel
-            advancedScreen?.inpGChannel = gchannel
-        }
     }
     
     @IBAction func AdvancedPressed(_ sender: Any) {
@@ -108,28 +79,21 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         LocationField.delegate = self
         LocationField.dataSource = self
         
-        let ud = UserDefaults.standard
-        let l = ud.integer(forKey: "Location Index")
-        LocationField.selectRow(l, inComponent: 0, animated: false)
-        let d = ud.string(forKey: "Date")
-        let t = ud.string(forKey: "Time")
-        let u = ud.string(forKey: "Duration")
-        if (d == nil) {
+        if (ud.string(forKey: "Date") == nil) {
             ud.set("2018-07-07", forKey: "Date")
         }
-        if (t == nil) {
+        if (ud.string(forKey: "Time") == nil) {
             ud.set("00:00", forKey: "Time")
         }
-        if (u == nil) {
-            ud.set("6", forKey: "Duration")
+        if (ud.string(forKey: "Duration") == nil) {
+            ud.set("3", forKey: "Duration")
         }
-        
+        LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
         DateField.text! = ud.string(forKey: "Date")!
         TimeField.text! = ud.string(forKey: "Time")!
         DurationField.text! = ud.string(forKey: "Duration")!
         
         addDoneButton()
-        
 
     }
 }

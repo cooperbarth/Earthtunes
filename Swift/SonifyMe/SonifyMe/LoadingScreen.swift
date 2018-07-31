@@ -4,12 +4,17 @@ import Foundation
 import AudioToolbox
 
 class LoadingScreen : ViewController {
-    var inputFreq = ""
-    var inputAmp = ""
-    var inputRate = "" //doesn't do anything yet
-    var inputHP = ""
-    var inputSChannel = ""
-    var inputGChannel = ""
+    let locate = UserDefaults.standard.string(forKey: "Location")!
+    let date = UserDefaults.standard.string(forKey: "Date")!
+    let time = UserDefaults.standard.string(forKey: "Time")! + ":00"
+    let duration = String(Float64(UserDefaults.standard.string(forKey: "Duration")!)! * 3600)
+    
+    let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
+    let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
+    let inputHP = UserDefaults.standard.string(forKey: "HP")!
+    let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
+    let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     
     var graphData : [Float64] = [Float64]()
     var mxs : Float64 = 0.0
@@ -22,13 +27,6 @@ class LoadingScreen : ViewController {
     @IBOutlet weak var Spinner: UIActivityIndicatorView!
     
     func getSoundAndGraph() -> [Float64] {
-        let ud = UserDefaults.standard
-        let locate = ud.string(forKey: "Location")!
-        let date = ud.string(forKey: "Date")!
-        let time = ud.string(forKey: "Time")! + ":00"
-        let u = ud.string(forKey: "Duration")!
-        let duration = String(Float64(u)! * 3600)
-        
         var station = ""
         var net = ""
         var location = ""
@@ -87,6 +85,7 @@ class LoadingScreen : ViewController {
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
         
         let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
+        
         var dfGraph = ""
         do {
             dfGraph = try String(contentsOf: URL(string: graphUrl)!)
@@ -94,12 +93,12 @@ class LoadingScreen : ViewController {
             print("Invalid URL for Graph")
         }
         
-        let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&hp=0.001&scale=auto&output=ascii1"
+        let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
         var dfSound = ""
         do {
             dfSound = try String(contentsOf: URL(string: soundUrl)!)
         } catch {
-            print("Invalid URL for Graph")
+            print("Invalid URL for Sound")
         }
         
         let g32 = processData(data: dfGraph)

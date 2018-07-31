@@ -1,14 +1,7 @@
 import UIKit
 import Foundation
 
-class AdvancedScreen : ViewController {
-    var inpFreq : Int = 4
-    var inpAmp : String = "0.0001"
-    var inpRate : String = "1.0"
-    var inpHP : String = "0.001"
-    var inpSChannel : Int = 0
-    var inpGChannel : Int = 1
-    
+class AdvancedScreen : ViewController {    
     @IBOutlet weak var Freq: UISegmentedControl!
     @IBOutlet weak var Amp: UITextField!
     @IBOutlet weak var Rate: UITextField!
@@ -24,29 +17,61 @@ class AdvancedScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Freq.selectedSegmentIndex = inpFreq
-        Amp.text = inpAmp
-        Rate.text = inpRate
-        HP.text = inpHP
-        SChannel.selectedSegmentIndex = inpSChannel
-        GChannel.selectedSegmentIndex = inpGChannel
+        
+        if (ud.string(forKey: "Amplitude") == nil) {
+            ud.set("0.0001", forKey: "Amplitude")
+        }
+        if (ud.string(forKey: "Rate") == nil) {
+            ud.set("1.0", forKey: "Rate")
+        }
+        if (ud.string(forKey: "HP") == nil) {
+            ud.set("0.001", forKey: "HP")
+        }
+        
+        if (ud.string(forKey: "First") == nil) {
+            ud.set(4, forKey: "FreqIndex")
+            ud.set(0, forKey: "SCIndex")
+            ud.set(1, forKey: "GCIndex")
+            ud.set("Set", forKey: "First")
+        }
+        fillIn()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if ((segue.destination as? InputScreen) != nil) {
-            let inputScreen = segue.destination as? InputScreen
-            
-            inputScreen?.freq = Freq.selectedSegmentIndex
-            inputScreen?.amp = Amp.text!
-            inputScreen?.rate = Rate.text!
-            inputScreen?.hp = HP.text!
-            inputScreen?.schannel = SChannel.selectedSegmentIndex
-            inputScreen?.gchannel = GChannel.selectedSegmentIndex
-            
-            inputScreen?.freqvalue = Freq.titleForSegment(at: Freq.selectedSegmentIndex)!
-            inputScreen?.svalue = SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!
-            inputScreen?.gvalue = GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!
-        }
+        ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
+        ud.set(Amp.text!, forKey: "Amplitude")
+        ud.set(Rate.text!, forKey: "Rate")
+        ud.set(HP.text!, forKey: "HP")
+        ud.set(SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!, forKey: "SChannel")
+        ud.set(GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!, forKey: "GChannel")
+        
+        ud.set(Freq.selectedSegmentIndex, forKey: "FreqIndex")
+        ud.set(SChannel.selectedSegmentIndex, forKey: "SCIndex")
+        ud.set(GChannel.selectedSegmentIndex, forKey: "GCIndex")
+    }
+    
+    @IBAction func ResetDefaults(_ sender: Any) {
+        ud.set(4, forKey: "FreqIndex")
+        ud.set("0.0001", forKey: "Amplitude")
+        ud.set("1.0", forKey: "Rate")
+        ud.set("0.001", forKey: "HP")
+        ud.set(0, forKey: "SCIndex")
+        ud.set(1, forKey: "GCIndex")
+
+        fillIn()
+        
+        ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
+        ud.set(SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!, forKey: "SChannel")
+        ud.set(GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!, forKey: "GChannel")
+    }
+    
+    func fillIn() {
+        Freq.selectedSegmentIndex = ud.integer(forKey: "FreqIndex")
+        Amp.text = ud.string(forKey: "Amplitude")
+        Rate.text = ud.string(forKey: "Rate")
+        HP.text = ud.string(forKey: "HP")
+        SChannel.selectedSegmentIndex = ud.integer(forKey: "SCIndex")
+        GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
     }
     
     @IBAction func ReturnButton(_ sender: Any) {

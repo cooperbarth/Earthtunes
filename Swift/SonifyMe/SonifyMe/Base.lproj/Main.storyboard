@@ -98,7 +98,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyb-bj-gAM">
-                                <rect key="frame" x="124.5" y="637" width="126" height="30"/>
+                                <rect key="frame" x="124.5" y="626" width="126" height="30"/>
                                 <state key="normal" title="Advanced Options"/>
                                 <connections>
                                     <action selector="AdvancedPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oBI-ba-WUn"/>
@@ -117,7 +117,7 @@
                             <constraint firstItem="On6-n7-VNJ" firstAttribute="top" secondItem="KFP-fK-QLU" secondAttribute="bottom" constant="28" id="Bt3-np-9IF"/>
                             <constraint firstItem="2fb-gI-jCh" firstAttribute="top" secondItem="2wP-Ta-uhh" secondAttribute="bottom" constant="16" id="IVg-fz-V8M"/>
                             <constraint firstItem="7XT-FV-SdI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="ZPa-q0-687"/>
-                            <constraint firstItem="Vyb-bj-gAM" firstAttribute="top" secondItem="2fb-gI-jCh" secondAttribute="bottom" constant="56" id="Zcn-VE-LkJ"/>
+                            <constraint firstItem="Vyb-bj-gAM" firstAttribute="top" secondItem="2fb-gI-jCh" secondAttribute="bottom" constant="45" id="Zcn-VE-LkJ"/>
                             <constraint firstItem="2aj-Cx-t33" firstAttribute="top" secondItem="CNF-vs-PLB" secondAttribute="bottom" constant="26" id="cUW-iy-JmJ"/>
                             <constraint firstItem="wMu-KE-ETd" firstAttribute="top" secondItem="7XT-FV-SdI" secondAttribute="bottom" constant="20" id="h2U-cK-zRC"/>
                             <constraint firstItem="1uK-sq-fQY" firstAttribute="top" secondItem="wMu-KE-ETd" secondAttribute="bottom" constant="50" id="ngq-Ka-BG8"/>
@@ -250,6 +250,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-qg-R60">
                                 <rect key="frame" x="129" y="605" width="118" height="30"/>
                                 <state key="normal" title="Reset to Defaults"/>
+                                <connections>
+                                    <action selector="ResetDefaults:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="fYG-eN-F8T"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
                                 <rect key="frame" x="165" y="637" width="46" height="30"/>
