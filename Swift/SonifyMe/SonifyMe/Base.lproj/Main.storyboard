@@ -28,7 +28,7 @@
         <!--Input Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="InputScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Input Screen" id="BYZ-38-t0r" customClass="InputScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -93,12 +93,6 @@
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="554744015.83097601">
                                     <!--2018-07-31 15:33:35 +0000-->
-                                </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="126270000">
-                                    <!--2005-01-01 11:00:00 +0000-->
-                                </date>
-                                <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
-                                    <!--2037-12-31 11:00:00 +0000-->
                                 </date>
                                 <connections>
                                     <action selector="DateChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="jrD-t1-DBa"/>
@@ -321,6 +315,111 @@
             </objects>
             <point key="canvasLocation" x="674" y="736"/>
         </scene>
+        <!--Input Error Screen-->
+        <scene sceneID="Tjm-K9-JZW">
+            <objects>
+                <viewController storyboardIdentifier="Input Error" id="3MG-UW-a0R" customClass="InputErrorScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="d8Y-wp-uqE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tTJ-6K-Rbo">
+                                <rect key="frame" x="67" y="195" width="240" height="175"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Input Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gBL-Rb-Gpr">
+                                        <rect key="frame" x="80" y="51" width="81" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="82p-gk-B1I"/>
+                                    <constraint firstAttribute="height" constant="175" id="9aD-jb-der"/>
+                                    <constraint firstItem="gBL-Rb-Gpr" firstAttribute="centerX" secondItem="tTJ-6K-Rbo" secondAttribute="centerX" id="x3u-70-nBj"/>
+                                    <constraint firstItem="gBL-Rb-Gpr" firstAttribute="top" secondItem="tTJ-6K-Rbo" secondAttribute="top" constant="51" id="yic-Zq-s2W"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wuq-M8-tEa">
+                                <rect key="frame" x="168" y="306" width="39" height="30"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="CloseButton:" destination="3MG-UW-a0R" eventType="touchUpInside" id="qUl-F6-ADP"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="tTJ-6K-Rbo" firstAttribute="top" secondItem="HDx-KI-oCM" secondAttribute="top" constant="175" id="4Sd-ML-IP1"/>
+                            <constraint firstItem="tTJ-6K-Rbo" firstAttribute="centerX" secondItem="d8Y-wp-uqE" secondAttribute="centerX" id="ck4-GP-9Rb"/>
+                            <constraint firstItem="Wuq-M8-tEa" firstAttribute="centerX" secondItem="d8Y-wp-uqE" secondAttribute="centerX" id="qu9-Cb-49T"/>
+                            <constraint firstItem="Wuq-M8-tEa" firstAttribute="top" secondItem="gBL-Rb-Gpr" secondAttribute="bottom" constant="39" id="sSl-Ve-BHb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="HDx-KI-oCM"/>
+                    </view>
+                    <connections>
+                        <outlet property="InputErrorLabel" destination="gBL-Rb-Gpr" id="uKi-aY-8Px"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="82R-rd-LZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-95.200000000000003" y="59.820089955022496"/>
+        </scene>
+        <!--Error404 Screen-->
+        <scene sceneID="VhE-wf-msJ">
+            <objects>
+                <viewController storyboardIdentifier="Error 404" id="5W9-Fh-qkL" customClass="Error404Screen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="hjn-Yp-TjS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="26Y-3I-yFd">
+                                <rect key="frame" x="67" y="195" width="240" height="175"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error 404" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qgu-XU-Xhk">
+                                        <rect key="frame" x="83.5" y="51" width="73.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Qgu-XU-Xhk" firstAttribute="top" secondItem="26Y-3I-yFd" secondAttribute="top" constant="51" id="464-w2-rFQ"/>
+                                    <constraint firstAttribute="width" constant="240" id="aac-qU-0uL"/>
+                                    <constraint firstItem="Qgu-XU-Xhk" firstAttribute="centerX" secondItem="26Y-3I-yFd" secondAttribute="centerX" id="ben-k6-59Q"/>
+                                    <constraint firstAttribute="height" constant="175" id="brd-BI-oMg"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T2u-i6-mlN">
+                                <rect key="frame" x="168" y="305" width="39" height="30"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="CloseButton:" destination="3MG-UW-a0R" eventType="touchUpInside" id="19K-a0-5Td"/>
+                                    <action selector="CloseButton:" destination="5W9-Fh-qkL" eventType="touchUpInside" id="pJk-gh-5Qe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="26Y-3I-yFd" firstAttribute="centerX" secondItem="hjn-Yp-TjS" secondAttribute="centerX" id="1UG-Mi-9Lr"/>
+                            <constraint firstItem="T2u-i6-mlN" firstAttribute="top" secondItem="Qgu-XU-Xhk" secondAttribute="bottom" constant="39" id="B8o-8Q-5Pz"/>
+                            <constraint firstItem="26Y-3I-yFd" firstAttribute="top" secondItem="YKV-C7-pkK" secondAttribute="top" constant="175" id="Fnc-R6-y7l"/>
+                            <constraint firstItem="T2u-i6-mlN" firstAttribute="centerX" secondItem="hjn-Yp-TjS" secondAttribute="centerX" id="gh8-JY-MKy"/>
+                            <constraint firstItem="26Y-3I-yFd" firstAttribute="top" secondItem="YKV-C7-pkK" secondAttribute="top" constant="175" id="zYf-L3-sAo"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YKV-C7-pkK"/>
+                    </view>
+                    <connections>
+                        <outlet property="InputErrorLabel" destination="Qgu-XU-Xhk" id="Qkd-nU-ZKA"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="Finished404" id="uSE-zc-9LE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lPa-UV-T6X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="-629"/>
+        </scene>
         <!--Loading Screen-->
         <scene sceneID="psx-1Q-nVD">
             <objects>
@@ -352,11 +451,12 @@
                         <outlet property="LoadingLabel" destination="OTG-ax-qu6" id="GHJ-jJ-QcL"/>
                         <outlet property="Spinner" destination="YW0-QI-0l3" id="3pM-ad-9kL"/>
                         <segue destination="0vR-sf-a3A" kind="presentation" identifier="ToDisplay" id="g2J-KY-UGA"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" id="clo-7X-v36"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1E-EU-c7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1415" y="60"/>
+            <point key="canvasLocation" x="1414" y="60"/>
         </scene>
         <!--Display Screen-->
         <scene sceneID="UAs-7B-U0g">
@@ -466,7 +566,6 @@
                         <outlet property="RewindButton" destination="NvE-cE-gFq" id="5Gd-xZ-2Dc"/>
                         <outlet property="SoundSlideLayout" destination="vWu-Zt-Aje" id="d1s-BO-OTO"/>
                         <outlet property="hostView" destination="7Rb-o0-4gi" id="5dw-fZ-05G"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="pqc-BN-sav"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vba-Ps-Qml" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -481,6 +580,6 @@
         <image name="Rewind" width="183" height="184"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lar-ca-Cwf"/>
+        <segue reference="uSE-zc-9LE"/>
     </inferredMetricsTieBreakers>
 </document>

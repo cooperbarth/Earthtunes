@@ -16,8 +16,15 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func ButtonPressed(_ sender: Any) {
+        view.endEditing(true)
         if (validInputs()) {
             performSegue(withIdentifier: "ToLoading", sender: self)
+        } else {
+            let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Input Error") as! InputErrorScreen
+            self.addChildViewController(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParentViewController: self)
         }
     }
     

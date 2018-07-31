@@ -87,7 +87,8 @@ class LoadingScreen : ViewController {
         do {
             dfSound = try String(contentsOf: URL(string: soundUrl)!)
         } catch {
-            print("Invalid URL for Sound")
+            showError404()
+            return
         }
         
         let s32 = processData(data: dfSound)
@@ -99,13 +100,15 @@ class LoadingScreen : ViewController {
             do {
                  dfGraph = try String(contentsOf: URL(string: graphUrl)!)
             } catch {
-                print("Invalid URL for Graph")
+                showError404()
+                return
             }
             let g32 = processData(data: dfGraph)
             ud.set(g32, forKey: "Data")
         } else {
             ud.set(s32, forKey: "Data")
         }
+        performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
     func processData(data: String) -> [Float64] {
@@ -181,10 +184,17 @@ class LoadingScreen : ViewController {
         }
     }
     
+    func showError404() {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Error 404") as! Error404Screen
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         self.getSoundAndGraph()
-        performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
     override func viewDidLoad() {

@@ -5,9 +5,7 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Input Error Checking/Change Input Types
-    -Future Dates
-    -Invalid URL dates/stations/whatever
+ -Invalid URL dates/stations/whatever
  -Aesthetics
  -Graph Axes
  -Suggestion Screen

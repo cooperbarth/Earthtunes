@@ -8,13 +8,7 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var HP: UITextField!
     @IBOutlet weak var SChannel: UISegmentedControl!
     @IBOutlet weak var GChannel: UISegmentedControl!
-    
-    func validInputs() -> Bool {
-        if (Amp.text == "" || Rate.text == "" || HP.text == "") {return false}
-        if (!isNumber(num: Amp.text!) || !isNumber(num: Rate.text!) || !isNumber(num: HP.text!)) {return false}
-        return true
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -79,8 +73,20 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func ReturnButton(_ sender: Any) {
+        view.endEditing(true)
         if (validInputs()) {
             performSegue(withIdentifier: "SetAdvanced", sender: self)
+        } else {
+            let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Input Error") as! InputErrorScreen
+            self.addChildViewController(popOverVC)
+            popOverVC.view.frame = self.view.frame
+            self.view.addSubview(popOverVC.view)
+            popOverVC.didMove(toParentViewController: self)
         }
+    }
+    
+    func validInputs() -> Bool {
+        if (Amp.text == "" || Rate.text == "" || HP.text == "") {return false}
+        return true
     }
 }
