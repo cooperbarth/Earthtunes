@@ -86,13 +86,6 @@ class LoadingScreen : ViewController {
         
         let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
         
-        var dfGraph = ""
-        do {
-            dfGraph = try String(contentsOf: URL(string: graphUrl)!)
-        } catch {
-            print("Invalid URL for Graph")
-        }
-        
         let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
         var dfSound = ""
         do {
@@ -101,13 +94,22 @@ class LoadingScreen : ViewController {
             print("Invalid URL for Sound")
         }
         
-        let g32 = processData(data: dfGraph)
-        
         let s32 = processData(data: dfSound)
         let ssps = bandsHZ * fsps
         saveFile(buff: s32, sample_rate: ssps)
         
-        return g32
+        if (graphUrl != soundUrl) {
+            var dfGraph : String = ""
+            do {
+                 dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+            } catch {
+                print("Invalid URL for Graph")
+            }
+            let g32 = processData(data: dfGraph)
+            return g32
+        } else {
+            return s32
+        }
     }
     
     func processData(data: String) -> [Float64] {
@@ -200,7 +202,6 @@ class LoadingScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let ud = UserDefaults.standard
         LoadingLabel.text! = "Loading Data From " + ud.string(forKey: "Location")! + "..."
     }
 }
