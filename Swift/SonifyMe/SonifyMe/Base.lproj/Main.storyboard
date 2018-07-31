@@ -111,7 +111,7 @@
                                 </connections>
                             </datePicker>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SonifyMe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
-                                <rect key="frame" x="113" y="28" width="148" height="43"/>
+                                <rect key="frame" x="113" y="35" width="148" height="43"/>
                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -123,7 +123,7 @@
                             <constraint firstItem="2aj-Cx-t33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3QC-nn-iS7"/>
                             <constraint firstItem="7XT-FV-SdI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3QJ-ge-OEy"/>
                             <constraint firstItem="1uK-sq-fQY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3af-ho-upG"/>
-                            <constraint firstItem="nKg-xr-ve2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="4CO-uA-foM"/>
+                            <constraint firstItem="nKg-xr-ve2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="4CO-uA-foM"/>
                             <constraint firstItem="2fb-gI-jCh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4zv-bX-jQT"/>
                             <constraint firstItem="1fX-hj-buG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8og-ab-eJC"/>
                             <constraint firstItem="On6-n7-VNJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BiH-w0-Yga"/>
@@ -421,7 +421,7 @@
                     </view>
                     <connections>
                         <outlet property="InputErrorLabel" destination="Qgu-XU-Xhk" id="Qkd-nU-ZKA"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="Finished404" id="uSE-zc-9LE"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="Finished404" id="uSE-zc-9LE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lPa-UV-T6X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -431,27 +431,37 @@
         <!--Loading Screen-->
         <scene sceneID="psx-1Q-nVD">
             <objects>
-                <viewController id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Loading Screen" id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lk4-EY-kWO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
-                                <rect key="frame" x="150" y="263" width="75" height="20.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7J-Pe-S8s">
+                                <rect key="frame" x="67" y="195" width="240" height="175"/>
+                                <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="RsB-zc-PsH"/>
+                                    <constraint firstAttribute="height" constant="175" id="aUO-FD-fs1"/>
+                                </constraints>
+                            </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
+                                <rect key="frame" x="177.5" y="295.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
+                                <rect key="frame" x="150" y="250" width="75" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
-                                <rect key="frame" x="177.5" y="293.5" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OTG-ax-qu6" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="243" id="3v6-7g-qlc"/>
+                            <constraint firstItem="OTG-ax-qu6" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="230" id="3v6-7g-qlc"/>
                             <constraint firstItem="OTG-ax-qu6" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="4Iz-5E-O1U"/>
+                            <constraint firstItem="a7J-Pe-S8s" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="4um-94-XQl"/>
+                            <constraint firstItem="a7J-Pe-S8s" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="175" id="biL-dO-1Sj"/>
                             <constraint firstItem="YW0-QI-0l3" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="sZW-2V-CKx"/>
-                            <constraint firstItem="YW0-QI-0l3" firstAttribute="top" secondItem="OTG-ax-qu6" secondAttribute="bottom" constant="10" id="ufc-9b-STb"/>
+                            <constraint firstItem="YW0-QI-0l3" firstAttribute="top" secondItem="OTG-ax-qu6" secondAttribute="bottom" constant="25" id="ufc-9b-STb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3tH-mJ-Hx7"/>
                     </view>
@@ -459,7 +469,6 @@
                         <outlet property="LoadingLabel" destination="OTG-ax-qu6" id="GHJ-jJ-QcL"/>
                         <outlet property="Spinner" destination="YW0-QI-0l3" id="3pM-ad-9kL"/>
                         <segue destination="0vR-sf-a3A" kind="presentation" identifier="ToDisplay" id="g2J-KY-UGA"/>
-                        <segue destination="BYZ-38-t0r" kind="presentation" id="clo-7X-v36"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1E-EU-c7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -574,6 +583,7 @@
                         <outlet property="RewindButton" destination="NvE-cE-gFq" id="5Gd-xZ-2Dc"/>
                         <outlet property="SoundSlideLayout" destination="vWu-Zt-Aje" id="d1s-BO-OTO"/>
                         <outlet property="hostView" destination="7Rb-o0-4gi" id="5dw-fZ-05G"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="O0B-H3-m4Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vba-Ps-Qml" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -588,6 +598,6 @@
         <image name="Rewind" width="183" height="184"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="clo-7X-v36"/>
+        <segue reference="uSE-zc-9LE"/>
     </inferredMetricsTieBreakers>
 </document>

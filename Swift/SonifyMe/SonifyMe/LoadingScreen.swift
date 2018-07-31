@@ -199,6 +199,8 @@ class LoadingScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LoadingLabel.text! = "Loading Data From " + ud.string(forKey: "Location")! + "..."
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        self.showAnimate()
     }
 }

@@ -77,8 +77,8 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func BackButton(_ sender: Any) {
-        pauseSound()
         performSegue(withIdentifier: "BackToInput", sender: self)
+        pauseSound()
     }
     
     override func viewDidAppear(_ animated: Bool) {
