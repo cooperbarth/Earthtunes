@@ -5,7 +5,6 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Make Loading Screen a popup
  -Add error description to Input Error popup
  -Aesthetics
  -Graph Axes
@@ -41,7 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { // return NO to not change text
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch string {
         case "0","1","2","3","4","5","6","7","8","9":
             return true

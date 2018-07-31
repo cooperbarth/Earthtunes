@@ -7,7 +7,7 @@ class LoadingScreen : ViewController {
     @IBOutlet weak var LoadingLabel: UILabel!
     @IBOutlet weak var Spinner: UIActivityIndicatorView!
     
-    let locate = UserDefaults.standard.string(forKey: "Location")!
+    var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")! + ":00"
     let duration = String(Float64(UserDefaults.standard.string(forKey: "Duration")!)! * 3600)
@@ -68,10 +68,10 @@ class LoadingScreen : ViewController {
                 location = "10"
                 break
             default:
+                locate = "Ryerson (IL,USA)"
                 station = "L44A"
                 net = "TA"
                 location = "--"
-                print("Defaulting to Ryerson Station...")
                 break
         }
         ud.set(locate, forKey: "Title")

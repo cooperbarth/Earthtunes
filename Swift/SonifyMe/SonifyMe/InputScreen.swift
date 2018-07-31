@@ -40,6 +40,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIView.setAnimationsEnabled(true)
         
         LocationField.delegate = self
         LocationField.dataSource = self

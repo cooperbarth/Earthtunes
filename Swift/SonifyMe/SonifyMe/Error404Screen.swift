@@ -6,6 +6,7 @@ class Error404Screen : ViewController {
     
     @IBAction func CloseButton(_ sender: Any) {
         self.removeAnimate()
+        UIView.setAnimationsEnabled(false)
         performSegue(withIdentifier: "Finished404", sender: self)
     }
     
