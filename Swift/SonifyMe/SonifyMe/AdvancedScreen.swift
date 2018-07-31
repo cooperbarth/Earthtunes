@@ -1,7 +1,7 @@
 import UIKit
 import Foundation
 
-class AdvancedScreen : ViewController {    
+class AdvancedScreen : ViewController {
     @IBOutlet weak var Freq: UISegmentedControl!
     @IBOutlet weak var Amp: UITextField!
     @IBOutlet weak var Rate: UITextField!

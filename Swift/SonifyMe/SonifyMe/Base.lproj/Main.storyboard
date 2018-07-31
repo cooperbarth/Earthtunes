@@ -182,11 +182,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
-                                <rect key="frame" x="125" y="548" width="125" height="29"/>
+                                <rect key="frame" x="146" y="548" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
-                                    <segment title="VHZ"/>
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graph Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-Pc-6co">
@@ -229,11 +228,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
-                                <rect key="frame" x="125" y="463" width="125" height="29"/>
+                                <rect key="frame" x="146" y="463" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
-                                    <segment title="VHZ"/>
                                 </segments>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="4" translatesAutoresizingMaskIntoConstraints="NO" id="nvp-mp-dIE">
