@@ -70,10 +70,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         DurationField.text! = ud.string(forKey: "Duration")!
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-    }
-    
     func validInputs() -> Bool {
         if (DurationField.text! == "") {return false}
         if (Double(DurationField.text!)!) > 24.0 {return false}
