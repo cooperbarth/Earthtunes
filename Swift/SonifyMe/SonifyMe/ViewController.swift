@@ -5,11 +5,12 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Invalid URL dates/stations/whatever
+ -Make Loading Screen a popup
+ -Add error description to Input Error popup
  -Aesthetics
  -Graph Axes
  -Suggestion Screen
- -Repeated inputs/requests
+ -No loading for repeated inputs/requests
  -Fix for non-iPhone 8
  -Put tips as to what the advanced options actually do
  */
