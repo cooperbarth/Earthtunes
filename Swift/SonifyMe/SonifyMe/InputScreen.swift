@@ -36,6 +36,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         
         LocationField.delegate = self
         LocationField.dataSource = self
+        DurationField.delegate = self
         
         DateField.maximumDate = Date()
         df1.dateFormat = "YYYY-MM-dd"
@@ -66,11 +67,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func validInputs() -> Bool {
-        if (DurationField.text == "") {return false}
+        if (DurationField.text! == "") {return false}
+        if (Double(DurationField.text!)!) > 24.0 {return false}
         return true
     }
-    
-    
     
     //Location Picker Setup
     let ScrollMenuData = ["Ryerson (IL,USA)",

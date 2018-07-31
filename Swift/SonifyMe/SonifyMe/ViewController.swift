@@ -16,13 +16,14 @@ import AudioToolbox
  -Put tips as to what the advanced options actually do
  */
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     let ud = UserDefaults.standard
     let url = Bundle.main.url(forResource: "sound", withExtension: "wav")
     let imgUrl = Bundle.main.url(forResource: "img", withExtension: "jpeg")
     var player : AVAudioPlayer?
     let df1 = DateFormatter()
     let df2 = DateFormatter()
+    var count = 0
 
     func isNumber(num:String) -> Bool {
         if (Float(num) != nil) {return true}
@@ -39,6 +40,22 @@ class ViewController: UIViewController {
         let lastChar = String(theNum[num.index(num.startIndex, offsetBy: num.count - 1)])
         if (!isNumber(num: lastChar)) {return false}
         return true
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool { // return NO to not change text
+        switch string {
+        case "0","1","2","3","4","5","6","7","8","9":
+            return true
+        case ".":
+            var decimalCount = 0
+            for character in textField.text! {
+                if character == "." {decimalCount += 1}}
+            if decimalCount == 1 {return false}
+            return true
+        default:
+            if string.count == 0 {return true}
+            return false
+        }
     }
     
     func initDoneButton() -> UIView {

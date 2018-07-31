@@ -18,6 +18,10 @@ class AdvancedScreen : ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Amp.delegate = self
+        Rate.delegate = self
+        HP.delegate = self
+        
         if (ud.string(forKey: "Amplitude") == nil) {
             ud.set("0.0001", forKey: "Amplitude")
         }
