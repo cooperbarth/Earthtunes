@@ -71,9 +71,14 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     func validInputs() -> Bool {
-        if (DurationField.text! == "") {return false}
-        if (Double(DurationField.text!)!) > 24.0 {return false}
-        return true
+        if (DurationField.text! == "") {
+            ud.set("Empty Field(s)", forKey: "Input Error")
+        } else if (Double(DurationField.text!)!) > 24.0 {
+            ud.set("Duration Too Long", forKey: "Input Error")
+        } else {
+            return true
+        }
+        return false
     }
     
     //Location Picker Setup

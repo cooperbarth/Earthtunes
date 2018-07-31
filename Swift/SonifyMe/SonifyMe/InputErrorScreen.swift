@@ -11,6 +11,7 @@ class InputErrorScreen : ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.InputErrorLabel.text = "Input Error:\n" + ud.string(forKey: "Input Error")!
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         
         self.showAnimate()

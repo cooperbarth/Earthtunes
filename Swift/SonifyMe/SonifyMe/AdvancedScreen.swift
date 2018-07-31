@@ -94,7 +94,11 @@ class AdvancedScreen : ViewController {
     }
     
     func validInputs() -> Bool {
-        if (Amp.text == "" || Rate.text == "" || HP.text == "") {return false}
-        return true
+        if (Amp.text == "" || Rate.text == "" || HP.text == "") {
+            ud.set("Empty Field(s)", forKey: "Input Error")
+        } else {
+            return true
+        }
+        return false
     }
 }

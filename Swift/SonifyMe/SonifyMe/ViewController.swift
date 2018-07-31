@@ -5,7 +5,6 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Add error description to Input Error popup
  -Aesthetics
  -Graph Axes
  -Suggestion Screen
