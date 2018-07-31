@@ -4,21 +4,15 @@ import Foundation
 class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var LocationField: UIPickerView!
     @IBOutlet weak var DateField: UIDatePicker!
-    @IBOutlet weak var TimeField: UITextField!
+    @IBOutlet weak var TimeField: UIDatePicker!
     @IBOutlet weak var DurationField: UITextField!
     
     @IBAction func DateChanged(_ sender: Any) {
-        ud.set(df.string(from: DateField.date), forKey: "Date")
-        print("hello")
+        ud.set(df1.string(from: DateField.date), forKey: "Date")
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        ud.set(TimeField.text!, forKey: "Time")
-        ud.set(DurationField.text!, forKey: "Duration")
-    }
-    
-    @IBAction func AdvancedPressed(_ sender: Any) {
-        performSegue(withIdentifier: "ToAdvanced", sender: self)
+    @IBAction func TimeChanged(_ sender: Any) {
+        ud.set(df2.string(from: TimeField.date), forKey: "Time")
     }
     
     @IBAction func ButtonPressed(_ sender: Any) {
@@ -27,26 +21,56 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
+    @IBAction func AdvancedPressed(_ sender: Any) {
+        performSegue(withIdentifier: "ToAdvanced", sender: self)
+    }
+    
     //Adding "Done" button to text fields
     func addDoneButton() {
-        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
-        doneToolbar.barStyle = UIBarStyle.default
-        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(doneButtonAction))
-        var items = [UIBarButtonItem]()
-        items.append(flexSpace)
-        items.append(done)
-        doneToolbar.items = items
-        doneToolbar.sizeToFit()
-        
+        let doneToolbar = initDoneButton()
         if(DurationField != nil) {self.DurationField.inputAccessoryView = doneToolbar}
     }
     
-    @objc func doneButtonAction() {
-        if (DurationField != nil) {
-            view.endEditing(true)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        LocationField.delegate = self
+        LocationField.dataSource = self
+        
+        DateField.maximumDate = Date()
+        df1.dateFormat = "YYYY-MM-dd"
+        df2.dateFormat = "HH:mm"
+        
+        addDoneButton()
+        
+        if (ud.string(forKey: "Location") == nil) {
+            ud.set("Ryerson (IL,USA)", forKey: "Location")
         }
+        if (ud.string(forKey: "Date") == nil) {
+            ud.set(df1.string(from: Date()), forKey: "Date")
+        }
+        if (ud.string(forKey: "Time") == nil) {
+            ud.set("00:00", forKey: "Time")
+        }
+        if (ud.string(forKey: "Duration") == nil) {
+            ud.set("3", forKey: "Duration")
+        }
+        LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
+        DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
+        TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
+        DurationField.text! = ud.string(forKey: "Duration")!
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        ud.set(DurationField.text!, forKey: "Duration")
+    }
+    
+    func validInputs() -> Bool {
+        if (DurationField.text == "") {return false}
+        return true
+    }
+    
+    
     
     //Location Picker Setup
     let ScrollMenuData = ["Ryerson (IL,USA)",
@@ -70,40 +94,5 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         let ud = UserDefaults.standard
         ud.set(row, forKey: "Location Index")
         ud.set(ScrollMenuData[row], forKey: "Location")
-    }
-    
-    //Date Picker Setup
-    override func validInputs() -> Bool {
-        if (TimeField.text == "" || DurationField.text == "") {return false}
-        return true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        LocationField.delegate = self
-        LocationField.dataSource = self
-        
-        DateField.maximumDate = Date()
-        df.dateFormat = "YYYY-MM-dd"
-        
-        addDoneButton()
-        
-        if (ud.string(forKey: "Location") == nil) {
-            ud.set("Ryerson (IL,USA)", forKey: "Location")
-        }
-        if (ud.string(forKey: "Date") == nil) {
-            ud.set(df.string(from: Date()), forKey: "Date")
-        }
-        if (ud.string(forKey: "Time") == nil) {
-            ud.set("00:00", forKey: "Time")
-        }
-        if (ud.string(forKey: "Duration") == nil) {
-            ud.set("3", forKey: "Duration")
-        }
-        LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
-        DateField.date = df.date(from: ud.string(forKey: "Date")!)!
-        TimeField.text! = ud.string(forKey: "Time")!
-        DurationField.text! = ud.string(forKey: "Duration")!
     }
 }

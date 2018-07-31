@@ -9,7 +9,7 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var SChannel: UISegmentedControl!
     @IBOutlet weak var GChannel: UISegmentedControl!
     
-    override func validInputs() -> Bool {
+    func validInputs() -> Bool {
         if (Amp.text == "" || Rate.text == "" || HP.text == "") {return false}
         if (!isNumber(num: Amp.text!) || !isNumber(num: Rate.text!) || !isNumber(num: HP.text!)) {return false}
         return true

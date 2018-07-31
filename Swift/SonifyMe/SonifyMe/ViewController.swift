@@ -21,7 +21,8 @@ class ViewController: UIViewController {
     let url = Bundle.main.url(forResource: "sound", withExtension: "wav")
     let imgUrl = Bundle.main.url(forResource: "img", withExtension: "jpeg")
     var player : AVAudioPlayer?
-    let df = DateFormatter()
+    let df1 = DateFormatter()
+    let df2 = DateFormatter()
 
     func isNumber(num:String) -> Bool {
         if (Float(num) != nil) {return true}
@@ -40,8 +41,22 @@ class ViewController: UIViewController {
         return true
     }
     
-    func validInputs() -> Bool {
-        return true
+    func initDoneButton() -> UIView {
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
+        doneToolbar.barStyle = UIBarStyle.default
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(doneButtonAction))
+        var items = [UIBarButtonItem]()
+        items.append(flexSpace)
+        items.append(done)
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        
+        return doneToolbar
+    }
+    
+    @objc func doneButtonAction() {
+        view.endEditing(true)
     }
     
     override func viewDidLoad() {
