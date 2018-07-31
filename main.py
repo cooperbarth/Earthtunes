@@ -560,7 +560,9 @@ class AdvancedScreen(BoxLayout):
 		self.layout = BoxLayout(orientation='vertical')
 
 		self.topGrid=GridLayout(cols=3, size_hint=(1,0.109))
-		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
+		self.resetButton = Button(text='Reset', size_hint=(0.1,1), background_normal='',background_color=(0,0,0,1))
+		self.resetButton.bind(on_release=self.reset)
+		self.topGrid.add_widget(self.resetButton)
 		self.title = Label(text="SonifyMe", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
@@ -650,6 +652,10 @@ class AdvancedScreen(BoxLayout):
 	def infoOpen(self,instance):
 		infoPopup.open()
 		advancedScreen.dismiss()
+
+	def reset(self, instance):
+		self.aFactor.text='10 Hz'
+		self.fixedAmpText.text='0.00005'
 
 #InfoScreen: Information about advanced options
 class InfoScreen(GridLayout):
