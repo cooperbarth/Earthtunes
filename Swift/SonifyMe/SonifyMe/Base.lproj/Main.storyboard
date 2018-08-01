@@ -110,8 +110,8 @@
                                     <action selector="TimeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="44Z-4m-aVd"/>
                                 </connections>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EarthTunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
-                                <rect key="frame" x="102" y="35" width="171" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earthtunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
+                                <rect key="frame" x="104" y="35" width="167" height="43"/>
                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
