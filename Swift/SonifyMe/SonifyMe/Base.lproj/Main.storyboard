@@ -13,7 +13,7 @@
         <!--Suggestion Screen-->
         <scene sceneID="f85-RJ-Uqq">
             <objects>
-                <viewController id="QAi-SF-yzZ" customClass="SuggestionScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QAi-SF-yzZ" customClass="SuggestionScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SnJ-7P-q0i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
         <!--Input Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Input Screen" id="BYZ-38-t0r" customClass="InputScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Input Screen" id="BYZ-38-t0r" customClass="InputScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -110,8 +110,8 @@
                                     <action selector="TimeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="44Z-4m-aVd"/>
                                 </connections>
                             </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SonifyMe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
-                                <rect key="frame" x="113" y="35" width="148" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="EarthTunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
+                                <rect key="frame" x="102" y="35" width="171" height="43"/>
                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="36"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -160,7 +160,7 @@
         <!--Advanced Screen-->
         <scene sceneID="64r-qo-TkT">
             <objects>
-                <viewController title="Advanced Screen" id="8fP-Gv-uzW" customClass="AdvancedScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Advanced Screen" id="8fP-Gv-uzW" customClass="AdvancedScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fLL-Xt-cNN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -326,7 +326,7 @@
         <!--Input Error Screen-->
         <scene sceneID="Tjm-K9-JZW">
             <objects>
-                <viewController storyboardIdentifier="Input Error" id="3MG-UW-a0R" customClass="InputErrorScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Input Error" id="3MG-UW-a0R" customClass="InputErrorScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d8Y-wp-uqE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,7 +378,7 @@
         <!--Error404 Screen-->
         <scene sceneID="VhE-wf-msJ">
             <objects>
-                <viewController storyboardIdentifier="Error 404" id="5W9-Fh-qkL" customClass="Error404Screen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Error 404" id="5W9-Fh-qkL" customClass="Error404Screen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hjn-Yp-TjS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -433,7 +433,7 @@
         <!--Loading Screen-->
         <scene sceneID="psx-1Q-nVD">
             <objects>
-                <viewController storyboardIdentifier="Loading Screen" id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Loading Screen" id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lk4-EY-kWO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -480,7 +480,7 @@
         <!--Display Screen-->
         <scene sceneID="UAs-7B-U0g">
             <objects>
-                <viewController id="0vR-sf-a3A" customClass="DisplayScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0vR-sf-a3A" customClass="DisplayScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n0b-dH-cYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
