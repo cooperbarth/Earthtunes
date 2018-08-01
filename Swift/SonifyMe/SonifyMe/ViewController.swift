@@ -6,6 +6,7 @@ import AudioToolbox
 /*
  Things to Implement:
  -Aesthetics
+ -Play-on-loop option
  -Graph Axes
  -Suggestion Screen
  -No reloading for repeated inputs/requests
