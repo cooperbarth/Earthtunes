@@ -5,7 +5,7 @@ import AudioToolbox
 
 class LoadingScreen : ViewController {
     @IBOutlet weak var LoadingLabel: UILabel!
-    @IBOutlet weak var Spinner: UIActivityIndicatorView!
+    @IBOutlet weak var LoadingView: UIView!
     
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
@@ -184,6 +184,12 @@ class LoadingScreen : ViewController {
         }
     }
     
+    func makeViewAppear() {
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        LoadingView.layer.cornerRadius = 8.0
+    }
+    
     func showError404() {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Error 404") as! Error404Screen
         self.addChildViewController(popOverVC)
@@ -199,8 +205,7 @@ class LoadingScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        self.makeViewAppear()
         self.showAnimate()
     }
 }

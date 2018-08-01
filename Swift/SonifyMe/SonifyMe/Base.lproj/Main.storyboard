@@ -368,6 +368,7 @@
                     </view>
                     <connections>
                         <outlet property="InputErrorLabel" destination="gBL-Rb-Gpr" id="uKi-aY-8Px"/>
+                        <outlet property="InputErrorView" destination="tTJ-6K-Rbo" id="VgQ-dW-Du7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="82R-rd-LZG" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -420,6 +421,7 @@
                         <viewLayoutGuide key="safeArea" id="YKV-C7-pkK"/>
                     </view>
                     <connections>
+                        <outlet property="Error404View" destination="26Y-3I-yFd" id="xzc-dR-Bcg"/>
                         <outlet property="InputErrorLabel" destination="Qgu-XU-Xhk" id="Qkd-nU-ZKA"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="Finished404" id="uSE-zc-9LE"/>
                     </connections>
@@ -467,7 +469,7 @@
                     </view>
                     <connections>
                         <outlet property="LoadingLabel" destination="OTG-ax-qu6" id="GHJ-jJ-QcL"/>
-                        <outlet property="Spinner" destination="YW0-QI-0l3" id="3pM-ad-9kL"/>
+                        <outlet property="LoadingView" destination="a7J-Pe-S8s" id="qU5-jB-nTn"/>
                         <segue destination="0vR-sf-a3A" kind="presentation" identifier="ToDisplay" id="g2J-KY-UGA"/>
                     </connections>
                 </viewController>
@@ -598,6 +600,6 @@
         <image name="Rewind" width="183" height="184"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O0B-H3-m4Q"/>
+        <segue reference="uSE-zc-9LE"/>
     </inferredMetricsTieBreakers>
 </document>
