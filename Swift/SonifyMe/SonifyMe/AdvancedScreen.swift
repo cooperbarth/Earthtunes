@@ -8,7 +8,8 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var HP: UITextField!
     @IBOutlet weak var SChannel: UISegmentedControl!
     @IBOutlet weak var GChannel: UISegmentedControl!
-
+    @IBOutlet weak var LoopingSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,6 +35,10 @@ class AdvancedScreen : ViewController {
         ud.set(GChannel.selectedSegmentIndex, forKey: "GCIndex")
     }
     
+    @IBAction func LoopingPressed(_ sender: Any) {
+        ud.set(LoopingSwitch.isOn, forKey: "Loop")
+    }
+    
     @IBAction func ResetDefaults(_ sender: Any) {
         ud.set(3, forKey: "FreqIndex")
         ud.set("0.0001", forKey: "Amplitude")
@@ -56,6 +61,7 @@ class AdvancedScreen : ViewController {
         HP.text = ud.string(forKey: "HP")
         SChannel.selectedSegmentIndex = ud.integer(forKey: "SCIndex")
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
+        LoopingSwitch.isOn = ud.bool(forKey: "Loop")
     }
     
     @IBAction func ReturnButton(_ sender: Any) {

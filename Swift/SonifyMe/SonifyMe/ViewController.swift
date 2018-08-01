@@ -6,14 +6,13 @@ import AudioToolbox
 /*
  Things to Implement:
  -Aesthetics
- -Play-on-loop option
  -Graph Axes
- -Suggestion Screen
+ -Suggested Events Screen
  -No reloading for repeated inputs/requests
- -Fix for non-iPhone 8
+ -Fix formatting for non-iPhone 8
  -Put tips as to what the advanced options actually do
  -Figure out time zone stuff? (2 options: local and UTC?)
- -Save images and sound
+ -Save images and sound to phone
  -FAQ button
  -Send Feedback
  */

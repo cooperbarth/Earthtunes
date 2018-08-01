@@ -13,7 +13,7 @@
         <!--Suggestion Screen-->
         <scene sceneID="f85-RJ-Uqq">
             <objects>
-                <viewController id="QAi-SF-yzZ" customClass="SuggestionScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="QAi-SF-yzZ" customClass="SuggestionScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SnJ-7P-q0i">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -28,7 +28,7 @@
         <!--Input Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Input Screen" id="BYZ-38-t0r" customClass="InputScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Input Screen" id="BYZ-38-t0r" customClass="InputScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,7 +160,7 @@
         <!--Advanced Screen-->
         <scene sceneID="64r-qo-TkT">
             <objects>
-                <viewController title="Advanced Screen" id="8fP-Gv-uzW" customClass="AdvancedScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Advanced Screen" id="8fP-Gv-uzW" customClass="AdvancedScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fLL-Xt-cNN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -190,20 +190,20 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sound Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyq-w4-sfo">
-                                <rect key="frame" x="129" y="427" width="117" height="21"/>
+                                <rect key="frame" x="39" y="427" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
-                                <rect key="frame" x="146" y="541" width="83" height="29"/>
+                                <rect key="frame" x="233" y="456" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Graph Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFl-Pc-6co">
-                                <rect key="frame" x="130" y="512" width="115" height="21"/>
+                                <rect key="frame" x="217" y="427" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -242,7 +242,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
-                                <rect key="frame" x="146" y="456" width="83" height="29"/>
+                                <rect key="frame" x="56" y="456" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
@@ -260,52 +260,69 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-qg-R60">
-                                <rect key="frame" x="129" y="598" width="118" height="30"/>
+                                <rect key="frame" x="128" y="585" width="118" height="30"/>
                                 <state key="normal" title="Reset to Defaults"/>
                                 <connections>
                                     <action selector="ResetDefaults:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="fYG-eN-F8T"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
-                                <rect key="frame" x="165" y="630" width="46" height="30"/>
+                                <rect key="frame" x="164" y="617" width="46" height="30"/>
                                 <state key="normal" title="Return"/>
                                 <connections>
                                     <action selector="ReturnButton:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="pTO-1U-NKh"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pS4-0O-pXk">
+                                <rect key="frame" x="194" y="526" width="51" height="31"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="LoopingPressed:" destination="8fP-Gv-uzW" eventType="valueChanged" id="9Il-NV-HwE"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70k-fc-sv8">
+                                <rect key="frame" x="124" y="531" width="62" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pS4-0O-pXk" firstAttribute="top" secondItem="ztt-rI-awL" secondAttribute="bottom" constant="42" id="0SA-LN-PkN"/>
                             <constraint firstItem="Rik-Kh-VK5" firstAttribute="top" secondItem="6RT-w2-Lb8" secondAttribute="bottom" constant="8" id="0he-79-KEc"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="343-27-IHt"/>
-                            <constraint firstItem="uFl-Pc-6co" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="6ov-B1-Itr"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="AOe-cD-HbL"/>
                             <constraint firstItem="fyq-w4-sfo" firstAttribute="top" secondItem="Rik-Kh-VK5" secondAttribute="bottom" constant="28" id="CCI-pn-c5Y"/>
                             <constraint firstItem="6RT-w2-Lb8" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Fi6-lj-D0S"/>
+                            <constraint firstItem="fyq-w4-sfo" firstAttribute="leading" secondItem="IBm-h0-0fi" secondAttribute="leading" constant="39" id="FvP-ls-See"/>
+                            <constraint firstItem="pS4-0O-pXk" firstAttribute="leading" secondItem="70k-fc-sv8" secondAttribute="trailing" constant="8" id="HzU-hS-4Fk"/>
                             <constraint firstItem="gFc-qa-KfA" firstAttribute="top" secondItem="9i5-kO-K9H" secondAttribute="bottom" constant="25" id="ID3-dd-Pmg"/>
+                            <constraint firstItem="uFl-Pc-6co" firstAttribute="leading" secondItem="fyq-w4-sfo" secondAttribute="trailing" constant="61" id="JcM-Pe-WkG"/>
+                            <constraint firstItem="uFl-Pc-6co" firstAttribute="top" secondItem="Rik-Kh-VK5" secondAttribute="bottom" constant="28" id="JiS-lt-z8D"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="MOx-Jj-nSq"/>
+                            <constraint firstItem="2xX-qg-R60" firstAttribute="top" secondItem="70k-fc-sv8" secondAttribute="bottom" constant="33" id="No5-2R-f9N"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Odf-wf-kih"/>
-                            <constraint firstItem="uFl-Pc-6co" firstAttribute="top" secondItem="2ve-Gc-hQk" secondAttribute="bottom" constant="28" id="Pk6-7W-yQ5"/>
                             <constraint firstItem="Rik-Kh-VK5" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="RWz-kk-BzB"/>
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="top" secondItem="FDh-bS-ZC3" secondAttribute="bottom" constant="8" id="Um6-8r-QGR"/>
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upc-DM-0nB"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upe-5T-rnr"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="top" secondItem="gFc-qa-KfA" secondAttribute="bottom" constant="8" id="Va9-wX-KtH"/>
-                            <constraint firstItem="2xX-qg-R60" firstAttribute="top" secondItem="ztt-rI-awL" secondAttribute="bottom" constant="29" id="X3e-Lr-AgO"/>
-                            <constraint firstItem="2ve-Gc-hQk" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="YeY-2f-07O"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="top" secondItem="nvp-mp-dIE" secondAttribute="bottom" constant="30" id="YmX-sH-bPQ"/>
+                            <constraint firstItem="ztt-rI-awL" firstAttribute="top" secondItem="uFl-Pc-6co" secondAttribute="bottom" constant="8" id="aSL-zg-ZRJ"/>
                             <constraint firstItem="6RT-w2-Lb8" firstAttribute="top" secondItem="B3l-w6-bKW" secondAttribute="bottom" constant="28" id="dax-73-mAj"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="top" secondItem="fyq-w4-sfo" secondAttribute="bottom" constant="8" id="f89-tx-cmd"/>
-                            <constraint firstItem="ztt-rI-awL" firstAttribute="top" secondItem="uFl-Pc-6co" secondAttribute="bottom" constant="8" id="gy6-M7-SGj"/>
+                            <constraint firstItem="2ve-Gc-hQk" firstAttribute="leading" secondItem="IBm-h0-0fi" secondAttribute="leading" constant="56" id="gaj-45-UgV"/>
+                            <constraint firstItem="70k-fc-sv8" firstAttribute="leading" secondItem="2ve-Gc-hQk" secondAttribute="trailing" constant="-15" id="kwy-A5-JrJ"/>
                             <constraint firstItem="gFc-qa-KfA" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="mVa-JG-3Lp"/>
                             <constraint firstItem="Ano-M4-rzf" firstAttribute="top" secondItem="2xX-qg-R60" secondAttribute="bottom" constant="2" id="o0F-Ej-sOa"/>
                             <constraint firstItem="2xX-qg-R60" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="pcY-Su-dMu"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="top" secondItem="IBm-h0-0fi" secondAttribute="top" constant="13" id="r71-ZE-8Sc"/>
-                            <constraint firstItem="ztt-rI-awL" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="rY1-Z4-dMJ"/>
                             <constraint firstItem="Ano-M4-rzf" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="uC7-Ij-6Ib"/>
-                            <constraint firstItem="fyq-w4-sfo" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="uvZ-WS-np6"/>
+                            <constraint firstItem="ztt-rI-awL" firstAttribute="leading" secondItem="2ve-Gc-hQk" secondAttribute="trailing" constant="94" id="uZh-8t-efS"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="top" secondItem="GLK-eC-Gmr" secondAttribute="bottom" constant="28" id="xZb-TJ-VFe"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="top" secondItem="dlt-Lb-3iE" secondAttribute="bottom" constant="8" id="xkN-Ki-d1r"/>
+                            <constraint firstItem="70k-fc-sv8" firstAttribute="top" secondItem="2ve-Gc-hQk" secondAttribute="bottom" constant="47" id="zeZ-IR-XQx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IBm-h0-0fi"/>
                     </view>
@@ -314,6 +331,7 @@
                         <outlet property="Freq" destination="nvp-mp-dIE" id="B3Q-Ax-qOk"/>
                         <outlet property="GChannel" destination="ztt-rI-awL" id="peJ-CE-M4h"/>
                         <outlet property="HP" destination="Rik-Kh-VK5" id="mcI-1b-KxS"/>
+                        <outlet property="LoopingSwitch" destination="pS4-0O-pXk" id="CLh-px-I91"/>
                         <outlet property="Rate" destination="B3l-w6-bKW" id="xIT-MW-esr"/>
                         <outlet property="SChannel" destination="2ve-Gc-hQk" id="dYq-ev-hTW"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="SetAdvanced" id="lar-ca-Cwf"/>
@@ -326,7 +344,7 @@
         <!--Input Error Screen-->
         <scene sceneID="Tjm-K9-JZW">
             <objects>
-                <viewController storyboardIdentifier="Input Error" id="3MG-UW-a0R" customClass="InputErrorScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Input Error" id="3MG-UW-a0R" customClass="InputErrorScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d8Y-wp-uqE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -378,7 +396,7 @@
         <!--Error404 Screen-->
         <scene sceneID="VhE-wf-msJ">
             <objects>
-                <viewController storyboardIdentifier="Error 404" id="5W9-Fh-qkL" customClass="Error404Screen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Error 404" id="5W9-Fh-qkL" customClass="Error404Screen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hjn-Yp-TjS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -433,7 +451,7 @@
         <!--Loading Screen-->
         <scene sceneID="psx-1Q-nVD">
             <objects>
-                <viewController storyboardIdentifier="Loading Screen" id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Loading Screen" id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Lk4-EY-kWO">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -480,7 +498,7 @@
         <!--Display Screen-->
         <scene sceneID="UAs-7B-U0g">
             <objects>
-                <viewController id="0vR-sf-a3A" customClass="DisplayScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="0vR-sf-a3A" customClass="DisplayScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="n0b-dH-cYg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

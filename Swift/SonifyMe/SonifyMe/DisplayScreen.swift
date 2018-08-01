@@ -48,7 +48,12 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        pauseSound()
+        if (ud.bool(forKey: "Loop")) {
+            player.currentTime = TimeInterval(0.0)
+            playSound()
+        } else {
+            pauseSound()
+        }
     }
     
     func playSound() {
