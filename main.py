@@ -38,8 +38,8 @@ class InputScreen(Screen):
 		#SonifyMe header
 		self.topGrid=BoxLayout(size_hint=(1,0.1085))
 		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
-		self.topGrid.add_widget(Label(text="SonifyMe", size_hint=(0.9,1), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
-		self.info = Button(text='Explore',background_normal='',background_color=(0,0,0,1),size_hint=(0.1085,1))
+		self.topGrid.add_widget(Label(text="EarthTunes", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
+		self.info = Button(text='Explore',background_normal='',background_color=(0,0,0,1),size_hint=(0.1,1))
 		self.info.bind(on_release=lambda x:samplePopup.open())
 		self.topGrid.add_widget(self.info)
 		self.layout.add_widget(self.topGrid)
@@ -286,12 +286,12 @@ class LoadingScreen(GridLayout):
 			bandsHZ = 16000
 		elif AF == '5 Hz':
 			bandsHZ = 1600
-		elif AF == '10 Hz':
-			bandsHZ = 800
+		elif AF == '20 Hz':
+			bandsHZ = 400
 		elif AF == '50 Hz':
 			bandsHZ = 160
 		else:
-			bandsHZ = 400
+			bandsHZ = 800
 
 		if FA == '':
 			fixedamp = maxAmp / 3.
@@ -575,7 +575,7 @@ class AdvancedScreen(BoxLayout):
 
 		#Spinner with acceleration factor choices
 		self.off = True
-		self.aFactor = Button(text='Acceleration Factor:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), bold = True, on_release = lambda x:self.showChoices())
+		self.aFactor = Button(text='Upper Frequency Limit:', size_hint = (1, 0.1), background_normal = '', background_color = (0, 0.13, 0.26, 1), bold = True, on_release = lambda x:self.showChoices())
 		self.layout.add_widget(self.aFactor)
 		self.one = Button(text = '0.1 Hz', on_release = lambda x:self.setUpButton(1))
 		self.two = Button(text = '0.5 Hz',on_release = lambda x:self.setUpButton(2))
@@ -658,14 +658,15 @@ class AdvancedScreen(BoxLayout):
 		self.fixedAmpText.text='0.00005'
 
 #InfoScreen: Information about advanced options
+
 class InfoScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(InfoScreen, self).__init__(**kwargs)
 		self.cols=1
-		self.Label1=Label(text='Acceleration Factor:\nThe range of frequencies that are recorded is to wide to fit into the audible range.\nWe use a factor in calculations to listen to specific ranges of frequencies;\nlower frequencies (higher multiplier) are better to hear earthquakes.\nKeep in mind not all stations record at all of these frequencies,\nso data may be sparse for some choices',
+		self.Label1=Label(text='Upper Frequency Limit (default: 10 Hz):\nThe range of frequencies that are recorded is to wide to fit into the audible range.\nWe use a factor in calculations to listen to specific ranges of frequencies;\n the below choices represent the highest frequency heard with specific multipliers.\nlower frequencies (higher multipliers) are better to hear earthquakes.\nKeep in mind not all stations record at all of these frequencies,\nso data may be sparse for some choices',
 								size_hint=(1,0.4),halign='center')
 		self.add_widget(self.Label1)
-		self.Label2=Label(text='Fixed Amplitude:\nThe fixed amplitude is a number used in calculations to help scale the amplitude of the sound.\nSmaller numbers lead to louder sounds, but may distort sounds that are already loud.\nHigher numbers lead to quieter sound, but more detail on louder sounds',
+		self.Label2=Label(text='Fixed Amplitude (default: 0.00005):\nThe fixed amplitude is a number used in calculations to help scale the amplitude of the sound.\nSmaller numbers lead to louder sounds, but may distort sounds that are already loud.\nHigher numbers lead to quieter sound, but more detail on louder sounds',
 								size_hint=(1,0.4),halign='center')
 		self.add_widget(self.Label2)
 		self.back = Button(text='Close', background_normal='', background_color=(1,1,1,1), color=(0,0,0,1),size_hint=(1,0.2))
