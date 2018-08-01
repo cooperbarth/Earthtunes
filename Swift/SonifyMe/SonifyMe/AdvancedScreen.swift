@@ -18,22 +18,6 @@ class AdvancedScreen : ViewController {
         
         addDoneButtons()
         
-        if (ud.string(forKey: "Amplitude") == nil) {
-            ud.set("0.0001", forKey: "Amplitude")
-        }
-        if (ud.string(forKey: "Rate") == nil) {
-            ud.set("1.0", forKey: "Rate")
-        }
-        if (ud.string(forKey: "HP") == nil) {
-            ud.set("0.001", forKey: "HP")
-        }
-        
-        if (ud.string(forKey: "First") == nil) {
-            ud.set(4, forKey: "FreqIndex")
-            ud.set(0, forKey: "SCIndex")
-            ud.set(1, forKey: "GCIndex")
-            ud.set("Set", forKey: "First")
-        }
         fillIn()
     }
     
