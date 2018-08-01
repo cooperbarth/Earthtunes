@@ -38,7 +38,7 @@ class InputScreen(Screen):
 		#SonifyMe header
 		self.topGrid=BoxLayout(size_hint=(1,0.1085))
 		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
-		self.topGrid.add_widget(Label(text="EarthTunes", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
+		self.topGrid.add_widget(Label(text="Earthtunes", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center', font_size = self.height/3))
 		self.info = Button(text='Explore',background_normal='',background_color=(0,0,0,1),size_hint=(0.1,1))
 		self.info.bind(on_release=lambda x:samplePopup.open())
 		self.topGrid.add_widget(self.info)
@@ -453,15 +453,6 @@ class ChooseScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(ChooseScreen, self).__init__(**kwargs)
 		self.cols=1
-		self.title = Label(text="SonifyMe", size_hint=(1,0.109), valign='middle', bold=True, halign = 'center', font_size = self.height/3)
-		self.title.bind(size=self.title.setter('text_size'))
-		self.add_widget(self.title)
-		self.add_widget(Label(size_hint=(1,0.001)))
-		# self.location = Spinner(text='Select Location',
-								# size_hint = (1,0.078),
-								# sync_height=True,
-								# font_size = self.height/7,
-								# bold = True)
 		self.off = True
 		self.location = Button(text = 'Select Location', size_hint = (1, 0.078), font_size = self.height/7, bold = True, background_normal = '', background_color = (0, 0.13, 0.26, 1), on_release = lambda x:self.showChoices())
 		self.add_widget(self.location)
@@ -512,7 +503,7 @@ class SampleScreen(GridLayout):
 		super(SampleScreen, self).__init__(**kwargs)
 		self.cols=1
 		self.layout=GridLayout(cols=2,size_hint=(1,0.9))
-		self.layout.add_widget(Label(text='Earthquake at _\nDate: January 23rd, 2018 Time: 08:00 Duration: 4 hours',size_hint=(0.7,0.2), halign='center'))
+		self.layout.add_widget(Label(text='Earthquake from Ryerson\nDate: January 23rd, 2018 Time: 08:00 Duration: 4 hours',size_hint=(0.7,0.2), halign='center'))
 		self.one=CheckBox(group='a_group',size_hint=(0.3,0.2))
 		self.layout.add_widget(self.one)
 		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
@@ -563,7 +554,7 @@ class AdvancedScreen(BoxLayout):
 		self.resetButton = Button(text='Reset', size_hint=(0.1,1), background_normal='',background_color=(0,0,0,1))
 		self.resetButton.bind(on_release=self.reset)
 		self.topGrid.add_widget(self.resetButton)
-		self.title = Label(text="SonifyMe", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center')
+		self.title = Label(text="Earthtunes", size_hint=(0.8,1), valign='middle', bold=True, halign = 'center')
 		self.title.font_size = self.title.height/3
 		self.title.bind(size=self.title.setter('text_size'))
 		self.topGrid.add_widget(self.title)
