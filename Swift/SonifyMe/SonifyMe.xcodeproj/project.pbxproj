@@ -27,7 +27,7 @@
 /* Begin PBXFileReference section */
 		47B4F5A3E97D34373C9B598E /* Pods-SonifyMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SonifyMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SonifyMe/Pods-SonifyMe.debug.xcconfig"; sourceTree = "<group>"; };
 		7E94F499905015FCDBF985BC /* Pods-SonifyMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SonifyMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-SonifyMe/Pods-SonifyMe.release.xcconfig"; sourceTree = "<group>"; };
-		CD01B88A21077766000EFCC9 /* Earthtunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earthtunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD01B88A21077766000EFCC9 /* SonifyMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonifyMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD01B88D21077766000EFCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD01B88F21077766000EFCC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD01B89221077766000EFCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		CD01B88B21077766000EFCC9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CD01B88A21077766000EFCC9 /* Earthtunes.app */,
+				CD01B88A21077766000EFCC9 /* SonifyMe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -118,9 +118,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CD01B88921077765000EFCC9 /* Earthtunes */ = {
+		CD01B88921077765000EFCC9 /* SonifyMe */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "Earthtunes" */;
+			buildConfigurationList = CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "SonifyMe" */;
 			buildPhases = (
 				C87969391F19340D8D671B9F /* [CP] Check Pods Manifest.lock */,
 				CD01B88621077765000EFCC9 /* Sources */,
@@ -132,9 +132,9 @@
 			);
 			dependencies = (
 			);
-			name = Earthtunes;
+			name = SonifyMe;
 			productName = SonifyMe;
-			productReference = CD01B88A21077766000EFCC9 /* Earthtunes.app */;
+			productReference = CD01B88A21077766000EFCC9 /* SonifyMe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -152,7 +152,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "Earthtunes" */;
+			buildConfigurationList = CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "SonifyMe" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -165,7 +165,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CD01B88921077765000EFCC9 /* Earthtunes */,
+				CD01B88921077765000EFCC9 /* SonifyMe */,
 			);
 		};
 /* End PBXProject section */
@@ -418,7 +418,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "Earthtunes" */ = {
+		CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "SonifyMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD01B89A21077767000EFCC9 /* Debug */,
@@ -427,7 +427,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "Earthtunes" */ = {
+		CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "SonifyMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD01B89D21077767000EFCC9 /* Debug */,

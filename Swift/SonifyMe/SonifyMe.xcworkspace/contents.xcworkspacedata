@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/coop1/Documents/SonifyMe/Swift/SonifyMe/Earthtunes.xcodeproj">
+      location = "group:/Users/coop1/Documents/SonifyMe/Swift/SonifyMe/SonifyMe.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
