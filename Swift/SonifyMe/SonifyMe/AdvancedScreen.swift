@@ -35,7 +35,7 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func ResetDefaults(_ sender: Any) {
-        ud.set(4, forKey: "FreqIndex")
+        ud.set(3, forKey: "FreqIndex")
         ud.set("0.0001", forKey: "Amplitude")
         ud.set("1.0", forKey: "Rate")
         ud.set("0.001", forKey: "HP")

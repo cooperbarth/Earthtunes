@@ -112,7 +112,6 @@ class LoadingScreen : ViewController {
     }
     
     func processData(data: String) -> [Float64] {
-        let halfpi = 0.5*Double.pi
         let dflines = data.split(separator: "\n")
         let head = dflines[0]
         fsps = Float64(head.split(separator: " ")[4])!
@@ -149,11 +148,11 @@ class LoadingScreen : ViewController {
             marker = marker + increment
         }
         
-        let mxs = 1.01*Double(Float64((2^31))*atan(maxAmp/fixedamp)/halfpi)
+        let mxs = 1.01*Double(Float64((2^31))*atan(maxAmp/fixedamp)/(0.5*Double.pi))
         ud.set(mxs, forKey: "Max")
         var s32 = [Float64]()
         for ii in 0..<sound.count {
-            s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/halfpi)
+            s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/(0.5*Double.pi))
         }
         return s32
     }

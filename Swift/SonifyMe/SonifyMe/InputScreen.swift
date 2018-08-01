@@ -80,12 +80,12 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         
         if (ud.string(forKey: "First") == nil) {
-            ud.set(4, forKey: "FreqIndex")
+            ud.set(3, forKey: "FreqIndex")
             ud.set(0, forKey: "SCIndex")
             ud.set(1, forKey: "GCIndex")
-            ud.set(4, forKey: "20 Hz")
-            ud.set(0, forKey: "BHZ")
-            ud.set(1, forKey: "LHZ")
+            ud.set("10 Hz", forKey: "Frequency")
+            ud.set("BHZ", forKey: "SChannel")
+            ud.set("LHZ", forKey: "GChannel")
             ud.set("Set", forKey: "First")
         }
     }

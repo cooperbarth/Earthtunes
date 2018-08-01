@@ -8,9 +8,13 @@ import AudioToolbox
  -Aesthetics
  -Graph Axes
  -Suggestion Screen
- -No loading for repeated inputs/requests
+ -No reloading for repeated inputs/requests
  -Fix for non-iPhone 8
  -Put tips as to what the advanced options actually do
+ -Figure out time zone stuff? (2 options: local and UTC?)
+ -Save images and sound
+ -FAQ button
+ -Send Feedback
  */
 
 class ViewController: UIViewController, UITextFieldDelegate {
