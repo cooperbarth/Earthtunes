@@ -354,16 +354,23 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOF-Ql-gkR">
                                 <rect key="frame" x="67" y="59" width="240" height="470"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g6v-13-FfM">
-                                        <rect key="frame" x="0.0" y="63" width="240" height="296"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g6v-13-FfM">
+                                        <rect key="frame" x="115" y="63" width="10" height="30.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise, but earthquakes are very audible.  5 Hz -   10 Hz -   20 Hz -   50 Hz - </string>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequencies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYa-gy-Z1a">
                                         <rect key="frame" x="62.5" y="28" width="116.5" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWM-oe-Rdq">
+                                        <rect key="frame" x="63" y="101" width="128" height="176"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <string key="text">0.1/0.5 Hz - The area where microseisms occur.  Most sound will simply sound like white noise,  but earthquakes are very  audible.  5 Hz -   10 Hz -   20 Hz -   50 Hz - </string>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="6"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
