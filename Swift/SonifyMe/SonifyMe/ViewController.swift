@@ -25,6 +25,14 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let df1 = DateFormatter()
     let df2 = DateFormatter()
     var count = 0
+    
+    func showInputError() {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Input Error") as! InputErrorScreen
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
 
     func isNumber(num:String) -> Bool {
         if (Float(num) != nil) {return true}
@@ -98,12 +106,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
         });
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
+    let ScrollMenuData = ["Ryerson (IL,USA)",
+                          "Yellowstone (WY,USA)",
+                          "Anchorage (AK,USA)",
+                          "Paris, France",
+                          "Inuyama, Japan",
+                          "Cachiyuyo, Chile",
+                          "Addis Ababa, Ethiopia",
+                          "Ar Rayn, Saudi Arabia",
+                          "Antarctica"]
+    var locationChosen : Bool = false
 }
 

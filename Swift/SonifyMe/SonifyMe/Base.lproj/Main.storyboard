@@ -165,12 +165,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequency Limit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFc-qa-KfA">
-                                <rect key="frame" x="126" y="79" width="123" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Max Amplitude" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dlt-Lb-3iE">
                                 <rect key="frame" x="130" y="166" width="115" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -286,6 +280,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GK-PO-V6D">
+                                <rect key="frame" x="126" y="67" width="123" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Frequency Limit"/>
+                                <connections>
+                                    <action selector="FrequencyHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="CNL-Ut-qMq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -294,27 +296,27 @@
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="343-27-IHt"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="AOe-cD-HbL"/>
                             <constraint firstItem="fyq-w4-sfo" firstAttribute="top" secondItem="Rik-Kh-VK5" secondAttribute="bottom" constant="28" id="CCI-pn-c5Y"/>
+                            <constraint firstItem="0GK-PO-V6D" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="CzO-Gq-8bI"/>
                             <constraint firstItem="6RT-w2-Lb8" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Fi6-lj-D0S"/>
                             <constraint firstItem="fyq-w4-sfo" firstAttribute="leading" secondItem="IBm-h0-0fi" secondAttribute="leading" constant="39" id="FvP-ls-See"/>
                             <constraint firstItem="pS4-0O-pXk" firstAttribute="leading" secondItem="70k-fc-sv8" secondAttribute="trailing" constant="8" id="HzU-hS-4Fk"/>
-                            <constraint firstItem="gFc-qa-KfA" firstAttribute="top" secondItem="9i5-kO-K9H" secondAttribute="bottom" constant="25" id="ID3-dd-Pmg"/>
                             <constraint firstItem="uFl-Pc-6co" firstAttribute="leading" secondItem="fyq-w4-sfo" secondAttribute="trailing" constant="61" id="JcM-Pe-WkG"/>
                             <constraint firstItem="uFl-Pc-6co" firstAttribute="top" secondItem="Rik-Kh-VK5" secondAttribute="bottom" constant="28" id="JiS-lt-z8D"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="MOx-Jj-nSq"/>
                             <constraint firstItem="2xX-qg-R60" firstAttribute="top" secondItem="70k-fc-sv8" secondAttribute="bottom" constant="33" id="No5-2R-f9N"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Odf-wf-kih"/>
                             <constraint firstItem="Rik-Kh-VK5" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="RWz-kk-BzB"/>
+                            <constraint firstItem="nvp-mp-dIE" firstAttribute="top" secondItem="0GK-PO-V6D" secondAttribute="bottom" constant="8" id="UhT-zq-41o"/>
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="top" secondItem="FDh-bS-ZC3" secondAttribute="bottom" constant="8" id="Um6-8r-QGR"/>
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upc-DM-0nB"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upe-5T-rnr"/>
-                            <constraint firstItem="nvp-mp-dIE" firstAttribute="top" secondItem="gFc-qa-KfA" secondAttribute="bottom" constant="8" id="Va9-wX-KtH"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="top" secondItem="nvp-mp-dIE" secondAttribute="bottom" constant="30" id="YmX-sH-bPQ"/>
                             <constraint firstItem="ztt-rI-awL" firstAttribute="top" secondItem="uFl-Pc-6co" secondAttribute="bottom" constant="8" id="aSL-zg-ZRJ"/>
+                            <constraint firstItem="0GK-PO-V6D" firstAttribute="top" secondItem="9i5-kO-K9H" secondAttribute="bottom" constant="13" id="aoL-7L-25L"/>
                             <constraint firstItem="6RT-w2-Lb8" firstAttribute="top" secondItem="B3l-w6-bKW" secondAttribute="bottom" constant="28" id="dax-73-mAj"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="top" secondItem="fyq-w4-sfo" secondAttribute="bottom" constant="8" id="f89-tx-cmd"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="leading" secondItem="IBm-h0-0fi" secondAttribute="leading" constant="56" id="gaj-45-UgV"/>
                             <constraint firstItem="70k-fc-sv8" firstAttribute="leading" secondItem="2ve-Gc-hQk" secondAttribute="trailing" constant="-15" id="kwy-A5-JrJ"/>
-                            <constraint firstItem="gFc-qa-KfA" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="mVa-JG-3Lp"/>
                             <constraint firstItem="Ano-M4-rzf" firstAttribute="top" secondItem="2xX-qg-R60" secondAttribute="bottom" constant="2" id="o0F-Ej-sOa"/>
                             <constraint firstItem="2xX-qg-R60" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="pcY-Su-dMu"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="top" secondItem="IBm-h0-0fi" secondAttribute="top" constant="13" id="r71-ZE-8Sc"/>
@@ -340,6 +342,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1z2-ww-8eO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="674" y="736"/>
+        </scene>
+        <!--Suggestion Screen-->
+        <scene sceneID="mhQ-z7-Ztg">
+            <objects>
+                <viewController storyboardIdentifier="Suggestion" id="JR9-YC-gGi" customClass="SuggestionScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="prh-yz-w3c">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOF-Ql-gkR">
+                                <rect key="frame" x="67" y="59" width="240" height="470"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g6v-13-FfM">
+                                        <rect key="frame" x="0.0" y="63" width="240" height="296"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <string key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise, but earthquakes are very audible.  5 Hz -   10 Hz -   20 Hz -   50 Hz - </string>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequencies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYa-gy-Z1a">
+                                        <rect key="frame" x="62.5" y="28" width="116.5" height="27"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="g6v-13-FfM" firstAttribute="centerX" secondItem="SOF-Ql-gkR" secondAttribute="centerX" id="7F0-RM-rqH"/>
+                                    <constraint firstItem="g6v-13-FfM" firstAttribute="top" secondItem="bYa-gy-Z1a" secondAttribute="bottom" constant="8" id="I1F-a1-g8y"/>
+                                    <constraint firstAttribute="height" constant="470" id="K7G-ue-OZc"/>
+                                    <constraint firstAttribute="width" constant="240" id="WYF-mo-16A"/>
+                                    <constraint firstItem="bYa-gy-Z1a" firstAttribute="top" secondItem="SOF-Ql-gkR" secondAttribute="top" constant="28" id="qW7-cb-Cfw"/>
+                                    <constraint firstItem="bYa-gy-Z1a" firstAttribute="centerX" secondItem="SOF-Ql-gkR" secondAttribute="centerX" id="uja-78-gvw"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="SOF-Ql-gkR" firstAttribute="centerX" secondItem="prh-yz-w3c" secondAttribute="centerX" id="VzQ-SH-moG"/>
+                            <constraint firstItem="SOF-Ql-gkR" firstAttribute="top" secondItem="IqD-ax-ydo" secondAttribute="top" constant="39" id="Xcf-9e-92h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IqD-ax-ydo"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBg-Uz-spy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1413.5999999999999" y="734.48275862068976"/>
         </scene>
         <!--Input Error Screen-->
         <scene sceneID="Tjm-K9-JZW">

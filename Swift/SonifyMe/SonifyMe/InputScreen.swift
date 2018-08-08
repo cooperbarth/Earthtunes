@@ -18,18 +18,9 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBAction func ButtonPressed(_ sender: Any) {
         view.endEditing(true)
         if (!validInputs()) {
-            let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Input Error") as! InputErrorScreen
-            self.addChildViewController(popOverVC)
-            popOverVC.view.frame = self.view.frame
-            self.view.addSubview(popOverVC.view)
-            popOverVC.didMove(toParentViewController: self)
+            showInputError()
         } else {
-            ud.set(DurationField.text!, forKey: "Duration")
-            let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading Screen") as! LoadingScreen
-            self.addChildViewController(popOverVC)
-            popOverVC.view.frame = self.view.frame
-            self.view.addSubview(popOverVC.view)
-            popOverVC.didMove(toParentViewController: self)
+            showLoading()
         }
     }
     
@@ -52,6 +43,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         
         self.DurationField.inputAccessoryView = initDoneButton()
         
+        setUpFields()
+    }
+    
+    func setUpFields() {
         if (ud.string(forKey: "Location") == nil) {
             ud.set("Ryerson (IL,USA)", forKey: "Location")
         }
@@ -90,6 +85,15 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
+    func showLoading() {
+        ud.set(DurationField.text!, forKey: "Duration")
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading Screen") as! LoadingScreen
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
+    
     func validInputs() -> Bool {
         if (DurationField.text! == "") {
             ud.set("Empty Field(s)", forKey: "Input Error")
@@ -100,24 +104,14 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         return false
     }
-    
-    //Location Picker Setup
-    let ScrollMenuData = ["Ryerson (IL,USA)",
-                          "Yellowstone (WY,USA)",
-                          "Anchorage (AK,USA)",
-                          "Paris, France",
-                          "Inuyama, Japan",
-                          "Cachiyuyo, Chile",
-                          "Addis Ababa, Ethiopia",
-                          "Ar Rayn, Saudi Arabia",
-                          "Antarctica"]
+}
+
+extension InputScreen {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return ScrollMenuData.count}
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return ScrollMenuData[row]}
-    
-    var locationChosen : Bool = false
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let ud = UserDefaults.standard
