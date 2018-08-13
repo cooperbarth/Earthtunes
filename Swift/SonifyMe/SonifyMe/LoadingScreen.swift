@@ -29,7 +29,7 @@ class LoadingScreen : ViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(animated)
         self.getSoundAndGraph()
     }
     
@@ -94,6 +94,7 @@ extension LoadingScreen {
             break
         }
         ud.set(locate, forKey: "Title")
+        let ssps = bandsHZ * fsps
         
         let graphType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputGChannel
         let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputSChannel
@@ -102,30 +103,45 @@ extension LoadingScreen {
         let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
         
         let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
-        var dfSound = ""
-        do {
-            dfSound = try String(contentsOf: URL(string: soundUrl)!)
-        } catch {
-            showPopup(name: "Error 404")
-            return
-        }
         
-        let s32 = processData(data: dfSound)
-        let ssps = bandsHZ * fsps
-        saveFile(buff: s32, sample_rate: ssps)
-        
-        if (graphUrl != soundUrl) {
-            var dfGraph : String = ""
+        let prevData = checkRepeats()
+        if (prevData != nil) {
+            let s32 = prevData?.s32
+            let g32 = prevData?.g32
+            
+            saveFile(buff: s32!, sample_rate: ssps)
+            
+            if (graphUrl != soundUrl) {
+                ud.set(g32, forKey: "Data")
+            } else {
+                ud.set(s32, forKey: "Data")
+            }
+        } else {
+            var dfSound = ""
             do {
-                dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+                dfSound = try String(contentsOf: URL(string: soundUrl)!)
             } catch {
                 showPopup(name: "Error 404")
                 return
             }
-            let g32 = processData(data: dfGraph)
-            ud.set(g32, forKey: "Data")
-        } else {
-            ud.set(s32, forKey: "Data")
+            let s32 = processData(data: dfSound)
+            saveFile(buff: s32, sample_rate: ssps)
+            
+            if (graphUrl != soundUrl) {
+                var dfGraph : String = ""
+                do {
+                    dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+                } catch {
+                    showPopup(name: "Error 404")
+                    return
+                }
+                let g32 = processData(data: dfGraph)
+                ud.set(g32, forKey: "Data")
+                saveData(s32: s32, g32: g32)
+            } else {
+                ud.set(s32, forKey: "Data")
+                saveData(s32: s32, g32: s32)
+            }
         }
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
@@ -200,5 +216,22 @@ extension LoadingScreen {
         } catch {
             print("Error writing audio file")
         }
+    }
+    
+    func checkRepeats() -> event? {
+        for e in retrieveEvents()! {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.hp == inputHP && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+                LoadingLabel.text! = "Loading Previously \nSaved Data From \n" + ud.string(forKey: "Location")!
+                return e
+            }
+        }
+        return nil
+    }
+    
+    func saveData(s32: [Float64], g32: [Float64]) {
+        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, HP: inputHP, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32)
+        var newEvents = retrieveEvents()
+        newEvents!.append(newEvent)
+        saveEvents(events: newEvents!)
     }
 }

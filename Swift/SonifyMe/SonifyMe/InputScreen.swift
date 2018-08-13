@@ -20,6 +20,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         if (!validInputs()) {
             showPopup(name: "Input Error")
         } else {
+            ud.set(DurationField.text!, forKey: "Duration")
             showPopup(name: "Loading Screen")
         }
     }
@@ -81,6 +82,9 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("10 Hz", forKey: "Frequency")
             ud.set("BHZ", forKey: "SChannel")
             ud.set("LHZ", forKey: "GChannel")
+            
+            saveEvents(events: [])
+            
             ud.set("Set", forKey: "First")
         }
     }
