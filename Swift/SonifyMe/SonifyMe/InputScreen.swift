@@ -15,6 +15,15 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         ud.set(df2.string(from: TimeField.date), forKey: "Time")
     }
     
+    @IBAction func SamplePressed(_ sender: Any) {
+        showPopup(name: "Suggestion Screen")
+    }
+    
+    @IBAction func AdvancedPressed(_ sender: Any) {
+        ud.set(DurationField.text!, forKey: "Duration")
+        performSegue(withIdentifier: "ToAdvanced", sender: self)
+    }
+    
     @IBAction func ButtonPressed(_ sender: Any) {
         view.endEditing(true)
         if (!validInputs()) {
@@ -23,11 +32,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set(DurationField.text!, forKey: "Duration")
             showPopup(name: "Loading Screen")
         }
-    }
-    
-    @IBAction func AdvancedPressed(_ sender: Any) {
-        ud.set(DurationField.text!, forKey: "Duration")
-        performSegue(withIdentifier: "ToAdvanced", sender: self)
     }
     
     override func viewDidLoad() {
