@@ -252,7 +252,7 @@
                                     <action selector="ReturnButton:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="pTO-1U-NKh"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pS4-0O-pXk">
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pS4-0O-pXk">
                                 <rect key="frame" x="194" y="526" width="51" height="31"/>
                                 <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
@@ -276,7 +276,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="pS4-0O-pXk" firstAttribute="top" secondItem="ztt-rI-awL" secondAttribute="bottom" constant="42" id="0SA-LN-PkN"/>
                             <constraint firstItem="Rik-Kh-VK5" firstAttribute="top" secondItem="6RT-w2-Lb8" secondAttribute="bottom" constant="8" id="0he-79-KEc"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="343-27-IHt"/>
                             <constraint firstItem="dlt-Lb-3iE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="AOe-cD-HbL"/>
@@ -309,6 +308,7 @@
                             <constraint firstItem="ztt-rI-awL" firstAttribute="leading" secondItem="2ve-Gc-hQk" secondAttribute="trailing" constant="94" id="uZh-8t-efS"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="top" secondItem="GLK-eC-Gmr" secondAttribute="bottom" constant="28" id="xZb-TJ-VFe"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="top" secondItem="dlt-Lb-3iE" secondAttribute="bottom" constant="8" id="xkN-Ki-d1r"/>
+                            <constraint firstItem="70k-fc-sv8" firstAttribute="top" secondItem="ztt-rI-awL" secondAttribute="bottom" constant="47" id="yoM-nH-WCX"/>
                             <constraint firstItem="70k-fc-sv8" firstAttribute="top" secondItem="2ve-Gc-hQk" secondAttribute="bottom" constant="47" id="zeZ-IR-XQx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IBm-h0-0fi"/>
@@ -331,7 +331,7 @@
         <!--Explanation Screen-->
         <scene sceneID="mhQ-z7-Ztg">
             <objects>
-                <viewController storyboardIdentifier="FreqSuggestion" id="JR9-YC-gGi" customClass="ExplanationScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FreqExplain" id="JR9-YC-gGi" customClass="ExplanationScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="prh-yz-w3c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -339,34 +339,30 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOF-Ql-gkR">
                                 <rect key="frame" x="67" y="59" width="240" height="470"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g6v-13-FfM">
-                                        <rect key="frame" x="115" y="63" width="10" height="30.5"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequencies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYa-gy-Z1a">
                                         <rect key="frame" x="62.5" y="28" width="116.5" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWM-oe-Rdq">
-                                        <rect key="frame" x="63" y="101" width="128" height="176"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <string key="text">0.1/0.5 Hz - The area where microseisms occur.  Most sound will simply sound like white noise,  but earthquakes are very  audible.  5 Hz -   10 Hz -   20 Hz -   50 Hz - </string>
-                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="6"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DWM-oe-Rdq">
+                                        <rect key="frame" x="7.5" y="82" width="225" height="310.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="225" id="RDG-Mn-OAI"/>
+                                        </constraints>
+                                        <mutableString key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise,  but earthquakes are very audible.  5 Hz - Great for highlighting earthquake sounds and provides for quick sound files.  10 Hz - The best compromise between 5 Hz and 20 Hz. This is the default setting for the app.  20 Hz - Great for birds-in-the-woods sounds. Sound duration is usually manageable.  50 Hz - best for listening to small jumps, but the jumps are usually very quick and easy to miss.</mutableString>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="g6v-13-FfM" firstAttribute="centerX" secondItem="SOF-Ql-gkR" secondAttribute="centerX" id="7F0-RM-rqH"/>
-                                    <constraint firstItem="g6v-13-FfM" firstAttribute="top" secondItem="bYa-gy-Z1a" secondAttribute="bottom" constant="8" id="I1F-a1-g8y"/>
+                                    <constraint firstItem="DWM-oe-Rdq" firstAttribute="top" secondItem="bYa-gy-Z1a" secondAttribute="bottom" constant="27" id="H95-6m-AlQ"/>
                                     <constraint firstAttribute="height" constant="470" id="K7G-ue-OZc"/>
                                     <constraint firstAttribute="width" constant="240" id="WYF-mo-16A"/>
                                     <constraint firstItem="bYa-gy-Z1a" firstAttribute="top" secondItem="SOF-Ql-gkR" secondAttribute="top" constant="28" id="qW7-cb-Cfw"/>
+                                    <constraint firstItem="DWM-oe-Rdq" firstAttribute="centerX" secondItem="SOF-Ql-gkR" secondAttribute="centerX" id="uA5-2o-9kU"/>
                                     <constraint firstItem="bYa-gy-Z1a" firstAttribute="centerX" secondItem="SOF-Ql-gkR" secondAttribute="centerX" id="uja-78-gvw"/>
                                 </constraints>
                             </view>

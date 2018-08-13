@@ -22,57 +22,76 @@ class LoadingScreen : ViewController {
     var fsps : Double = 0.0
     var bandsHZ : Double = 0.0
     
+    func makeViewAppear() {
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        LoadingView.layer.cornerRadius = 8.0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        self.getSoundAndGraph()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.makeViewAppear()
+        self.showAnimate()
+    }
+}
+
+extension LoadingScreen {
     func getSoundAndGraph() {
         var station = ""
         var net = ""
         var location = ""
         switch locate {
-            case "Yellowstone (WY,USA)":
-                station = "H17A"
-                net = "TA"
-                location = "--"
-                break
-            case "Anchorage (AK,USA)":
-                station = "SSN"
-                net = "AK"
-                location = "--"
-                break
-            case "Paris, France":
-                station = "CLF"
-                net = "G"
-                location = "00"
-                break
-            case "Inuyama, Japan":
-                station = "INU"
-                net = "G"
-                location = "00"
-                break
-            case "Cachiyuyo, Chile":
-                station = "LCO"
-                net = "IU"
-                location = "10"
-                break
-            case "Addis Ababa, Ethiopia":
-                station = "FURI"
-                net = "IU"
-                location = "00"
-                break
-            case "Ar Rayn, Saudi Arabia":
-                station = "RAYN"
-                net = "II"
-                location = "10"
-                break
-            case "Antarctica":
-                station = "CASY"
-                net = "IU"
-                location = "10"
-                break
-            default:
-                locate = "Ryerson (IL,USA)"
-                station = "L44A"
-                net = "TA"
-                location = "--"
-                break
+        case "Yellowstone (WY,USA)":
+            station = "H17A"
+            net = "TA"
+            location = "--"
+            break
+        case "Anchorage (AK,USA)":
+            station = "SSN"
+            net = "AK"
+            location = "--"
+            break
+        case "Paris, France":
+            station = "CLF"
+            net = "G"
+            location = "00"
+            break
+        case "Inuyama, Japan":
+            station = "INU"
+            net = "G"
+            location = "00"
+            break
+        case "Cachiyuyo, Chile":
+            station = "LCO"
+            net = "IU"
+            location = "10"
+            break
+        case "Addis Ababa, Ethiopia":
+            station = "FURI"
+            net = "IU"
+            location = "00"
+            break
+        case "Ar Rayn, Saudi Arabia":
+            station = "RAYN"
+            net = "II"
+            location = "10"
+            break
+        case "Antarctica":
+            station = "CASY"
+            net = "IU"
+            location = "10"
+            break
+        default:
+            locate = "Ryerson (IL,USA)"
+            station = "L44A"
+            net = "TA"
+            location = "--"
+            break
         }
         ud.set(locate, forKey: "Title")
         
@@ -98,7 +117,7 @@ class LoadingScreen : ViewController {
         if (graphUrl != soundUrl) {
             var dfGraph : String = ""
             do {
-                 dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+                dfGraph = try String(contentsOf: URL(string: graphUrl)!)
             } catch {
                 showPopup(name: "Error 404")
                 return
@@ -181,22 +200,5 @@ class LoadingScreen : ViewController {
         } catch {
             print("Error writing audio file")
         }
-    }
-    
-    func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
-        LoadingView.layer.cornerRadius = 8.0
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        self.getSoundAndGraph()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.makeViewAppear()
-        self.showAnimate()
     }
 }
