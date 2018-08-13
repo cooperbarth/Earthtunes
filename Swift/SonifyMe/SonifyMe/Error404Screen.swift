@@ -10,6 +10,13 @@ class Error404Screen : ViewController {
         performSegue(withIdentifier: "Finished404", sender: self)
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        if (touch?.view != Error404View) {
+            self.removeAnimate()
+        }
+    }
+    
     func makeViewAppear() {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.0)
         InputErrorLabel.text = "Error 404: The Requested\n Data is Unavailable"

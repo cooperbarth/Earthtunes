@@ -10,21 +10,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Suggestion Screen-->
-        <scene sceneID="f85-RJ-Uqq">
-            <objects>
-                <viewController id="QAi-SF-yzZ" customClass="SuggestionScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SnJ-7P-q0i">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="9Lo-Ib-uej"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1aZ-eO-LeC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="673" y="-629"/>
-        </scene>
         <!--Input Screen-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -343,10 +328,10 @@
             </objects>
             <point key="canvasLocation" x="674" y="736"/>
         </scene>
-        <!--Suggestion Screen-->
+        <!--Explanation Screen-->
         <scene sceneID="mhQ-z7-Ztg">
             <objects>
-                <viewController storyboardIdentifier="Suggestion" id="JR9-YC-gGi" customClass="SuggestionScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FreqSuggestion" id="JR9-YC-gGi" customClass="ExplanationScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="prh-yz-w3c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -393,6 +378,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IqD-ax-ydo"/>
                     </view>
+                    <connections>
+                        <outlet property="FrequencyView" destination="SOF-Ql-gkR" id="QhT-Ip-3Lb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pBg-Uz-spy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

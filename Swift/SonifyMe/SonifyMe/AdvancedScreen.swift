@@ -22,7 +22,7 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func FrequencyHelp(_ sender: Any) {
-        showFreqSuggestion()
+        showPopup(name: "FreqSuggestion")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -62,7 +62,7 @@ class AdvancedScreen : ViewController {
         if (validInputs()) {
             performSegue(withIdentifier: "SetAdvanced", sender: self)
         } else {
-            showInputError()
+            showPopup(name: "Input Error")
         }
     }
     
@@ -74,14 +74,6 @@ class AdvancedScreen : ViewController {
         SChannel.selectedSegmentIndex = ud.integer(forKey: "SCIndex")
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
-    }
-    
-    func showFreqSuggestion() {
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Suggestion") as! SuggestionScreen
-        self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
     }
     
     func addDoneButtons() {

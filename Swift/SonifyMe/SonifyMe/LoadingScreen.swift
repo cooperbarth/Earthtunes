@@ -87,7 +87,7 @@ class LoadingScreen : ViewController {
         do {
             dfSound = try String(contentsOf: URL(string: soundUrl)!)
         } catch {
-            showError404()
+            showPopup(name: "Error 404")
             return
         }
         
@@ -100,7 +100,7 @@ class LoadingScreen : ViewController {
             do {
                  dfGraph = try String(contentsOf: URL(string: graphUrl)!)
             } catch {
-                showError404()
+                showPopup(name: "Error 404")
                 return
             }
             let g32 = processData(data: dfGraph)
@@ -187,14 +187,6 @@ class LoadingScreen : ViewController {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
         LoadingView.layer.cornerRadius = 8.0
-    }
-    
-    func showError404() {
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Error 404") as! Error404Screen
-        self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {

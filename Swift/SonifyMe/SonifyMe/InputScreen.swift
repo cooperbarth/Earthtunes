@@ -18,9 +18,9 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBAction func ButtonPressed(_ sender: Any) {
         view.endEditing(true)
         if (!validInputs()) {
-            showInputError()
+            showPopup(name: "Input Error")
         } else {
-            showLoading()
+            showPopup(name: "Loading Screen")
         }
     }
     

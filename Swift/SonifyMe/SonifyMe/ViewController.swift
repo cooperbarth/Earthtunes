@@ -6,6 +6,7 @@ import AudioToolbox
 /*
  Things to Implement:
  -Aesthetics
+ -Make rate/playback speed work
  -Graph Axes
  -Suggested Events Screen
  -No reloading for repeated inputs/requests
@@ -26,15 +27,19 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let df2 = DateFormatter()
     var count = 0
     
-    func showInputError() {
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Input Error") as! InputErrorScreen
+    func showPopup(name: String) {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
         self.addChildViewController(popOverVC)
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
     }
+    
+    func showInputError() {
+        showPopup(name: "Input Error")
+    }
 
-    func isNumber(num:String) -> Bool {
+    func isNumber(num: String) -> Bool {
         if (Float(num) != nil) {return true}
         var theNum = ""
         if (num[num.startIndex] == "-") {

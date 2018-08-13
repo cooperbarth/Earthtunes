@@ -9,6 +9,13 @@ class InputErrorScreen : ViewController {
         self.removeAnimate()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch: UITouch? = touches.first
+        if (touch?.view != InputErrorView) {
+            self.removeAnimate()
+        }
+    }
+    
     func makeViewAppear() {
         self.InputErrorLabel.text = "Input Error:\n" + ud.string(forKey: "Input Error")!
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
