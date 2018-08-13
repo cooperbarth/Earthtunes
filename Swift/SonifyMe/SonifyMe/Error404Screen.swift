@@ -6,15 +6,19 @@ class Error404Screen : ViewController {
     @IBOutlet weak var InputErrorLabel: UILabel!
 
     @IBAction func CloseButton(_ sender: Any) {
-        UIView.setAnimationsEnabled(false)
-        performSegue(withIdentifier: "Finished404", sender: self)
+        returnToInput()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
         if (touch?.view != Error404View) {
-            self.removeAnimate()
+            returnToInput()
         }
+    }
+    
+    func returnToInput() {
+        UIView.setAnimationsEnabled(false)
+        performSegue(withIdentifier: "Finished404", sender: self)
     }
     
     func makeViewAppear() {
