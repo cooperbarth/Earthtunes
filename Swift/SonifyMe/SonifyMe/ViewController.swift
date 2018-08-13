@@ -5,8 +5,11 @@ import AudioToolbox
 
 /*
  Things to Implement:
+ -Make user be able to save to and remove from "Suggestion Screen"
+    -Slide cells to right to show popup that asks if you want to delete
+    -Save event button on Display screen
  -Aesthetics
- -Put tips as to what the advanced options actually do
+ -More Explanation Screens
  -Clear cache of old data
  -Suggested Events Screen
  -Make rate/playback speed work
