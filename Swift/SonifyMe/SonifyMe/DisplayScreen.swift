@@ -113,6 +113,31 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         configureChart()
         configureAxes()
     }
+}
+
+extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
+    func numberOfRecords(for plot: CPTPlot) -> UInt {
+        return UInt(data.count)
+    }
+    
+    func number(for plot: CPTPlot, field: UInt, record idx: UInt) -> Any? {
+        switch CPTScatterPlotField(rawValue: Int(field)) {
+        case .X?:
+            return idx
+        case .Y?:
+            return self.data[Int(idx)] as! NSNumber
+        default:
+            return 0.0 as NSNumber
+        }
+    }
+    
+    func symbol(for plot: CPTScatterPlot, record idx: UInt) -> CPTPlotSymbol? {
+        let symbol : CPTPlotSymbol = CPTPlotSymbol()
+        symbol.symbolType = CPTPlotSymbolType(rawValue: 1)!
+        symbol.size = CGSize(width: 1, height: 1)
+        symbol.fill = CPTFill(color: CPTColor.blue())
+        return symbol
+    }
     
     func configureHostView() {
         hostView.allowPinchScaling = false
@@ -156,37 +181,11 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         plotLineStyle.lineWidth = 1
         plotLineStyle.lineColor = CPTColor.black()
         plot.dataLineStyle = plotLineStyle
-
+        
         graph.add(plot, to: graph.defaultPlotSpace)
     }
     
     func configureAxes() {}
-    
-}
-
-extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
-    func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return UInt(data.count)
-    }
-    
-    func number(for plot: CPTPlot, field: UInt, record idx: UInt) -> Any? {
-        switch CPTScatterPlotField(rawValue: Int(field)) {
-        case .X?:
-            return idx
-        case .Y?:
-            return self.data[Int(idx)] as! NSNumber
-        default:
-            return 0.0 as NSNumber
-        }
-    }
-    
-    func symbol(for plot: CPTScatterPlot, record idx: UInt) -> CPTPlotSymbol? {
-        let symbol : CPTPlotSymbol = CPTPlotSymbol()
-        symbol.symbolType = CPTPlotSymbolType(rawValue: 1)!
-        symbol.size = CGSize(width: 1, height: 1)
-        symbol.fill = CPTFill(color: CPTColor.blue())
-        return symbol
-    }
 }
 
 

@@ -89,14 +89,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
     }
     
-    func showLoading() {
-        ud.set(DurationField.text!, forKey: "Duration")
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading Screen") as! LoadingScreen
-        self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
-    }
     
     func validInputs() -> Bool {
         if (DurationField.text! == "") {
@@ -108,6 +100,17 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         return false
     }
+    
+    let ScrollMenuData = ["Ryerson (IL,USA)",
+                          "Yellowstone (WY,USA)",
+                          "Anchorage (AK,USA)",
+                          "Paris, France",
+                          "Inuyama, Japan",
+                          "Cachiyuyo, Chile",
+                          "Addis Ababa, Ethiopia",
+                          "Ar Rayn, Saudi Arabia",
+                          "Antarctica"]
+    var locationChosen : Bool = false
 }
 
 extension InputScreen {

@@ -30,7 +30,7 @@ class LoadingScreen : ViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.getSoundAndGraph()
+        getSoundAndGraph()
     }
     
     override func viewDidLoad() {
@@ -154,7 +154,7 @@ extension LoadingScreen {
         var sound = [Float64]()
         var maxAmp = 0.0
         for i in 1..<dflines.count {
-            if (self.isNumber(num: String(dflines[i]))) {
+            if (isNumber(num: String(dflines[i]))) {
                 let f = Float64(dflines[i])
                 sound.append(f!)
                 maxAmp = max(maxAmp, abs(f!))
@@ -190,32 +190,6 @@ extension LoadingScreen {
             s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/(0.5*Double.pi))
         }
         return s32
-    }
-    
-    func saveFile(buff: [Float64], sample_rate: Float64) {
-        let SAMPLE_RATE = sample_rate
-        
-        let outputFormatSettings = [
-            AVFormatIDKey:kAudioFormatLinearPCM,
-            AVLinearPCMBitDepthKey:32,
-            AVLinearPCMIsFloatKey: true,
-            AVLinearPCMIsBigEndianKey: false,
-            AVSampleRateKey: SAMPLE_RATE,
-            AVNumberOfChannelsKey: 1
-            ] as [String : Any]
-        
-        let audioFile = try? AVAudioFile(forWriting: url!, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
-        
-        let bufferFormat = AVAudioFormat(settings: outputFormatSettings)
-        let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat!, frameCapacity: AVAudioFrameCount(buff.count))
-        for i in 0..<buff.count {outputBuffer!.floatChannelData!.pointee[i] = Float(buff[i])}
-        outputBuffer?.frameLength = AVAudioFrameCount(buff.count)
-        
-        do {
-            try audioFile?.write(from: outputBuffer!)
-        } catch {
-            print("Error writing audio file")
-        }
     }
     
     func checkRepeats() -> event? {
