@@ -16,7 +16,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func SamplePressed(_ sender: Any) {
-        //save events to memory
         view.endEditing(true)
         showPopup(name: "Suggestion Screen")
     }
@@ -62,7 +61,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("00:00", forKey: "Time")
         }
         if (ud.string(forKey: "Duration") == nil) {
-            ud.set("3", forKey: "Duration")
+            ud.set("2", forKey: "Duration")
         }
         LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
         DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
@@ -91,7 +90,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             saveEvents(events: [])
             let favorites = [
                     event(Location: "Yellowstone (WY,USA)", Date: "2018-07-08", Time: "00:49", Duration: "2", Frequency: "20 Hz", Amplitude: "1234", Rate: "1234", HP: "1234", SChannel: "BHZ", GChannel: "BHZ", G32: [], S32: []),
-                    event(Location: "ev2", Date: "", Time: "", Duration: "", Frequency: "", Amplitude: "", Rate: "", HP: "", SChannel: "", GChannel: "", G32: [], S32: [])
             ]
             saveFavorites(events: favorites)
             
