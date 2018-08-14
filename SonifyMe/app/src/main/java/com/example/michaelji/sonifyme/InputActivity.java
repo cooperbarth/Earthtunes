@@ -1,10 +1,15 @@
 package com.example.michaelji.sonifyme;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -12,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -26,7 +32,6 @@ import java.util.GregorianCalendar;
 public class InputActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.michaelji.sonifyme.MESSAGE";
-    public final static String ERROR_MESSAGE = "com.example.michaelji.sonifyme.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,9 +80,6 @@ public class InputActivity extends AppCompatActivity {
             time = timeText.getText().toString();
             EditText durationText = (EditText) findViewById(R.id.DurationText);
             duration = durationText.getText().toString();
-            int dur = Integer.parseInt(duration);
-            dur *= 3600;
-            duration = Integer.toString(dur);
         }
         catch(Exception e)
         {
@@ -102,6 +104,11 @@ public class InputActivity extends AppCompatActivity {
 
     public String getUrl(String loc, String dur, String time, String date)
     {
+        int duration = Integer.parseInt(dur);
+        duration *= 3600;
+        dur = Integer.toString(duration);
+
+        time = time + ":00";
 
         String soundname, station, net, location, channel;
         switch (loc) {
@@ -205,7 +212,7 @@ class DownloadFile extends AsyncTask<String, Integer, String> {
 
             // downlod the file
             InputStream input = new BufferedInputStream(url.openStream());
-            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath());
+            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
 
             byte data[] = new byte[1024];
 

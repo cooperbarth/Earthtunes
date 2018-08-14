@@ -256,7 +256,7 @@ class LoadingScreen(GridLayout):
 		print "Getting data from",disploc,'on',date
 		type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
 		when = "&starttime=" + date + "T" + time + "&duration=" + duration
-		url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.0001&scale=auto&output=ascii1"
+		url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
 		print "requesting data from IRIS...please be patient..."
 		ws = urllib2.urlopen(url)
 		print "loading data ..."
