@@ -31,8 +31,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             showPopup(name: "Input Error")
         } else {
             ud.set(DurationField.text!, forKey: "Duration")
-            showPopup(name: "Loading Screen")
-        }
+            showPopup(name: "Loading Screen")        }
     }
     
     override func viewDidLoad() {
@@ -62,7 +61,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("00:00", forKey: "Time")
         }
         if (ud.string(forKey: "Duration") == nil) {
-            ud.set("3", forKey: "Duration")
+            ud.set("2", forKey: "Duration")
         }
         LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
         DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
@@ -76,9 +75,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         if (ud.string(forKey: "Rate") == nil) {
             ud.set("1.0", forKey: "Rate")
         }
-        if (ud.string(forKey: "HP") == nil) {
-            ud.set("0.001", forKey: "HP")
-        }
         
         if (ud.string(forKey: "First") == nil) {
             ud.set(3, forKey: "FreqIndex")
@@ -89,6 +85,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("LHZ", forKey: "GChannel")
             
             saveEvents(events: [])
+            let favorites = defaultEvents
+            saveFavorites(events: favorites)
             
             ud.set("Set", forKey: "First")
         }

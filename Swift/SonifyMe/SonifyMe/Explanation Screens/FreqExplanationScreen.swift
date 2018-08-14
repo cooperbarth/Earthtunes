@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class ExplanationScreen : ViewController {
+class FreqExplanationScreen : ViewController {
     @IBOutlet weak var ExplainView: UIView!
     
     @IBAction func ExplainReturn(_ sender: Any) {

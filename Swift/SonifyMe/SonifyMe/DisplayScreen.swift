@@ -5,6 +5,21 @@ import AudioToolbox
 import CorePlot
 
 class DisplayScreen : ViewController, AVAudioPlayerDelegate {
+    var locate = UserDefaults.standard.string(forKey: "Location")!
+    let date = UserDefaults.standard.string(forKey: "Date")!
+    let time = UserDefaults.standard.string(forKey: "Time")!
+    let duration = UserDefaults.standard.string(forKey: "Duration")!
+    
+    let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
+    let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
+    let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
+    let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
+    
+    let data = UserDefaults.standard.array(forKey: "Data")!
+    let yMax = UserDefaults.standard.double(forKey: "Max")
+    
+    var favorites : [event] = []
     
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
@@ -13,8 +28,25 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var FFButton: UIButton!
     @IBOutlet weak var RewindButton: UIButton!
     
-    let data = UserDefaults.standard.array(forKey: "Data")!
-    let yMax = UserDefaults.standard.double(forKey: "Max")
+    @IBOutlet weak var BlackButton: UIButton!
+    @IBAction func BlackPressed(_ sender: Any) {
+        favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: []))
+        saveFavorites(events: favorites)
+        YellowButton.isHidden = false
+        YellowButton.isEnabled = true
+        BlackButton.isHidden = true
+        BlackButton.isEnabled = false
+    }
+    
+    @IBOutlet weak var YellowButton: UIButton!
+    @IBAction func YellowPressed(_ sender: Any) {
+        removeFavorite()
+        saveFavorites(events: favorites)
+        BlackButton.isHidden = false
+        YellowButton.isHidden = true
+        YellowButton.isEnabled = false
+        BlackButton.isEnabled = true
+    }
     
     @IBAction func PauseButtonPressed(_ sender: Any) {
         pauseSound()
@@ -91,6 +123,14 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         do {
             player = try AVAudioPlayer(contentsOf: url!)
             playSound()
+            favorites = retrieveFavorites()!
+            if (inFavorites()) {
+                BlackButton.isHidden = true
+                BlackButton.isEnabled = false
+            } else {
+                YellowButton.isHidden = true
+                YellowButton.isEnabled = false
+            }
         } catch {
             print("Audio Player Not Found.")
         }
@@ -112,6 +152,25 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         configureGraph()
         configureChart()
         configureAxes()
+    }
+    
+    func inFavorites() -> Bool {
+        for e in favorites {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func removeFavorite() {
+        var count = 0
+        for e in favorites {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+                favorites.remove(at: count)
+            }
+            count += 1
+        }
     }
 }
 

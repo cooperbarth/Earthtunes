@@ -5,17 +5,14 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var Freq: UISegmentedControl!
     @IBOutlet weak var Amp: UITextField!
     @IBOutlet weak var Rate: UITextField!
-    @IBOutlet weak var HP: UITextField!
     @IBOutlet weak var SChannel: UISegmentedControl!
     @IBOutlet weak var GChannel: UISegmentedControl!
     @IBOutlet weak var LoopingSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         Amp.delegate = self
         Rate.delegate = self
-        HP.delegate = self
         addDoneButtons()
         
         fillIn()
@@ -25,11 +22,14 @@ class AdvancedScreen : ViewController {
         showPopup(name: "FreqExplain")
     }
     
+    @IBAction func AmplitudeHelp(_ sender: Any) {
+        showPopup(name: "AmpExplain")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
         ud.set(Amp.text!, forKey: "Amplitude")
         ud.set(Rate.text!, forKey: "Rate")
-        ud.set(HP.text!, forKey: "HP")
         ud.set(SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!, forKey: "SChannel")
         ud.set(GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!, forKey: "GChannel")
         
@@ -46,7 +46,6 @@ class AdvancedScreen : ViewController {
         ud.set(3, forKey: "FreqIndex")
         ud.set("0.0001", forKey: "Amplitude")
         ud.set("1.0", forKey: "Rate")
-        ud.set("0.001", forKey: "HP")
         ud.set(0, forKey: "SCIndex")
         ud.set(1, forKey: "GCIndex")
 
@@ -70,7 +69,6 @@ class AdvancedScreen : ViewController {
         Freq.selectedSegmentIndex = ud.integer(forKey: "FreqIndex")
         Amp.text = ud.string(forKey: "Amplitude")
         Rate.text = ud.string(forKey: "Rate")
-        HP.text = ud.string(forKey: "HP")
         SChannel.selectedSegmentIndex = ud.integer(forKey: "SCIndex")
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
@@ -79,11 +77,10 @@ class AdvancedScreen : ViewController {
     func addDoneButtons() {
         self.Amp.inputAccessoryView = initDoneButton()
         self.Rate.inputAccessoryView = initDoneButton()
-        self.HP.inputAccessoryView = initDoneButton()
     }
     
     func validInputs() -> Bool {
-        if (Amp.text == "" || Rate.text == "" || HP.text == "") {
+        if (Amp.text == "" || Rate.text == "") {
             ud.set("Empty Field(s)", forKey: "Input Error")
         } else {
             return true
