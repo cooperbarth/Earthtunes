@@ -24,3 +24,14 @@ func isNumber(num: String) -> Bool {
     if (!isNumber(num: lastChar)) {return false}
     return true
 }
+
+let ScrollMenuData = ["Ryerson (IL,USA)",
+                      "Yellowstone (WY,USA)",
+                      "Anchorage (AK,USA)",
+                      "Paris, France",
+                      "Inuyama, Japan",
+                      "Cachiyuyo, Chile",
+                      "Addis Ababa, Ethiopia",
+                      "Ar Rayn, Saudi Arabia",
+                      "Antarctica"]
+var locationChosen : Bool = false

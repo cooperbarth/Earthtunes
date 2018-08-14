@@ -6,8 +6,7 @@ import AudioToolbox
 /*
  Things to Implement:
  -Make user be able to save to and remove from "Suggestion Screen"
-    -Slide cells to right to show popup that asks if you want to delete
-    -Save event button on Display screen
+    -Star icon on display screen to save/unsave event
  -Aesthetics
  -More Explanation Screens
  -Clear cache of old data

@@ -16,6 +16,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func SamplePressed(_ sender: Any) {
+        view.endEditing(true)
         showPopup(name: "Suggestion Screen")
     }
     
@@ -67,7 +68,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
         DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
         TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
-        DurationField.text! = ud.string(forKey: "Duration")!
+        DurationField.text = ud.string(forKey: "Duration")
         
         if (ud.string(forKey: "Amplitude") == nil) {
             ud.set("0.0001", forKey: "Amplitude")
@@ -104,17 +105,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         }
         return false
     }
-    
-    let ScrollMenuData = ["Ryerson (IL,USA)",
-                          "Yellowstone (WY,USA)",
-                          "Anchorage (AK,USA)",
-                          "Paris, France",
-                          "Inuyama, Japan",
-                          "Cachiyuyo, Chile",
-                          "Addis Ababa, Ethiopia",
-                          "Ar Rayn, Saudi Arabia",
-                          "Antarctica"]
-    var locationChosen : Bool = false
 }
 
 extension InputScreen {
