@@ -10,7 +10,6 @@ import AudioToolbox
  -Aesthetics
  -More Explanation Screens
  -Clear cache of old data
- -Suggested Events Screen
  -Make rate/playback speed work
  -Graph Axes
  -Fix formatting for non-iPhone 8

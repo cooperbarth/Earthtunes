@@ -121,7 +121,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         do {
-            player = try AVAudioPlayer(contentsOf: url!)
+            player = try AVAudioPlayer(contentsOf: url)
             playSound()
             favorites = retrieveFavorites()!
             if (inFavorites()) {

@@ -1,7 +1,7 @@
 import Foundation
 import AVKit
 
-let url = Bundle.main.url(forResource: "sound", withExtension: "wav")
+let url = URL(fileURLWithPath: NSTemporaryDirectory().appending("new.wav"))
 let imgUrl = Bundle.main.url(forResource: "img", withExtension: "jpeg")
 let df1 = DateFormatter()
 let df2 = DateFormatter()
