@@ -2,6 +2,8 @@ import Foundation
 import UIKit
 
 class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSource {
+    var events : [event] = []
+    
     @IBOutlet weak var SuggestionView: UIView!
     @IBOutlet weak var SuggestionScroll: UITableView!
 
@@ -12,6 +14,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func setAllFields() {
+        saveFavorites(events: self.events)
         let selectedRow = SuggestionScroll.indexPathForSelectedRow?.row
         if (selectedRow == nil) {return}
         let Event = events[selectedRow!]
@@ -64,8 +67,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
         if (touch?.view != SuggestionView && touch?.view != SuggestionScroll) {
-            setAllFields()
-            self.removeAnimate()
+            removeAnimate()
         }
     }
     
@@ -79,14 +81,11 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         self.makeViewAppear()
         self.showAnimate()
         
+        events = retrieveFavorites()!
+        
         SuggestionScroll.dataSource = self
         SuggestionScroll.delegate = self
     }
-
-    var events: [event] = [
-        event(Location: "Yellowstone (WY,USA)", Date: "2018-07-08", Time: "00:49", Duration: "2", Frequency: "20 Hz", Amplitude: "1234", Rate: "1234", HP: "1234", SChannel: "BHZ", GChannel: "BHZ", G32: [], S32: []),
-        event(Location: "ev2", Date: "", Time: "", Duration: "", Frequency: "", Amplitude: "", Rate: "", HP: "", SChannel: "", GChannel: "", G32: [], S32: [])
-    ]
 }
 
 extension SuggestionScreen {
@@ -112,6 +111,7 @@ extension SuggestionScreen {
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let action = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, completion) in
             self.events.remove(at: indexPath.row)
+            saveFavorites(events: self.events)
             self.SuggestionScroll.deleteRows(at: [indexPath], with: .automatic)
             completion(true)
         })

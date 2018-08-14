@@ -481,9 +481,9 @@
                                         </prototypes>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw2-7I-3hJ">
-                                        <rect key="frame" x="97" y="367" width="46" height="30"/>
+                                        <rect key="frame" x="98" y="367" width="44" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Return"/>
+                                        <state key="normal" title="Select"/>
                                         <connections>
                                             <action selector="ReturnButton:" destination="yYD-fC-Qj3" eventType="touchUpInside" id="BrP-9H-bxG"/>
                                         </connections>
@@ -699,12 +699,37 @@
                                     <action selector="RewindButtonPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="hfc-n4-3d8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7B-9Z-WdK">
+                                <rect key="frame" x="332" y="28" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="35" id="Qd4-t2-c5k"/>
+                                    <constraint firstAttribute="width" constant="35" id="bxn-dV-T5e"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="Black Star"/>
+                                <connections>
+                                    <action selector="BlackPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="8OZ-5o-lj6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-aO-WjU">
+                                <rect key="frame" x="332" y="28" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Txb-MN-ofK"/>
+                                    <constraint firstAttribute="height" constant="35" id="yZ5-7G-7L5"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="Yellow Star"/>
+                                <connections>
+                                    <action selector="YellowPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="ZJf-c6-BtA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="1Oy-sr-Po9"/>
                             <constraint firstItem="EPU-Gb-YcJ" firstAttribute="top" secondItem="7Rb-o0-4gi" secondAttribute="bottom" constant="100" id="3HQ-qG-BD5"/>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="zLw-aO-WjU" secondAttribute="trailing" constant="8" id="Cca-mE-qFq"/>
+                            <constraint firstItem="zLw-aO-WjU" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="DlW-Md-5ps"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="cVj-gJ-gnv" secondAttribute="bottom" constant="20" id="G7B-6v-uiZ"/>
+                            <constraint firstItem="q7B-9Z-WdK" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="IaK-4R-tSn"/>
                             <constraint firstItem="NvE-cE-gFq" firstAttribute="centerY" secondItem="NId-aO-pDk" secondAttribute="centerY" id="OAP-Kl-h3o"/>
                             <constraint firstItem="7Rb-o0-4gi" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="75" id="RTL-tE-IaG"/>
                             <constraint firstItem="ddS-py-hen" firstAttribute="leading" secondItem="NId-aO-pDk" secondAttribute="trailing" constant="29" id="VJ7-fo-oFx"/>
@@ -720,17 +745,20 @@
                             <constraint firstItem="EPU-Gb-YcJ" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="hn3-aa-8wv"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="lWL-gK-2Sf"/>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="width" secondItem="7Rb-o0-4gi" secondAttribute="width" id="n3O-F4-S5U"/>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="q7B-9Z-WdK" secondAttribute="trailing" constant="8" id="uGJ-If-ngk"/>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="wo0-dt-Ab1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gih-OP-X9R"/>
                     </view>
                     <connections>
+                        <outlet property="BlackButton" destination="q7B-9Z-WdK" id="ih0-Mn-nJ3"/>
                         <outlet property="FFButton" destination="ddS-py-hen" id="YaX-Se-2U6"/>
                         <outlet property="GraphTitle" destination="5o0-Lw-Qfm" id="RkT-Lo-hPo"/>
                         <outlet property="PauseButton" destination="EPU-Gb-YcJ" id="jvy-I9-Ovj"/>
                         <outlet property="PlayButton" destination="NId-aO-pDk" id="uge-oP-vDo"/>
                         <outlet property="RewindButton" destination="NvE-cE-gFq" id="5Gd-xZ-2Dc"/>
                         <outlet property="SoundSlideLayout" destination="vWu-Zt-Aje" id="d1s-BO-OTO"/>
+                        <outlet property="YellowButton" destination="zLw-aO-WjU" id="r1N-XG-yG5"/>
                         <outlet property="hostView" destination="7Rb-o0-4gi" id="5dw-fZ-05G"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="O0B-H3-m4Q"/>
                     </connections>
@@ -741,12 +769,14 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Black Star" width="720" height="720"/>
         <image name="FF" width="188" height="186"/>
         <image name="Pause" width="183" height="181"/>
         <image name="Play" width="192" height="185"/>
         <image name="Rewind" width="183" height="184"/>
+        <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uSE-zc-9LE"/>
+        <segue reference="htf-sJ-yhm"/>
     </inferredMetricsTieBreakers>
 </document>

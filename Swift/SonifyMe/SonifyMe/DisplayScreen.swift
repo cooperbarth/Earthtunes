@@ -6,6 +6,9 @@ import CorePlot
 
 class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     
+    let data = UserDefaults.standard.array(forKey: "Data")!
+    let yMax = UserDefaults.standard.double(forKey: "Max")
+    
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
     @IBOutlet weak var PauseButton: UIButton!
@@ -13,8 +16,21 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var FFButton: UIButton!
     @IBOutlet weak var RewindButton: UIButton!
     
-    let data = UserDefaults.standard.array(forKey: "Data")!
-    let yMax = UserDefaults.standard.double(forKey: "Max")
+    @IBOutlet weak var BlackButton: UIButton!
+    @IBAction func BlackPressed(_ sender: Any) {
+        YellowButton.isHidden = false
+        YellowButton.isEnabled = true
+        BlackButton.isHidden = true
+        BlackButton.isEnabled = false
+    }
+    
+    @IBOutlet weak var YellowButton: UIButton!
+    @IBAction func YellowPressed(_ sender: Any) {
+        BlackButton.isHidden = false
+        YellowButton.isHidden = true
+        YellowButton.isEnabled = false
+        BlackButton.isEnabled = true
+    }
     
     @IBAction func PauseButtonPressed(_ sender: Any) {
         pauseSound()
@@ -102,6 +118,9 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         initplot()
         GraphTitle.text = ud.string(forKey: "Title")
         SoundSlideLayout.value = 0.0
+        
+        YellowButton.isHidden = true
+        YellowButton.isEnabled = false
     }
     
     @IBOutlet weak var hostView: CPTGraphHostingView!

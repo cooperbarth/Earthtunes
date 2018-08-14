@@ -16,6 +16,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
     
     @IBAction func SamplePressed(_ sender: Any) {
+        //save events to memory
         view.endEditing(true)
         showPopup(name: "Suggestion Screen")
     }
@@ -31,8 +32,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             showPopup(name: "Input Error")
         } else {
             ud.set(DurationField.text!, forKey: "Duration")
-            showPopup(name: "Loading Screen")
-        }
+            showPopup(name: "Loading Screen")        }
     }
     
     override func viewDidLoad() {
@@ -89,6 +89,11 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("LHZ", forKey: "GChannel")
             
             saveEvents(events: [])
+            let favorites = [
+                    event(Location: "Yellowstone (WY,USA)", Date: "2018-07-08", Time: "00:49", Duration: "2", Frequency: "20 Hz", Amplitude: "1234", Rate: "1234", HP: "1234", SChannel: "BHZ", GChannel: "BHZ", G32: [], S32: []),
+                    event(Location: "ev2", Date: "", Time: "", Duration: "", Frequency: "", Amplitude: "", Rate: "", HP: "", SChannel: "", GChannel: "", G32: [], S32: [])
+            ]
+            saveFavorites(events: favorites)
             
             ud.set("Set", forKey: "First")
         }

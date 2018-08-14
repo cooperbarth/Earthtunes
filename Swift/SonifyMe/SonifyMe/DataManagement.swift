@@ -16,6 +16,19 @@ func retrieveEvents() -> [event]? {
     return nil
 }
 
+func saveFavorites(events: [event]) {
+    let archivedObject = NSKeyedArchiver.archivedData(withRootObject: events as NSArray)
+    ud.set(archivedObject, forKey: "Favorites")
+    ud.synchronize()
+}
+
+func retrieveFavorites() -> [event]? {
+    if let unarchivedObject = ud.object(forKey: "Favorites") as? NSData {
+        return (NSKeyedUnarchiver.unarchiveObject(with: unarchivedObject as Data) as? [event])!
+    }
+    return nil
+}
+
 func saveFile(buff: [Float64], sample_rate: Float64) {
     let SAMPLE_RATE = sample_rate
     
