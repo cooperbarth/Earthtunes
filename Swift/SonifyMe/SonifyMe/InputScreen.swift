@@ -15,18 +15,24 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         ud.set(df2.string(from: TimeField.date), forKey: "Time")
     }
     
-    @IBAction func ButtonPressed(_ sender: Any) {
+    @IBAction func SamplePressed(_ sender: Any) {
         view.endEditing(true)
-        if (!validInputs()) {
-            showPopup(name: "Input Error")
-        } else {
-            showPopup(name: "Loading Screen")
-        }
+        showPopup(name: "Suggestion Screen")
     }
     
     @IBAction func AdvancedPressed(_ sender: Any) {
         ud.set(DurationField.text!, forKey: "Duration")
         performSegue(withIdentifier: "ToAdvanced", sender: self)
+    }
+    
+    @IBAction func ButtonPressed(_ sender: Any) {
+        view.endEditing(true)
+        if (!validInputs()) {
+            showPopup(name: "Input Error")
+        } else {
+            ud.set(DurationField.text!, forKey: "Duration")
+            showPopup(name: "Loading Screen")
+        }
     }
     
     override func viewDidLoad() {
@@ -42,7 +48,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         df2.dateFormat = "HH:mm"
         
         self.DurationField.inputAccessoryView = initDoneButton()
-        
         setUpFields()
     }
     
@@ -62,7 +67,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
         DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
         TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
-        DurationField.text! = ud.string(forKey: "Duration")!
+        DurationField.text = ud.string(forKey: "Duration")
+
         
         if (ud.string(forKey: "Amplitude") == nil) {
             ud.set("0.0001", forKey: "Amplitude")
@@ -81,18 +87,13 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("10 Hz", forKey: "Frequency")
             ud.set("BHZ", forKey: "SChannel")
             ud.set("LHZ", forKey: "GChannel")
+            
+            saveEvents(events: [])
+            
             ud.set("Set", forKey: "First")
         }
     }
     
-    func showLoading() {
-        ud.set(DurationField.text!, forKey: "Duration")
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "Loading Screen") as! LoadingScreen
-        self.addChildViewController(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParentViewController: self)
-    }
     
     func validInputs() -> Bool {
         if (DurationField.text! == "") {

@@ -5,13 +5,15 @@ import AudioToolbox
 
 /*
  Things to Implement:
+ -Make user be able to save to and remove from "Suggestion Screen"
+    -Star icon on display screen to save/unsave event
  -Aesthetics
+ -More Explanation Screens
+ -Clear cache of old data
+ -Suggested Events Screen
  -Make rate/playback speed work
  -Graph Axes
- -Suggested Events Screen
- -No reloading for repeated inputs/requests
  -Fix formatting for non-iPhone 8
- -Put tips as to what the advanced options actually do
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Save images and sound to phone
  -FAQ button
@@ -20,12 +22,6 @@ import AudioToolbox
 
 class ViewController: UIViewController, UITextFieldDelegate {
     let ud = UserDefaults.standard
-    let url = Bundle.main.url(forResource: "sound", withExtension: "wav")
-    let imgUrl = Bundle.main.url(forResource: "img", withExtension: "jpeg")
-    var player : AVAudioPlayer?
-    let df1 = DateFormatter()
-    let df2 = DateFormatter()
-    var count = 0
     
     func showPopup(name: String) {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
@@ -33,27 +29,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         popOverVC.view.frame = self.view.frame
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParentViewController: self)
-    }
-    
-    func showInputError() {
-        showPopup(name: "Input Error")
-    }
-
-    func isNumber(num: String) -> Bool {
-        if (Float(num) != nil) {return true}
-        var theNum = ""
-        if (num[num.startIndex] == "-") {
-            theNum = String(num[num.index(num.startIndex, offsetBy: 1)..<num.endIndex])
-        } else {
-            theNum = num
-        }
-        let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        if (!numbers.contains(String(theNum[num.index(num.startIndex, offsetBy: 0)]))) {return false}
-        let secondChar = String(theNum[num.index(num.startIndex, offsetBy: 1)])
-        if (secondChar != "." && secondChar != "e") {return false}
-        let lastChar = String(theNum[num.index(num.startIndex, offsetBy: num.count - 1)])
-        if (!isNumber(num: lastChar)) {return false}
-        return true
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -110,16 +85,4 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         });
     }
-    
-    let ScrollMenuData = ["Ryerson (IL,USA)",
-                          "Yellowstone (WY,USA)",
-                          "Anchorage (AK,USA)",
-                          "Paris, France",
-                          "Inuyama, Japan",
-                          "Cachiyuyo, Chile",
-                          "Addis Ababa, Ethiopia",
-                          "Ar Rayn, Saudi Arabia",
-                          "Antarctica"]
-    var locationChosen : Bool = false
 }
-

@@ -23,6 +23,8 @@
 		F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818182108EE2500EB66D7 /* DisplayScreen.swift */; };
 		F28406242110CFAE002747DF /* Error404Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28406232110CFAE002747DF /* Error404Screen.swift */; };
 		F28406262110CFE2002747DF /* InputErrorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28406252110CFE2002747DF /* InputErrorScreen.swift */; };
+		F2FAF2FF2121FDD900753512 /* DataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF2FE2121FDD900753512 /* DataManagement.swift */; };
+		F2FAF3012121FFB800753512 /* ExternalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF3002121FFB800753512 /* ExternalFunctions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,8 @@
 		F25818182108EE2500EB66D7 /* DisplayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayScreen.swift; sourceTree = "<group>"; };
 		F28406232110CFAE002747DF /* Error404Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error404Screen.swift; sourceTree = "<group>"; };
 		F28406252110CFE2002747DF /* InputErrorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputErrorScreen.swift; sourceTree = "<group>"; };
+		F2FAF2FE2121FDD900753512 /* DataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagement.swift; sourceTree = "<group>"; };
+		F2FAF3002121FFB800753512 /* ExternalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFunctions.swift; sourceTree = "<group>"; };
 		FAF48E3B5253A7818872C2F6 /* Pods_SonifyMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SonifyMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -108,6 +112,8 @@
 				F25818162108ED9000EB66D7 /* LoadingScreen.swift */,
 				F28406232110CFAE002747DF /* Error404Screen.swift */,
 				F25818182108EE2500EB66D7 /* DisplayScreen.swift */,
+				F2FAF2FE2121FDD900753512 /* DataManagement.swift */,
+				F2FAF3002121FFB800753512 /* ExternalFunctions.swift */,
 				CD01B89621077767000EFCC9 /* LaunchScreen.storyboard */,
 				CD01B88D21077766000EFCC9 /* AppDelegate.swift */,
 				CD01B89421077767000EFCC9 /* Assets.xcassets */,
@@ -234,9 +240,11 @@
 			files = (
 				F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */,
 				F28406262110CFE2002747DF /* InputErrorScreen.swift in Sources */,
+				F2FAF2FF2121FDD900753512 /* DataManagement.swift in Sources */,
 				F28406242110CFAE002747DF /* Error404Screen.swift in Sources */,
 				CD01B89021077766000EFCC9 /* ViewController.swift in Sources */,
 				CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */,
+				F2FAF3012121FFB800753512 /* ExternalFunctions.swift in Sources */,
 				F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */,
 				CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */,
 				F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */,

@@ -22,7 +22,7 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func FrequencyHelp(_ sender: Any) {
-        showPopup(name: "FreqSuggestion")
+        showPopup(name: "FreqExplain")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

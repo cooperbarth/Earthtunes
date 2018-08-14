@@ -22,59 +22,79 @@ class LoadingScreen : ViewController {
     var fsps : Double = 0.0
     var bandsHZ : Double = 0.0
     
+    func makeViewAppear() {
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        LoadingView.layer.cornerRadius = 8.0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getSoundAndGraph()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.makeViewAppear()
+        self.showAnimate()
+    }
+}
+
+extension LoadingScreen {
     func getSoundAndGraph() {
         var station = ""
         var net = ""
         var location = ""
         switch locate {
-            case "Yellowstone (WY,USA)":
-                station = "H17A"
-                net = "TA"
-                location = "--"
-                break
-            case "Anchorage (AK,USA)":
-                station = "SSN"
-                net = "AK"
-                location = "--"
-                break
-            case "Paris, France":
-                station = "CLF"
-                net = "G"
-                location = "00"
-                break
-            case "Inuyama, Japan":
-                station = "INU"
-                net = "G"
-                location = "00"
-                break
-            case "Cachiyuyo, Chile":
-                station = "LCO"
-                net = "IU"
-                location = "10"
-                break
-            case "Addis Ababa, Ethiopia":
-                station = "FURI"
-                net = "IU"
-                location = "00"
-                break
-            case "Ar Rayn, Saudi Arabia":
-                station = "RAYN"
-                net = "II"
-                location = "10"
-                break
-            case "Antarctica":
-                station = "CASY"
-                net = "IU"
-                location = "10"
-                break
-            default:
-                locate = "Ryerson (IL,USA)"
-                station = "L44A"
-                net = "TA"
-                location = "--"
-                break
+        case "Yellowstone (WY,USA)":
+            station = "H17A"
+            net = "TA"
+            location = "--"
+            break
+        case "Anchorage (AK,USA)":
+            station = "SSN"
+            net = "AK"
+            location = "--"
+            break
+        case "Paris, France":
+            station = "CLF"
+            net = "G"
+            location = "00"
+            break
+        case "Inuyama, Japan":
+            station = "INU"
+            net = "G"
+            location = "00"
+            break
+        case "Cachiyuyo, Chile":
+            station = "LCO"
+            net = "IU"
+            location = "10"
+            break
+        case "Addis Ababa, Ethiopia":
+            station = "FURI"
+            net = "IU"
+            location = "00"
+            break
+        case "Ar Rayn, Saudi Arabia":
+            station = "RAYN"
+            net = "II"
+            location = "10"
+            break
+        case "Antarctica":
+            station = "CASY"
+            net = "IU"
+            location = "10"
+            break
+        default:
+            locate = "Ryerson (IL,USA)"
+            station = "L44A"
+            net = "TA"
+            location = "--"
+            break
         }
         ud.set(locate, forKey: "Title")
+        let ssps = bandsHZ * fsps
         
         let graphType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputGChannel
         let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputSChannel
@@ -83,30 +103,45 @@ class LoadingScreen : ViewController {
         let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
         
         let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&hp=" + inputHP + "&scale=auto&output=ascii1"
-        var dfSound = ""
-        do {
-            dfSound = try String(contentsOf: URL(string: soundUrl)!)
-        } catch {
-            showPopup(name: "Error 404")
-            return
-        }
         
-        let s32 = processData(data: dfSound)
-        let ssps = bandsHZ * fsps
-        saveFile(buff: s32, sample_rate: ssps)
-        
-        if (graphUrl != soundUrl) {
-            var dfGraph : String = ""
+        let prevData = checkRepeats()
+        if (prevData != nil) {
+            let s32 = prevData?.s32
+            let g32 = prevData?.g32
+            
+            saveFile(buff: s32!, sample_rate: ssps)
+            
+            if (graphUrl != soundUrl) {
+                ud.set(g32, forKey: "Data")
+            } else {
+                ud.set(s32, forKey: "Data")
+            }
+        } else {
+            var dfSound = ""
             do {
-                 dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+                dfSound = try String(contentsOf: URL(string: soundUrl)!)
             } catch {
                 showPopup(name: "Error 404")
                 return
             }
-            let g32 = processData(data: dfGraph)
-            ud.set(g32, forKey: "Data")
-        } else {
-            ud.set(s32, forKey: "Data")
+            let s32 = processData(data: dfSound)
+            saveFile(buff: s32, sample_rate: ssps)
+            
+            if (graphUrl != soundUrl) {
+                var dfGraph : String = ""
+                do {
+                    dfGraph = try String(contentsOf: URL(string: graphUrl)!)
+                } catch {
+                    showPopup(name: "Error 404")
+                    return
+                }
+                let g32 = processData(data: dfGraph)
+                ud.set(g32, forKey: "Data")
+                saveData(s32: s32, g32: g32)
+            } else {
+                ud.set(s32, forKey: "Data")
+                saveData(s32: s32, g32: s32)
+            }
         }
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
@@ -119,7 +154,7 @@ class LoadingScreen : ViewController {
         var sound = [Float64]()
         var maxAmp = 0.0
         for i in 1..<dflines.count {
-            if (self.isNumber(num: String(dflines[i]))) {
+            if (isNumber(num: String(dflines[i]))) {
                 let f = Float64(dflines[i])
                 sound.append(f!)
                 maxAmp = max(maxAmp, abs(f!))
@@ -157,46 +192,20 @@ class LoadingScreen : ViewController {
         return s32
     }
     
-    func saveFile(buff: [Float64], sample_rate: Float64) {
-        let SAMPLE_RATE = sample_rate
-        
-        let outputFormatSettings = [
-            AVFormatIDKey:kAudioFormatLinearPCM,
-            AVLinearPCMBitDepthKey:32,
-            AVLinearPCMIsFloatKey: true,
-            AVLinearPCMIsBigEndianKey: false,
-            AVSampleRateKey: SAMPLE_RATE,
-            AVNumberOfChannelsKey: 1
-            ] as [String : Any]
-        
-        let audioFile = try? AVAudioFile(forWriting: url!, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
-        
-        let bufferFormat = AVAudioFormat(settings: outputFormatSettings)
-        let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat!, frameCapacity: AVAudioFrameCount(buff.count))
-        for i in 0..<buff.count {outputBuffer!.floatChannelData!.pointee[i] = Float(buff[i])}
-        outputBuffer?.frameLength = AVAudioFrameCount(buff.count)
-        
-        do {
-            try audioFile?.write(from: outputBuffer!)
-        } catch {
-            print("Error writing audio file")
+    func checkRepeats() -> event? {
+        for e in retrieveEvents()! {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.hp == inputHP && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+                LoadingLabel.text! = "Loading Previously \nSaved Data From \n" + ud.string(forKey: "Location")!
+                return e
+            }
         }
+        return nil
     }
     
-    func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
-        LoadingView.layer.cornerRadius = 8.0
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        self.getSoundAndGraph()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.makeViewAppear()
-        self.showAnimate()
+    func saveData(s32: [Float64], g32: [Float64]) {
+        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, HP: inputHP, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32)
+        var newEvents = retrieveEvents()
+        newEvents!.append(newEvent)
+        saveEvents(events: newEvents!)
     }
 }
