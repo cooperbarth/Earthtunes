@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SonifyMe</string>
+    <string name="edit_message">Location:</string>
+    <string name="button_submit">Submit</string>
+    <string name="time_submit">HH:MM</string>
+    <string-array name="locations_array">
+        <item>Ryerson (IL,USA)</item>
+        <item>Yellowstone (WY,USA)</item>
+        <item>Anchorage (AK,USA)</item>
+        <item>Cachiyuyo, Chile</item>
+        <item>Kyoto, Japan</item>
+        <item>London, UK</item>
+        <item>Ar Rayn, Saudi Arabia</item>
+        <item>Addis Ababa, Ethiopia</item>
+        <item>Antarctica</item>
+    </string-array>
+</resources>
