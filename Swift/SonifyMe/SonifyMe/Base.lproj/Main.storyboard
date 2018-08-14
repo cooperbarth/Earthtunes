@@ -514,6 +514,7 @@
                     <connections>
                         <outlet property="SuggestionScroll" destination="66p-92-ZFM" id="8JA-Bk-R1D"/>
                         <outlet property="SuggestionView" destination="i3p-vR-JNx" id="qQj-r2-DWi"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="Select Event" id="htf-sJ-yhm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yel-9u-lw7" userLabel="First Responder" sceneMemberID="firstResponder"/>

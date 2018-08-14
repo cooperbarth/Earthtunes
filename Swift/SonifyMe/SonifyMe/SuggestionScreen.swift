@@ -7,13 +7,11 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
 
     @IBAction func ReturnButton(_ sender: Any) {
         setAllFields()
-        self.removeAnimate()
+        UIView.setAnimationsEnabled(false)
+        performSegue(withIdentifier: "Select Event", sender: self)
     }
     
     func setAllFields() {
-        
-        //@COOPER: THE PROBLEM WITH DURATION HAPPENS BECAUSE IT SETS WHATEVER IS IN THE BOX TO BE EQUAL TO "DURATION" IN MEMORY WHEN SWITCHING TO ADVANCED SCREEN. FIXING IT SO THAT THE FIELDS CHANGE IMMEDIATELY, RATHER THAN ON VIEWDIDLOAD, WILL FIX THIS.
-        
         let selectedRow = SuggestionScroll.indexPathForSelectedRow?.row
         if (selectedRow == nil) {return}
         let Event = events[selectedRow!]

@@ -48,7 +48,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         df2.dateFormat = "HH:mm"
         
         self.DurationField.inputAccessoryView = initDoneButton()
-        
         setUpFields()
     }
     
@@ -69,6 +68,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
         TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
         DurationField.text = ud.string(forKey: "Duration")
+
         
         if (ud.string(forKey: "Amplitude") == nil) {
             ud.set("0.0001", forKey: "Amplitude")
