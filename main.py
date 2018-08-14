@@ -336,20 +336,25 @@ class DisplayScreen(Screen):
 		self.sound = SoundLoader.load('ryerson.wav')
 		self.layout = BoxLayout(orientation='vertical')
 
-		self.im = Image(source="Blank", size_hint=(1,0.8))
-		self.layout.add_widget(self.im, index=3)
+		self.topGrid = GridLayout(cols=3,size_hint=(1,0.8))
+		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
+		self.im = Image(source="Blank", size_hint=(0.8,1))
+		self.im.allow_stretch = True
+		self.topGrid.add_widget(self.im)
+		self.topGrid.add_widget(Label(size_hint=(0.1,1)))
+		self.layout.add_widget(self.topGrid, index=3)
 
 		self.bottom = GridLayout(cols=7,size_hint=(1,0.08))
 
 		#Slider allows moving through sound files
 		self.slide = GridLayout(cols=3,size_hint=(1,0.07))
-		self.slide.add_widget(Label(size_hint=(0.206,1)))
-		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(0.65,1))
+		self.slide.add_widget(Label(size_hint=(0.2,1)))
+		self.seek = Slider(value_track=True, value_track_color=[0, 0, 1, 1], size_hint=(0.695,1))
 		self.seek.sensitivity='handle'
 		self.seek.bind(on_touch_down=self.slidePause)
 		self.seek.bind(on_touch_up=self.slideSeek)
 		self.slide.add_widget(self.seek)
-		self.slide.add_widget(Label(size_hint=(0.124,1)))
+		self.slide.add_widget(Label(size_hint=(0.105,1)))
 		self.layout.add_widget(self.slide)
 
 		self.bottom.add_widget(Label(size_hint=(0.05,1)))
@@ -503,21 +508,27 @@ class SampleScreen(GridLayout):
 		super(SampleScreen, self).__init__(**kwargs)
 		self.cols=1
 		self.layout=GridLayout(cols=2,size_hint=(1,0.9))
-		self.layout.add_widget(Label(text='Earthquake from Ryerson\nDate: January 23rd, 2018 Time: 08:00 Duration: 4 hours',size_hint=(0.7,0.2), halign='center'))
-		self.one=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(Label(text='Earthquake from Ryerson\nDate: January 23rd, 2018 Time: 10:00 Duration: 4 hours',size_hint=(0.7,0.148), halign='center'))
+		self.one=CheckBox(group='a_group',size_hint=(0.3,0.148))
 		self.layout.add_widget(self.one)
-		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
-		self.two=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(Label(text='Event 1\nDate: June 2nd, 2017 Time: 00:23 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.two=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.two)
-		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
-		self.three=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(Label(text='Event 2\nDate: November 7th, 2016 Time: 01:30 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.three=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.three)
-		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
-		self.four=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(Label(text='Event 3\nDate: July 6th, 2017 Time: 6:29 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.four=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.four)
-		self.layout.add_widget(Label(text='Earthquake at _\nDate:_ Time:_ Duration:_',size_hint=(0.7,0.2)))
-		self.five=CheckBox(group='a_group',size_hint=(0.3,0.2))
+		self.layout.add_widget(Label(text='Event 4\nDate: May 4th, 2018 Time: 22:33 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.five=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.five)
+		self.layout.add_widget(Label(text='Event 5\nDate: July 8th, 2018 Time: 16:30 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.six=CheckBox(group='a_group',size_hint=(0.3,0.142))
+		self.layout.add_widget(self.six)
+		self.layout.add_widget(Label(text='Event 6\nDate: July 24th, 2018 Time: 14:00 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.seven=CheckBox(group='a_group',size_hint=(0.3,0.142))
+		self.layout.add_widget(self.seven)
 		self.add_widget(self.layout)
 		
 		self.returnbutton = Button(text='Submit', size_hint=(1,0.1), background_normal = '', background_color = (1, 1, 1, 1), color = (0,0,0,1), valign = 'middle')
@@ -533,13 +544,35 @@ class SampleScreen(GridLayout):
 			input.startTime.text = '08:00'
 			input.duration.text = '4'
 		elif self.two.active:
-			pass
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2017-06-02'
+			input.startTime.text = '00:00'
+			input.duration.text = '4'
 		elif self.three.active:
-			pass
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2016-11-07'
+			input.startTime.text = '00:00'
+			input.duration.text = '4'
 		elif self.four.active:
-			pass
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2017-07-06'
+			input.startTime.text = '05:00'
+			input.duration.text = '4'
 		elif self.five.active:
-			pass
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2018-05-04'
+			input.startTime.text = '21:00'
+			input.duration.text = '4'
+		elif self.six.active:
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2018-07-08'
+			input.startTime.text = '15:00'
+			input.duration.text = '4'
+		elif self.seven.active:
+			input.location.text = 'Ryerson (IL,USA)'
+			input.date.text = '2018-07-24'
+			input.startTime.text = '13:00'
+			input.duration.text = '4'
 		else:
 			pass
 		samplePopup.dismiss()
