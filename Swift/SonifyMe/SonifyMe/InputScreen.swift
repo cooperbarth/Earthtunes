@@ -75,9 +75,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         if (ud.string(forKey: "Rate") == nil) {
             ud.set("1.0", forKey: "Rate")
         }
-        if (ud.string(forKey: "HP") == nil) {
-            ud.set("0.001", forKey: "HP")
-        }
         
         if (ud.string(forKey: "First") == nil) {
             ud.set(3, forKey: "FreqIndex")
@@ -88,9 +85,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("LHZ", forKey: "GChannel")
             
             saveEvents(events: [])
-            let favorites = [
-                    event(Location: "Yellowstone (WY,USA)", Date: "2018-07-08", Time: "00:49", Duration: "2", Frequency: "20 Hz", Amplitude: "1234", Rate: "1234", HP: "1234", SChannel: "BHZ", GChannel: "BHZ", G32: [], S32: []),
-            ]
+            let favorites = defaultEvents
             saveFavorites(events: favorites)
             
             ud.set("Set", forKey: "First")

@@ -13,7 +13,6 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
     let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
     let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
-    let inputHP = UserDefaults.standard.string(forKey: "HP")!
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     
@@ -31,7 +30,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     
     @IBOutlet weak var BlackButton: UIButton!
     @IBAction func BlackPressed(_ sender: Any) {
-        favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, HP: inputHP, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: []))
+        favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: []))
         saveFavorites(events: favorites)
         YellowButton.isHidden = false
         YellowButton.isEnabled = true
@@ -157,7 +156,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     
     func inFavorites() -> Bool {
         for e in favorites {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.hp == inputHP && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 return true
             }
         }
@@ -167,7 +166,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     func removeFavorite() {
         var count = 0
         for e in favorites {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.hp == inputHP && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 favorites.remove(at: count)
             }
             count += 1

@@ -35,3 +35,12 @@ let ScrollMenuData = ["Ryerson (IL,USA)",
                       "Ar Rayn, Saudi Arabia",
                       "Antarctica"]
 var locationChosen : Bool = false
+
+let defaultEvents: [event] = [
+    event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", Rate: "1.0", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: []),
+    event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", Rate: "1.0", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: []),
+    event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", Rate: "1.0", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: []),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", Rate: "1.0", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: []),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", Rate: "1.0", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: []),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", Rate: "1.0", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [])
+]
