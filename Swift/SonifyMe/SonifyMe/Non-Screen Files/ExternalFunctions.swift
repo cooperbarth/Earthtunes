@@ -1,8 +1,8 @@
 import Foundation
 import AVKit
 
-let url = URL(fileURLWithPath: NSTemporaryDirectory().appending("new.wav"))
-let imgUrl = Bundle.main.url(forResource: "img", withExtension: "jpeg")
+let url = URL(fileURLWithPath: NSTemporaryDirectory().appending("sound.wav"))
+let imgUrl = URL(fileURLWithPath: NSTemporaryDirectory().appending("graph.jpeg"))
 let df1 = DateFormatter()
 let df2 = DateFormatter()
 var player : AVAudioPlayer?
