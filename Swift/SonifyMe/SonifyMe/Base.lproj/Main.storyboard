@@ -103,8 +103,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-kn-h1s">
-                                <rect key="frame" x="137" y="542" width="101" height="30"/>
-                                <state key="normal" title="Sample Events"/>
+                                <rect key="frame" x="142" y="542" width="92" height="30"/>
+                                <state key="normal" title="Saved Events"/>
                                 <connections>
                                     <action selector="SamplePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zl4-Ox-9Hm"/>
                                 </connections>
@@ -330,7 +330,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SOF-Ql-gkR">
-                                <rect key="frame" x="67" y="59" width="240" height="470"/>
+                                <rect key="frame" x="67" y="98.5" width="240" height="470"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Frequencies" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYa-gy-Z1a">
                                         <rect key="frame" x="62.5" y="28" width="116.5" height="27"/>
@@ -343,7 +343,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="225" id="RDG-Mn-OAI"/>
                                         </constraints>
-                                        <mutableString key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise,  but earthquakes are very audible.  5 Hz - Great for highlighting earthquake sounds and provides for quick sound files.  10 Hz - The best compromise between 5 Hz and 20 Hz. This is the default setting for the app.  20 Hz - Great for birds-in-the-woods sounds. Sound duration is usually manageable.  50 Hz - Best for listening to small jumps, but the jumps are usually very quick and easy to miss.</mutableString>
+                                        <string key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise,  but earthquakes are very audible.  5 Hz - Great for highlighting earthquake sounds and provides for quick sound files.  10 Hz - The best compromise between 5 Hz and 20 Hz. This is the default setting for the app.  20 Hz - Great for birds-in-the-woods sounds. Sound duration is usually manageable.  50 Hz - Best for listening to small jumps, but the jumps are usually very quick and easy to miss.</string>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -372,7 +372,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SOF-Ql-gkR" firstAttribute="centerX" secondItem="prh-yz-w3c" secondAttribute="centerX" id="VzQ-SH-moG"/>
-                            <constraint firstItem="SOF-Ql-gkR" firstAttribute="top" secondItem="IqD-ax-ydo" secondAttribute="top" constant="39" id="Xcf-9e-92h"/>
+                            <constraint firstItem="SOF-Ql-gkR" firstAttribute="centerY" secondItem="prh-yz-w3c" secondAttribute="centerY" id="jTm-n3-RJL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IqD-ax-ydo"/>
                     </view>
@@ -402,7 +402,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Controls the volume of the output  sound. Higher values will make  the sound quieter." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAb-4g-0P3">
-                                        <rect key="frame" x="15" y="55" width="225" height="47"/>
+                                        <rect key="frame" x="15" y="64" width="225" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="225" id="9bj-st-qrs"/>
                                         </constraints>
@@ -423,7 +423,7 @@
                                     <constraint firstAttribute="width" constant="240" id="11W-ME-V9L"/>
                                     <constraint firstAttribute="bottom" secondItem="fOS-FE-rHr" secondAttribute="bottom" constant="8" id="5sC-Xy-L7x"/>
                                     <constraint firstItem="BAb-4g-0P3" firstAttribute="centerX" secondItem="b9C-eM-Z72" secondAttribute="centerX" constant="7.5" id="TCW-mR-4Ph"/>
-                                    <constraint firstItem="BAb-4g-0P3" firstAttribute="top" secondItem="mmw-QI-fCA" secondAttribute="bottom" constant="3" id="VdU-RP-ryK"/>
+                                    <constraint firstItem="BAb-4g-0P3" firstAttribute="top" secondItem="mmw-QI-fCA" secondAttribute="bottom" constant="12" id="VdU-RP-ryK"/>
                                     <constraint firstItem="mmw-QI-fCA" firstAttribute="centerX" secondItem="b9C-eM-Z72" secondAttribute="centerX" id="XEd-i6-ZP8"/>
                                     <constraint firstItem="mmw-QI-fCA" firstAttribute="top" secondItem="b9C-eM-Z72" secondAttribute="top" constant="25" id="a8L-pY-su7"/>
                                     <constraint firstAttribute="height" constant="159" id="hdh-oS-RzL"/>
@@ -822,6 +822,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lar-ca-Cwf"/>
+        <segue reference="htf-sJ-yhm"/>
     </inferredMetricsTieBreakers>
 </document>

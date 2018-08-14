@@ -80,6 +80,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         self.makeViewAppear()
         self.showAnimate()
         
+        
         events = retrieveFavorites()!
         
         SuggestionScroll.dataSource = self
@@ -102,6 +103,16 @@ extension SuggestionScreen {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.4)
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let selectedCell:UITableViewCell = tableView.cellForRow(at: indexPath)!
+        selectedCell.contentView.backgroundColor = UIColor.white
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = deleteAction(at: indexPath)
         return UISwipeActionsConfiguration(actions: [delete])
@@ -119,10 +130,6 @@ extension SuggestionScreen {
         
         return action
     }
-}
-
-class TableViewCell: UITableViewCell {
-    
 }
 
 

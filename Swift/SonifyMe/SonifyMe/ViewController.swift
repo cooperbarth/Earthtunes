@@ -5,8 +5,9 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Make user be able to save to and remove from "Suggestion Screen"
-    -Star icon on display screen to save/unsave event
+ -Suggestion Screen
+    -User be able to name saved events
+    -More info shown on event title
  -Aesthetics
  -More Explanation Screens
  -Clear cache of old data
