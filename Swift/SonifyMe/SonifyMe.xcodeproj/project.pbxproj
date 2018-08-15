@@ -19,6 +19,7 @@
 		F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818122108ED6900EB66D7 /* InputScreen.swift */; };
 		F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818162108ED9000EB66D7 /* LoadingScreen.swift */; };
 		F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818182108EE2500EB66D7 /* DisplayScreen.swift */; };
+		F2753654212481DB00E952F0 /* DeleteEventScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2753653212481DB00E952F0 /* DeleteEventScreen.swift */; };
 		F28406242110CFAE002747DF /* Error404Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28406232110CFAE002747DF /* Error404Screen.swift */; };
 		F28406262110CFE2002747DF /* InputErrorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28406252110CFE2002747DF /* InputErrorScreen.swift */; };
 		F2E80D1E21234EA60049AB07 /* FreqExplanationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E80D1D21234EA60049AB07 /* FreqExplanationScreen.swift */; };
@@ -43,6 +44,7 @@
 		F25818122108ED6900EB66D7 /* InputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScreen.swift; sourceTree = "<group>"; };
 		F25818162108ED9000EB66D7 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		F25818182108EE2500EB66D7 /* DisplayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayScreen.swift; sourceTree = "<group>"; };
+		F2753653212481DB00E952F0 /* DeleteEventScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteEventScreen.swift; sourceTree = "<group>"; };
 		F28406232110CFAE002747DF /* Error404Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error404Screen.swift; sourceTree = "<group>"; };
 		F28406252110CFE2002747DF /* InputErrorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputErrorScreen.swift; sourceTree = "<group>"; };
 		F2E80D1D21234EA60049AB07 /* FreqExplanationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreqExplanationScreen.swift; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 		CD52C6032123C4D0003FF1C7 /* Confirmation Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F2753653212481DB00E952F0 /* DeleteEventScreen.swift */,
 				CD52C6012123C4CA003FF1C7 /* ClearCacheScreen.swift */,
 			);
 			path = "Confirmation Screens";
@@ -277,6 +280,7 @@
 				CD52C6022123C4CA003FF1C7 /* ClearCacheScreen.swift in Sources */,
 				CD01B89021077766000EFCC9 /* ViewController.swift in Sources */,
 				CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */,
+				F2753654212481DB00E952F0 /* DeleteEventScreen.swift in Sources */,
 				F2FAF3012121FFB800753512 /* ExternalFunctions.swift in Sources */,
 				F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */,
 				CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */,

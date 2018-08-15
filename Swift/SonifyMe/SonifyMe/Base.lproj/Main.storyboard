@@ -567,6 +567,66 @@
             </objects>
             <point key="canvasLocation" x="-95.200000000000003" y="59.820089955022496"/>
         </scene>
+        <!--Delete Event Screen-->
+        <scene sceneID="t8T-Jm-zZn">
+            <objects>
+                <viewController storyboardIdentifier="Delete Event" useStoryboardIdentifierAsRestorationIdentifier="YES" id="rPu-8l-ZQd" customClass="DeleteEventScreen" customModule="SonifyMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="O7j-93-t7J">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bHL-Dg-Rub">
+                                <rect key="frame" x="67" y="233" width="240" height="85"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete Event?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="neO-d4-YM5">
+                                        <rect key="frame" x="67" y="18" width="106" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2th-vM-vMh">
+                                        <rect key="frame" x="157" y="49" width="48" height="30"/>
+                                        <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="CancelButton:" destination="rPu-8l-ZQd" eventType="touchUpInside" id="6U1-Qp-XP5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HPE-JS-L6d">
+                                        <rect key="frame" x="35" y="49" width="45" height="30"/>
+                                        <state key="normal" title="Delete"/>
+                                        <connections>
+                                            <action selector="DeleteButton:" destination="rPu-8l-ZQd" eventType="touchUpInside" id="NtJ-OB-pgx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="2th-vM-vMh" secondAttribute="trailing" constant="35" id="IWK-1a-gfq"/>
+                                    <constraint firstItem="neO-d4-YM5" firstAttribute="centerX" secondItem="bHL-Dg-Rub" secondAttribute="centerX" id="KJC-dS-lYL"/>
+                                    <constraint firstItem="2th-vM-vMh" firstAttribute="top" secondItem="neO-d4-YM5" secondAttribute="bottom" constant="10" id="Kuo-wy-XkL"/>
+                                    <constraint firstItem="HPE-JS-L6d" firstAttribute="top" secondItem="neO-d4-YM5" secondAttribute="bottom" constant="10" id="Vaj-ay-5mr"/>
+                                    <constraint firstItem="HPE-JS-L6d" firstAttribute="leading" secondItem="bHL-Dg-Rub" secondAttribute="leading" constant="35" id="X1E-Vq-8Vm"/>
+                                    <constraint firstAttribute="height" constant="85" id="ePV-6A-7vq"/>
+                                    <constraint firstAttribute="width" constant="240" id="lZq-I5-lgh"/>
+                                    <constraint firstItem="neO-d4-YM5" firstAttribute="top" secondItem="bHL-Dg-Rub" secondAttribute="top" constant="18" id="sD4-cE-8lP"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bHL-Dg-Rub" firstAttribute="centerX" secondItem="O7j-93-t7J" secondAttribute="centerX" id="aIW-04-tPM"/>
+                            <constraint firstItem="bHL-Dg-Rub" firstAttribute="top" secondItem="JcZ-IR-TFZ" secondAttribute="top" constant="213" id="y5P-id-jdA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JcZ-IR-TFZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="DeleteView" destination="bHL-Dg-Rub" id="8Fl-Af-voF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tNb-3O-Ccc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-95.200000000000003" y="-629.2353823088456"/>
+        </scene>
         <!--Suggestion Screen-->
         <scene sceneID="8dl-tY-6KU">
             <objects>
