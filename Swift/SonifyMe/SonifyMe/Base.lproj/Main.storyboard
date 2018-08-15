@@ -6,7 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -766,7 +766,7 @@
                                 </constraints>
                             </view>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
-                                <rect key="frame" x="177.5" y="291" width="20" height="20"/>
+                                <rect key="frame" x="177.5" y="307" width="20" height="20"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
                                 <rect key="frame" x="150" y="250" width="75" height="20.5"/>
@@ -777,13 +777,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="OTG-ax-qu6" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="230" id="3v6-7g-qlc"/>
+                            <constraint firstItem="OTG-ax-qu6" firstAttribute="centerY" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="240" id="3v6-7g-qlc"/>
                             <constraint firstItem="OTG-ax-qu6" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="4Iz-5E-O1U"/>
                             <constraint firstItem="a7J-Pe-S8s" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="4um-94-XQl"/>
-                            <constraint firstItem="YW0-QI-0l3" firstAttribute="firstBaseline" secondItem="OTG-ax-qu6" secondAttribute="baseline" constant="25" id="AGR-OE-TuF"/>
                             <constraint firstItem="YW0-QI-0l3" firstAttribute="leading" secondItem="a7J-Pe-S8s" secondAttribute="trailing" constant="-129.5" id="I5S-uG-hmi"/>
                             <constraint firstItem="a7J-Pe-S8s" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" constant="175" id="biL-dO-1Sj"/>
                             <constraint firstItem="YW0-QI-0l3" firstAttribute="centerX" secondItem="Lk4-EY-kWO" secondAttribute="centerX" id="sZW-2V-CKx"/>
+                            <constraint firstItem="3tH-mJ-Hx7" firstAttribute="bottom" secondItem="YW0-QI-0l3" secondAttribute="bottom" constant="340" id="v7m-vM-UBY"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3tH-mJ-Hx7"/>
                     </view>

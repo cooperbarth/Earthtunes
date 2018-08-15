@@ -5,8 +5,8 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Add confirmation screen for deleting saved events
  -Make loading bubble not move down when "Loading Previous Data" shows up
+ -Make users be able to add event descriptions (popup text views on long press)
  -Graph Axes
  -More Explanation Screens
  -User be able to name saved events?
@@ -16,6 +16,7 @@ import AudioToolbox
  
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Save images and sound to phone (Optional)
+ -Send raw data to self (for scientists)
  -FAQ button
  -Send Feedback
  */
