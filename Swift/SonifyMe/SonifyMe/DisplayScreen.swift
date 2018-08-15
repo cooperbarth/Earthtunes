@@ -208,20 +208,22 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
     
     func configureHostView() {
         hostView.allowPinchScaling = false
+        hostView.collapsesLayers = true
     }
     
     func configureGraph() {
         let graph = CPTXYGraph(frame: hostView.bounds)
         graph.plotAreaFrame?.masksToBorder = false
+        graph.plotAreaFrame?.borderLineStyle = nil
+        graph.plotAreaFrame?.paddingLeft = 35.0
         hostView.hostedGraph = graph
         
         graph.apply(CPTTheme(named: CPTThemeName.plainWhiteTheme))
-        graph.fill = CPTFill(color: CPTColor.clear())
+        //graph.fill = CPTFill(color: CPTColor.clear())
         graph.paddingBottom = 0.0
         graph.paddingLeft = 0.0
         graph.paddingTop = 0.0
         graph.paddingRight = 0.0
-        graph.axisSet = nil
         
         let titleStyle = CPTMutableTextStyle()
         titleStyle.color = CPTColor.black()
@@ -252,7 +254,21 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         graph.add(plot, to: graph.defaultPlotSpace)
     }
     
-    func configureAxes() {}
+    func configureAxes() {
+        let axisLineStyle = CPTMutableLineStyle()
+        axisLineStyle.lineWidth = 1.0
+        axisLineStyle.lineColor = CPTColor.black()
+        
+        guard let axisSet = hostView.hostedGraph?.axisSet as? CPTXYAxisSet else { return }
+        let xAxis = axisSet.xAxis
+        xAxis?.majorIntervalLength = 1000
+        xAxis?.axisLineStyle = axisLineStyle
+        /*
+        let yAxis = axisSet.yAxis
+        yAxis?.majorIntervalLength = 100000
+        yAxis?.axisLineStyle = axisLineStyle
+ */
+    }
 }
 
 
