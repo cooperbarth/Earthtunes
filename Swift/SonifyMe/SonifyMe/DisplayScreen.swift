@@ -30,7 +30,9 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     
     @IBOutlet weak var BlackButton: UIButton!
     @IBAction func BlackPressed(_ sender: Any) {
-        favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: []))
+        if (!inFavorites()) {
+            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: []))
+        }
         saveFavorites(events: favorites)
         YellowButton.isHidden = false
         YellowButton.isEnabled = true
@@ -168,6 +170,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         for e in favorites {
             if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 favorites.remove(at: count)
+                break
             }
             count += 1
         }

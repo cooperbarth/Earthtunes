@@ -6,9 +6,9 @@ import AudioToolbox
 /*
  Things to Implement:
  -Suggestion Screen
-    -User be able to name saved events
-    -More info shown on event title
+    -User be able to name saved events?
     -Add confirmation screen for deleting events
+ -Make loading bubble not move down when "Loading Previous Data" shows up
  -Graph Axes
  -More Explanation Screens
  -Make rate/playback speed work
@@ -16,7 +16,7 @@ import AudioToolbox
  -Fix formatting for non-iPhone 8
  
  -Figure out time zone stuff? (2 options: local and UTC?)
- -Save images and sound to phone
+ -Save images and sound to phone (Optional)
  -FAQ button
  -Send Feedback
  */
