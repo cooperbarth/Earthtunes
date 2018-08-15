@@ -1,18 +1,24 @@
 package com.example.michaelji.sonifyme;
 
 import android.content.Intent;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.net.URI;
+
 public class DisplayActivity extends AppCompatActivity {
 
+    public static MediaPlayer mediaPlayer = new MediaPlayer();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +32,20 @@ public class DisplayActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView);
         textView.setText(locate);
 
-        String path = getApplicationContext().getFilesDir().getPath() + "/"  + locate + ".wav";
-        MediaPlayer mediaPlayer = new MediaPlayer();
+        String audioPath = getApplicationContext().getFilesDir().getPath() + "/"  + locate + ".wav";
         try {
-            mediaPlayer.setDataSource(path);
+            mediaPlayer.setDataSource(audioPath);
             mediaPlayer.prepare();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mediaPlayer.start(); // no need to call prepare(); create() does that for you
+        // no need to call prepare(); create() does that for you
 
+        //String imPath = getApplicationContext().getFilesDir().getPath() + "/"  + locate + ".png";
+        //ImageView im = findViewById(R.id.imageView);
+        //im.setImageURI(Uri.parse(imPath));
+
+        /*
         GraphView graph = (GraphView) findViewById(R.id.graph);
         LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                 new DataPoint(0, 1),
@@ -44,6 +54,14 @@ public class DisplayActivity extends AppCompatActivity {
                 new DataPoint(3, 2),
                 new DataPoint(4, 6)
         });
-        graph.addSeries(series);
+        graph.addSeries(series);*/
+    }
+
+    public void playPause(View view) {
+        if(mediaPlayer.isPlaying()){
+            mediaPlayer.pause();
+        } else {
+            mediaPlayer.start();
+        }
     }
 }

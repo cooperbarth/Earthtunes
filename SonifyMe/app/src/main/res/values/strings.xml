@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SonifyMe</string>
+    <string name="app_name">Earthtunes</string>
     <string name="edit_message">Location:</string>
     <string name="button_submit">Submit</string>
     <string name="time_submit">HH:MM</string>
