@@ -6,9 +6,9 @@ import AudioToolbox
 /*
  Things to Implement:
  -Suggestion Screen
-    -User be able to name saved events
-    -More info shown on event title
+    -User be able to name saved events?
     -Add confirmation screen for deleting events
+ -Make loading bubble not move down when "Loading Previous Data" shows up
  -Graph Axes
  -More Explanation Screens
  -Make rate/playback speed work

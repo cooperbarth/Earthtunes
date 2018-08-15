@@ -99,7 +99,25 @@ extension SuggestionScreen {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = SuggestionScroll.dequeueReusableCell(withIdentifier: "Event Cell")!
-        cell.textLabel?.text = events[indexPath.row].location //EDIT THIS BOI (new cell class?)
+        let locationString: String = events[indexPath.row].location
+        var index : Int = 0
+        var ct = 0
+        for character in locationString {
+            if (character == "(") {
+                index = max(ct - 1, 0)
+                break
+            } else if (character == ",") {
+                index = ct
+                break
+            }
+            ct += 1
+        }
+        if (index != 0) {
+            let subLocation = locationString.prefix(index)
+            cell.textLabel?.text = subLocation + ": " + events[indexPath.row].date
+        } else {
+            cell.textLabel?.text = locationString + ": " + events[indexPath.row].date
+        }
         return cell
     }
     
