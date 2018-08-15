@@ -16,7 +16,7 @@ import AudioToolbox
  -Fix formatting for non-iPhone 8
  
  -Figure out time zone stuff? (2 options: local and UTC?)
- -Save images and sound to phone
+ -Save images and sound to phone (Optional)
  -FAQ button
  -Send Feedback
  */

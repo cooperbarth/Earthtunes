@@ -745,6 +745,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-aO-WjU">
+                                <rect key="frame" x="332" y="28" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Txb-MN-ofK"/>
+                                    <constraint firstAttribute="height" constant="35" id="yZ5-7G-7L5"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="Yellow Star"/>
+                                <connections>
+                                    <action selector="YellowPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="ZJf-c6-BtA"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Rb-o0-4gi" customClass="CPTGraphHostingView">
                                 <rect key="frame" x="0.0" y="95" width="375" height="225"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -823,18 +835,6 @@
                                     <action selector="BlackPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="8OZ-5o-lj6"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLw-aO-WjU">
-                                <rect key="frame" x="332" y="28" width="35" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="35" id="Txb-MN-ofK"/>
-                                    <constraint firstAttribute="height" constant="35" id="yZ5-7G-7L5"/>
-                                </constraints>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" backgroundImage="Yellow Star"/>
-                                <connections>
-                                    <action selector="YellowPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="ZJf-c6-BtA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -891,6 +891,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lar-ca-Cwf"/>
+        <segue reference="O0B-H3-m4Q"/>
     </inferredMetricsTieBreakers>
 </document>
