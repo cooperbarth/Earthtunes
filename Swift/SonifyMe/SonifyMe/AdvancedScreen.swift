@@ -42,6 +42,10 @@ class AdvancedScreen : ViewController {
         ud.set(LoopingSwitch.isOn, forKey: "Loop")
     }
     
+    @IBAction func ClearCache(_ sender: Any) {
+        showPopup(name: "ClearCache")
+    }
+    
     @IBAction func ResetDefaults(_ sender: Any) {
         ud.set(3, forKey: "FreqIndex")
         ud.set("0.0001", forKey: "Amplitude")

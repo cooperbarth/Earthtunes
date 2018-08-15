@@ -8,12 +8,13 @@ import AudioToolbox
  -Suggestion Screen
     -User be able to name saved events
     -More info shown on event title
- -Aesthetics
- -More Explanation Screens
- -Clear cache of old data
- -Make rate/playback speed work
+    -Add confirmation screen for deleting events
  -Graph Axes
+ -More Explanation Screens
+ -Make rate/playback speed work
+ -Aesthetics
  -Fix formatting for non-iPhone 8
+ 
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Save images and sound to phone
  -FAQ button
