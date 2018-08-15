@@ -20,13 +20,20 @@ public class DisplayActivity extends AppCompatActivity {
 
         // Get the Intent that started this activity and extract the string
         Intent intent = getIntent();
-        String url = intent.getStringExtra(InputActivity.EXTRA_MESSAGE);
+        String locate = intent.getStringExtra(InputActivity.EXTRA_MESSAGE);
 
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.textView);
-        textView.setText(url);
+        textView.setText(locate);
 
-        MediaPlayer mediaPlayer = MediaPlayer.create(DisplayActivity.this, R.raw.ryerson);
+        String path = getApplicationContext().getFilesDir().getPath() + "/"  + locate + ".wav";
+        MediaPlayer mediaPlayer = new MediaPlayer();
+        try {
+            mediaPlayer.setDataSource(path);
+            mediaPlayer.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         mediaPlayer.start(); // no need to call prepare(); create() does that for you
 
         GraphView graph = (GraphView) findViewById(R.id.graph);

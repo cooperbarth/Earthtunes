@@ -93,16 +93,16 @@ public class InputActivity extends AppCompatActivity {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date = sdf.format(new Date(dateLong));
 
-            String url = getUrl(locate, duration, time, date);
+            String[] url = getUrl(locate, duration, time, date);
 
-            new DownloadFile().execute(url);
+            new DownloadFile().execute(url[0], url[1]);
 
-            intent.putExtra(EXTRA_MESSAGE, url);
+            intent.putExtra(EXTRA_MESSAGE, locate);
             startActivity(intent);
         }
     }
 
-    public String getUrl(String loc, String dur, String time, String date)
+    public String[] getUrl(String loc, String dur, String time, String date)
     {
         int duration = Integer.parseInt(dur);
         duration *= 3600;
@@ -195,42 +195,46 @@ public class InputActivity extends AppCompatActivity {
         }
         String type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel;
         String when = "&starttime=" + date + "T" + time + "&duration=" + dur;
-        return "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.0001&scale=auto&output=audio";
+        String[] out = {"http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.0001&scale=auto&output=audio", soundname};
+        return out;
     }
-}
 
-class DownloadFile extends AsyncTask<String, Integer, String> {
-    @Override
-    protected String doInBackground(String... file) {
-        int count;
-        try {
-            URL url = new URL(file[0]);
-            URLConnection conexion = url.openConnection();
-            conexion.connect();
-            // this will be useful so that you can show a tipical 0-100% progress bar
-            int lenghtOfFile = conexion.getContentLength();
+    public class DownloadFile extends AsyncTask<String, Integer, String> {
+        @Override
+        protected String doInBackground(String... file) {
+            int count;
+            try {
+                URL url = new URL(file[0]);
+                URLConnection conexion = url.openConnection();
+                conexion.connect();
+                // this will be useful so that you can show a tipical 0-100% progress bar
+                int lenghtOfFile = conexion.getContentLength();
 
-            // downlod the file
-            InputStream input = new BufferedInputStream(url.openStream());
-            OutputStream output = new FileOutputStream(Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
+                // downlod the file
+                InputStream input = new BufferedInputStream(url.openStream());
+                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".wav");
+                        //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
 
-            byte data[] = new byte[1024];
+                byte data[] = new byte[1024];
 
-            long total = 0;
+                long total = 0;
 
-            while ((count = input.read(data)) != -1) {
-                total += count;
-                // publishing the progress....
-                publishProgress((int) (total * 100 / lenghtOfFile));
-                output.write(data, 0, count);
+                while ((count = input.read(data)) != -1) {
+                    total += count;
+                    // publishing the progress....
+                    publishProgress((int) (total * 100 / lenghtOfFile));
+                    output.write(data, 0, count);
+                }
+
+                output.flush();
+                output.close();
+                input.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-
-            output.flush();
-            output.close();
-            input.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            return null;
         }
-        return null;
     }
 }
+
+
