@@ -1,15 +1,9 @@
 package com.example.michaelji.sonifyme;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Environment;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -17,17 +11,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.io.BufferedInputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
 
 public class InputActivity extends AppCompatActivity {
 
@@ -69,25 +60,21 @@ public class InputActivity extends AppCompatActivity {
         Intent intent = new Intent(InputActivity.this, DisplayActivity.class);
         Intent malintent = new Intent( this, ErrorActivity.class);
 
-        boolean success = true;
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String locate = (String) spinner.getSelectedItem();
         String duration = "-1";
         String time = "-1";
-        try {
-            EditText timeText = (EditText) findViewById(R.id.TimeText);
-            time = timeText.getText().toString();
-            EditText durationText = (EditText) findViewById(R.id.DurationText);
-            duration = durationText.getText().toString();
-        }
-        catch(Exception e)
-        {
-            success = false;
+
+        EditText timeText = (EditText) findViewById(R.id.TimeText);
+        time = timeText.getText().toString();
+        EditText durationText = (EditText) findViewById(R.id.DurationText);
+        duration = durationText.getText().toString();
+
+        if(time.equals("") || duration.equals("")) {
             startActivity(malintent);
-        }
-        if(success)
-        {
+        } else {
+
             CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
             long dateLong = calendar.getDate();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -95,7 +82,9 @@ public class InputActivity extends AppCompatActivity {
 
             String[] url = getUrl(locate, duration, time, date);
 
-            new DownloadFile().execute(url[0], url[1]);
+            new DownloadFile().execute(url[0] + "audio", url[1], "audio");
+            new DownloadFile().execute(url[0] + "plot", url[1], "plot");
+
 
             intent.putExtra(EXTRA_MESSAGE, locate);
             startActivity(intent);
@@ -195,7 +184,7 @@ public class InputActivity extends AppCompatActivity {
         }
         String type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel;
         String when = "&starttime=" + date + "T" + time + "&duration=" + dur;
-        String[] out = {"http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&hp=0.0001&scale=auto&output=audio", soundname};
+        String[] out = {"http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=", soundname};
         return out;
     }
 
@@ -212,9 +201,14 @@ public class InputActivity extends AppCompatActivity {
 
                 // downlod the file
                 InputStream input = new BufferedInputStream(url.openStream());
-                OutputStream output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".wav");
-                        //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
-
+                OutputStream output;
+                if(file[2].equals("audio")) {
+                    output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".wav");
+                    //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
+                }
+                else {
+                    output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".png");
+                }
                 byte data[] = new byte[1024];
 
                 long total = 0;
