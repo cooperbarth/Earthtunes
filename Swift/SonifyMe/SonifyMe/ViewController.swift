@@ -5,11 +5,9 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Make loading bubble not move down when "Loading Previous Data" shows up
- -Make users be able to add event descriptions (popup text views on long press)
  -Graph Axes
+ -Make users be able to add event descriptions (popup text views on long press)
  -More Explanation Screens
- -User be able to name saved events?
  -Make rate/playback speed work
  -Aesthetics
  -Fix formatting for non-iPhone 8
