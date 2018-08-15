@@ -120,19 +120,17 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         pauseSound()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        favorites = retrieveFavorites()!
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         do {
+
             player = try AVAudioPlayer(contentsOf: url)
             playSound()
-            favorites = retrieveFavorites()!
-            if (inFavorites()) {
-                BlackButton.isHidden = true
-                BlackButton.isEnabled = false
-            } else {
-                YellowButton.isHidden = true
-                YellowButton.isEnabled = false
-            }
         } catch {
             print("Audio Player Not Found.")
         }
@@ -144,6 +142,13 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         initplot()
         GraphTitle.text = ud.string(forKey: "Title")
         SoundSlideLayout.value = 0.0
+        if (inFavorites()) {
+            BlackButton.isHidden = true
+            BlackButton.isEnabled = false
+        } else {
+            YellowButton.isHidden = true
+            YellowButton.isEnabled = false
+        }
     }
     
     @IBOutlet weak var hostView: CPTGraphHostingView!
