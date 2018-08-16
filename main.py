@@ -131,16 +131,16 @@ class InputScreen(Screen):
 		durationText = self.duration.text
 
 		#list of geology facts for use on the loading screen
-		geofacts = ['0',
-					'1',
-					'2',
-					'3',
-					'4',
-					'5',
-					'6',
-					'7',
-					'8',
-					'9']
+		geofacts = ['An earthquake has only one magnitude, which\nreflects how much rock was diplaced, but causes a\nrange of shaking intensities at different distances\nfrom the epicenter',
+					'The two largest earthquakes ever recorded are the\n1960 Valdivia earthquake (M9.5, Chile) and the 1964\nGreat Alaska earthquake (M9.2)',
+					'The 2011 M5.8 Viginia earthquake was felt by\nmore U.S. residents than any other earthquake,\nincluding by people in high-rise buildings in Chicago',
+					'Seismic waves from earthquakes can alter water\nlevels in wells near and far from the epicenter',
+					'After Alaska, the most seismically active state in\nthe U.S. is Oklahoma. Oklahoma\'s seismic activity\nsurpassed California\'s just within the past decade',
+					'Earthquakes in eastern Africa are helping to break\nAfrica up into two plates',
+					'Earthquakes in California help move Los Angeles\non the Pacific Plate move closer to San Francisco on\nthe North American Plate. They will be each other\'s\nsuburbs in about 15 million years',
+					'Earthquakes in the Mediterranean region have\nhelped shape ancient and present civilizations. They\nare the result of the European Plate overriding the\nAfrican Plate',
+					'U.S. Midcontinent residents weight 0.01% (1% of 1%) more\nwhen on top of billion-year old buried lava flows that\nwind from Lake Superior to NE Kansas. That is as if\nthey lived a third of a mile (half of km) closer to the\Earth\'s center ',
+					'The deepest recorded earthquakes are nearly 700\nkm deep, which is one tenth of the Earth\'s radius. Deep\nearthquakes occur where oceanic tectonic plates,\nsuch as the Pacific Plate, are sinking into the Earth\'s\ndeformable mantle, underneath overriding tectonic\nplates, such as the Eurasian and American Plates']
 
 		if locationText == 'Select Location':
 			errscreen.errorlabel.text = 'Input Error: Please Select a Location.'
@@ -160,7 +160,7 @@ class InputScreen(Screen):
 			return
 
 		#Open loading popup
-		loadScreen.message.text= "Loading data from " + locationText + '...\n\n\n\n' + geofacts[random.randint(0,9)]
+		loadScreen.message.text= "Loading data from " + locationText + '...\n\n\n\n' + "Fun Fact:\n" + geofacts[random.randint(0,9)]
 		loadPopup.open()
 
 #LoadingScreen: popup loading screen
@@ -687,7 +687,7 @@ class InfoScreen(GridLayout):
 	def __init__(self, **kwargs):
 		super(InfoScreen, self).__init__(**kwargs)
 		self.cols=1
-		self.Label1=Label(text='Upper Frequency Limit (default: 10 Hz):\nThe range of frequencies that are recorded is to wide to fit into the audible range.\nWe use a factor in calculations to listen to specific ranges of frequencies;\n the below choices represent the highest frequency heard with specific multipliers.\nlower frequencies (higher multipliers) are better to hear earthquakes.\nKeep in mind not all stations record at all of these frequencies,\nso data may be sparse for some choices',
+		self.Label1=Label(text='Upper Frequency Limit (default: 10 Hz):\nThe range of frequencies that are recorded is too wide to fit into the audible range.\nWe use a factor in calculations to listen to specific ranges of frequencies;\n the below choices represent the highest frequency heard with specific multipliers.\nlower frequencies (higher multipliers) are better to hear earthquakes.\nKeep in mind not all stations record at all of these frequencies,\nso data may be sparse for some choices',
 								size_hint=(1,0.4),halign='center')
 		self.add_widget(self.Label1)
 		self.Label2=Label(text='Fixed Amplitude (default: 0.00005):\nThe fixed amplitude is a number used in calculations to help scale the amplitude of the sound.\nSmaller numbers lead to louder sounds, but may distort sounds that are already loud.\nHigher numbers lead to quieter sound, but more detail on louder sounds',
