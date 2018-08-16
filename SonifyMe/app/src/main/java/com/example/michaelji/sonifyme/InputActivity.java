@@ -86,7 +86,7 @@ public class InputActivity extends AppCompatActivity {
 
             String[] url = getUrl(locate, duration, time, date);
 
-            new DownloadFile().execute(url[0] + "audio", url[1]);
+            new DownloadFile().execute(url[0] + "audio");
             new DownloadImage().execute(url[0] + "plot");
 
 
@@ -206,7 +206,7 @@ public class InputActivity extends AppCompatActivity {
                 // downlod the file
                 InputStream input = new BufferedInputStream(url.openStream());
                 OutputStream output;
-                output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".wav");
+                output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + "sound.wav");
                 //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
 
 
