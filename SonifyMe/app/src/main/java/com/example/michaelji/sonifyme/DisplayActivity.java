@@ -35,7 +35,7 @@ public class DisplayActivity extends AppCompatActivity {
         TextView textView = findViewById(R.id.textView);
         textView.setText(locate);
 
-        String audioPath = getApplicationContext().getFilesDir().getPath() + "/"  + locate + ".wav";
+        String audioPath = getApplicationContext().getFilesDir().getPath() + "/"  + "sound.wav";
         try {
             mediaPlayer.setDataSource(audioPath);
             mediaPlayer.prepare();
@@ -72,7 +72,7 @@ public class DisplayActivity extends AppCompatActivity {
             }
         });
         seek.setMax(mediaPlayer.getDuration());
-        seek.setProgress(mediaPlayer.getCurrentPosition());
+        seek.setProgress(0);
 
     }
 
