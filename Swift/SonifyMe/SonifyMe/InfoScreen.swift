@@ -2,11 +2,6 @@ import Foundation
 import UIKit
 
 class InfoScreen : ViewController {
-    //text box, cancel, and save buttons
-    //events need to have a "description" field (string)
-    //on load, set the textbox.text = event.description
-    //on clicking save, set event.description = textbox.text and close it
-    
     var events: [event] = []
     let eventIndex = UserDefaults.standard.integer(forKey: "Long-Pressed Index")
     

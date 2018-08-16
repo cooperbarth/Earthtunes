@@ -26,6 +26,16 @@ class AdvancedScreen : ViewController {
         showPopup(name: "AmpExplain")
     }
     
+    @IBAction func SoundChannelHelp(_ sender: Any) {
+        ud.set("Sound", forKey: "ChannelHelp")
+        showPopup(name: "ChannelExplain")
+    }
+    
+    @IBAction func GraphChannelHelp(_ sender: Any) {
+        ud.set("Graph", forKey: "ChannelHelp")
+        showPopup(name: "ChannelExplain")
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
         ud.set(Amp.text!, forKey: "Amplitude")

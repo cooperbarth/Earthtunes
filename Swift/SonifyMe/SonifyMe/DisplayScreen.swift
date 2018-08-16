@@ -168,7 +168,7 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
     func symbol(for plot: CPTScatterPlot, record idx: UInt) -> CPTPlotSymbol? {
         let symbol : CPTPlotSymbol = CPTPlotSymbol()
         symbol.symbolType = CPTPlotSymbolType(rawValue: 1)!
-        symbol.size = CGSize(width: 1, height: 1)
+        symbol.size = CGSize(width: 0.01, height: 0.01)
         symbol.fill = CPTFill(color: CPTColor.blue())
         return symbol
     }
@@ -213,8 +213,8 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         plot.identifier = NSString(string: "plot")
         
         let plotLineStyle = CPTMutableLineStyle()
-        plotLineStyle.lineWidth = 1
-        plotLineStyle.lineColor = CPTColor.black()
+        plotLineStyle.lineWidth = 0.5
+        plotLineStyle.lineColor = CPTColor.blue()
         plot.dataLineStyle = plotLineStyle
         
         graph.add(plot, to: graph.defaultPlotSpace)
@@ -273,6 +273,7 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         xAxis.axisLabels = axisLabels
     }
 }
+
 extension DisplayScreen : AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if (ud.bool(forKey: "Loop")) {
