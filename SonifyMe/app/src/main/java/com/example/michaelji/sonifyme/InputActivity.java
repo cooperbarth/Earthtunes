@@ -1,9 +1,13 @@
 package com.example.michaelji.sonifyme;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.CalendarView;
@@ -82,8 +86,8 @@ public class InputActivity extends AppCompatActivity {
 
             String[] url = getUrl(locate, duration, time, date);
 
-            new DownloadFile().execute(url[0] + "audio", url[1], "audio");
-            new DownloadFile().execute(url[0] + "plot", url[1], "plot");
+            new DownloadFile().execute(url[0] + "audio", url[1]);
+            new DownloadImage().execute(url[0] + "plot");
 
 
             intent.putExtra(EXTRA_MESSAGE, locate);
@@ -202,13 +206,12 @@ public class InputActivity extends AppCompatActivity {
                 // downlod the file
                 InputStream input = new BufferedInputStream(url.openStream());
                 OutputStream output;
-                if(file[2].equals("audio")) {
-                    output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".wav");
-                    //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
-                }
-                else {
-                    output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".png");
-                }
+                output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".wav");
+                //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
+
+
+                //output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".png");
+
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -227,6 +230,43 @@ public class InputActivity extends AppCompatActivity {
                 System.out.println(e.getMessage());
             }
             return null;
+        }
+    }
+
+    public void saveImage(Context context, Bitmap b, String imageName) {
+        FileOutputStream foStream;
+        try {
+            foStream = context.openFileOutput(imageName, Context.MODE_PRIVATE);
+            b.compress(Bitmap.CompressFormat.PNG, 100, foStream);
+            foStream.close();
+        } catch (Exception e) {
+            Log.d("saveImage", "Exception 2, Something went wrong!");
+            e.printStackTrace();
+        }
+    }
+
+    private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        private String TAG = "DownloadImage";
+        private Bitmap downloadImageBitmap(String sUrl) {
+            Bitmap bitmap = null;
+            try {
+                InputStream inputStream = new URL(sUrl).openStream();   // Download Image from URL
+                bitmap = BitmapFactory.decodeStream(inputStream);       // Decode Bitmap
+                inputStream.close();
+            } catch (Exception e) {
+                Log.d(TAG, "Exception 1, Something went wrong!");
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        @Override
+        protected Bitmap doInBackground(String... params) {
+            return downloadImageBitmap(params[0]);
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            saveImage(getApplicationContext(), result, "graph.png");
         }
     }
 }
