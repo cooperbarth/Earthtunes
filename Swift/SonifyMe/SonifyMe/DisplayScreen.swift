@@ -4,7 +4,7 @@ import Foundation
 import AudioToolbox
 import CorePlot
 
-class DisplayScreen : ViewController, AVAudioPlayerDelegate {
+class DisplayScreen : ViewController {
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")!
@@ -31,7 +31,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var BlackButton: UIButton!
     @IBAction func BlackPressed(_ sender: Any) {
         if (!inFavorites()) {
-            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: []))
+            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: [], Descript: ""))
         }
         saveFavorites(events: favorites)
         YellowButton.isHidden = false
@@ -81,39 +81,7 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
     
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        if (ud.bool(forKey: "Loop")) {
-            player.currentTime = TimeInterval(0.0)
-            playSound()
-        } else {
-            pauseSound()
-        }
-    }
-    
-    func playSound() {
-        SoundSlideLayout.maximumValue = Float((player?.duration)!)
-        player?.prepareToPlay()
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-        player?.play()
-        PlayButton.isHidden = true
-        PlayButton.isEnabled = false
-        PauseButton.isHidden = false
-        PauseButton.isEnabled = true
-    }
-    
-    @objc func updateSlider(_ timer: Timer) {
-        SoundSlideLayout.value = Float((player?.currentTime)!)
-    }
-    
-    func pauseSound() {
-        if (player?.isPlaying)! {
-            player?.stop()
-        }
-        PauseButton.isHidden = true
-        PauseButton.isEnabled = false
-        PlayButton.isHidden = false
-        PlayButton.isEnabled = true
-    }
+
     
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
@@ -153,13 +121,6 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var hostView: CPTGraphHostingView!
     var plot: CPTScatterPlot!
     
-    func initplot() {
-        configureHostView()
-        configureGraph()
-        configureChart()
-        configureAxes()
-    }
-    
     func inFavorites() -> Bool {
         for e in favorites {
             if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
@@ -182,6 +143,13 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
 }
 
 extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
+    func initplot() {
+        configureHostView()
+        configureGraph()
+        configureChart()
+        configureAxes()
+    }
+    
     func numberOfRecords(for plot: CPTPlot) -> UInt {
         return UInt(data.count)
     }
@@ -305,7 +273,41 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         xAxis.axisLabels = axisLabels
     }
 }
-
+extension DisplayScreen : AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if (ud.bool(forKey: "Loop")) {
+            player.currentTime = TimeInterval(0.0)
+            playSound()
+        } else {
+            pauseSound()
+        }
+    }
+    
+    func playSound() {
+        SoundSlideLayout.maximumValue = Float((player?.duration)!)
+        player?.prepareToPlay()
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        player?.play()
+        PlayButton.isHidden = true
+        PlayButton.isEnabled = false
+        PauseButton.isHidden = false
+        PauseButton.isEnabled = true
+    }
+    
+    @objc func updateSlider(_ timer: Timer) {
+        SoundSlideLayout.value = Float((player?.currentTime)!)
+    }
+    
+    func pauseSound() {
+        if (player?.isPlaying)! {
+            player?.stop()
+        }
+        PauseButton.isHidden = true
+        PauseButton.isEnabled = false
+        PlayButton.isHidden = false
+        PlayButton.isEnabled = true
+    }
+}
 
 
 

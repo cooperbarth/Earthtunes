@@ -67,8 +67,9 @@ class event: NSObject, NSCoding {
     var gchannel: String
     var g32: [Float64]
     var s32: [Float64]
+    var descript: String
     
-    required init(Location: String, Date: String, Time: String, Duration: String, Frequency: String, Amplitude: String, Rate: String, SChannel: String, GChannel: String, G32: [Float64], S32: [Float64]) {
+    required init(Location: String, Date: String, Time: String, Duration: String, Frequency: String, Amplitude: String, Rate: String, SChannel: String, GChannel: String, G32: [Float64], S32: [Float64], Descript: String) {
         location = Location
         date = Date
         time = Time
@@ -80,6 +81,7 @@ class event: NSObject, NSCoding {
         gchannel = GChannel
         g32 = G32
         s32 = S32
+        descript = Descript
     }
     
     func encode(with aCoder: NSCoder) {
@@ -94,6 +96,7 @@ class event: NSObject, NSCoding {
         aCoder.encode(gchannel, forKey: "gchannel")
         aCoder.encode(g32, forKey: "g32")
         aCoder.encode(s32, forKey: "s32")
+        aCoder.encode(descript, forKey: "descript")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -108,6 +111,7 @@ class event: NSObject, NSCoding {
         gchannel = aDecoder.decodeObject(forKey: "gchannel") as! String
         g32 = aDecoder.decodeObject(forKey: "g32") as! [Float64]
         s32 = aDecoder.decodeObject(forKey: "s32") as! [Float64]
+        descript = aDecoder.decodeObject(forKey: "descript") as! String
     }
 }
 
