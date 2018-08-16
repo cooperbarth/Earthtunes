@@ -11,6 +11,7 @@ import AudioToolbox
  -Make rate/playback speed work
  -Aesthetics
  -Fix formatting for non-iPhone 8
+ -Geology Facts?
  
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Save images and sound to phone (Optional)

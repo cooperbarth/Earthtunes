@@ -128,7 +128,6 @@ class DisplayScreen : ViewController, AVAudioPlayerDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         do {
-
             player = try AVAudioPlayer(contentsOf: url)
             playSound()
         } catch {
@@ -215,7 +214,7 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         let graph = CPTXYGraph(frame: hostView.bounds)
         graph.plotAreaFrame?.masksToBorder = false
         graph.plotAreaFrame?.borderLineStyle = nil
-        graph.plotAreaFrame?.paddingLeft = 35.0
+        //graph.plotAreaFrame?.paddingLeft = 35.0  UNCOMMENT THIS FOR Y AXIS
         hostView.hostedGraph = graph
         
         graph.apply(CPTTheme(named: CPTThemeName.plainWhiteTheme))
@@ -260,14 +259,56 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         axisLineStyle.lineColor = CPTColor.black()
         
         guard let axisSet = hostView.hostedGraph?.axisSet as? CPTXYAxisSet else { return }
-        let xAxis = axisSet.xAxis
-        xAxis?.majorIntervalLength = 1000
-        xAxis?.axisLineStyle = axisLineStyle
-        /*
-        let yAxis = axisSet.yAxis
-        yAxis?.majorIntervalLength = 100000
-        yAxis?.axisLineStyle = axisLineStyle
- */
+        
+        let xAxis = axisSet.xAxis!
+        xAxis.axisLineStyle = axisLineStyle
+        xAxis.labelingPolicy = .none
+        var majorTickLocations = Set<NSNumber>()
+        var axisLabels = Set<CPTAxisLabel>()
+        let loc = ud.string(forKey: "Location")!
+        let dur = ud.string(forKey: "Duration")!
+        let startTime = df2.date(from: ud.string(forKey: "Time")!)
+        
+        var sampleRate = 1
+        if (ud.string(forKey: "GChannel") == "BHZ") {
+            if (loc == "Anchorage (AK,USA)") {
+                sampleRate = 50
+            } else if (loc == "Addis Ababa, Ethiopia") {
+                sampleRate = 20
+            } else {
+                sampleRate = 40
+            }
+        }
+        
+        //currently assuming 1 per sec
+        var interval = 1800    //determine whether we mark by half-hour or hour
+        if (Float(dur)! >= 8.0) {
+            interval = 3600
+        }
+        interval *= sampleRate
+
+        var count = 0
+        for (idx, _) in data.enumerated() {
+            if (count % interval == 0) {
+                majorTickLocations.insert(NSNumber(value: idx))
+                let timePassed = TimeInterval(count / sampleRate)
+                let timeLabel = startTime?.addingTimeInterval(timePassed)
+                let axisLabel = df2.string(from: timeLabel!)
+                let label = CPTAxisLabel(text: axisLabel, textStyle: CPTTextStyle())
+                label.tickLocation = NSNumber(value: idx)
+                label.offset = 132.0
+                label.alignment = .bottom
+                axisLabels.insert(label)
+            }
+            count += 1
+        }
+        xAxis.majorTickLocations = majorTickLocations
+        xAxis.axisLabels = axisLabels
+        
+        let yAxis = axisSet.yAxis!
+        yAxis.majorIntervalLength = 1.0
+        yAxis.axisLineStyle = axisLineStyle
+ 
     }
 }
 
