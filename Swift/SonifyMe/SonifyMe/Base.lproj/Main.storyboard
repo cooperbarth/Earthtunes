@@ -537,7 +537,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVW-Us-43k">
-                                        <rect key="frame" x="7.5" y="50" width="225" height="78"/>
+                                        <rect key="frame" x="12" y="50" width="225" height="78"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="225" id="PnA-Nh-Eq4"/>
                                         </constraints>
@@ -557,12 +557,13 @@
                                 <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="tL1-2a-mFP" firstAttribute="centerX" secondItem="hmx-H0-mgS" secondAttribute="centerX" id="1TW-d1-tme"/>
+                                    <constraint firstAttribute="trailing" secondItem="cVW-Us-43k" secondAttribute="trailing" constant="13" id="Lbw-np-q1y"/>
                                     <constraint firstItem="WOs-0z-f2s" firstAttribute="centerX" secondItem="hmx-H0-mgS" secondAttribute="centerX" id="MGl-EL-85A"/>
-                                    <constraint firstItem="cVW-Us-43k" firstAttribute="centerX" secondItem="hmx-H0-mgS" secondAttribute="centerX" id="Mok-qA-Ld1"/>
                                     <constraint firstAttribute="height" constant="160" id="Wgl-sR-d61"/>
                                     <constraint firstItem="cVW-Us-43k" firstAttribute="top" secondItem="tL1-2a-mFP" secondAttribute="bottom" constant="8" id="ZuO-7h-lEb"/>
                                     <constraint firstItem="tL1-2a-mFP" firstAttribute="top" secondItem="hmx-H0-mgS" secondAttribute="top" constant="15" id="a6Z-pT-Jms"/>
                                     <constraint firstAttribute="bottom" secondItem="WOs-0z-f2s" secondAttribute="bottom" constant="6" id="b03-yT-x9L"/>
+                                    <constraint firstItem="cVW-Us-43k" firstAttribute="leading" secondItem="hmx-H0-mgS" secondAttribute="leading" constant="12" id="gsg-cP-qBA"/>
                                     <constraint firstAttribute="width" constant="240" id="v18-Mn-JtP"/>
                                 </constraints>
                             </view>
