@@ -1,11 +1,15 @@
 package com.example.michaelji.sonifyme;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +18,7 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import java.io.FileInputStream;
 import java.net.URI;
 
 public class DisplayActivity extends AppCompatActivity {
@@ -41,9 +46,10 @@ public class DisplayActivity extends AppCompatActivity {
         }
         // no need to call prepare(); create() does that for you
 
-        //String imPath = getApplicationContext().getFilesDir().getPath() + "/"  + locate + ".png";
-        //ImageView im = findViewById(R.id.imageView);
-        //im.setImageURI(Uri.parse(imPath));
+        String imPath = getApplicationContext().getFilesDir().getPath() + "/"  + "graph.png";
+        ImageView im = findViewById(R.id.imageView);
+        im.setImageBitmap(loadImageBitmap(getApplicationContext(), "graph.png"));
+                //.setImageURI(Uri.parse(imPath));
 
         /*
         GraphView graph = (GraphView) findViewById(R.id.graph);
@@ -55,6 +61,20 @@ public class DisplayActivity extends AppCompatActivity {
                 new DataPoint(4, 6)
         });
         graph.addSeries(series);*/
+    }
+
+    public Bitmap loadImageBitmap(Context context, String imageName) {
+        Bitmap bitmap = null;
+        FileInputStream fiStream;
+        try {
+            fiStream    = context.openFileInput(imageName);
+            bitmap      = BitmapFactory.decodeStream(fiStream);
+            fiStream.close();
+        } catch (Exception e) {
+            Log.d("saveImage", "Exception 3, Something went wrong!");
+            e.printStackTrace();
+        }
+        return bitmap;
     }
 
     public void playPause(View view) {
