@@ -152,8 +152,12 @@ extension SuggestionScreen {
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         let touchPoint = longPressGestureRecognizer.location(in: self.SuggestionScroll)
         if let indexPath = SuggestionScroll.indexPathForRow(at: touchPoint) {
-            let longPressedEvent = events[indexPath.row]
-            print(longPressedEvent.location)
+            if (longPressGestureRecognizer.state == UIGestureRecognizerState.began) {
+                view.endEditing(true)
+                let longPressedEvent = events[indexPath.row]
+                print(longPressedEvent.location)
+                showPopup(name: "Info Screen")
+            }
         }
     }
     
@@ -164,26 +168,3 @@ extension SuggestionScreen {
         self.SuggestionScroll.addGestureRecognizer(longPressGesture)
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

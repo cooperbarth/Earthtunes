@@ -8,11 +8,12 @@ import AudioToolbox
  -Make users be able to add event descriptions (popup text views on long press)
  -More Explanation Screens
  -Make rate/playback speed work
- -Aesthetics
  -Fix formatting for non-iPhone 8
- -Geology Facts?
+ -Aesthetics
  
+ -Geology Facts?
  -Figure out time zone stuff? (2 options: local and UTC?)
+ -Add y-axis
  -Save images and sound to phone (Optional)
  -Send raw data to self (for scientists)
  -FAQ button
