@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSource {
+class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     var events : [event] = []
     
     @IBOutlet weak var SuggestionView: UIView!
@@ -79,7 +79,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         super.viewDidLoad()
         self.makeViewAppear()
         self.showAnimate()
-        
+        self.setUpLongPress()
         
         events = retrieveFavorites()!
         
@@ -147,6 +147,21 @@ extension SuggestionScreen {
         action.backgroundColor = UIColor.red
         
         return action
+    }
+    
+    @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        let touchPoint = longPressGestureRecognizer.location(in: self.SuggestionScroll)
+        if let indexPath = SuggestionScroll.indexPathForRow(at: touchPoint) {
+            let longPressedEvent = events[indexPath.row]
+            print(longPressedEvent.location)
+        }
+    }
+    
+    func setUpLongPress() {
+        let longPressGesture:UILongPressGestureRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(longPress(_:)))
+        longPressGesture.minimumPressDuration = 1.0
+        longPressGesture.delegate = self
+        self.SuggestionScroll.addGestureRecognizer(longPressGesture)
     }
 }
 
