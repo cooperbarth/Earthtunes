@@ -5,25 +5,23 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.net.Uri;
-import android.provider.Settings;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-
 import java.io.FileInputStream;
-import java.net.URI;
 
 public class DisplayActivity extends AppCompatActivity {
 
     public static MediaPlayer mediaPlayer = new MediaPlayer();
+    Handler seekHandler = new Handler();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,24 +42,57 @@ public class DisplayActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // no need to call prepare(); create() does that for you
 
-        String imPath = getApplicationContext().getFilesDir().getPath() + "/"  + "graph.png";
         ImageView im = findViewById(R.id.imageView);
         im.setImageBitmap(loadImageBitmap(getApplicationContext(), "graph.png"));
-                //.setImageURI(Uri.parse(imPath));
 
-        /*
-        GraphView graph = (GraphView) findViewById(R.id.graph);
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-                new DataPoint(0, 1),
-                new DataPoint(1, 5),
-                new DataPoint(2, 3),
-                new DataPoint(3, 2),
-                new DataPoint(4, 6)
+        SeekBar seek = findViewById(R.id.seekBar);
+        seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            boolean wasPlaying = false;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(fromUser)
+                    mediaPlayer.seekTo(progress);
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                if(mediaPlayer.isPlaying()) {
+                    wasPlaying = true;
+                }
+                mediaPlayer.pause();
+                seekHandler.removeCallbacks(moveSeekBarThread);
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                if(wasPlaying) {
+                    mediaPlayer.start();
+                    seekHandler.postDelayed(moveSeekBarThread, 0); //cal the thread after 100 milliseconds
+                    wasPlaying = false;
+                }
+            }
         });
-        graph.addSeries(series);*/
+        seek.setMax(mediaPlayer.getDuration());
+        seek.setProgress(mediaPlayer.getCurrentPosition());
+
     }
+
+    private Runnable moveSeekBarThread = new Runnable() {
+        public void run() {
+            if(mediaPlayer.isPlaying()){
+                SeekBar seekbar = findViewById(R.id.seekBar);
+                int mediaPos_new = mediaPlayer.getCurrentPosition();
+                seekbar.setProgress(mediaPos_new);
+
+                seekHandler.postDelayed(this, 100); //Looping the thread after 0.1 second
+            }
+            else if(mediaPlayer.getCurrentPosition()==mediaPlayer.getDuration())
+            {
+                SeekBar seekbar = findViewById(R.id.seekBar);
+                seekbar.setProgress(seekbar.getMax());
+            }
+
+        }
+    };
 
     public Bitmap loadImageBitmap(Context context, String imageName) {
         Bitmap bitmap = null;
@@ -80,8 +111,18 @@ public class DisplayActivity extends AppCompatActivity {
     public void playPause(View view) {
         if(mediaPlayer.isPlaying()){
             mediaPlayer.pause();
+            seekHandler.removeCallbacks(moveSeekBarThread);
         } else {
             mediaPlayer.start();
+            seekHandler.postDelayed(moveSeekBarThread, 0); //cal the thread after 100 milliseconds
         }
+    }
+
+    public void jumpForward(View view) {
+        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() + 10000);
+    }
+
+    public void jumpBackward(View view) {
+        mediaPlayer.seekTo(mediaPlayer.getCurrentPosition() - 10000);
     }
 }
