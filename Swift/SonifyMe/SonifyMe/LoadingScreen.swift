@@ -202,7 +202,7 @@ extension LoadingScreen {
     }
     
     func saveData(s32: [Float64], g32: [Float64]) {
-        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32)
+        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32, Descript: "")
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)
