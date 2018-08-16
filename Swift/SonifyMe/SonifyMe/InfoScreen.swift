@@ -26,6 +26,8 @@ class InfoScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        InfoText.delegate = self as? UITextViewDelegate
+        self.InfoText.inputAccessoryView = initDoneButton()
         events = retrieveFavorites()!
         self.makeViewAppear()
         self.showAnimate()

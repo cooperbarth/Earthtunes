@@ -49,6 +49,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func initDoneButton() -> UIView {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
+        doneToolbar.barTintColor = UIColor.white
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(doneButtonAction))
         var items = [UIBarButtonItem]()
