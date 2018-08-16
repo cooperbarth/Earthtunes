@@ -5,7 +5,6 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Graph Axes
  -Make users be able to add event descriptions (popup text views on long press)
  -More Explanation Screens
  -Make rate/playback speed work

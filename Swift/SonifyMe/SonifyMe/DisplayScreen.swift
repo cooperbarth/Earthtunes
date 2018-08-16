@@ -214,11 +214,10 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         let graph = CPTXYGraph(frame: hostView.bounds)
         graph.plotAreaFrame?.masksToBorder = false
         graph.plotAreaFrame?.borderLineStyle = nil
-        //graph.plotAreaFrame?.paddingLeft = 35.0  UNCOMMENT THIS FOR Y AXIS
+        graph.plotAreaFrame?.paddingBottom = 10.0
         hostView.hostedGraph = graph
         
         graph.apply(CPTTheme(named: CPTThemeName.plainWhiteTheme))
-        //graph.fill = CPTFill(color: CPTColor.clear())
         graph.paddingBottom = 0.0
         graph.paddingLeft = 0.0
         graph.paddingTop = 0.0
@@ -257,8 +256,7 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         let axisLineStyle = CPTMutableLineStyle()
         axisLineStyle.lineWidth = 1.0
         axisLineStyle.lineColor = CPTColor.black()
-        
-        guard let axisSet = hostView.hostedGraph?.axisSet as? CPTXYAxisSet else { return }
+        guard let axisSet = hostView.hostedGraph?.axisSet as? CPTXYAxisSet else {return}
         
         let xAxis = axisSet.xAxis!
         xAxis.axisLineStyle = axisLineStyle
@@ -280,10 +278,11 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
             }
         }
         
-        //currently assuming 1 per sec
-        var interval = 1800    //determine whether we mark by half-hour or hour
+        var interval = 1800
         if (Float(dur)! >= 8.0) {
             interval = 3600
+        } else if (Float(dur)! <= 2.0) {
+            interval = 900
         }
         interval *= sampleRate
 
@@ -296,7 +295,7 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
                 let axisLabel = df2.string(from: timeLabel!)
                 let label = CPTAxisLabel(text: axisLabel, textStyle: CPTTextStyle())
                 label.tickLocation = NSNumber(value: idx)
-                label.offset = 132.0
+                label.offset = 135.0
                 label.alignment = .bottom
                 axisLabels.insert(label)
             }
@@ -304,11 +303,6 @@ extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
         }
         xAxis.majorTickLocations = majorTickLocations
         xAxis.axisLabels = axisLabels
-        
-        let yAxis = axisSet.yAxis!
-        yAxis.majorIntervalLength = 1.0
-        yAxis.axisLineStyle = axisLineStyle
- 
     }
 }
 
