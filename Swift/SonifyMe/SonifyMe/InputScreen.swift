@@ -6,7 +6,23 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var DateField: UIDatePicker!
     @IBOutlet weak var TimeField: UIDatePicker!
     @IBOutlet weak var DurationField: UITextField!
+    
+    @IBOutlet weak var TitleDistanceFromTop: NSLayoutConstraint!
+    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var TitleToLocationDistance: NSLayoutConstraint!
+    @IBOutlet weak var LocationLabel: UILabel!
+    @IBOutlet weak var LocationLabelToSpinnerDistance: NSLayoutConstraint!
+    
+    @IBOutlet weak var LocationSpinnerHeight: NSLayoutConstraint!
+    @IBOutlet weak var LocationSpinnerWidth: NSLayoutConstraint!
+    @IBOutlet weak var DateSpinnerHeight: NSLayoutConstraint!
+    @IBOutlet weak var DateSpinnerWidth: NSLayoutConstraint!
+    @IBOutlet weak var TimeSpinnerHeight: NSLayoutConstraint!
+    @IBOutlet weak var TimeSpinnerWidth: NSLayoutConstraint!
     @IBOutlet weak var DurationTextFieldWidth: NSLayoutConstraint!
+    @IBOutlet weak var DurationFieldTextHeight: NSLayoutConstraint!
+
+    @IBOutlet weak var LocationSpinnerLabelSpacing: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,22 +113,36 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
 }
 
 extension InputScreen {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return ScrollMenuData.count}
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return ScrollMenuData[row]}
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let ud = UserDefaults.standard
-        ud.set(row, forKey: "Location Index")
-        ud.set(ScrollMenuData[row], forKey: "Location")
-    }
-}
-
-extension InputScreen {
     func formatScreen() {
+        TitleDistanceFromTop.constant = screenSize.height * 0.02
+        TitleLabel.font = UIFont(name: TitleLabel.font.fontName, size: screenSize.height / 18)
+        TitleToLocationDistance.constant = TitleDistanceFromTop.constant
+        LocationLabel.font = UIFont(name: LocationLabel.font.fontName, size: screenSize.height / 40)
+        LocationLabelToSpinnerDistance.constant = 0
+        //LocationSpinner Height
+        //LocationSpinner Width
+        //Distance between LocationSpinner and Date
+        //Date Font Size
+        //Distance between Date and DateSpinner
+        //DateSpinner Height
+        //DateSpinner Width
+        //Distance between DateSpinner and Time
+        //Time font size
+        //Distance between time and TimeSpinner
+        //TimeSpinner width
+        //TimeSpinner height
+        //Distance between timespinner and Duration
+        //Duration font size
+        //Distance between duration and durationtextfield
         DurationTextFieldWidth.constant = screenSize.width * 0.35
+        DurationFieldTextHeight.constant = DurationTextFieldWidth.constant * 0.25
+        //DurationTextField text size
+        //Distance between DurationTextField and Saved Events
+        //Saved Events font size
+        //Distance between Saved Events and Advanced Options
+        //Advanced Options font size
+        //Distance between Advanced Options and Submit
+        //Submit Font size
     }
     
     func validInputs() -> Bool {
@@ -124,5 +154,19 @@ extension InputScreen {
             return true
         }
         return false
+    }
+}
+
+extension InputScreen {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return ScrollMenuData.count}
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return ScrollMenuData[row]}
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let ud = UserDefaults.standard
+        ud.set(row, forKey: "Location Index")
+        ud.set(ScrollMenuData[row], forKey: "Location")
     }
 }
