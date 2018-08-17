@@ -5,8 +5,6 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -More Explanation Screens
- -Make rate/playback speed work
  -Fix formatting for non-iPhone 8
  -Aesthetics
  
