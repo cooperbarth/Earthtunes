@@ -142,6 +142,7 @@
                     <connections>
                         <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
                         <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
+                        <outlet property="DurationTextFieldWidth" destination="76c-SV-PFS" id="L4K-9x-B0t"/>
                         <outlet property="LocationField" destination="wMu-KE-ETd" id="qpS-A3-lSO"/>
                         <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
                         <segue destination="Ky7-K0-5BQ" kind="presentation" identifier="ToLoading" id="oiZ-qh-wIF"/>
@@ -528,10 +529,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hmx-H0-mgS">
-                                <rect key="frame" x="67" y="195" width="240" height="160"/>
+                                <rect key="frame" x="62" y="195" width="250" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Channel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL1-2a-mFP">
-                                        <rect key="frame" x="80" y="15" width="80" height="27"/>
+                                        <rect key="frame" x="85" y="15" width="80" height="27"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -547,7 +548,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WOs-0z-f2s">
-                                        <rect key="frame" x="97" y="124" width="46" height="30"/>
+                                        <rect key="frame" x="102" y="124" width="46" height="30"/>
                                         <state key="normal" title="Return"/>
                                         <connections>
                                             <action selector="ReturnButton:" destination="FwB-Zn-fnD" eventType="touchUpInside" id="N9J-kS-4V3"/>
@@ -564,7 +565,6 @@
                                     <constraint firstItem="tL1-2a-mFP" firstAttribute="top" secondItem="hmx-H0-mgS" secondAttribute="top" constant="15" id="a6Z-pT-Jms"/>
                                     <constraint firstAttribute="bottom" secondItem="WOs-0z-f2s" secondAttribute="bottom" constant="6" id="b03-yT-x9L"/>
                                     <constraint firstItem="cVW-Us-43k" firstAttribute="leading" secondItem="hmx-H0-mgS" secondAttribute="leading" constant="12" id="gsg-cP-qBA"/>
-                                    <constraint firstAttribute="width" constant="240" id="v18-Mn-JtP"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -1089,6 +1089,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O0B-H3-m4Q"/>
+        <segue reference="uSE-zc-9LE"/>
     </inferredMetricsTieBreakers>
 </document>

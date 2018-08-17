@@ -18,6 +18,7 @@ import AudioToolbox
  */
 
 class ViewController: UIViewController, UITextFieldDelegate {
+    let screenSize: CGRect = UIScreen.main.bounds
     let ud = UserDefaults.standard
     
     func showPopup(name: String) {
