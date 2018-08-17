@@ -61,7 +61,7 @@ public class InputActivity extends AppCompatActivity {
 
     /** Called when the user taps the Send button */
     public void sendMessage(View view) {
-        Intent intent = new Intent(InputActivity.this, DisplayActivity.class);
+        Intent intent = new Intent(InputActivity.this, LoadingActivity.class);
         Intent malintent = new Intent( this, ErrorActivity.class);
 
 
@@ -93,6 +93,17 @@ public class InputActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_MESSAGE, locate);
             startActivity(intent);
         }
+    }
+
+    public void toDisplay ()
+    {
+        Intent intent = new Intent(InputActivity.this, DisplayActivity.class);
+
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        String locate = (String) spinner.getSelectedItem();
+
+        intent.putExtra(EXTRA_MESSAGE, locate);
+        startActivity(intent);
     }
 
     public String[] getUrl(String loc, String dur, String time, String date)
@@ -267,6 +278,7 @@ public class InputActivity extends AppCompatActivity {
 
         protected void onPostExecute(Bitmap result) {
             saveImage(getApplicationContext(), result, "graph.png");
+            toDisplay();
         }
     }
 }
