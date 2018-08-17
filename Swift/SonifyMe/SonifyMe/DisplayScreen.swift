@@ -31,7 +31,7 @@ class DisplayScreen : ViewController {
     @IBOutlet weak var BlackButton: UIButton!
     @IBAction func BlackPressed(_ sender: Any) {
         if (!inFavorites()) {
-            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: [], Descript: ""))
+            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: [], Descript: ""))
         }
         saveFavorites(events: favorites)
         YellowButton.isHidden = false
@@ -123,7 +123,7 @@ class DisplayScreen : ViewController {
     
     func inFavorites() -> Bool {
         for e in favorites {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 return true
             }
         }
@@ -133,7 +133,7 @@ class DisplayScreen : ViewController {
     func removeFavorite() {
         var count = 0
         for e in favorites {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 favorites.remove(at: count)
                 break
             }
