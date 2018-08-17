@@ -6,6 +6,24 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var DateField: UIDatePicker!
     @IBOutlet weak var TimeField: UIDatePicker!
     @IBOutlet weak var DurationField: UITextField!
+    @IBOutlet weak var DurationTextFieldWidth: NSLayoutConstraint!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        formatScreen()
+        UIView.setAnimationsEnabled(true)
+        
+        LocationField.delegate = self
+        LocationField.dataSource = self
+        DurationField.delegate = self
+        
+        DateField.maximumDate = Date()
+        df1.dateFormat = "YYYY-MM-dd"
+        df2.dateFormat = "HH:mm"
+        
+        self.DurationField.inputAccessoryView = initDoneButton()
+        setUpFields()
+    }
     
     @IBAction func DateChanged(_ sender: Any) {
         ud.set(df1.string(from: DateField.date), forKey: "Date")
@@ -31,23 +49,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             showPopup(name: "Input Error")
         } else {
             ud.set(DurationField.text!, forKey: "Duration")
-            showPopup(name: "Loading Screen")        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        UIView.setAnimationsEnabled(true)
-        
-        LocationField.delegate = self
-        LocationField.dataSource = self
-        DurationField.delegate = self
-        
-        DateField.maximumDate = Date()
-        df1.dateFormat = "YYYY-MM-dd"
-        df2.dateFormat = "HH:mm"
-        
-        self.DurationField.inputAccessoryView = initDoneButton()
-        setUpFields()
+            showPopup(name: "Loading Screen")
+        }
     }
     
     func setUpFields() {
@@ -91,18 +94,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("Set", forKey: "First")
         }
     }
-    
-    
-    func validInputs() -> Bool {
-        if (DurationField.text! == "") {
-            ud.set("Empty Field(s)", forKey: "Input Error")
-        } else if (Double(DurationField.text!)!) > 24.0 {
-            ud.set("Duration Too Long", forKey: "Input Error")
-        } else {
-            return true
-        }
-        return false
-    }
 }
 
 extension InputScreen {
@@ -116,5 +107,22 @@ extension InputScreen {
         let ud = UserDefaults.standard
         ud.set(row, forKey: "Location Index")
         ud.set(ScrollMenuData[row], forKey: "Location")
+    }
+}
+
+extension InputScreen {
+    func formatScreen() {
+        DurationTextFieldWidth.constant = screenSize.width * 0.35
+    }
+    
+    func validInputs() -> Bool {
+        if (DurationField.text! == "") {
+            ud.set("Empty Field(s)", forKey: "Input Error")
+        } else if (Double(DurationField.text!)!) > 24.0 {
+            ud.set("Duration Too Long", forKey: "Input Error")
+        } else {
+            return true
+        }
+        return false
     }
 }

@@ -11,31 +11,31 @@ class LoadingScreen : ViewController {
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")! + ":00"
     let duration = String(Float64(UserDefaults.standard.string(forKey: "Duration")!)! * 3600)
-    
     let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
     let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
     let inputRate = UserDefaults.standard.string(forKey: "Rate")!
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
-    
     var fsps : Double = 0.0
     var bandsHZ : Double = 0.0
     
-    func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
-        LoadingView.layer.cornerRadius = 8.0
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.makeViewAppear()
+        self.showAnimate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getSoundAndGraph()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.makeViewAppear()
-        self.showAnimate()
+}
+
+extension LoadingScreen {
+    func makeViewAppear() {
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        LoadingView.layer.cornerRadius = 8.0
     }
 }
 
