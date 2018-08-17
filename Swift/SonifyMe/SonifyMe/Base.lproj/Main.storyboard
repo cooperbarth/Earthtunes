@@ -47,8 +47,11 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
                                 <rect key="frame" x="123.5" y="461" width="128" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="128" id="wuh-Y2-zPJ"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -145,19 +148,29 @@
                     </view>
                     <connections>
                         <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
+                        <outlet property="DateLabel" destination="1uK-sq-fQY" id="1C7-0Y-foP"/>
+                        <outlet property="DateLabelToSpinnerDistance" destination="fm4-qH-8A7" id="WEu-rY-5Wy"/>
                         <outlet property="DateSpinnerHeight" destination="4WD-Dg-7jy" id="Yec-DK-Hde"/>
+                        <outlet property="DateSpinnerToTimeLabelDistance" destination="Xca-KN-0ex" id="A1W-ia-Zty"/>
                         <outlet property="DateSpinnerWidth" destination="eT9-Vn-XSp" id="vVa-Ls-Sds"/>
                         <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
                         <outlet property="DurationFieldTextHeight" destination="UIk-hQ-xqw" id="cwh-G2-3WK"/>
+                        <outlet property="DurationFieldToSavedEventsDistance" destination="gZQ-cZ-0UQ" id="tBA-N6-eej"/>
+                        <outlet property="DurationLabel" destination="On6-n7-VNJ" id="izE-A8-fTV"/>
+                        <outlet property="DurationLabelToFieldDistance" destination="rCe-J0-Q0I" id="fMQ-ii-yJM"/>
+                        <outlet property="DurationLabelWidth" destination="wuh-Y2-zPJ" id="8Ie-i5-foJ"/>
                         <outlet property="DurationTextFieldWidth" destination="76c-SV-PFS" id="L4K-9x-B0t"/>
                         <outlet property="LocationField" destination="wMu-KE-ETd" id="qpS-A3-lSO"/>
                         <outlet property="LocationLabel" destination="7XT-FV-SdI" id="JFl-cE-fzi"/>
                         <outlet property="LocationLabelToSpinnerDistance" destination="h2U-cK-zRC" id="r24-Dk-PWe"/>
                         <outlet property="LocationSpinnerHeight" destination="4am-h4-XqT" id="Ikj-dc-GZX"/>
-                        <outlet property="LocationSpinnerLabelSpacing" destination="h2U-cK-zRC" id="R6f-7Y-MAJ"/>
+                        <outlet property="LocationSpinnerToDateLabelDistance" destination="ngq-Ka-BG8" id="mTF-7N-lMT"/>
                         <outlet property="LocationSpinnerWidth" destination="mKO-zo-bL1" id="1lJ-a8-FyF"/>
                         <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
+                        <outlet property="TimeLabel" destination="2aj-Cx-t33" id="rpe-B2-wsR"/>
+                        <outlet property="TimeLabelToSpinnerDistance" destination="UUR-KB-vNw" id="bQr-GY-YIH"/>
                         <outlet property="TimeSpinnerHeight" destination="LeZ-MT-c2i" id="Pib-ax-qqi"/>
+                        <outlet property="TimeSpinnerToDurationLabelDistance" destination="u7E-mf-iKW" id="87F-tn-mmY"/>
                         <outlet property="TimeSpinnerWidth" destination="PYZ-qM-uk8" id="7k5-L4-KPs"/>
                         <outlet property="TitleDistanceFromTop" destination="4CO-uA-foM" id="uGX-qC-e6w"/>
                         <outlet property="TitleLabel" destination="nKg-xr-ve2" id="Haf-qU-iWW"/>
