@@ -25,7 +25,6 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         ud.set(Event.duration, forKey: "Duration")
         ud.set(Event.frequency, forKey: "Frequency")
         ud.set(Event.amplitude, forKey: "Amplitude")
-        ud.set(Event.rate, forKey: "Rate")
         ud.set(Event.schannel, forKey: "SChannel")
         ud.set(Event.gchannel, forKey: "GChannel")
         

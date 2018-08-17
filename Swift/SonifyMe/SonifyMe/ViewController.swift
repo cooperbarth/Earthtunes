@@ -5,14 +5,12 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -More Explanation Screens
- -Make rate/playback speed work
  -Fix formatting for non-iPhone 8
  -Aesthetics
  
  -Geology Facts?
  -Figure out time zone stuff? (2 options: local and UTC?)
- -Add y-axis
+ -Add y-axis to graph
  -Save images and sound to phone (Optional)
  -Send raw data to self (for scientists)
  -FAQ button
@@ -49,6 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func initDoneButton() -> UIView {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
+        doneToolbar.barTintColor = UIColor.white
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(doneButtonAction))
         var items = [UIBarButtonItem]()

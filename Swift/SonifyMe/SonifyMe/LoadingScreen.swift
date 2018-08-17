@@ -14,7 +14,7 @@ class LoadingScreen : ViewController {
     
     let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
     let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     
@@ -193,7 +193,7 @@ extension LoadingScreen {
     
     func checkRepeats() -> event? {
         for e in retrieveEvents()! {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 LoadingLabel.text! = "Loading Previously \nSaved Data From \n" + ud.string(forKey: "Location")!
                 return e
             }
@@ -202,7 +202,7 @@ extension LoadingScreen {
     }
     
     func saveData(s32: [Float64], g32: [Float64]) {
-        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32, Descript: "")
+        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32, Descript: "")
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)
