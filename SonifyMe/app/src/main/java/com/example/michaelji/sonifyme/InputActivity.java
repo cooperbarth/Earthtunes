@@ -1,10 +1,14 @@
 package com.example.michaelji.sonifyme;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,7 +80,9 @@ public class InputActivity extends AppCompatActivity {
         duration = durationText.getText().toString();
 
         if(time.equals("") || duration.equals("")) {
-            startActivity(malintent);
+            InputErrorDialogFragment error = new InputErrorDialogFragment();
+            error.show(getSupportFragmentManager(),"error");
+            //startActivity(malintent);
         } else {
 
             CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
@@ -88,7 +94,6 @@ public class InputActivity extends AppCompatActivity {
 
             new DownloadFile().execute(url[0] + "audio");
             new DownloadImage().execute(url[0] + "plot");
-
 
             intent.putExtra(EXTRA_MESSAGE, locate);
             startActivity(intent);
@@ -104,6 +109,40 @@ public class InputActivity extends AppCompatActivity {
 
         intent.putExtra(EXTRA_MESSAGE, locate);
         startActivity(intent);
+    }
+
+    public static class InputErrorDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Input error");
+            builder.setMessage("You are missing inputs.")
+                    .setNeutralButton("Close", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+
+    public static class DownloadErrorDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("ERROR 404");
+            builder.setMessage("The data could not be found. It may be unavailable due to station downtime or issues.Check your inputs")
+                    .setNeutralButton("Close", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
     }
 
     public String[] getUrl(String loc, String dur, String time, String date)
@@ -242,6 +281,7 @@ public class InputActivity extends AppCompatActivity {
             }
             return null;
         }
+
     }
 
     public void saveImage(Context context, Bitmap b, String imageName) {
