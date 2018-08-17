@@ -23,6 +23,7 @@
                                 <rect key="frame" x="112.5" y="487" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="76c-SV-PFS"/>
+                                    <constraint firstAttribute="height" constant="30" id="UIk-hQ-xqw"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -56,6 +57,7 @@
                                 <rect key="frame" x="27" y="104" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4am-h4-XqT"/>
+                                    <constraint firstAttribute="width" constant="320" id="mKO-zo-bL1"/>
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
@@ -76,6 +78,7 @@
                                 <rect key="frame" x="28" y="223" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4WD-Dg-7jy"/>
+                                    <constraint firstAttribute="width" constant="320" id="eT9-Vn-XSp"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="554744015.83097601">
                                     <!--2018-07-31 15:33:35 +0000-->
@@ -88,6 +91,7 @@
                                 <rect key="frame" x="28" y="342" width="320" height="114"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="114" id="LeZ-MT-c2i"/>
+                                    <constraint firstAttribute="width" constant="320" id="PYZ-qM-uk8"/>
                                 </constraints>
                                 <date key="date" timeIntervalSinceReferenceDate="554746568.410321">
                                     <!--2018-07-31 16:16:08 +0000-->
@@ -123,7 +127,6 @@
                             <constraint firstItem="On6-n7-VNJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BiH-w0-Yga"/>
                             <constraint firstItem="tQc-1c-sK0" firstAttribute="top" secondItem="2aj-Cx-t33" secondAttribute="bottom" constant="-7" id="UUR-KB-vNw"/>
                             <constraint firstItem="2aj-Cx-t33" firstAttribute="top" secondItem="1fX-hj-buG" secondAttribute="bottom" constant="5" id="Xca-KN-0ex"/>
-                            <constraint firstItem="7XT-FV-SdI" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="70" id="ZPa-q0-687"/>
                             <constraint firstItem="nKg-xr-ve2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cD2-9k-xsS"/>
                             <constraint firstItem="EcL-kn-h1s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cMJ-KS-iAA"/>
                             <constraint firstItem="1fX-hj-buG" firstAttribute="top" secondItem="1uK-sq-fQY" secondAttribute="bottom" constant="-7" id="fm4-qH-8A7"/>
@@ -133,6 +136,7 @@
                             <constraint firstItem="tQc-1c-sK0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pXT-ME-xsO"/>
                             <constraint firstItem="2wP-Ta-uhh" firstAttribute="top" secondItem="On6-n7-VNJ" secondAttribute="bottom" constant="5" id="rCe-J0-Q0I"/>
                             <constraint firstItem="Vyb-bj-gAM" firstAttribute="top" secondItem="EcL-kn-h1s" secondAttribute="bottom" constant="10" id="rLf-du-VM2"/>
+                            <constraint firstItem="7XT-FV-SdI" firstAttribute="top" secondItem="nKg-xr-ve2" secondAttribute="bottom" constant="12" id="sPy-S3-3Qo"/>
                             <constraint firstItem="Vyb-bj-gAM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tlS-3t-HKP"/>
                             <constraint firstItem="On6-n7-VNJ" firstAttribute="top" secondItem="tQc-1c-sK0" secondAttribute="bottom" constant="5" id="u7E-mf-iKW"/>
                             <constraint firstItem="wMu-KE-ETd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uMt-aw-Zjz"/>
@@ -141,10 +145,23 @@
                     </view>
                     <connections>
                         <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
+                        <outlet property="DateSpinnerHeight" destination="4WD-Dg-7jy" id="Yec-DK-Hde"/>
+                        <outlet property="DateSpinnerWidth" destination="eT9-Vn-XSp" id="vVa-Ls-Sds"/>
                         <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
+                        <outlet property="DurationFieldTextHeight" destination="UIk-hQ-xqw" id="cwh-G2-3WK"/>
                         <outlet property="DurationTextFieldWidth" destination="76c-SV-PFS" id="L4K-9x-B0t"/>
                         <outlet property="LocationField" destination="wMu-KE-ETd" id="qpS-A3-lSO"/>
+                        <outlet property="LocationLabel" destination="7XT-FV-SdI" id="JFl-cE-fzi"/>
+                        <outlet property="LocationLabelToSpinnerDistance" destination="h2U-cK-zRC" id="r24-Dk-PWe"/>
+                        <outlet property="LocationSpinnerHeight" destination="4am-h4-XqT" id="Ikj-dc-GZX"/>
+                        <outlet property="LocationSpinnerLabelSpacing" destination="h2U-cK-zRC" id="R6f-7Y-MAJ"/>
+                        <outlet property="LocationSpinnerWidth" destination="mKO-zo-bL1" id="1lJ-a8-FyF"/>
                         <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
+                        <outlet property="TimeSpinnerHeight" destination="LeZ-MT-c2i" id="Pib-ax-qqi"/>
+                        <outlet property="TimeSpinnerWidth" destination="PYZ-qM-uk8" id="7k5-L4-KPs"/>
+                        <outlet property="TitleDistanceFromTop" destination="4CO-uA-foM" id="uGX-qC-e6w"/>
+                        <outlet property="TitleLabel" destination="nKg-xr-ve2" id="Haf-qU-iWW"/>
+                        <outlet property="TitleToLocationDistance" destination="sPy-S3-3Qo" id="doQ-r7-COq"/>
                         <segue destination="Ky7-K0-5BQ" kind="presentation" identifier="ToLoading" id="oiZ-qh-wIF"/>
                         <segue destination="8fP-Gv-uzW" kind="presentation" identifier="ToAdvanced" id="opf-df-TSD"/>
                     </connections>
