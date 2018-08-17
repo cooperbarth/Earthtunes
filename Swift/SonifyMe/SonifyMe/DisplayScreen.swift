@@ -12,7 +12,7 @@ class DisplayScreen : ViewController {
     
     let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
     let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     
@@ -287,6 +287,8 @@ extension DisplayScreen : AVAudioPlayerDelegate {
     func playSound() {
         SoundSlideLayout.maximumValue = Float((player?.duration)!)
         player?.prepareToPlay()
+        player?.enableRate = true
+        player?.rate = Float(inputRate)!
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         player?.play()
         PlayButton.isHidden = true

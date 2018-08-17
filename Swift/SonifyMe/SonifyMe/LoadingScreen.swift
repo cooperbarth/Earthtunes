@@ -14,7 +14,7 @@ class LoadingScreen : ViewController {
     
     let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
     let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     
