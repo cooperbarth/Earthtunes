@@ -19,5 +19,6 @@ public class LoadingActivity extends AppCompatActivity {
         // Capture the layout's TextView and set the string as its text
         TextView textView = findViewById(R.id.textView7);
         textView.append(" data from " + locate);
+
     }
 }
