@@ -8,13 +8,12 @@ import AudioToolbox
  -Fix formatting for non-iPhone 8
  -Aesthetics
  
+ -Save images and sound to phone (Optional)
+ -Send Feedback
  -Geology Facts?
  -Figure out time zone stuff? (2 options: local and UTC?)
- -Add y-axis to graph
- -Save images and sound to phone (Optional)
  -Send raw data to self (for scientists)
  -FAQ button
- -Send Feedback
  */
 
 class ViewController: UIViewController, UITextFieldDelegate {

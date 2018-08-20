@@ -109,26 +109,26 @@ class AdvancedScreen : ViewController {
 
 extension AdvancedScreen {
     func formatScreen() {
-        TopToTitleDistance.constant = screenSize.height / 30
+        TopToTitleDistance.constant = screenSize.height * 0.02
         AdvancedTitle.font = AdvancedTitle.font.withSize(TopToTitleDistance.constant * 0.8)
         TitleToFreqLabelDistance.constant = TopToTitleDistance.constant * 0.8
-        FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.8)
+        FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
         FreqLabelToFreqControlDistance.constant = TitleToFreqLabelDistance.constant * 0.4
         let segFont = FreqLabel.titleLabel?.font!.withSize((FreqLabel.titleLabel?.font!.pointSize)! * 0.8)
         Freq.apportionsSegmentWidthsByContent = true
         Freq.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
         FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant * 1.5
         AmpLabel.titleLabel?.font = FreqLabel.titleLabel?.font
-        AmpLabelWidth.constant = screenSize.width * 0.4
+        AmpLabelWidth.constant = screenSize.width * 0.25
         AmpLabelToAmpControlDistance.constant = FreqLabelToFreqControlDistance.constant * 0.75
         AmpFieldWidth.constant = AmpLabelWidth.constant
-        AmpFieldHeight.constant = screenSize.height / 20
+        AmpFieldHeight.constant = screenSize.height * 0.03
         Amp.font = Amp.font?.withSize(AmpFieldHeight.constant * 0.4)
         AmpFieldToSoundLabelDistance.constant = FreqControlToAmpLabelDistance.constant
         AmpFieldToGraphLabelDistance.constant = AmpFieldToSoundLabelDistance.constant
         SoundLabel.titleLabel?.font = AmpLabel.titleLabel?.font
         GraphLabel.titleLabel?.font = SoundLabel.titleLabel?.font
-        GraphLabelXPos.constant = screenSize.width / 4
+        GraphLabelXPos.constant = screenSize.width * 0.1
         SoundLabelXPos.constant = -GraphLabelXPos.constant
         //soundchannel to soundswitch y
         //graphchannel to graphswitch y

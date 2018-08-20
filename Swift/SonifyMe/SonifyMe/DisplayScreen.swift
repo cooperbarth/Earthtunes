@@ -207,10 +207,6 @@ extension DisplayScreen {
 
         return image
     }
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .allButUpsideDown
-    }
 }
 
 
