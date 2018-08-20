@@ -27,11 +27,10 @@ class DisplayScreen : ViewController {
     let data = UserDefaults.standard.array(forKey: "Data")!
     let yMax = UserDefaults.standard.double(forKey: "Max")
     var favorites : [event] = []
-    var plot: CPTScatterPlot!
     
     override func viewDidLoad() {
-        setUpGraph()
         super.viewDidLoad()
+        self.GraphView.image = img
         favorites = retrieveFavorites()!
     }
     
@@ -136,33 +135,6 @@ extension DisplayScreen {
             }
             count += 1
         }
-    }
-}
-
-extension DisplayScreen {
-    func setUpGraph() {
-        let graphString = ud.string(forKey: "GraphURL")!
-        let graphUrl = URL(string: graphString)
-        let session = URLSession(configuration: .default)
-        let getImageFromUrl = session.dataTask(with: graphUrl!) { (data, response, error) in
-            if let e = error {
-                print("Error Occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    if let imageData = data {
-                        img = UIImage(data: imageData)!
-                        DispatchQueue.main.async {
-                            self.GraphView.image = img
-                        }
-                    } else {
-                        print("Image file is corrupted")
-                    }
-                } else {
-                    print("No response from server")
-                }
-            }
-        }
-        getImageFromUrl.resume()
     }
 }
 
