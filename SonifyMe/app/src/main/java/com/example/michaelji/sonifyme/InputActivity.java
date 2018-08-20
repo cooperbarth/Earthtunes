@@ -25,16 +25,19 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class InputActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.michaelji.sonifyme.MESSAGE";
+    private boolean errored = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
+
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -79,17 +82,23 @@ public class InputActivity extends AppCompatActivity {
         EditText durationText = (EditText) findViewById(R.id.DurationText);
         duration = durationText.getText().toString();
 
+        CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
+        long dateLong = calendar.getDate();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date = sdf.format(new Date(dateLong));
+
+        Date currentTime = Calendar.getInstance().getTime();
+        long today = currentTime.getTime();
+
         if(time.equals("") || duration.equals("")) {
             InputErrorDialogFragment error = new InputErrorDialogFragment();
             error.show(getSupportFragmentManager(),"error");
             //startActivity(malintent);
-        } else {
+        } /*else if (dateLong > today){
+            DateErrorDialogFragment error = new DateErrorDialogFragment();
+            error.show(getSupportFragmentManager(), "error");
 
-            CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
-            long dateLong = calendar.getDate();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            String date = sdf.format(new Date(dateLong));
-
+        }*/else {
             String[] url = getUrl(locate, duration, time, date);
 
             new DownloadFile().execute(url[0] + "audio");
@@ -118,6 +127,23 @@ public class InputActivity extends AppCompatActivity {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("Input error");
             builder.setMessage("You are missing inputs.")
+                    .setNeutralButton("Close", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+
+    public static class DateErrorDialogFragment extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Input error");
+            builder.setMessage("The date you selected has not happened yet")
                     .setNeutralButton("Close", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dismiss();
