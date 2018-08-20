@@ -69,6 +69,7 @@ public class InputActivity extends AppCompatActivity {
                 view.setDate(millis);
             }//met
         });
+
     }
 
     @Override
@@ -83,6 +84,54 @@ public class InputActivity extends AppCompatActivity {
             DownloadErrorDialogFragment error = new DownloadErrorDialogFragment();
             error.show(getSupportFragmentManager(),"error");
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        Spinner locate = findViewById(R.id.spinner);
+        int location =  locate.getSelectedItemPosition();
+
+        CalendarView day = findViewById(R.id.calendarView2);
+        long date = day.getDate();
+
+        Button button = findViewById(R.id.button5);
+        String time = button.getText().toString();
+
+        EditText dur = findViewById(R.id.DurationText);
+        String duration = dur.getText().toString();
+
+        savedInstanceState.putInt("location", location);
+        savedInstanceState.putLong("date", date);
+        savedInstanceState.putString("time", time);
+        savedInstanceState.putString("duration", duration);
+        // etc.
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        int loc = savedInstanceState.getInt("location");
+        long dat = savedInstanceState.getLong("date");
+        String tim = savedInstanceState.getString("time");
+        String dur = savedInstanceState.getString("duration");
+
+        Spinner locate = findViewById(R.id.spinner);
+        locate.setSelection(loc);
+
+        CalendarView day = findViewById(R.id.calendarView2);
+        day.setDate(dat);
+
+        Button button = findViewById(R.id.button5);
+        button.setText(tim);
+
+        EditText duration = findViewById(R.id.DurationText);
+        duration.setText(dur);
     }
 
     /** Called when the user taps the Send button */
