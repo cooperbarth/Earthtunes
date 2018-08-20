@@ -31,6 +31,11 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var DurationTextFieldWidth: NSLayoutConstraint!
     @IBOutlet weak var DurationFieldTextHeight: NSLayoutConstraint!
     @IBOutlet weak var DurationFieldToSavedEventsDistance: NSLayoutConstraint!
+    @IBOutlet weak var SavedEventsLabel: UIButton!
+    @IBOutlet weak var SavedToAdvancedDistance: NSLayoutConstraint!
+    @IBOutlet weak var AdvancedOptionsLabel: UIButton!
+    @IBOutlet weak var AdvancedToSubmitDistance: NSLayoutConstraint!
+    @IBOutlet weak var SubmitLabel: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -145,13 +150,14 @@ extension InputScreen {
         DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant * 0.5
         DurationTextFieldWidth.constant = DurationLabelWidth.constant * 1.1
         DurationFieldTextHeight.constant = DurationTextFieldWidth.constant * 0.18
-        DurationField.font = DurationField.font?.withSize(screenSize.height / 50) //not working
-        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant
-        //Saved Events font size
-        //Distance between Saved Events and Advanced Options
-        //Advanced Options font size
-        //Distance between Advanced Options and Submit
-        //Submit Font size
+        DurationField.font = DurationField.font?.withSize(DurationFieldTextHeight.constant / 2)
+        DurationField.textAlignment = .center
+        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.6
+        SavedEventsLabel.titleLabel?.font = DurationLabel.font
+        SavedToAdvancedDistance.constant = TimeSpinnerToDurationLabelDistance.constant * 1.4
+        AdvancedOptionsLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
+        AdvancedToSubmitDistance.constant = SavedToAdvancedDistance.constant
+        SubmitLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
     }
     
     func validInputs() -> Bool {

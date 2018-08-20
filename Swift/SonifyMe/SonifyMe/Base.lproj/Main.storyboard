@@ -147,6 +147,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="AdvancedOptionsLabel" destination="Vyb-bj-gAM" id="lh2-7s-658"/>
+                        <outlet property="AdvancedToSubmitDistance" destination="63m-PS-7Lv" id="31R-Yp-APF"/>
                         <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
                         <outlet property="DateLabel" destination="1uK-sq-fQY" id="1C7-0Y-foP"/>
                         <outlet property="DateLabelToSpinnerDistance" destination="fm4-qH-8A7" id="WEu-rY-5Wy"/>
@@ -166,6 +168,9 @@
                         <outlet property="LocationSpinnerHeight" destination="4am-h4-XqT" id="Ikj-dc-GZX"/>
                         <outlet property="LocationSpinnerToDateLabelDistance" destination="ngq-Ka-BG8" id="mTF-7N-lMT"/>
                         <outlet property="LocationSpinnerWidth" destination="mKO-zo-bL1" id="1lJ-a8-FyF"/>
+                        <outlet property="SavedEventsLabel" destination="EcL-kn-h1s" id="UhY-qA-Ozl"/>
+                        <outlet property="SavedToAdvancedDistance" destination="rLf-du-VM2" id="WvR-QI-M0c"/>
+                        <outlet property="SubmitLabel" destination="2fb-gI-jCh" id="V6X-SL-QnU"/>
                         <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
                         <outlet property="TimeLabel" destination="2aj-Cx-t33" id="rpe-B2-wsR"/>
                         <outlet property="TimeLabelToSpinnerDistance" destination="UUR-KB-vNw" id="bQr-GY-YIH"/>
