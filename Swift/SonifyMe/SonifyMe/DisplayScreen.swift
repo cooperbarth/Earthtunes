@@ -13,7 +13,7 @@ class DisplayScreen : ViewController {
     @IBOutlet weak var RewindButton: UIButton!
     @IBOutlet weak var BlackButton: UIButton!
     @IBOutlet weak var YellowButton: UIButton!
-    @IBOutlet weak var hostView: CPTGraphHostingView!
+    @IBOutlet weak var GraphView: UIImageView!
     
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
@@ -30,6 +30,7 @@ class DisplayScreen : ViewController {
     var plot: CPTScatterPlot!
     
     override func viewDidLoad() {
+        setUpGraph()
         super.viewDidLoad()
         favorites = retrieveFavorites()!
     }
@@ -47,7 +48,6 @@ class DisplayScreen : ViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        initplot()
         GraphTitle.text = ud.string(forKey: "Title")
         SoundSlideLayout.value = 0.0
         if (inFavorites()) {
@@ -61,7 +61,7 @@ class DisplayScreen : ViewController {
     
     @IBAction func BlackPressed(_ sender: Any) {
         if (!inFavorites()) {
-            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: [], Descript: ""))
+            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: ""))
         }
         saveFavorites(events: favorites)
         YellowButton.isHidden = false
@@ -139,135 +139,30 @@ extension DisplayScreen {
     }
 }
 
-extension DisplayScreen : CPTScatterPlotDelegate, CPTScatterPlotDataSource {
-    func initplot() {
-        configureHostView()
-        configureGraph()
-        configureChart()
-        configureAxes()
-    }
-    
-    func numberOfRecords(for plot: CPTPlot) -> UInt {
-        return UInt(data.count)
-    }
-    
-    func number(for plot: CPTPlot, field: UInt, record idx: UInt) -> Any? {
-        switch CPTScatterPlotField(rawValue: Int(field)) {
-        case .X?:
-            return idx
-        case .Y?:
-            return self.data[Int(idx)] as! NSNumber
-        default:
-            return 0.0 as NSNumber
-        }
-    }
-    
-    func symbol(for plot: CPTScatterPlot, record idx: UInt) -> CPTPlotSymbol? {
-        let symbol : CPTPlotSymbol = CPTPlotSymbol()
-        symbol.symbolType = CPTPlotSymbolType(rawValue: 1)!
-        symbol.size = CGSize(width: 0.01, height: 0.01)
-        symbol.fill = CPTFill(color: CPTColor.blue())
-        return symbol
-    }
-    
-    func configureHostView() {
-        hostView.allowPinchScaling = false
-        hostView.collapsesLayers = true
-    }
-    
-    func configureGraph() {
-        let graph = CPTXYGraph(frame: hostView.bounds)
-        graph.plotAreaFrame?.masksToBorder = false
-        graph.plotAreaFrame?.borderLineStyle = nil
-        graph.plotAreaFrame?.paddingBottom = 10.0
-        hostView.hostedGraph = graph
-        
-        graph.apply(CPTTheme(named: CPTThemeName.plainWhiteTheme))
-        graph.paddingBottom = 0.0
-        graph.paddingLeft = 0.0
-        graph.paddingTop = 0.0
-        graph.paddingRight = 0.0
-        
-        let titleStyle = CPTMutableTextStyle()
-        titleStyle.color = CPTColor.black()
-        titleStyle.fontName = "HelveticaNeue-Bold"
-        titleStyle.fontSize = 16.0
-        titleStyle.textAlignment = .center
-        
-        let xMin = 0.0
-        let xMax = Double(data.count)
-        let yMin = -yMax
-        guard let plotSpace = graph.defaultPlotSpace as? CPTXYPlotSpace else {return}
-        plotSpace.xRange = CPTPlotRange(locationDecimal: CPTDecimalFromDouble(xMin), lengthDecimal: CPTDecimalFromDouble(xMax - xMin))
-        plotSpace.yRange = CPTPlotRange(locationDecimal: CPTDecimalFromDouble(yMin), lengthDecimal: CPTDecimalFromDouble(yMax - yMin))
-    }
-    
-    func configureChart() {
-        let graph = hostView.hostedGraph!
-        let plot = CPTScatterPlot()
-        plot.delegate = self
-        plot.dataSource = self
-        plot.identifier = NSString(string: "plot")
-        
-        let plotLineStyle = CPTMutableLineStyle()
-        plotLineStyle.lineWidth = 0.5
-        plotLineStyle.lineColor = CPTColor.blue()
-        plot.dataLineStyle = plotLineStyle
-        
-        graph.add(plot, to: graph.defaultPlotSpace)
-    }
-    
-    func configureAxes() {
-        let axisLineStyle = CPTMutableLineStyle()
-        axisLineStyle.lineWidth = 1.0
-        axisLineStyle.lineColor = CPTColor.black()
-        guard let axisSet = hostView.hostedGraph?.axisSet as? CPTXYAxisSet else {return}
-        
-        let xAxis = axisSet.xAxis!
-        xAxis.axisLineStyle = axisLineStyle
-        xAxis.labelingPolicy = .none
-        var majorTickLocations = Set<NSNumber>()
-        var axisLabels = Set<CPTAxisLabel>()
-        let loc = ud.string(forKey: "Location")!
-        let dur = ud.string(forKey: "Duration")!
-        let startTime = df2.date(from: ud.string(forKey: "Time")!)
-        
-        var sampleRate = 1
-        if (ud.string(forKey: "GChannel") == "BHZ") {
-            if (loc == "Anchorage (AK,USA)") {
-                sampleRate = 50
-            } else if (loc == "Addis Ababa, Ethiopia") {
-                sampleRate = 20
+extension DisplayScreen {
+    func setUpGraph() {
+        let graphString = ud.string(forKey: "GraphURL")!
+        let graphUrl = URL(string: graphString)
+        let session = URLSession(configuration: .default)
+        let getImageFromUrl = session.dataTask(with: graphUrl!) { (data, response, error) in
+            if let e = error {
+                print("Error Occurred: \(e)")
             } else {
-                sampleRate = 40
+                if (response as? HTTPURLResponse) != nil {
+                    if let imageData = data {
+                        img = UIImage(data: imageData)!
+                        DispatchQueue.main.async {
+                            self.GraphView.image = img
+                        }
+                    } else {
+                        print("Image file is corrupted")
+                    }
+                } else {
+                    print("No response from server")
+                }
             }
         }
-        
-        var interval = 1800
-        if (Float(dur)! >= 8.0) {
-            interval = 3600
-        } else if (Float(dur)! <= 2.0) {
-            interval = 900
-        }
-        interval *= sampleRate
-
-        var count = 0
-        for (idx, _) in data.enumerated() {
-            if (count % interval == 0) {
-                majorTickLocations.insert(NSNumber(value: idx))
-                let timePassed = TimeInterval(count / sampleRate)
-                let timeLabel = startTime?.addingTimeInterval(timePassed)
-                let axisLabel = df2.string(from: timeLabel!)
-                let label = CPTAxisLabel(text: axisLabel, textStyle: CPTTextStyle())
-                label.tickLocation = NSNumber(value: idx)
-                label.offset = 135.0
-                label.alignment = .bottom
-                axisLabels.insert(label)
-            }
-            count += 1
-        }
-        xAxis.majorTickLocations = majorTickLocations
-        xAxis.axisLabels = axisLabels
+        getImageFromUrl.resume()
     }
 }
 
