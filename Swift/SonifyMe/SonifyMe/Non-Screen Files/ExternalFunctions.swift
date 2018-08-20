@@ -2,7 +2,7 @@ import Foundation
 import AVKit
 
 let url = URL(fileURLWithPath: NSTemporaryDirectory().appending("sound.wav"))
-let imgUrl = URL(fileURLWithPath: NSTemporaryDirectory().appending("graph.jpeg"))
+var img : UIImage? = nil
 let df1 = DateFormatter()
 let df2 = DateFormatter()
 var player : AVAudioPlayer?
@@ -20,12 +20,12 @@ let ScrollMenuData = ["Ryerson (IL,USA)",
 var locationChosen : Bool = false
 
 let defaultEvents: [event] = [
-    event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [], Descript: "Magnitude 5.0 Earthquake in Oklahoma"),
-    event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [], Descript: "Sunny Day at Ryerson Station"),
-    event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [], Descript: "Magnitude 5.8 Earthquake in Montana"),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [], Descript: "Magnitude 5.4 Earthquake in Hawaii"),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [], Descript: "Students went to Ryerson station and jumped on the ground near the seismometer. See if you can find a frequency to hear it!"),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", G32: [], S32: [], Descript: "Thunderstorm at Ryerson Station")
+    event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Magnitude 5.0 Earthquake in Oklahoma"),
+    event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Sunny Day at Ryerson Station"),
+    event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Magnitude 5.8 Earthquake in Montana"),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Magnitude 5.4 Earthquake in Hawaii"),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Students went to Ryerson station and jumped on the ground near the seismometer. See if you can find a frequency to hear it!"),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Thunderstorm at Ryerson Station")
 ]
 
 let soundExplain = "Controls the channel from which the data for the sound is retrieved. BHZ will retrieve more data points than LHZ, but will take much longer to load."

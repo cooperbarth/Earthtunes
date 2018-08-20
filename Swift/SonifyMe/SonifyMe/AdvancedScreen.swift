@@ -11,10 +11,8 @@ class AdvancedScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        Amp.delegate = self
-        Rate.delegate = self
+        formatScreen()
         addDoneButtons()
-        
         fillIn()
     }
     
@@ -88,10 +86,71 @@ class AdvancedScreen : ViewController {
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
     }
+    
+    @IBOutlet weak var TopToTitleDistance: NSLayoutConstraint!
+    @IBOutlet weak var AdvancedTitle: UILabel!
+    @IBOutlet weak var TitleToFreqLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var FreqLabel: UIButton!
+    @IBOutlet weak var FreqLabelToFreqControlDistance: NSLayoutConstraint!
+    @IBOutlet weak var FreqControlToAmpLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var AmpLabel: UIButton!
+    @IBOutlet weak var AmpLabelToAmpControlDistance: NSLayoutConstraint!
+    
 }
 
 extension AdvancedScreen {
+    func formatScreen() {
+        TopToTitleDistance.constant = screenSize.height / 30
+        AdvancedTitle.font = AdvancedTitle.font.withSize(TopToTitleDistance.constant * 0.8)
+        TitleToFreqLabelDistance.constant = TopToTitleDistance.constant * 0.8
+        FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.8)
+        FreqLabelToFreqControlDistance.constant = TitleToFreqLabelDistance.constant * 0.4
+        let segFont = FreqLabel.titleLabel?.font!.withSize((FreqLabel.titleLabel?.font!.pointSize)! * 0.8)
+        Freq.apportionsSegmentWidthsByContent = true
+        Freq.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
+        FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant
+        AmpLabel.titleLabel?.font = FreqLabel.titleLabel?.font
+        AmpLabelToAmpControlDistance.constant = FreqLabelToFreqControlDistance.constant
+        //ampfield font size
+        //ampfield width
+        //ampfield height
+        //ampfield to soundchannel y
+        //ampfield to graphchannel y
+        //soundchannel xpos
+        //graphchannel xpos
+        //soundchannel font size
+        //graphchannel font size
+        //soundchannel to soundswitch y
+        //graphchannel to graphswitch y
+        //soundswitch height
+        //soundswitch width
+        //soundswitch font size?
+        //graphswitch height
+        //graphswitch width
+        //graphswitch font size?
+        //soundswitch to playbacklabel y
+        //playbacklabel font size
+        //playbacklabel to playbackfield y
+        //playbackfield height
+        //playbackfield width
+        //playbackfield to loopinglabel y
+        //loopinglabel xpos
+        //loopinglabel font size
+        //playbackfield to loopingswitch y
+        //loopingswitch xpos
+        //loopingswitch height
+        //loopingswitch width
+        //loopinglabel to clearcache y
+        //clearcache font size
+        //clearcache to reset y
+        //reset font size
+        //reset to return y
+        //return font size
+    }
+    
     func addDoneButtons() {
+        Amp.delegate = self
+        Rate.delegate = self
         self.Amp.inputAccessoryView = initDoneButton()
         self.Rate.inputAccessoryView = initDoneButton()
     }

@@ -99,22 +99,17 @@ extension LoadingScreen {
         let soundType = net + "&sta=" + station + "&loc=" + location + "&cha=" + inputSChannel
         let when = "&starttime=" + date + "T" + time + "&duration=" + duration
         
-        let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&scale=auto&output=ascii1"
-        
         let soundUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + soundType + when + "&demean=true&scale=auto&output=ascii1"
+        
+        let graphUrl = "https://service.iris.edu/irisws/timeseries/1/query?net=" + graphType + when + "&demean=true&scale=auto&output=plot"
+        ud.set(graphUrl, forKey: "GraphURL")
         
         let prevData = checkRepeats()
         if (prevData != nil) {
             let s32 = prevData?.s32
-            let g32 = prevData?.g32
             
             saveFile(buff: s32!, sample_rate: ssps)
-            
-            if (graphUrl != soundUrl) {
-                ud.set(g32, forKey: "Data")
-            } else {
-                ud.set(s32, forKey: "Data")
-            }
+            ud.set(s32, forKey: "Data")
         } else {
             var dfSound = ""
             do {
@@ -125,22 +120,8 @@ extension LoadingScreen {
             }
             let s32 = processData(data: dfSound)
             saveFile(buff: s32, sample_rate: ssps)
-            
-            if (graphUrl != soundUrl) {
-                var dfGraph : String = ""
-                do {
-                    dfGraph = try String(contentsOf: URL(string: graphUrl)!)
-                } catch {
-                    showPopup(name: "Error 404")
-                    return
-                }
-                let g32 = processData(data: dfGraph)
-                ud.set(g32, forKey: "Data")
-                saveData(s32: s32, g32: g32)
-            } else {
-                ud.set(s32, forKey: "Data")
-                saveData(s32: s32, g32: s32)
-            }
+            ud.set(s32, forKey: "Data")
+            saveData(s32: s32)
         }
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
@@ -201,8 +182,8 @@ extension LoadingScreen {
         return nil
     }
     
-    func saveData(s32: [Float64], g32: [Float64]) {
-        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32, Descript: "")
+    func saveData(s32: [Float64]) {
+        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: s32, Descript: "")
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)
