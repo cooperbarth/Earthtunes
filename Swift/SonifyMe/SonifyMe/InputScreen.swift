@@ -7,6 +7,48 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var TimeField: UIDatePicker!
     @IBOutlet weak var DurationField: UITextField!
     
+    @IBOutlet weak var TitleDistanceFromTop: NSLayoutConstraint!
+    @IBOutlet weak var TitleLabel: UILabel!
+    @IBOutlet weak var TitleToLocationDistance: NSLayoutConstraint!
+    @IBOutlet weak var LocationLabel: UILabel!
+    @IBOutlet weak var LocationLabelToSpinnerDistance: NSLayoutConstraint!
+    @IBOutlet weak var LocationSpinnerHeight: NSLayoutConstraint!
+    @IBOutlet weak var LocationSpinnerWidth: NSLayoutConstraint!
+    @IBOutlet weak var LocationSpinnerToDateLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var DateLabel: UILabel!
+    @IBOutlet weak var DateLabelToSpinnerDistance: NSLayoutConstraint!
+    @IBOutlet weak var DateSpinnerHeight: NSLayoutConstraint!
+    @IBOutlet weak var DateSpinnerWidth: NSLayoutConstraint!
+    @IBOutlet weak var DateSpinnerToTimeLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var TimeLabel: UILabel!
+    @IBOutlet weak var TimeLabelToSpinnerDistance: NSLayoutConstraint!
+    @IBOutlet weak var TimeSpinnerHeight: NSLayoutConstraint!
+    @IBOutlet weak var TimeSpinnerWidth: NSLayoutConstraint!
+    @IBOutlet weak var TimeSpinnerToDurationLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var DurationLabel: UILabel!
+    @IBOutlet weak var DurationLabelWidth: NSLayoutConstraint!
+    @IBOutlet weak var DurationLabelToFieldDistance: NSLayoutConstraint!
+    @IBOutlet weak var DurationTextFieldWidth: NSLayoutConstraint!
+    @IBOutlet weak var DurationFieldTextHeight: NSLayoutConstraint!
+    @IBOutlet weak var DurationFieldToSavedEventsDistance: NSLayoutConstraint!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        formatScreen()
+        UIView.setAnimationsEnabled(true)
+        
+        LocationField.delegate = self
+        LocationField.dataSource = self
+        DurationField.delegate = self
+        
+        DateField.maximumDate = Date()
+        df1.dateFormat = "YYYY-MM-dd"
+        df2.dateFormat = "HH:mm"
+        
+        self.DurationField.inputAccessoryView = initDoneButton()
+        setUpFields()
+    }
+    
     @IBAction func DateChanged(_ sender: Any) {
         ud.set(df1.string(from: DateField.date), forKey: "Date")
     }
@@ -31,23 +73,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             showPopup(name: "Input Error")
         } else {
             ud.set(DurationField.text!, forKey: "Duration")
-            showPopup(name: "Loading Screen")        }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        UIView.setAnimationsEnabled(true)
-        
-        LocationField.delegate = self
-        LocationField.dataSource = self
-        DurationField.delegate = self
-        
-        DateField.maximumDate = Date()
-        df1.dateFormat = "YYYY-MM-dd"
-        df2.dateFormat = "HH:mm"
-        
-        self.DurationField.inputAccessoryView = initDoneButton()
-        setUpFields()
+            showPopup(name: "Loading Screen")
+        }
     }
     
     func setUpFields() {
@@ -91,7 +118,41 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             ud.set("Set", forKey: "First")
         }
     }
-    
+}
+
+extension InputScreen {
+    func formatScreen() {
+        TitleDistanceFromTop.constant = screenSize.height * 0.02
+        TitleLabel.font = UIFont(name: TitleLabel.font.fontName, size: screenSize.height / 18)
+        TitleToLocationDistance.constant = TitleDistanceFromTop.constant
+        LocationLabel.font = LocationLabel.font.withSize(screenSize.height / 40)
+        LocationLabelToSpinnerDistance.constant = 0
+        LocationSpinnerHeight.constant = screenSize.height / 7
+        LocationSpinnerWidth.constant = LocationSpinnerHeight.constant * 3.2
+        LocationSpinnerToDateLabelDistance.constant = TitleToLocationDistance.constant * 0.6
+        DateLabel.font = LocationLabel.font
+        DateLabelToSpinnerDistance.constant = LocationLabelToSpinnerDistance.constant
+        DateSpinnerHeight.constant = LocationSpinnerHeight.constant
+        DateSpinnerWidth.constant = LocationSpinnerWidth.constant
+        DateSpinnerToTimeLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
+        TimeLabel.font = LocationLabel.font
+        TimeLabelToSpinnerDistance.constant = DateLabelToSpinnerDistance.constant
+        TimeSpinnerHeight.constant = LocationSpinnerHeight.constant
+        TimeSpinnerWidth.constant = LocationSpinnerWidth.constant
+        TimeSpinnerToDurationLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
+        DurationLabel.font = LocationLabel.font
+        DurationLabelWidth.constant = screenSize.width * 0.4
+        DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant * 0.5
+        DurationTextFieldWidth.constant = DurationLabelWidth.constant * 1.1
+        DurationFieldTextHeight.constant = DurationTextFieldWidth.constant * 0.18
+        DurationField.font = DurationField.font?.withSize(screenSize.height / 50) //not working
+        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant
+        //Saved Events font size
+        //Distance between Saved Events and Advanced Options
+        //Advanced Options font size
+        //Distance between Advanced Options and Submit
+        //Submit Font size
+    }
     
     func validInputs() -> Bool {
         if (DurationField.text! == "") {

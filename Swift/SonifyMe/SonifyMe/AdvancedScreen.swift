@@ -36,18 +36,6 @@ class AdvancedScreen : ViewController {
         showPopup(name: "ChannelExplain")
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
-        ud.set(Amp.text!, forKey: "Amplitude")
-        ud.set(Rate.text!, forKey: "Rate")
-        ud.set(SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!, forKey: "SChannel")
-        ud.set(GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!, forKey: "GChannel")
-        
-        ud.set(Freq.selectedSegmentIndex, forKey: "FreqIndex")
-        ud.set(SChannel.selectedSegmentIndex, forKey: "SCIndex")
-        ud.set(GChannel.selectedSegmentIndex, forKey: "GCIndex")
-    }
-    
     @IBAction func LoopingPressed(_ sender: Any) {
         ud.set(LoopingSwitch.isOn, forKey: "Loop")
     }
@@ -73,10 +61,23 @@ class AdvancedScreen : ViewController {
     @IBAction func ReturnButton(_ sender: Any) {
         view.endEditing(true)
         if (validInputs()) {
+            setValues()
             performSegue(withIdentifier: "SetAdvanced", sender: self)
         } else {
             showPopup(name: "Input Error")
         }
+    }
+    
+    func setValues() {
+        ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
+        ud.set(Amp.text!, forKey: "Amplitude")
+        ud.set(Rate.text!, forKey: "Rate")
+        ud.set(SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!, forKey: "SChannel")
+        ud.set(GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!, forKey: "GChannel")
+        
+        ud.set(Freq.selectedSegmentIndex, forKey: "FreqIndex")
+        ud.set(SChannel.selectedSegmentIndex, forKey: "SCIndex")
+        ud.set(GChannel.selectedSegmentIndex, forKey: "GCIndex")
     }
     
     func fillIn() {
@@ -87,7 +88,9 @@ class AdvancedScreen : ViewController {
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
     }
-    
+}
+
+extension AdvancedScreen {
     func addDoneButtons() {
         self.Amp.inputAccessoryView = initDoneButton()
         self.Rate.inputAccessoryView = initDoneButton()

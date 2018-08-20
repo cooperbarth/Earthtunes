@@ -2,10 +2,22 @@ import Foundation
 import UIKit
 
 class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
-    var events : [event] = []
-    
     @IBOutlet weak var SuggestionView: UIView!
     @IBOutlet weak var SuggestionScroll: UITableView!
+    
+    var events : [event] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.makeViewAppear()
+        self.showAnimate()
+        self.setUpLongPress()
+        
+        events = retrieveFavorites()!
+        
+        SuggestionScroll.dataSource = self
+        SuggestionScroll.delegate = self
+    }
 
     @IBAction func ReturnButton(_ sender: Any) {
         setAllFields()
@@ -25,7 +37,6 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         ud.set(Event.duration, forKey: "Duration")
         ud.set(Event.frequency, forKey: "Frequency")
         ud.set(Event.amplitude, forKey: "Amplitude")
-        ud.set(Event.rate, forKey: "Rate")
         ud.set(Event.schannel, forKey: "SChannel")
         ud.set(Event.gchannel, forKey: "GChannel")
         
@@ -62,7 +73,9 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         
         ud.set("Set", forKey: "First")
     }
-    
+}
+
+extension SuggestionScreen {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch: UITouch? = touches.first
         if (touch?.view != SuggestionView && touch?.view != SuggestionScroll) {
@@ -73,18 +86,6 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
     func makeViewAppear() {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         SuggestionView.layer.cornerRadius = 8.0
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.makeViewAppear()
-        self.showAnimate()
-        self.setUpLongPress()
-        
-        events = retrieveFavorites()!
-        
-        SuggestionScroll.dataSource = self
-        SuggestionScroll.delegate = self
     }
 }
 

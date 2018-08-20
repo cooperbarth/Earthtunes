@@ -8,6 +8,14 @@ class FreqExplanationScreen : ViewController {
         self.removeAnimate()
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.makeViewAppear()
+        self.showAnimate()
+    }
+}
+
+extension FreqExplanationScreen {
     func makeViewAppear() {
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
         ExplainView.layer.cornerRadius = 8.0
@@ -18,11 +26,5 @@ class FreqExplanationScreen : ViewController {
         if (touch?.view != ExplainView) {
             self.removeAnimate()
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.makeViewAppear()
-        self.showAnimate()
     }
 }

@@ -5,33 +5,63 @@ import AudioToolbox
 import CorePlot
 
 class DisplayScreen : ViewController {
-    var locate = UserDefaults.standard.string(forKey: "Location")!
-    let date = UserDefaults.standard.string(forKey: "Date")!
-    let time = UserDefaults.standard.string(forKey: "Time")!
-    let duration = UserDefaults.standard.string(forKey: "Duration")!
-    
-    let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
-    let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
-    let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
-    let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
-    
-    let data = UserDefaults.standard.array(forKey: "Data")!
-    let yMax = UserDefaults.standard.double(forKey: "Max")
-    
-    var favorites : [event] = []
-    
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
     @IBOutlet weak var PauseButton: UIButton!
     @IBOutlet weak var PlayButton: UIButton!
     @IBOutlet weak var FFButton: UIButton!
     @IBOutlet weak var RewindButton: UIButton!
-    
     @IBOutlet weak var BlackButton: UIButton!
+    @IBOutlet weak var YellowButton: UIButton!
+    @IBOutlet weak var hostView: CPTGraphHostingView!
+    
+    var locate = UserDefaults.standard.string(forKey: "Location")!
+    let date = UserDefaults.standard.string(forKey: "Date")!
+    let time = UserDefaults.standard.string(forKey: "Time")!
+    let duration = UserDefaults.standard.string(forKey: "Duration")!
+    let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
+    let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
+    let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
+    let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
+    let data = UserDefaults.standard.array(forKey: "Data")!
+    let yMax = UserDefaults.standard.double(forKey: "Max")
+    var favorites : [event] = []
+    var plot: CPTScatterPlot!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        favorites = retrieveFavorites()!
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        do {
+            player = try AVAudioPlayer(contentsOf: url)
+            playSound()
+        } catch {
+            print("Audio Player Not Found.")
+        }
+        player?.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        initplot()
+        GraphTitle.text = ud.string(forKey: "Title")
+        SoundSlideLayout.value = 0.0
+        if (inFavorites()) {
+            BlackButton.isHidden = true
+            BlackButton.isEnabled = false
+        } else {
+            YellowButton.isHidden = true
+            YellowButton.isEnabled = false
+        }
+    }
+    
     @IBAction func BlackPressed(_ sender: Any) {
         if (!inFavorites()) {
-            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: [], Descript: ""))
+            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, G32: [], S32: [], Descript: ""))
         }
         saveFavorites(events: favorites)
         YellowButton.isHidden = false
@@ -40,7 +70,6 @@ class DisplayScreen : ViewController {
         BlackButton.isEnabled = false
     }
     
-    @IBOutlet weak var YellowButton: UIButton!
     @IBAction func YellowPressed(_ sender: Any) {
         removeFavorite()
         saveFavorites(events: favorites)
@@ -81,49 +110,17 @@ class DisplayScreen : ViewController {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
     
-
     
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        favorites = retrieveFavorites()!
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        do {
-            player = try AVAudioPlayer(contentsOf: url)
-            playSound()
-        } catch {
-            print("Audio Player Not Found.")
-        }
-        player?.delegate = self
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        initplot()
-        GraphTitle.text = ud.string(forKey: "Title")
-        SoundSlideLayout.value = 0.0
-        if (inFavorites()) {
-            BlackButton.isHidden = true
-            BlackButton.isEnabled = false
-        } else {
-            YellowButton.isHidden = true
-            YellowButton.isEnabled = false
-        }
-    }
-    
-    @IBOutlet weak var hostView: CPTGraphHostingView!
-    var plot: CPTScatterPlot!
-    
+}
+
+extension DisplayScreen {
     func inFavorites() -> Bool {
         for e in favorites {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 return true
             }
         }
@@ -133,7 +130,7 @@ class DisplayScreen : ViewController {
     func removeFavorite() {
         var count = 0
         for e in favorites {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 favorites.remove(at: count)
                 break
             }
@@ -287,6 +284,8 @@ extension DisplayScreen : AVAudioPlayerDelegate {
     func playSound() {
         SoundSlideLayout.maximumValue = Float((player?.duration)!)
         player?.prepareToPlay()
+        player?.enableRate = true
+        player?.rate = Float(inputRate)!
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         player?.play()
         PlayButton.isHidden = true

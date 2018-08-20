@@ -11,31 +11,31 @@ class LoadingScreen : ViewController {
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")! + ":00"
     let duration = String(Float64(UserDefaults.standard.string(forKey: "Duration")!)! * 3600)
-    
     let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
     let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")! //doesn't do anything yet
+    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
     let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
-    
     var fsps : Double = 0.0
     var bandsHZ : Double = 0.0
     
-    func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
-        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
-        LoadingView.layer.cornerRadius = 8.0
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.makeViewAppear()
+        self.showAnimate()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getSoundAndGraph()
     }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.makeViewAppear()
-        self.showAnimate()
+}
+
+extension LoadingScreen {
+    func makeViewAppear() {
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
+        LoadingView.layer.cornerRadius = 8.0
     }
 }
 
@@ -193,7 +193,7 @@ extension LoadingScreen {
     
     func checkRepeats() -> event? {
         for e in retrieveEvents()! {
-            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.rate == inputRate && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
+            if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 LoadingLabel.text! = "Loading Previously \nSaved Data From \n" + ud.string(forKey: "Location")!
                 return e
             }
@@ -202,7 +202,7 @@ extension LoadingScreen {
     }
     
     func saveData(s32: [Float64], g32: [Float64]) {
-        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, Rate: inputRate, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32, Descript: "")
+        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, G32: g32, S32: s32, Descript: "")
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)

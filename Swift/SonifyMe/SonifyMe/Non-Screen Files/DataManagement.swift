@@ -62,21 +62,19 @@ class event: NSObject, NSCoding {
     var duration: String
     var frequency: String
     var amplitude: String
-    var rate: String
     var schannel: String
     var gchannel: String
     var g32: [Float64]
     var s32: [Float64]
     var descript: String
     
-    required init(Location: String, Date: String, Time: String, Duration: String, Frequency: String, Amplitude: String, Rate: String, SChannel: String, GChannel: String, G32: [Float64], S32: [Float64], Descript: String) {
+    required init(Location: String, Date: String, Time: String, Duration: String, Frequency: String, Amplitude: String, SChannel: String, GChannel: String, G32: [Float64], S32: [Float64], Descript: String) {
         location = Location
         date = Date
         time = Time
         duration = Duration
         frequency = Frequency
         amplitude = Amplitude
-        rate = Rate
         schannel = SChannel
         gchannel = GChannel
         g32 = G32
@@ -91,7 +89,6 @@ class event: NSObject, NSCoding {
         aCoder.encode(duration, forKey: "duration")
         aCoder.encode(frequency, forKey: "frequency")
         aCoder.encode(amplitude, forKey: "amplitude")
-        aCoder.encode(rate, forKey: "rate")
         aCoder.encode(schannel, forKey: "schannel")
         aCoder.encode(gchannel, forKey: "gchannel")
         aCoder.encode(g32, forKey: "g32")
@@ -106,7 +103,6 @@ class event: NSObject, NSCoding {
         duration = aDecoder.decodeObject(forKey: "duration") as! String
         frequency = aDecoder.decodeObject(forKey: "frequency") as! String
         amplitude = aDecoder.decodeObject(forKey: "amplitude") as! String
-        rate = aDecoder.decodeObject(forKey: "rate") as! String
         schannel = aDecoder.decodeObject(forKey: "schannel") as! String
         gchannel = aDecoder.decodeObject(forKey: "gchannel") as! String
         g32 = aDecoder.decodeObject(forKey: "g32") as! [Float64]

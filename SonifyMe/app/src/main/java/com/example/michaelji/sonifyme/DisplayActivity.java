@@ -27,25 +27,6 @@ public class DisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
-        // Get the Intent that started this activity and extract the string
-        Intent intent = getIntent();
-        String locate = intent.getStringExtra(InputActivity.EXTRA_MESSAGE);
-
-        // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(locate);
-
-        String audioPath = getApplicationContext().getFilesDir().getPath() + "/"  + "sound.wav";
-        try {
-            mediaPlayer.setDataSource(audioPath);
-            mediaPlayer.prepare();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        ImageView im = findViewById(R.id.imageView);
-        im.setImageBitmap(loadImageBitmap(getApplicationContext(), "graph.png"));
-
         SeekBar seek = findViewById(R.id.seekBar);
         seek.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             boolean wasPlaying = false;
@@ -71,9 +52,43 @@ public class DisplayActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+
+        // Get the Intent that started this activity and extract the string
+        Intent intent = getIntent();
+        String locate = intent.getStringExtra(InputActivity.EXTRA_MESSAGE);
+
+        // Capture the layout's TextView and set the string as its text
+        TextView textView = findViewById(R.id.textView);
+        textView.setText(locate);
+
+        String audioPath = getApplicationContext().getFilesDir().getPath() + "/"  + "sound.wav";
+        try {
+            mediaPlayer.setDataSource(audioPath);
+            mediaPlayer.prepare();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        ImageView im = findViewById(R.id.imageView);
+        im.setImageBitmap(loadImageBitmap(getApplicationContext(), "graph.png"));
+
+        SeekBar seek = findViewById(R.id.seekBar);
         seek.setMax(mediaPlayer.getDuration());
         seek.setProgress(0);
+    }
 
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        mediaPlayer.stop();
+        mediaPlayer.reset();
     }
 
     private Runnable moveSeekBarThread = new Runnable() {
