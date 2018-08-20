@@ -127,16 +127,16 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
 
 extension InputScreen {
     func formatScreen() {
-        TitleDistanceFromTop.constant = screenSize.height * 0.02
-        TitleLabel.font = UIFont(name: TitleLabel.font.fontName, size: screenSize.height / 18)
+        TitleDistanceFromTop.constant = screenSize.height * 0.01
+        TitleLabel.font = UIFont(name: TitleLabel.font.fontName, size: screenSize.height / 35)
         TitleToLocationDistance.constant = TitleDistanceFromTop.constant
-        LocationLabel.font = LocationLabel.font.withSize(screenSize.height / 40)
-        LocationLabelToSpinnerDistance.constant = 0
-        LocationSpinnerHeight.constant = screenSize.height / 7
+        LocationLabel.font = LocationLabel.font.withSize(screenSize.height / 65)
+        LocationLabelToSpinnerDistance.constant = -screenSize.height * 0.005
+        LocationSpinnerHeight.constant = screenSize.height / 15
         LocationSpinnerWidth.constant = LocationSpinnerHeight.constant * 3.2
         LocationSpinnerToDateLabelDistance.constant = TitleToLocationDistance.constant * 0.6
         DateLabel.font = LocationLabel.font
-        DateLabelToSpinnerDistance.constant = LocationLabelToSpinnerDistance.constant
+        DateLabelToSpinnerDistance.constant = 0
         DateSpinnerHeight.constant = LocationSpinnerHeight.constant
         DateSpinnerWidth.constant = LocationSpinnerWidth.constant
         DateSpinnerToTimeLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
@@ -146,14 +146,14 @@ extension InputScreen {
         TimeSpinnerWidth.constant = LocationSpinnerWidth.constant
         TimeSpinnerToDurationLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
         DurationLabel.font = LocationLabel.font
-        DurationLabelWidth.constant = screenSize.width * 0.4
+        DurationLabelWidth.constant = screenSize.width * 0.25
         DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant
         DurationTextFieldWidth.constant = DurationLabelWidth.constant * 1.1
-        DurationFieldTextHeight.constant = screenSize.height / 20
+        DurationFieldTextHeight.constant = screenSize.height * 0.035
         DurationField.font = DurationField.font?.withSize(DurationFieldTextHeight.constant * 0.4)
         DurationField.textAlignment = .center
-        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.6
-        SavedEventsLabel.titleLabel?.font = DurationLabel.font
+        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.4
+        SavedEventsLabel.titleLabel?.font = DurationLabel.font?.withSize(DurationFieldTextHeight.constant * 0.3)
         SavedToAdvancedDistance.constant = TimeSpinnerToDurationLabelDistance.constant * 1.2
         AdvancedOptionsLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
         AdvancedToSubmitDistance.constant = SavedToAdvancedDistance.constant

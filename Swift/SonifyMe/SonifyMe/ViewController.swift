@@ -18,8 +18,12 @@ import AudioToolbox
  */
 
 class ViewController: UIViewController, UITextFieldDelegate {
-    let screenSize: CGRect = UIScreen.main.bounds
+    let screenSize: CGRect = UIScreen.main.nativeBounds
     let ud = UserDefaults.standard
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     func showPopup(name: String) {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)

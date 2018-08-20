@@ -193,24 +193,12 @@ extension LoadingScreen {
 
 extension LoadingScreen {
     func setUpGraph() {
-        let graphString = ud.string(forKey: "GraphURL")!
-        let graphUrl = URL(string: graphString)
-        let session = URLSession(configuration: .default)
-        let getImageFromUrl = session.dataTask(with: graphUrl!) { (data, response, error) in
-            if let e = error {
-                print("Error Occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    if let imageData = data {
-                        img = UIImage(data: imageData)!
-                    } else {
-                        print("Image file is corrupted")
-                    }
-                } else {
-                    print("No response from server")
-                }
-            }
+        do {
+            let graphURL = ud.string(forKey: "GraphURL")
+            let data = try Data(contentsOf: URL(string: graphURL!)!)
+            img = UIImage(data: data)
+        } catch {
+            print("Error: Image Not Found")
         }
-        getImageFromUrl.resume()
     }
 }
