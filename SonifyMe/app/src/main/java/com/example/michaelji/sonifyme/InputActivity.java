@@ -32,7 +32,6 @@ import java.text.SimpleDateFormat;
 public class InputActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.michaelji.sonifyme.MESSAGE";
-    private boolean errored = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +47,7 @@ public class InputActivity extends AppCompatActivity {
         spinner.setAdapter(adapter);
 
         CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
+        calendar.setMaxDate(calendar.getDate());
         calendar.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 month++;
@@ -64,6 +64,20 @@ public class InputActivity extends AppCompatActivity {
                 view.setDate(millis);
             }//met
         });
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        Intent intent = getIntent();
+        boolean errored = intent.getBooleanExtra(EXTRA_MESSAGE, false);
+        if(errored)
+        {
+            errored = false;
+            DownloadErrorDialogFragment error = new DownloadErrorDialogFragment();
+            error.show(getSupportFragmentManager(),"error");
+        }
     }
 
     /** Called when the user taps the Send button */
@@ -87,18 +101,11 @@ public class InputActivity extends AppCompatActivity {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String date = sdf.format(new Date(dateLong));
 
-        Date currentTime = Calendar.getInstance().getTime();
-        long today = currentTime.getTime();
-
         if(time.equals("") || duration.equals("")) {
             InputErrorDialogFragment error = new InputErrorDialogFragment();
             error.show(getSupportFragmentManager(),"error");
             //startActivity(malintent);
-        } /*else if (dateLong > today){
-            DateErrorDialogFragment error = new DateErrorDialogFragment();
-            error.show(getSupportFragmentManager(), "error");
-
-        }*/else {
+        } else {
             String[] url = getUrl(locate, duration, time, date);
 
             new DownloadFile().execute(url[0] + "audio");
@@ -137,30 +144,13 @@ public class InputActivity extends AppCompatActivity {
         }
     }
 
-    public static class DateErrorDialogFragment extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Input error");
-            builder.setMessage("The date you selected has not happened yet")
-                    .setNeutralButton("Close", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dismiss();
-                        }
-                    });
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
-    }
-
     public static class DownloadErrorDialogFragment extends DialogFragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle("ERROR 404");
-            builder.setMessage("The data could not be found. It may be unavailable due to station downtime or issues.Check your inputs")
+            builder.setMessage("The data could not be found. It may be unavailable due to station downtime or issues. Check your inputs")
                     .setNeutralButton("Close", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             dismiss();
@@ -324,6 +314,7 @@ public class InputActivity extends AppCompatActivity {
 
     private class DownloadImage extends AsyncTask<String, Void, Bitmap> {
         private String TAG = "DownloadImage";
+        private boolean errored = false;
         private Bitmap downloadImageBitmap(String sUrl) {
             Bitmap bitmap = null;
             try {
@@ -331,6 +322,7 @@ public class InputActivity extends AppCompatActivity {
                 bitmap = BitmapFactory.decodeStream(inputStream);       // Decode Bitmap
                 inputStream.close();
             } catch (Exception e) {
+                errored = true;
                 Log.d(TAG, "Exception 1, Something went wrong!");
                 e.printStackTrace();
             }
@@ -343,8 +335,15 @@ public class InputActivity extends AppCompatActivity {
         }
 
         protected void onPostExecute(Bitmap result) {
-            saveImage(getApplicationContext(), result, "graph.png");
-            toDisplay();
+            if(errored)
+            {
+                Intent intent = new Intent(InputActivity.this, InputActivity.class);
+                intent.putExtra(EXTRA_MESSAGE, true);
+                startActivity(intent);
+            } else {
+                saveImage(getApplicationContext(), result, "graph.png");
+                toDisplay();
+            }
         }
     }
 }
