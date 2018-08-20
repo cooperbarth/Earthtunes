@@ -329,11 +329,11 @@
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="343-27-IHt"/>
                             <constraint firstItem="o8h-O8-jQu" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="5wa-F0-Iys"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="top" secondItem="2ve-Gc-hQk" secondAttribute="bottom" constant="36" id="8Ec-Qt-mhp"/>
+                            <constraint firstItem="pS4-0O-pXk" firstAttribute="centerY" secondItem="70k-fc-sv8" secondAttribute="centerY" id="9qK-el-Gen"/>
                             <constraint firstItem="ztt-rI-awL" firstAttribute="top" secondItem="usP-zQ-600" secondAttribute="bottom" constant="5" id="CrG-1R-Lgh"/>
                             <constraint firstItem="0GK-PO-V6D" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="CzO-Gq-8bI"/>
                             <constraint firstItem="usP-zQ-600" firstAttribute="top" secondItem="GLK-eC-Gmr" secondAttribute="bottom" constant="28" id="Fzr-28-TMv"/>
                             <constraint firstItem="ZPB-VD-OUg" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="HoE-rd-bsA"/>
-                            <constraint firstItem="pS4-0O-pXk" firstAttribute="leading" secondItem="70k-fc-sv8" secondAttribute="trailing" constant="8" id="HzU-hS-4Fk"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="MOx-Jj-nSq"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Odf-wf-kih"/>
                             <constraint firstItem="o8h-O8-jQu" firstAttribute="top" secondItem="70k-fc-sv8" secondAttribute="bottom" constant="34" id="RHE-pG-8xT"/>
@@ -341,6 +341,7 @@
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="top" secondItem="FDh-bS-ZC3" secondAttribute="bottom" constant="8" id="Um6-8r-QGR"/>
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upc-DM-0nB"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Upe-5T-rnr"/>
+                            <constraint firstItem="70k-fc-sv8" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" constant="-30.5" id="Uw3-iK-2hg"/>
                             <constraint firstItem="2xX-qg-R60" firstAttribute="top" secondItem="o8h-O8-jQu" secondAttribute="bottom" constant="10" id="VsE-5y-G4b"/>
                             <constraint firstItem="70k-fc-sv8" firstAttribute="top" secondItem="B3l-w6-bKW" secondAttribute="bottom" constant="44" id="XV2-Pc-tyU"/>
                             <constraint firstItem="ztt-rI-awL" firstAttribute="centerX" secondItem="usP-zQ-600" secondAttribute="centerX" id="a5d-I8-0Ml"/>
@@ -350,12 +351,10 @@
                             <constraint firstItem="3Th-fI-L8p" firstAttribute="top" secondItem="GLK-eC-Gmr" secondAttribute="bottom" constant="28" id="gja-GK-Aho"/>
                             <constraint firstItem="ZPB-VD-OUg" firstAttribute="top" secondItem="nvp-mp-dIE" secondAttribute="bottom" constant="28" id="jRy-7T-gZV"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="top" secondItem="ZPB-VD-OUg" secondAttribute="bottom" constant="8" id="jfl-if-dLt"/>
+                            <constraint firstItem="pS4-0O-pXk" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" constant="33" id="k0c-3S-v89"/>
                             <constraint firstItem="2xX-qg-R60" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="pcY-Su-dMu"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="top" secondItem="IBm-h0-0fi" secondAttribute="top" constant="25" id="r71-ZE-8Sc"/>
                             <constraint firstItem="Ano-M4-rzf" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="uC7-Ij-6Ib"/>
-                            <constraint firstItem="IBm-h0-0fi" firstAttribute="trailing" secondItem="pS4-0O-pXk" secondAttribute="trailing" constant="130" id="wBg-GJ-KZL"/>
-                            <constraint firstItem="pS4-0O-pXk" firstAttribute="top" secondItem="B3l-w6-bKW" secondAttribute="bottom" constant="39" id="yJ2-6q-y9e"/>
-                            <constraint firstItem="70k-fc-sv8" firstAttribute="leading" secondItem="IBm-h0-0fi" secondAttribute="leading" constant="126" id="yT6-gC-0kN"/>
                             <constraint firstItem="Ano-M4-rzf" firstAttribute="top" secondItem="2xX-qg-R60" secondAttribute="bottom" constant="10" id="ylM-7o-3VZ"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="centerX" secondItem="3Th-fI-L8p" secondAttribute="centerX" id="yzd-h7-F9D"/>
                         </constraints>
@@ -371,18 +370,35 @@
                         <outlet property="AmpLabel" destination="ZPB-VD-OUg" id="nET-1c-r3H"/>
                         <outlet property="AmpLabelToAmpControlDistance" destination="jfl-if-dLt" id="TTC-s3-lQk"/>
                         <outlet property="AmpLabelWidth" destination="ajF-Yh-z6X" id="v82-zZ-gP1"/>
+                        <outlet property="ClearCacheLabel" destination="o8h-O8-jQu" id="7iC-Vx-dV2"/>
+                        <outlet property="ClearToResetLabelDistance" destination="VsE-5y-G4b" id="slT-WH-Opu"/>
                         <outlet property="Freq" destination="nvp-mp-dIE" id="B3Q-Ax-qOk"/>
                         <outlet property="FreqControlToAmpLabelDistance" destination="jRy-7T-gZV" id="9P5-x2-MNc"/>
                         <outlet property="FreqLabel" destination="0GK-PO-V6D" id="gaW-VE-AbN"/>
                         <outlet property="FreqLabelToFreqControlDistance" destination="UhT-zq-41o" id="Ebh-Nu-OAl"/>
                         <outlet property="GChannel" destination="ztt-rI-awL" id="peJ-CE-M4h"/>
                         <outlet property="GraphLabel" destination="usP-zQ-600" id="VS6-vE-tHS"/>
+                        <outlet property="GraphLabelToSwitchDistance" destination="CrG-1R-Lgh" id="iVj-8q-8Yv"/>
                         <outlet property="GraphLabelXPos" destination="316-aC-Jby" id="cfu-Ay-kPD"/>
+                        <outlet property="LoopingLabel" destination="70k-fc-sv8" id="Lq0-aT-ScN"/>
+                        <outlet property="LoopingLabelToClearDistance" destination="RHE-pG-8xT" id="ueY-hX-Vxt"/>
+                        <outlet property="LoopingLabelXPos" destination="Uw3-iK-2hg" id="7nK-XG-mMw"/>
                         <outlet property="LoopingSwitch" destination="pS4-0O-pXk" id="CLh-px-I91"/>
+                        <outlet property="LoopingSwitchXPos" destination="k0c-3S-v89" id="tEK-Os-UtJ"/>
                         <outlet property="Rate" destination="B3l-w6-bKW" id="xIT-MW-esr"/>
+                        <outlet property="RateFieldHeight" destination="nz9-cn-TIu" id="Bgd-vU-cA2"/>
+                        <outlet property="RateFieldToLoopingLabelDistance" destination="XV2-Pc-tyU" id="xoH-Xi-xbN"/>
+                        <outlet property="RateFieldWidth" destination="4dB-iL-saf" id="J3u-OA-6mf"/>
+                        <outlet property="RateLabel" destination="FDh-bS-ZC3" id="dS8-Mo-bAK"/>
+                        <outlet property="RateLabelToFieldDistance" destination="Um6-8r-QGR" id="2dU-xH-ZDN"/>
+                        <outlet property="ResetLabel" destination="2xX-qg-R60" id="U8f-SR-3Xf"/>
+                        <outlet property="ResetToReturnLabelDistance" destination="ylM-7o-3VZ" id="Y3d-Hg-xIR"/>
+                        <outlet property="ReturnLabel" destination="Ano-M4-rzf" id="tho-S0-jiu"/>
                         <outlet property="SChannel" destination="2ve-Gc-hQk" id="dYq-ev-hTW"/>
                         <outlet property="SoundLabel" destination="3Th-fI-L8p" id="eyb-SA-ccl"/>
+                        <outlet property="SoundLabelToSwitchDistance" destination="fRJ-de-feD" id="JaV-08-b9c"/>
                         <outlet property="SoundLabelXPos" destination="fUq-Sg-DiH" id="efY-UW-e6V"/>
+                        <outlet property="SoundSwitchToRateLabelDistance" destination="8Ec-Qt-mhp" id="gol-zg-FmK"/>
                         <outlet property="TitleToFreqLabelDistance" destination="aoL-7L-25L" id="EJt-N1-Hza"/>
                         <outlet property="TopToTitleDistance" destination="r71-ZE-8Sc" id="P2I-lS-WSS"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="SetAdvanced" id="lar-ca-Cwf"/>
@@ -390,7 +406,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1z2-ww-8eO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674" y="736"/>
+            <point key="canvasLocation" x="672.79999999999995" y="735.38230884557731"/>
         </scene>
         <!--Clear Cache Screen-->
         <scene sceneID="vdp-Tz-EoF">
@@ -1144,6 +1160,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O0B-H3-m4Q"/>
+        <segue reference="lar-ca-Cwf"/>
     </inferredMetricsTieBreakers>
 </document>

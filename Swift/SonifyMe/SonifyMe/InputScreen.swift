@@ -154,7 +154,7 @@ extension InputScreen {
         DurationField.textAlignment = .center
         DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.4
         SavedEventsLabel.titleLabel?.font = DurationLabel.font?.withSize(DurationFieldTextHeight.constant * 0.3)
-        SavedToAdvancedDistance.constant = TimeSpinnerToDurationLabelDistance.constant * 1.2
+        SavedToAdvancedDistance.constant = TimeSpinnerToDurationLabelDistance.constant
         AdvancedOptionsLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
         AdvancedToSubmitDistance.constant = SavedToAdvancedDistance.constant
         SubmitLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
