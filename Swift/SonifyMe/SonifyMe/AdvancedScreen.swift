@@ -94,7 +94,16 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var FreqLabelToFreqControlDistance: NSLayoutConstraint!
     @IBOutlet weak var FreqControlToAmpLabelDistance: NSLayoutConstraint!
     @IBOutlet weak var AmpLabel: UIButton!
+    @IBOutlet weak var AmpLabelWidth: NSLayoutConstraint!
     @IBOutlet weak var AmpLabelToAmpControlDistance: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldWidth: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldToSoundLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldToGraphLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var SoundLabel: UIButton!
+    @IBOutlet weak var GraphLabel: UIButton!
+    @IBOutlet weak var SoundLabelXPos: NSLayoutConstraint!
+    @IBOutlet weak var GraphLabelXPos: NSLayoutConstraint!
     
 }
 
@@ -108,18 +117,19 @@ extension AdvancedScreen {
         let segFont = FreqLabel.titleLabel?.font!.withSize((FreqLabel.titleLabel?.font!.pointSize)! * 0.8)
         Freq.apportionsSegmentWidthsByContent = true
         Freq.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
-        FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant
+        FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant * 1.5
         AmpLabel.titleLabel?.font = FreqLabel.titleLabel?.font
-        AmpLabelToAmpControlDistance.constant = FreqLabelToFreqControlDistance.constant
-        //ampfield font size
-        //ampfield width
-        //ampfield height
-        //ampfield to soundchannel y
-        //ampfield to graphchannel y
-        //soundchannel xpos
-        //graphchannel xpos
-        //soundchannel font size
-        //graphchannel font size
+        AmpLabelWidth.constant = screenSize.width * 0.4
+        AmpLabelToAmpControlDistance.constant = FreqLabelToFreqControlDistance.constant * 0.75
+        AmpFieldWidth.constant = AmpLabelWidth.constant
+        AmpFieldHeight.constant = screenSize.height / 20
+        Amp.font = Amp.font?.withSize(AmpFieldHeight.constant * 0.4)
+        AmpFieldToSoundLabelDistance.constant = FreqControlToAmpLabelDistance.constant
+        AmpFieldToGraphLabelDistance.constant = AmpFieldToSoundLabelDistance.constant
+        SoundLabel.titleLabel?.font = AmpLabel.titleLabel?.font
+        GraphLabel.titleLabel?.font = SoundLabel.titleLabel?.font
+        GraphLabelXPos.constant = screenSize.width / 4
+        SoundLabelXPos.constant = -GraphLabelXPos.constant
         //soundchannel to soundswitch y
         //graphchannel to graphswitch y
         //soundswitch height

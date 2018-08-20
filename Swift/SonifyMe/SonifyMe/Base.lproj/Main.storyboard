@@ -203,7 +203,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
-                                <rect key="frame" x="234" y="320" width="83" height="29"/>
+                                <rect key="frame" x="226" y="320" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
@@ -213,6 +213,7 @@
                                 <rect key="frame" x="113" y="224" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4sz-5P-SnK"/>
+                                    <constraint firstAttribute="height" constant="30" id="NVy-NS-c6a"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -222,6 +223,7 @@
                                 <rect key="frame" x="112" y="413" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4dB-iL-saf"/>
+                                    <constraint firstAttribute="height" constant="30" id="nz9-cn-TIu"/>
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -234,7 +236,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
-                                <rect key="frame" x="59" y="320" width="83" height="29"/>
+                                <rect key="frame" x="66" y="320" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
@@ -275,6 +277,9 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPB-VD-OUg">
                                 <rect key="frame" x="130" y="183" width="115" height="33"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="ajF-Yh-z6X"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Max Amplitude"/>
                                 <connections>
@@ -289,7 +294,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usP-zQ-600">
-                                <rect key="frame" x="218" y="282" width="115" height="33"/>
+                                <rect key="frame" x="210" y="282" width="115" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Graph Channel"/>
                                 <connections>
@@ -297,7 +302,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-fI-L8p">
-                                <rect key="frame" x="42" y="282" width="117" height="33"/>
+                                <rect key="frame" x="49" y="282" width="117" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Sound Channel"/>
                                 <connections>
@@ -320,10 +325,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="usP-zQ-600" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" constant="80" id="316-aC-Jby"/>
                             <constraint firstItem="9i5-kO-K9H" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="343-27-IHt"/>
                             <constraint firstItem="o8h-O8-jQu" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="5wa-F0-Iys"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="top" secondItem="2ve-Gc-hQk" secondAttribute="bottom" constant="36" id="8Ec-Qt-mhp"/>
-                            <constraint firstItem="IBm-h0-0fi" firstAttribute="trailing" secondItem="usP-zQ-600" secondAttribute="trailing" constant="42" id="9A8-Uf-71H"/>
                             <constraint firstItem="ztt-rI-awL" firstAttribute="top" secondItem="usP-zQ-600" secondAttribute="bottom" constant="5" id="CrG-1R-Lgh"/>
                             <constraint firstItem="0GK-PO-V6D" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="CzO-Gq-8bI"/>
                             <constraint firstItem="usP-zQ-600" firstAttribute="top" secondItem="GLK-eC-Gmr" secondAttribute="bottom" constant="28" id="Fzr-28-TMv"/>
@@ -331,7 +336,6 @@
                             <constraint firstItem="pS4-0O-pXk" firstAttribute="leading" secondItem="70k-fc-sv8" secondAttribute="trailing" constant="8" id="HzU-hS-4Fk"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="MOx-Jj-nSq"/>
                             <constraint firstItem="FDh-bS-ZC3" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Odf-wf-kih"/>
-                            <constraint firstItem="3Th-fI-L8p" firstAttribute="leading" secondItem="IBm-h0-0fi" secondAttribute="leading" constant="42" id="QcI-1N-J6P"/>
                             <constraint firstItem="o8h-O8-jQu" firstAttribute="top" secondItem="70k-fc-sv8" secondAttribute="bottom" constant="34" id="RHE-pG-8xT"/>
                             <constraint firstItem="nvp-mp-dIE" firstAttribute="top" secondItem="0GK-PO-V6D" secondAttribute="bottom" constant="8" id="UhT-zq-41o"/>
                             <constraint firstItem="B3l-w6-bKW" firstAttribute="top" secondItem="FDh-bS-ZC3" secondAttribute="bottom" constant="8" id="Um6-8r-QGR"/>
@@ -342,6 +346,7 @@
                             <constraint firstItem="ztt-rI-awL" firstAttribute="centerX" secondItem="usP-zQ-600" secondAttribute="centerX" id="a5d-I8-0Ml"/>
                             <constraint firstItem="0GK-PO-V6D" firstAttribute="top" secondItem="9i5-kO-K9H" secondAttribute="bottom" constant="20" id="aoL-7L-25L"/>
                             <constraint firstItem="2ve-Gc-hQk" firstAttribute="top" secondItem="3Th-fI-L8p" secondAttribute="bottom" constant="5" id="fRJ-de-feD"/>
+                            <constraint firstItem="3Th-fI-L8p" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" constant="-80" id="fUq-Sg-DiH"/>
                             <constraint firstItem="3Th-fI-L8p" firstAttribute="top" secondItem="GLK-eC-Gmr" secondAttribute="bottom" constant="28" id="gja-GK-Aho"/>
                             <constraint firstItem="ZPB-VD-OUg" firstAttribute="top" secondItem="nvp-mp-dIE" secondAttribute="bottom" constant="28" id="jRy-7T-gZV"/>
                             <constraint firstItem="GLK-eC-Gmr" firstAttribute="top" secondItem="ZPB-VD-OUg" secondAttribute="bottom" constant="8" id="jfl-if-dLt"/>
@@ -359,16 +364,25 @@
                     <connections>
                         <outlet property="AdvancedTitle" destination="9i5-kO-K9H" id="NyG-A6-qUW"/>
                         <outlet property="Amp" destination="GLK-eC-Gmr" id="lbj-br-Omn"/>
+                        <outlet property="AmpFieldHeight" destination="NVy-NS-c6a" id="QJ7-ni-RiS"/>
+                        <outlet property="AmpFieldToGraphLabelDistance" destination="Fzr-28-TMv" id="p3b-up-Htx"/>
+                        <outlet property="AmpFieldToSoundLabelDistance" destination="gja-GK-Aho" id="phW-eq-KYs"/>
+                        <outlet property="AmpFieldWidth" destination="4sz-5P-SnK" id="ohg-7G-2xr"/>
                         <outlet property="AmpLabel" destination="ZPB-VD-OUg" id="nET-1c-r3H"/>
                         <outlet property="AmpLabelToAmpControlDistance" destination="jfl-if-dLt" id="TTC-s3-lQk"/>
+                        <outlet property="AmpLabelWidth" destination="ajF-Yh-z6X" id="v82-zZ-gP1"/>
                         <outlet property="Freq" destination="nvp-mp-dIE" id="B3Q-Ax-qOk"/>
                         <outlet property="FreqControlToAmpLabelDistance" destination="jRy-7T-gZV" id="9P5-x2-MNc"/>
                         <outlet property="FreqLabel" destination="0GK-PO-V6D" id="gaW-VE-AbN"/>
                         <outlet property="FreqLabelToFreqControlDistance" destination="UhT-zq-41o" id="Ebh-Nu-OAl"/>
                         <outlet property="GChannel" destination="ztt-rI-awL" id="peJ-CE-M4h"/>
+                        <outlet property="GraphLabel" destination="usP-zQ-600" id="VS6-vE-tHS"/>
+                        <outlet property="GraphLabelXPos" destination="316-aC-Jby" id="cfu-Ay-kPD"/>
                         <outlet property="LoopingSwitch" destination="pS4-0O-pXk" id="CLh-px-I91"/>
                         <outlet property="Rate" destination="B3l-w6-bKW" id="xIT-MW-esr"/>
                         <outlet property="SChannel" destination="2ve-Gc-hQk" id="dYq-ev-hTW"/>
+                        <outlet property="SoundLabel" destination="3Th-fI-L8p" id="eyb-SA-ccl"/>
+                        <outlet property="SoundLabelXPos" destination="fUq-Sg-DiH" id="efY-UW-e6V"/>
                         <outlet property="TitleToFreqLabelDistance" destination="aoL-7L-25L" id="EJt-N1-Hza"/>
                         <outlet property="TopToTitleDistance" destination="r71-ZE-8Sc" id="P2I-lS-WSS"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="SetAdvanced" id="lar-ca-Cwf"/>
@@ -1130,6 +1144,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O0B-H3-m4Q"/>
+        <segue reference="lar-ca-Cwf"/>
     </inferredMetricsTieBreakers>
 </document>

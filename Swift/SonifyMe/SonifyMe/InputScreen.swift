@@ -147,10 +147,10 @@ extension InputScreen {
         TimeSpinnerToDurationLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
         DurationLabel.font = LocationLabel.font
         DurationLabelWidth.constant = screenSize.width * 0.4
-        DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant * 0.5
+        DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant
         DurationTextFieldWidth.constant = DurationLabelWidth.constant * 1.1
-        DurationFieldTextHeight.constant = DurationTextFieldWidth.constant * 0.18
-        DurationField.font = DurationField.font?.withSize(DurationFieldTextHeight.constant / 2)
+        DurationFieldTextHeight.constant = screenSize.height / 20
+        DurationField.font = DurationField.font?.withSize(DurationFieldTextHeight.constant * 0.4)
         DurationField.textAlignment = .center
         DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.6
         SavedEventsLabel.titleLabel?.font = DurationLabel.font
