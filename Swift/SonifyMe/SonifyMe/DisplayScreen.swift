@@ -2,7 +2,6 @@ import UIKit
 import AVKit
 import Foundation
 import AudioToolbox
-import CorePlot
 
 class DisplayScreen : ViewController {
     @IBOutlet weak var GraphTitle: UILabel!

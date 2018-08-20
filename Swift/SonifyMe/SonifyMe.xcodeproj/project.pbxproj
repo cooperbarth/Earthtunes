@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE1C0B26A42DB402DB1B60BA /* Pods_SonifyMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF48E3B5253A7818872C2F6 /* Pods_SonifyMe.framework */; };
 		CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01B88D21077766000EFCC9 /* AppDelegate.swift */; };
 		CD01B89021077766000EFCC9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01B88F21077766000EFCC9 /* ViewController.swift */; };
 		CD01B89321077766000EFCC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89121077766000EFCC9 /* Main.storyboard */; };
@@ -30,8 +29,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		47B4F5A3E97D34373C9B598E /* Pods-SonifyMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SonifyMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SonifyMe/Pods-SonifyMe.debug.xcconfig"; sourceTree = "<group>"; };
-		7E94F499905015FCDBF985BC /* Pods-SonifyMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SonifyMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-SonifyMe/Pods-SonifyMe.release.xcconfig"; sourceTree = "<group>"; };
 		CD01B88A21077766000EFCC9 /* SonifyMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonifyMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD01B88D21077766000EFCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD01B88F21077766000EFCC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +50,6 @@
 		F2E80D1F21234EB20049AB07 /* AmpExplanationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmpExplanationScreen.swift; sourceTree = "<group>"; };
 		F2FAF2FE2121FDD900753512 /* DataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagement.swift; sourceTree = "<group>"; };
 		F2FAF3002121FFB800753512 /* ExternalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFunctions.swift; sourceTree = "<group>"; };
-		FAF48E3B5253A7818872C2F6 /* Pods_SonifyMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SonifyMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,37 +57,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AE1C0B26A42DB402DB1B60BA /* Pods_SonifyMe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7058889CE2A2AF2446F56A9C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				47B4F5A3E97D34373C9B598E /* Pods-SonifyMe.debug.xcconfig */,
-				7E94F499905015FCDBF985BC /* Pods-SonifyMe.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		80E4E2CCBC46D11E82942E8C /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FAF48E3B5253A7818872C2F6 /* Pods_SonifyMe.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		CD01B88121077765000EFCC9 = {
 			isa = PBXGroup;
 			children = (
 				CD01B88C21077766000EFCC9 /* SonifyMe */,
 				CD01B88B21077766000EFCC9 /* Products */,
-				7058889CE2A2AF2446F56A9C /* Pods */,
-				80E4E2CCBC46D11E82942E8C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -169,11 +145,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "SonifyMe" */;
 			buildPhases = (
-				C87969391F19340D8D671B9F /* [CP] Check Pods Manifest.lock */,
 				CD01B88621077765000EFCC9 /* Sources */,
 				CD01B88721077765000EFCC9 /* Frameworks */,
 				CD01B88821077765000EFCC9 /* Resources */,
-				74EA98FAFABAFD25192DA555 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -229,45 +203,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		74EA98FAFABAFD25192DA555 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-SonifyMe/Pods-SonifyMe-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/CorePlot/CorePlot.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CorePlot.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SonifyMe/Pods-SonifyMe-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C87969391F19340D8D671B9F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SonifyMe-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CD01B88621077765000EFCC9 /* Sources */ = {
@@ -431,7 +366,6 @@
 		};
 		CD01B89D21077767000EFCC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47B4F5A3E97D34373C9B598E /* Pods-SonifyMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -450,7 +384,6 @@
 		};
 		CD01B89E21077767000EFCC9 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E94F499905015FCDBF985BC /* Pods-SonifyMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
