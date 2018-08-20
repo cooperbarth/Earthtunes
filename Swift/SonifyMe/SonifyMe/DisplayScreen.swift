@@ -27,11 +27,14 @@ class DisplayScreen : ViewController {
     let data = UserDefaults.standard.array(forKey: "Data")!
     let yMax = UserDefaults.standard.double(forKey: "Max")
     var favorites : [event] = []
-    var plot: CPTScatterPlot!
+    
+    var graphImage : UIImage? = nil
     
     override func viewDidLoad() {
-        setUpGraph()
         super.viewDidLoad()
+        graphImage = img!
+        let newImg = cropToBounds(image: graphImage!, width: 320, height: 350)
+        self.GraphView.image = newImg
         favorites = retrieveFavorites()!
     }
     
@@ -139,33 +142,6 @@ extension DisplayScreen {
     }
 }
 
-extension DisplayScreen {
-    func setUpGraph() {
-        let graphString = ud.string(forKey: "GraphURL")!
-        let graphUrl = URL(string: graphString)
-        let session = URLSession(configuration: .default)
-        let getImageFromUrl = session.dataTask(with: graphUrl!) { (data, response, error) in
-            if let e = error {
-                print("Error Occurred: \(e)")
-            } else {
-                if (response as? HTTPURLResponse) != nil {
-                    if let imageData = data {
-                        img = UIImage(data: imageData)!
-                        DispatchQueue.main.async {
-                            self.GraphView.image = img
-                        }
-                    } else {
-                        print("Image file is corrupted")
-                    }
-                } else {
-                    print("No response from server")
-                }
-            }
-        }
-        getImageFromUrl.resume()
-    }
-}
-
 extension DisplayScreen : AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if (ud.bool(forKey: "Loop")) {
@@ -201,6 +177,36 @@ extension DisplayScreen : AVAudioPlayerDelegate {
         PauseButton.isEnabled = false
         PlayButton.isHidden = false
         PlayButton.isEnabled = true
+    }
+}
+
+extension DisplayScreen {
+    func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
+        let cgimage = image.cgImage!
+        let contextImage: UIImage = UIImage(cgImage: cgimage)
+        let contextSize: CGSize = contextImage.size
+        var posX: CGFloat = 0.0
+        var posY: CGFloat = 0.0
+        var cgwidth: CGFloat = CGFloat(width)
+        var cgheight: CGFloat = CGFloat(height)
+        
+        if contextSize.width > contextSize.height {
+            posX = ((contextSize.width - contextSize.height) / 2)
+            posY = 0
+            cgwidth = contextSize.height
+            cgheight = contextSize.height
+        } else {
+            posX = 0
+            posY = ((contextSize.height - contextSize.width) / 2)
+            cgwidth = contextSize.width
+            cgheight = contextSize.width
+        }
+        
+        let rect: CGRect = CGRect(x: posX, y: posY, width: cgwidth, height: cgheight)
+        let imageRef: CGImage = cgimage.cropping(to: rect)!
+        let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
+
+        return image
     }
 }
 

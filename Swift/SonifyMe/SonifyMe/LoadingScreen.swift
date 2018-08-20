@@ -123,6 +123,7 @@ extension LoadingScreen {
             ud.set(s32, forKey: "Data")
             saveData(s32: s32)
         }
+        setUpGraph()
         performSegue(withIdentifier: "ToDisplay", sender: self)
     }
     
@@ -187,5 +188,29 @@ extension LoadingScreen {
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)
+    }
+}
+
+extension LoadingScreen {
+    func setUpGraph() {
+        let graphString = ud.string(forKey: "GraphURL")!
+        let graphUrl = URL(string: graphString)
+        let session = URLSession(configuration: .default)
+        let getImageFromUrl = session.dataTask(with: graphUrl!) { (data, response, error) in
+            if let e = error {
+                print("Error Occurred: \(e)")
+            } else {
+                if (response as? HTTPURLResponse) != nil {
+                    if let imageData = data {
+                        img = UIImage(data: imageData)!
+                    } else {
+                        print("Image file is corrupted")
+                    }
+                } else {
+                    print("No response from server")
+                }
+            }
+        }
+        getImageFromUrl.resume()
     }
 }
