@@ -107,7 +107,6 @@ extension LoadingScreen {
         let prevData = checkRepeats()
         if (prevData != nil) {
             let s32 = prevData?.s32
-            
             saveFile(buff: s32!, sample_rate: ssps)
             ud.set(s32, forKey: "Data")
         } else {

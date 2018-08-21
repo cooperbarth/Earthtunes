@@ -14,6 +14,20 @@ class DisplayScreen : ViewController {
     @IBOutlet weak var YellowButton: UIButton!
     @IBOutlet weak var GraphView: UIImageView!
     
+    @IBOutlet weak var GraphHeight: NSLayoutConstraint!
+    @IBOutlet weak var GraphWidth: NSLayoutConstraint!
+    @IBOutlet weak var PauseHeight: NSLayoutConstraint!
+    @IBOutlet weak var PauseWidth: NSLayoutConstraint!
+    @IBOutlet weak var PlayHeight: NSLayoutConstraint!
+    @IBOutlet weak var PlayWidth: NSLayoutConstraint!
+    @IBOutlet weak var FFHeight: NSLayoutConstraint!
+    @IBOutlet weak var FFWidth: NSLayoutConstraint!
+    @IBOutlet weak var RewindHeight: NSLayoutConstraint!
+    @IBOutlet weak var RewindWidth: NSLayoutConstraint!
+    @IBOutlet weak var TitleToTopDistance: NSLayoutConstraint!
+    @IBOutlet weak var TitleToGraphDistance: NSLayoutConstraint!
+    @IBOutlet weak var SliderToPlayDistance: NSLayoutConstraint!
+    
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")!
@@ -112,25 +126,14 @@ class DisplayScreen : ViewController {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
     
+    @IBAction func SaveGraph(_ sender: Any) {
+        UIImageWriteToSavedPhotosAlbum(img!, self, nil, nil)
+    }
     
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
     }
-    
-    @IBOutlet weak var GraphHeight: NSLayoutConstraint!
-    @IBOutlet weak var GraphWidth: NSLayoutConstraint!
-    @IBOutlet weak var PauseHeight: NSLayoutConstraint!
-    @IBOutlet weak var PauseWidth: NSLayoutConstraint!
-    @IBOutlet weak var PlayHeight: NSLayoutConstraint!
-    @IBOutlet weak var PlayWidth: NSLayoutConstraint!
-    @IBOutlet weak var FFHeight: NSLayoutConstraint!
-    @IBOutlet weak var FFWidth: NSLayoutConstraint!
-    @IBOutlet weak var RewindHeight: NSLayoutConstraint!
-    @IBOutlet weak var RewindWidth: NSLayoutConstraint!
-    @IBOutlet weak var TitleToTopDistance: NSLayoutConstraint!
-    @IBOutlet weak var TitleToGraphDistance: NSLayoutConstraint!
-    @IBOutlet weak var SliderToPlayDistance: NSLayoutConstraint!
 }
 
 extension DisplayScreen {

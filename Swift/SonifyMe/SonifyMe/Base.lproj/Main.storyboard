@@ -1109,11 +1109,19 @@
                                     <constraint firstAttribute="height" constant="365" id="we6-Xb-g70"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1Y-lB-mFA">
+                                <rect key="frame" x="23" y="622" width="80" height="30"/>
+                                <state key="normal" title="Save Graph"/>
+                                <connections>
+                                    <action selector="SaveGraph:" destination="0vR-sf-a3A" eventType="touchUpInside" id="NjZ-AS-v3i"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="width" secondItem="nKE-IA-8Od" secondAttribute="width" id="0Oi-DI-Bb6"/>
                             <constraint firstItem="nKE-IA-8Od" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="3iO-8U-2fx"/>
+                            <constraint firstItem="m1Y-lB-mFA" firstAttribute="top" secondItem="NvE-cE-gFq" secondAttribute="bottom" constant="26" id="5K3-gc-nHs"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="zLw-aO-WjU" secondAttribute="trailing" constant="8" id="Cca-mE-qFq"/>
                             <constraint firstItem="ddS-py-hen" firstAttribute="leading" secondItem="NId-aO-pDk" secondAttribute="trailing" constant="29" id="DBM-Jw-KgD"/>
                             <constraint firstItem="zLw-aO-WjU" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="DlW-Md-5ps"/>
@@ -1125,6 +1133,7 @@
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="top" secondItem="nKE-IA-8Od" secondAttribute="bottom" constant="15" id="UzJ-ND-blA"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="15" id="W4O-Fw-DvM"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="Y4h-Pm-n2O"/>
+                            <constraint firstItem="m1Y-lB-mFA" firstAttribute="centerX" secondItem="NvE-cE-gFq" secondAttribute="centerX" id="cA5-pc-Ctv"/>
                             <constraint firstItem="ddS-py-hen" firstAttribute="centerY" secondItem="NId-aO-pDk" secondAttribute="centerY" id="dfd-l4-aKR"/>
                             <constraint firstItem="NId-aO-pDk" firstAttribute="top" secondItem="vWu-Zt-Aje" secondAttribute="bottom" constant="20" id="fRO-pO-PGT"/>
                             <constraint firstItem="EPU-Gb-YcJ" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="hn3-aa-8wv"/>
