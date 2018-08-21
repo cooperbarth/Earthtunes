@@ -139,7 +139,7 @@ extension SuggestionScreen {
     
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction? {
         let action = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, completion) in
-            let alertController = UIAlertController(title: "Delete Event", message: "Are you sure you want to delete the saved event?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Delete Event", message: deleteEventText, preferredStyle: .alert)
             let clearCacheAction = UIAlertAction(title: "Delete", style: .default, handler: { (_) -> Void in
                 self.events.remove(at: indexPath.row)
                 saveFavorites(events: self.events)
@@ -157,10 +157,6 @@ extension SuggestionScreen {
         action.backgroundColor = UIColor.red
         
         return action
-    }
-    
-    func confirmDelete() {
-
     }
     
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {

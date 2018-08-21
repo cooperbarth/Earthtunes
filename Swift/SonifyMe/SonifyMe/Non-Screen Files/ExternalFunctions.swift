@@ -28,8 +28,13 @@ let defaultEvents: [event] = [
     event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Thunderstorm at Ryerson Station")
 ]
 
-let soundExplain = "Controls the channel from which the data for the sound is retrieved. BHZ will retrieve more data points than LHZ, but will take much longer to load."
-let graphExplain = "Controls the channel from which the data for the graph is retrieved. BHZ will retrieve more data points than LHZ, but will take much longer to load."
+let freqText = "\n0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise,  but earthquakes are very audible.  5 Hz - Great for highlighting earthquake sounds and provides for quick sound files.  10 Hz - The best compromise between 5 Hz and 20 Hz. This is the default setting for the app.  20 Hz - Great for birds-in-the-woods sounds. Sound duration is usually manageable.  50 Hz - Best for listening to small jumps, but activity is usually very quick and easy to miss."
+let ampText = "Controls the volume of the output sound. Higher values will make the sound quieter."
+let channelText1 = "Controls the channel from which the data for the "
+let channelText2 = " is retrieved. BHZ will retrieve more data points than LHZ, but will take much longer to load."
+let saveGraphText = "To save your graphs, open Settings and allow Earthtunes to access your Photos Library"
+let clearCacheText = "This action will erase all previous searches from memory. Proceed?"
+let deleteEventText = "Are you sure you want to delete the saved event?"
 
 func isNumber(num: String) -> Bool {
     if (Float(num) != nil) {return true}

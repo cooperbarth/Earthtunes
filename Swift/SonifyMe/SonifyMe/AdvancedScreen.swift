@@ -57,21 +57,36 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func FrequencyHelp(_ sender: Any) {
-        showPopup(name: "FreqExplain")
+        let alertController = UIAlertController(title: "Frequency", message: freqText, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func AmplitudeHelp(_ sender: Any) {
-        showPopup(name: "AmpExplain")
+        let alertController = UIAlertController(title: "Amplitude", message: ampText, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func SoundChannelHelp(_ sender: Any) {
-        ud.set("Sound", forKey: "ChannelHelp")
-        showPopup(name: "ChannelExplain")
+        ChannelHelp(expType: "Sound")
     }
     
     @IBAction func GraphChannelHelp(_ sender: Any) {
-        ud.set("Graph", forKey: "ChannelHelp")
-        showPopup(name: "ChannelExplain")
+        ChannelHelp(expType: "Graph")
+    }
+    
+    func ChannelHelp(expType: String) {
+        let expString = channelText1 + expType.lowercased() + channelText2
+        let alertController = UIAlertController(title: expType, message: expString, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func LoopingPressed(_ sender: Any) {
@@ -86,34 +101,30 @@ class AdvancedScreen : ViewController {
                     if status == .authorized {return} else {return}
                 })
             } else if (photos != .authorized) {
-                goToSettings()
+                let alertController = UIAlertController(title: "Save Graphs", message: saveGraphText, preferredStyle: .alert)
+                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                        return
+                    }
+                    
+                    if UIApplication.shared.canOpenURL(settingsUrl) {
+                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            print("Settings opened: \(success)")
+                        })
+                    }
+                }
+                alertController.addAction(settingsAction)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                alertController.addAction(cancelAction)
+                
+                present(alertController, animated: true, completion: nil)
             }
         }
         self.ud.set(self.SaveGraphSwitch.isOn, forKey: "Save")
     }
     
-    func goToSettings() {
-        let alertController = UIAlertController(title: "Save Graphs", message: "To save your graphs, open Settings and allow Earthtunes to access your Photos Library", preferredStyle: .alert)
-        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                return
-            }
-            
-            if UIApplication.shared.canOpenURL(settingsUrl) {
-                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                    print("Settings opened: \(success)")
-                })
-            }
-        }
-        alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        alertController.addAction(cancelAction)
-        
-        present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func ClearCache(_ sender: Any) {
-        let alertController = UIAlertController(title: "Clear Cache", message: "This action will erase all previous searches from memory. Proceed?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Clear Cache", message: clearCacheText, preferredStyle: .alert)
         let clearCacheAction = UIAlertAction(title: "Clear", style: .default, handler: { (_) -> Void in
             saveEvents(events: [])
         })

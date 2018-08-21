@@ -6,9 +6,10 @@ import AudioToolbox
 /*
  Things to Implement:
  -Make other alert windows actually alerts
+ -Change amplitude to volume slider
  -Aesthetics
     -Make errorScreens and popUps look nicer
-    -Format displayScreen differently in landscape
+    -Format displayScreen differently in landscape?
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Send raw data to self
  */
