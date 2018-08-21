@@ -37,6 +37,11 @@ import java.text.SimpleDateFormat;
 public class InputActivity extends AppCompatActivity {
 
     public final static String EXTRA_MESSAGE = "com.example.michaelji.sonifyme.MESSAGE";
+    private static int location;
+    private static long date;
+    private static String time;
+    private static String duration;
+    private static boolean saved = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +75,24 @@ public class InputActivity extends AppCompatActivity {
             }//met
         });
 
+        if (savedInstanceState != null) {
+            location = savedInstanceState.getInt("location", 0);
+            date = savedInstanceState.getLong("date", calendar.getDate());
+            time = savedInstanceState.getString("time", "00:00");
+            duration = savedInstanceState.getString("duration", "2");
+        }
+
+        if(saved) {
+            spinner.setSelection(location);
+
+            calendar.setDate(date);
+
+            Button button = findViewById(R.id.button5);
+            button.setText(time);
+
+            EditText dur = findViewById(R.id.DurationText);
+            dur.setText(duration);
+        }
     }
 
     @Override
@@ -92,17 +115,18 @@ public class InputActivity extends AppCompatActivity {
         // Save UI state changes to the savedInstanceState.
         // This bundle will be passed to onCreate if the process is
         // killed and restarted.
+        saved = true;
         Spinner locate = findViewById(R.id.spinner);
-        int location =  locate.getSelectedItemPosition();
+        location =  locate.getSelectedItemPosition();
 
         CalendarView day = findViewById(R.id.calendarView2);
-        long date = day.getDate();
+        date = day.getDate();
 
         Button button = findViewById(R.id.button5);
-        String time = button.getText().toString();
+        time = button.getText().toString();
 
         EditText dur = findViewById(R.id.DurationText);
-        String duration = dur.getText().toString();
+        duration = dur.getText().toString();
 
         savedInstanceState.putInt("location", location);
         savedInstanceState.putLong("date", date);
@@ -110,7 +134,7 @@ public class InputActivity extends AppCompatActivity {
         savedInstanceState.putString("duration", duration);
         // etc.
     }
-
+/*
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
