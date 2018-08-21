@@ -9,6 +9,41 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var GChannel: UISegmentedControl!
     @IBOutlet weak var LoopingSwitch: UISwitch!
     
+    @IBOutlet weak var TopToTitleDistance: NSLayoutConstraint!
+    @IBOutlet weak var AdvancedTitle: UILabel!
+    @IBOutlet weak var TitleToFreqLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var FreqLabel: UIButton!
+    @IBOutlet weak var FreqLabelToFreqControlDistance: NSLayoutConstraint!
+    @IBOutlet weak var FreqControlToAmpLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var AmpLabel: UIButton!
+    @IBOutlet weak var AmpLabelWidth: NSLayoutConstraint!
+    @IBOutlet weak var AmpLabelToAmpControlDistance: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldWidth: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldToSoundLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var AmpFieldToGraphLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var SoundLabel: UIButton!
+    @IBOutlet weak var GraphLabel: UIButton!
+    @IBOutlet weak var SoundLabelXPos: NSLayoutConstraint!
+    @IBOutlet weak var GraphLabelXPos: NSLayoutConstraint!
+    @IBOutlet weak var SoundLabelToSwitchDistance: NSLayoutConstraint!
+    @IBOutlet weak var GraphLabelToSwitchDistance: NSLayoutConstraint!
+    @IBOutlet weak var SoundSwitchToRateLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var RateLabel: UILabel!
+    @IBOutlet weak var RateLabelToFieldDistance: NSLayoutConstraint!
+    @IBOutlet weak var RateFieldWidth: NSLayoutConstraint!
+    @IBOutlet weak var RateFieldHeight: NSLayoutConstraint!
+    @IBOutlet weak var RateFieldToLoopingLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var LoopingLabelXPos: NSLayoutConstraint!
+    @IBOutlet weak var LoopingSwitchXPos: NSLayoutConstraint!
+    @IBOutlet weak var LoopingLabel: UILabel!
+    @IBOutlet weak var LoopingLabelToClearDistance: NSLayoutConstraint!
+    @IBOutlet weak var ClearCacheLabel: UIButton!
+    @IBOutlet weak var ClearToResetLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var ResetLabel: UIButton!
+    @IBOutlet weak var ResetToReturnLabelDistance: NSLayoutConstraint!
+    @IBOutlet weak var ReturnLabel: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         formatScreen()
@@ -86,42 +121,6 @@ class AdvancedScreen : ViewController {
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
     }
-    
-    @IBOutlet weak var TopToTitleDistance: NSLayoutConstraint!
-    @IBOutlet weak var AdvancedTitle: UILabel!
-    @IBOutlet weak var TitleToFreqLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var FreqLabel: UIButton!
-    @IBOutlet weak var FreqLabelToFreqControlDistance: NSLayoutConstraint!
-    @IBOutlet weak var FreqControlToAmpLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var AmpLabel: UIButton!
-    @IBOutlet weak var AmpLabelWidth: NSLayoutConstraint!
-    @IBOutlet weak var AmpLabelToAmpControlDistance: NSLayoutConstraint!
-    @IBOutlet weak var AmpFieldWidth: NSLayoutConstraint!
-    @IBOutlet weak var AmpFieldHeight: NSLayoutConstraint!
-    @IBOutlet weak var AmpFieldToSoundLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var AmpFieldToGraphLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var SoundLabel: UIButton!
-    @IBOutlet weak var GraphLabel: UIButton!
-    @IBOutlet weak var SoundLabelXPos: NSLayoutConstraint!
-    @IBOutlet weak var GraphLabelXPos: NSLayoutConstraint!
-    @IBOutlet weak var SoundLabelToSwitchDistance: NSLayoutConstraint!
-    @IBOutlet weak var GraphLabelToSwitchDistance: NSLayoutConstraint!
-    @IBOutlet weak var SoundSwitchToRateLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var RateLabel: UILabel!
-    @IBOutlet weak var RateLabelToFieldDistance: NSLayoutConstraint!
-    @IBOutlet weak var RateFieldWidth: NSLayoutConstraint!
-    @IBOutlet weak var RateFieldHeight: NSLayoutConstraint!
-    @IBOutlet weak var RateFieldToLoopingLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var LoopingLabelXPos: NSLayoutConstraint!
-    @IBOutlet weak var LoopingSwitchXPos: NSLayoutConstraint!
-    @IBOutlet weak var LoopingLabel: UILabel!
-    @IBOutlet weak var LoopingLabelToClearDistance: NSLayoutConstraint!
-    
-    @IBOutlet weak var ClearCacheLabel: UIButton!
-    @IBOutlet weak var ClearToResetLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var ResetLabel: UIButton!
-    @IBOutlet weak var ResetToReturnLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var ReturnLabel: UIButton!
 }
 
 extension AdvancedScreen {
