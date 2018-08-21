@@ -77,7 +77,8 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBAction func ButtonPressed(_ sender: Any) {
         view.endEditing(true)
         if (!validInputs()) {
-            showPopup(name: "Input Error")
+            //showPopup(name: "Input Error")
+            showInputError()
         } else {
             ud.set(DurationField.text!, forKey: "Duration")
             showPopup(name: "Loading Screen")

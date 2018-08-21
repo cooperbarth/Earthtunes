@@ -17,8 +17,6 @@
 		F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818122108ED6900EB66D7 /* InputScreen.swift */; };
 		F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818162108ED9000EB66D7 /* LoadingScreen.swift */; };
 		F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818182108EE2500EB66D7 /* DisplayScreen.swift */; };
-		F28406242110CFAE002747DF /* Error404Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28406232110CFAE002747DF /* Error404Screen.swift */; };
-		F28406262110CFE2002747DF /* InputErrorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F28406252110CFE2002747DF /* InputErrorScreen.swift */; };
 		F2A6EDF32125EA70001672EC /* InfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6EDF22125EA70001672EC /* InfoScreen.swift */; };
 		F2FAF2FF2121FDD900753512 /* DataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF2FE2121FDD900753512 /* DataManagement.swift */; };
 		F2FAF3012121FFB800753512 /* ExternalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF3002121FFB800753512 /* ExternalFunctions.swift */; };
@@ -37,8 +35,6 @@
 		F25818122108ED6900EB66D7 /* InputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScreen.swift; sourceTree = "<group>"; };
 		F25818162108ED9000EB66D7 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		F25818182108EE2500EB66D7 /* DisplayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayScreen.swift; sourceTree = "<group>"; };
-		F28406232110CFAE002747DF /* Error404Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error404Screen.swift; sourceTree = "<group>"; };
-		F28406252110CFE2002747DF /* InputErrorScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputErrorScreen.swift; sourceTree = "<group>"; };
 		F2A6EDF22125EA70001672EC /* InfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoScreen.swift; sourceTree = "<group>"; };
 		F2FAF2FE2121FDD900753512 /* DataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagement.swift; sourceTree = "<group>"; };
 		F2FAF3002121FFB800753512 /* ExternalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFunctions.swift; sourceTree = "<group>"; };
@@ -82,7 +78,6 @@
 				F2A6EDF22125EA70001672EC /* InfoScreen.swift */,
 				F25818162108ED9000EB66D7 /* LoadingScreen.swift */,
 				F25818182108EE2500EB66D7 /* DisplayScreen.swift */,
-				F2E80D2221234EF50049AB07 /* Error Screens */,
 				F2E80D2321234F0A0049AB07 /* Non-Screen Files */,
 				CD01B89621077767000EFCC9 /* LaunchScreen.storyboard */,
 				CD01B88D21077766000EFCC9 /* AppDelegate.swift */,
@@ -90,15 +85,6 @@
 				CD01B89921077767000EFCC9 /* Info.plist */,
 			);
 			path = SonifyMe;
-			sourceTree = "<group>";
-		};
-		F2E80D2221234EF50049AB07 /* Error Screens */ = {
-			isa = PBXGroup;
-			children = (
-				F28406232110CFAE002747DF /* Error404Screen.swift */,
-				F28406252110CFE2002747DF /* InputErrorScreen.swift */,
-			);
-			path = "Error Screens";
 			sourceTree = "<group>";
 		};
 		F2E80D2321234F0A0049AB07 /* Non-Screen Files */ = {
@@ -182,9 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */,
-				F28406262110CFE2002747DF /* InputErrorScreen.swift in Sources */,
 				F2FAF2FF2121FDD900753512 /* DataManagement.swift in Sources */,
-				F28406242110CFAE002747DF /* Error404Screen.swift in Sources */,
 				F2A6EDF32125EA70001672EC /* InfoScreen.swift in Sources */,
 				CD01B89021077766000EFCC9 /* ViewController.swift in Sources */,
 				CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */,

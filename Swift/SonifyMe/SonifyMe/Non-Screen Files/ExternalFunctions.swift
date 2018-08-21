@@ -35,6 +35,7 @@ let channelText2 = " is retrieved. BHZ will retrieve more data points than LHZ, 
 let saveGraphText = "To save your graphs, open Settings and allow Earthtunes to access your Photos Library"
 let clearCacheText = "This action will erase all previous searches from memory. Proceed?"
 let deleteEventText = "Are you sure you want to delete the saved event?"
+let error404Text = "The requested URL could not be found."
 
 func isNumber(num: String) -> Bool {
     if (Float(num) != nil) {return true}
