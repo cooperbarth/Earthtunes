@@ -138,21 +138,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     }
 }
 
-/*
- 5s - 1136
- SE - 1136
- 
- 6 - 1334
- 7 - 1334
- 8 - 1334
- 
- 6 plus - 2208
- 7 plus - 2208
- 8 plus - 2208
- 
- X - 2436
- */
-
 extension InputScreen {
     func formatScreen() {
         switch screenSize.height {
