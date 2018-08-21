@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Earthtunes</string>
-    <string name="edit_message">Location:</string>
     <string name="button_submit">Submit</string>
     <string name="time_submit">HH:MM</string>
     <string-array name="locations_array">
@@ -14,4 +13,17 @@
         <item>Addis Ababa, Ethiopia</item>
         <item>Antarctica</item>
     </string-array>
+    <string-array name="events_array">
+        <item>Ryerson 6/2/17</item>
+        <item>Ryerson 11/7/16</item>
+        <item>Ryerson 7/6/17</item>
+        <item>Ryerson 5/4/18</item>
+        <item>Ryerson 7/8/18</item>
+        <item>Ryerson 7/24/18</item>
+    </string-array>
+    <string name="location_label">Location:</string>
+    <string name="date_label">Date:</string>
+    <string name="time_label">Time:</string>
+    <string name="duration_label">Duration (hours):</string>
+    <string name="saved_button">Saved Events</string>
 </resources>
