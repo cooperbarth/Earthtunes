@@ -113,7 +113,15 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func ClearCache(_ sender: Any) {
-        showPopup(name: "ClearCache")
+        let alertController = UIAlertController(title: "Clear Cache", message: "This action will erase all previous searches from memory. Proceed?", preferredStyle: .alert)
+        let clearCacheAction = UIAlertAction(title: "Clear", style: .default, handler: { (_) -> Void in
+            saveEvents(events: [])
+        })
+        alertController.addAction(clearCacheAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func ResetDefaults(_ sender: Any) {
