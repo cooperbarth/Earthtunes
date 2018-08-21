@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import Photos
 
 class AdvancedScreen : ViewController {
     @IBOutlet weak var Freq: UISegmentedControl!
@@ -8,6 +9,7 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var SChannel: UISegmentedControl!
     @IBOutlet weak var GChannel: UISegmentedControl!
     @IBOutlet weak var LoopingSwitch: UISwitch!
+    @IBOutlet weak var SaveGraphSwitch: UISwitch!
     
     @IBOutlet weak var TopToTitleDistance: NSLayoutConstraint!
     @IBOutlet weak var AdvancedTitle: UILabel!
@@ -76,6 +78,40 @@ class AdvancedScreen : ViewController {
         ud.set(LoopingSwitch.isOn, forKey: "Loop")
     }
     
+    @IBAction func SavePressed(_ sender: Any) {
+        if (SaveGraphSwitch.isOn) {
+            let photos = PHPhotoLibrary.authorizationStatus()
+            if (photos == .notDetermined) {
+                PHPhotoLibrary.requestAuthorization({status in
+                    if status == .authorized {return} else {return}
+                })
+            } else if (photos != .authorized) {
+                goToSettings()
+            }
+        }
+        self.ud.set(self.SaveGraphSwitch.isOn, forKey: "Save")
+    }
+    
+    func goToSettings() {
+        let alertController = UIAlertController(title: "Save Graphs", message: "To save your graphs, open Settings and allow Earthtunes to access your Photos Library", preferredStyle: .alert)
+        let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Settings opened: \(success)")
+                })
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
     @IBAction func ClearCache(_ sender: Any) {
         showPopup(name: "ClearCache")
     }
@@ -123,6 +159,7 @@ class AdvancedScreen : ViewController {
         SChannel.selectedSegmentIndex = ud.integer(forKey: "SCIndex")
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
+        SaveGraphSwitch.isOn = ud.bool(forKey: "Save")
     }
 }
 

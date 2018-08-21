@@ -5,7 +5,7 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Format "Save Graph" Button
+ -Make other alert windows actually alerts
  -Aesthetics
     -Make errorScreens and popUps look nicer
     -Format displayScreen differently in landscape
