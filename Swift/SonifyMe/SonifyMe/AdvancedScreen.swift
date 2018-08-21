@@ -124,22 +124,6 @@ class AdvancedScreen : ViewController {
 }
 
 extension AdvancedScreen {
-    
-    /*
-     5s - 1136
-     SE - 1136
-     
-     6 - 1334
-     7 - 1334
-     8 - 1334
-     
-     6 plus - 2208
-     7 plus - 2208
-     8 plus - 2208
-     
-     X - 2436
-     */
-    
     func formatScreen() {
         switch screenSize.height {
         case 1136.0:

@@ -31,7 +31,7 @@ class DisplayScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        graphImage = img!
+        formatScreen()
         let newImg = cropToBounds(image: graphImage!, width: 320, height: 350)
         self.GraphView.image = newImg
         favorites = retrieveFavorites()!
@@ -116,6 +116,78 @@ class DisplayScreen : ViewController {
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
+    }
+    
+    @IBOutlet weak var GraphHeight: NSLayoutConstraint!
+    @IBOutlet weak var GraphWidth: NSLayoutConstraint!
+    @IBOutlet weak var PauseHeight: NSLayoutConstraint!
+    @IBOutlet weak var PauseWidth: NSLayoutConstraint!
+    @IBOutlet weak var PlayHeight: NSLayoutConstraint!
+    @IBOutlet weak var PlayWidth: NSLayoutConstraint!
+    @IBOutlet weak var FFHeight: NSLayoutConstraint!
+    @IBOutlet weak var FFWidth: NSLayoutConstraint!
+    @IBOutlet weak var RewindHeight: NSLayoutConstraint!
+    @IBOutlet weak var RewindWidth: NSLayoutConstraint!
+    @IBOutlet weak var TitleToTopDistance: NSLayoutConstraint!
+    @IBOutlet weak var TitleToGraphDistance: NSLayoutConstraint!
+    @IBOutlet weak var SliderToPlayDistance: NSLayoutConstraint!
+}
+
+extension DisplayScreen {
+    /*
+     5s - 1136
+     SE - 1136
+     
+     6 - 1334
+     7 - 1334
+     8 - 1334
+     
+     6 plus - 2208
+     7 plus - 2208
+     8 plus - 2208
+     
+     X - 2436
+     */
+    
+    func formatScreen() {
+        graphImage = img!
+        switch screenSize.height {
+        case 1136.0:
+            format1136Screen()
+            break
+        case 2208.0:
+            format2208Screen()
+            break
+        case 2436.0:
+            break
+        default:
+            break
+        }
+        PauseWidth.constant = PauseHeight.constant
+        PlayHeight.constant = PauseHeight.constant
+        PlayWidth.constant = PlayHeight.constant
+        FFHeight.constant = PlayHeight.constant
+        FFWidth.constant = FFHeight.constant
+        RewindHeight.constant = FFHeight.constant
+        RewindWidth.constant = RewindHeight.constant
+    }
+    
+    func format1136Screen() {
+        GraphWidth.constant = GraphWidth.constant * 0.85
+        GraphHeight.constant = GraphHeight.constant * 0.75
+        PauseHeight.constant = PauseHeight.constant * 0.8
+    }
+    
+    func format2208Screen() {
+        GraphWidth.constant = GraphWidth.constant * 1.15
+        GraphHeight.constant = GraphHeight.constant * 1.25
+    }
+    
+    func format2436Screen() {
+        TitleToTopDistance.constant = TitleToTopDistance.constant * 1.25
+        TitleToGraphDistance.constant = TitleToGraphDistance.constant * 1.5
+        PauseHeight.constant = PauseHeight.constant * 1.25
+        SliderToPlayDistance.constant = SliderToPlayDistance.constant * 3
     }
 }
 
