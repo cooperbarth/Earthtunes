@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.TimePicker;
@@ -30,6 +31,7 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -42,6 +44,7 @@ public class InputActivity extends AppCompatActivity {
     private static String time;
     private static String duration;
     private static boolean saved = false;
+    private static int[] selection = new int[]{-1};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +113,50 @@ public class InputActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if(selection[0] != -1)
+        {
+            int selected = selection[0];
+            selection[0] = -1;
+
+            Spinner locate = findViewById(R.id.spinner);
+
+            CalendarView day = findViewById(R.id.calendarView2);
+
+            Button button = findViewById(R.id.button5);
+
+            EditText dur = findViewById(R.id.DurationText);
+            switch (selected)
+            {
+                case 0: {
+                    locate.setSelection(0);
+                    day.setDate(1496361600);
+                }
+                case 1: {
+
+                }
+                case 2: {
+
+                }
+                case 3: {
+
+                }
+                case 4: {
+
+                }
+                case 5: {
+
+                }
+                default: {
+
+                }
+            }
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         // Save UI state changes to the savedInstanceState.
@@ -134,29 +181,6 @@ public class InputActivity extends AppCompatActivity {
         savedInstanceState.putString("duration", duration);
         // etc.
     }
-/*
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        // Restore UI state from the savedInstanceState.
-        // This bundle has also been passed to onCreate.
-        int loc = savedInstanceState.getInt("location");
-        long dat = savedInstanceState.getLong("date");
-        String tim = savedInstanceState.getString("time");
-        String dur = savedInstanceState.getString("duration");
-
-        Spinner locate = findViewById(R.id.spinner);
-        locate.setSelection(loc);
-
-        CalendarView day = findViewById(R.id.calendarView2);
-        day.setDate(dat);
-
-        Button button = findViewById(R.id.button5);
-        button.setText(tim);
-
-        EditText duration = findViewById(R.id.DurationText);
-        duration.setText(dur);
-    }
 
     /** Called when the user taps the Send button */
     public void sendMessage(View view) {
@@ -180,7 +204,6 @@ public class InputActivity extends AppCompatActivity {
         if(time.equals("") || duration.equals("")) {
             InputErrorDialogFragment error = new InputErrorDialogFragment();
             error.show(getSupportFragmentManager(),"error");
-            //startActivity(malintent);
         } else {
             String[] url = getUrl(locate, duration, time, date);
 
@@ -265,6 +288,46 @@ public class InputActivity extends AppCompatActivity {
             builder.setTitle("ERROR 404");
             builder.setMessage("The data could not be found. It may be unavailable due to station downtime or issues. Check your inputs")
                     .setNeutralButton("Close", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dismiss();
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
+        }
+    }
+
+    public void showSavedEventsDialog(View v)
+    {
+        DialogFragment saved = new SavedEventsDialog();
+        saved.show(getSupportFragmentManager(), "saved");
+    }
+
+    public static class SavedEventsDialog extends DialogFragment {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the Builder class for convenient dialog construction
+            final int[] mSelectedItems = new int[]{-1};  // Where we track the selected item
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Saved Events");
+            builder.setSingleChoiceItems(R.array.events_array, -1,
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    mSelectedItems[0] = which;
+                                }
+                            })
+                    // Set the action buttons
+                    .setPositiveButton("Select", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User clicked OK, so save the mSelectedItems results somewhere
+                            // or return them to the component that opened the dialog
+                            selection[0] = mSelectedItems[0];
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int id) {
                             dismiss();
                         }
@@ -386,10 +449,6 @@ public class InputActivity extends AppCompatActivity {
                 InputStream input = new BufferedInputStream(url.openStream());
                 OutputStream output;
                 output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + "sound.wav");
-                //Environment.getExternalStorageDirectory().getPath() + "/ryerson.wav");
-
-
-                //output = new FileOutputStream(getApplicationContext().getFilesDir().getPath() + "/" + file[1] + ".png");
 
                 byte data[] = new byte[1024];
 
