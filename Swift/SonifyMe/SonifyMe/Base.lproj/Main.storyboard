@@ -490,7 +490,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="225" id="RDG-Mn-OAI"/>
                                         </constraints>
-                                        <mutableString key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise,  but earthquakes are very audible.  5 Hz - Great for highlighting earthquake sounds and provides for quick sound files.  10 Hz - The best compromise between 5 Hz and 20 Hz. This is the default setting for the app.  20 Hz - Great for birds-in-the-woods sounds. Sound duration is usually manageable.  50 Hz - Best for listening to small jumps, but activity is usually very quick and easy to miss.</mutableString>
+                                        <string key="text">0.1/0.5 Hz - The area where microseisms occur. Most sound will simply sound like white noise,  but earthquakes are very audible.  5 Hz - Great for highlighting earthquake sounds and provides for quick sound files.  10 Hz - The best compromise between 5 Hz and 20 Hz. This is the default setting for the app.  20 Hz - Great for birds-in-the-woods sounds. Sound duration is usually manageable.  50 Hz - Best for listening to small jumps, but activity is usually very quick and easy to miss.</string>
                                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1033,6 +1033,9 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
                                 <rect key="frame" x="170" y="622" width="34" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="GRy-8q-EKj"/>
+                                </constraints>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="BackButton:" destination="0vR-sf-a3A" eventType="touchUpInside" id="pOG-SV-hxz"/>
@@ -1106,28 +1109,40 @@
                                     <constraint firstAttribute="height" constant="365" id="we6-Xb-g70"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m1Y-lB-mFA">
+                                <rect key="frame" x="23" y="622" width="80" height="30"/>
+                                <state key="normal" title="Save Graph"/>
+                                <connections>
+                                    <action selector="SaveGraph:" destination="0vR-sf-a3A" eventType="touchUpInside" id="NjZ-AS-v3i"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="width" secondItem="nKE-IA-8Od" secondAttribute="width" id="0Oi-DI-Bb6"/>
                             <constraint firstItem="nKE-IA-8Od" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="3iO-8U-2fx"/>
+                            <constraint firstItem="m1Y-lB-mFA" firstAttribute="top" secondItem="NvE-cE-gFq" secondAttribute="bottom" constant="26" id="5K3-gc-nHs"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="zLw-aO-WjU" secondAttribute="trailing" constant="8" id="Cca-mE-qFq"/>
+                            <constraint firstItem="ddS-py-hen" firstAttribute="leading" secondItem="NId-aO-pDk" secondAttribute="trailing" constant="29" id="DBM-Jw-KgD"/>
                             <constraint firstItem="zLw-aO-WjU" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="DlW-Md-5ps"/>
+                            <constraint firstItem="NId-aO-pDk" firstAttribute="leading" secondItem="cVj-gJ-gnv" secondAttribute="trailing" constant="-64" id="EQn-JP-dIu"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="cVj-gJ-gnv" secondAttribute="bottom" constant="15" id="G7B-6v-uiZ"/>
                             <constraint firstItem="q7B-9Z-WdK" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="IaK-4R-tSn"/>
+                            <constraint firstItem="cVj-gJ-gnv" firstAttribute="top" secondItem="EPU-Gb-YcJ" secondAttribute="bottom" constant="26" id="Jh6-DH-NKt"/>
                             <constraint firstItem="NvE-cE-gFq" firstAttribute="centerY" secondItem="NId-aO-pDk" secondAttribute="centerY" id="OAP-Kl-h3o"/>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="top" secondItem="nKE-IA-8Od" secondAttribute="bottom" constant="15" id="UzJ-ND-blA"/>
-                            <constraint firstItem="ddS-py-hen" firstAttribute="leading" secondItem="NId-aO-pDk" secondAttribute="trailing" constant="29" id="VJ7-fo-oFx"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="15" id="W4O-Fw-DvM"/>
                             <constraint firstItem="5o0-Lw-Qfm" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="Y4h-Pm-n2O"/>
-                            <constraint firstItem="NId-aO-pDk" firstAttribute="leading" secondItem="EPU-Gb-YcJ" secondAttribute="trailing" constant="-95" id="YMO-8k-Rx7"/>
-                            <constraint firstItem="NId-aO-pDk" firstAttribute="leading" secondItem="NvE-cE-gFq" secondAttribute="trailing" constant="29" id="Z80-hP-uYi"/>
-                            <constraint firstItem="NId-aO-pDk" firstAttribute="top" secondItem="EPU-Gb-YcJ" secondAttribute="bottom" constant="-95" id="aRv-aO-tYQ"/>
+                            <constraint firstItem="m1Y-lB-mFA" firstAttribute="centerX" secondItem="NvE-cE-gFq" secondAttribute="centerX" id="cA5-pc-Ctv"/>
                             <constraint firstItem="ddS-py-hen" firstAttribute="centerY" secondItem="NId-aO-pDk" secondAttribute="centerY" id="dfd-l4-aKR"/>
                             <constraint firstItem="NId-aO-pDk" firstAttribute="top" secondItem="vWu-Zt-Aje" secondAttribute="bottom" constant="20" id="fRO-pO-PGT"/>
                             <constraint firstItem="EPU-Gb-YcJ" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="hn3-aa-8wv"/>
+                            <constraint firstItem="NId-aO-pDk" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="ibH-1m-gmd"/>
+                            <constraint firstItem="EPU-Gb-YcJ" firstAttribute="leading" secondItem="cVj-gJ-gnv" secondAttribute="trailing" constant="-64" id="jCU-5z-MLc"/>
+                            <constraint firstItem="cVj-gJ-gnv" firstAttribute="top" secondItem="NId-aO-pDk" secondAttribute="bottom" constant="26" id="ke3-5a-Pbd"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="lWL-gK-2Sf"/>
                             <constraint firstItem="nKE-IA-8Od" firstAttribute="top" secondItem="5o0-Lw-Qfm" secondAttribute="bottom" constant="15" id="mpx-pH-kFm"/>
+                            <constraint firstItem="NId-aO-pDk" firstAttribute="leading" secondItem="NvE-cE-gFq" secondAttribute="trailing" constant="29" id="odX-ri-Nck"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="q7B-9Z-WdK" secondAttribute="trailing" constant="8" id="uGJ-If-ngk"/>
                             <constraint firstItem="vWu-Zt-Aje" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="wo0-dt-Ab1"/>
                         </constraints>
@@ -1136,12 +1151,25 @@
                     <connections>
                         <outlet property="BlackButton" destination="q7B-9Z-WdK" id="ih0-Mn-nJ3"/>
                         <outlet property="FFButton" destination="ddS-py-hen" id="YaX-Se-2U6"/>
+                        <outlet property="FFHeight" destination="HSj-DG-K9P" id="yAD-jC-86X"/>
+                        <outlet property="FFWidth" destination="SSr-L5-rqz" id="5wb-kx-4ll"/>
+                        <outlet property="GraphHeight" destination="we6-Xb-g70" id="QNJ-ht-p5u"/>
                         <outlet property="GraphTitle" destination="5o0-Lw-Qfm" id="RkT-Lo-hPo"/>
                         <outlet property="GraphView" destination="nKE-IA-8Od" id="3fw-h0-3HC"/>
+                        <outlet property="GraphWidth" destination="j24-Tc-c7J" id="nEp-sS-x1d"/>
                         <outlet property="PauseButton" destination="EPU-Gb-YcJ" id="jvy-I9-Ovj"/>
+                        <outlet property="PauseHeight" destination="bgC-c8-kZK" id="Rps-sq-ACS"/>
+                        <outlet property="PauseWidth" destination="qPh-gb-4V0" id="qBT-uX-HKS"/>
                         <outlet property="PlayButton" destination="NId-aO-pDk" id="uge-oP-vDo"/>
+                        <outlet property="PlayHeight" destination="GWd-8w-bhR" id="XuT-v0-Vsk"/>
+                        <outlet property="PlayWidth" destination="fGI-lT-wBg" id="wYr-Tp-FYw"/>
                         <outlet property="RewindButton" destination="NvE-cE-gFq" id="5Gd-xZ-2Dc"/>
+                        <outlet property="RewindHeight" destination="Nha-PO-uMp" id="n3k-Ts-NkJ"/>
+                        <outlet property="RewindWidth" destination="UQo-0i-cRp" id="gUU-cH-Gko"/>
+                        <outlet property="SliderToPlayDistance" destination="fRO-pO-PGT" id="x6l-dx-AYA"/>
                         <outlet property="SoundSlideLayout" destination="vWu-Zt-Aje" id="d1s-BO-OTO"/>
+                        <outlet property="TitleToGraphDistance" destination="mpx-pH-kFm" id="NcH-Kn-mJc"/>
+                        <outlet property="TitleToTopDistance" destination="W4O-Fw-DvM" id="Dvd-Og-nWE"/>
                         <outlet property="YellowButton" destination="zLw-aO-WjU" id="r1N-XG-yG5"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="O0B-H3-m4Q"/>
                     </connections>
@@ -1160,6 +1188,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lar-ca-Cwf"/>
+        <segue reference="O0B-H3-m4Q"/>
     </inferredMetricsTieBreakers>
 </document>

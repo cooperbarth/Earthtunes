@@ -125,22 +125,38 @@ class AdvancedScreen : ViewController {
 
 extension AdvancedScreen {
     func formatScreen() {
+        switch screenSize.height {
+        case 1136.0:
+            format1136Screen()
+            break
+        case 2208.0:
+            format2208Screen()
+            break
+        case 2436.0:
+            format2436Screen()
+            break
+        default:
+            break
+        }
+    }
+    
+    func format1136Screen() {
         TopToTitleDistance.constant = screenSize.height * 0.02
         AdvancedTitle.font = AdvancedTitle.font.withSize(TopToTitleDistance.constant * 0.8)
-        TitleToFreqLabelDistance.constant = TopToTitleDistance.constant * 0.8
+        TitleToFreqLabelDistance.constant = TopToTitleDistance.constant * 0.5
         FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
         FreqLabelToFreqControlDistance.constant = TitleToFreqLabelDistance.constant * 0.4
         let segFont = FreqLabel.titleLabel?.font!.withSize((FreqLabel.titleLabel?.font!.pointSize)! * 0.8)
         Freq.apportionsSegmentWidthsByContent = true
         Freq.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
-        FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant * 1.15
+        FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant * 1.35
         AmpLabel.titleLabel?.font = FreqLabel.titleLabel?.font
         AmpLabelWidth.constant = screenSize.width * 0.25
         AmpLabelToAmpControlDistance.constant = FreqLabelToFreqControlDistance.constant * 0.75
         AmpFieldWidth.constant = AmpLabelWidth.constant
         AmpFieldHeight.constant = screenSize.height * 0.03
         Amp.font = Amp.font?.withSize(AmpFieldHeight.constant * 0.4)
-        AmpFieldToSoundLabelDistance.constant = FreqControlToAmpLabelDistance.constant
+        AmpFieldToSoundLabelDistance.constant = FreqControlToAmpLabelDistance.constant * 1.35
         AmpFieldToGraphLabelDistance.constant = AmpFieldToSoundLabelDistance.constant
         SoundLabel.titleLabel?.font = AmpLabel.titleLabel?.font
         GraphLabel.titleLabel?.font = SoundLabel.titleLabel?.font
@@ -152,6 +168,45 @@ extension AdvancedScreen {
         SChannel.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
         GChannel.apportionsSegmentWidthsByContent = true
         GChannel.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
+        SoundSwitchToRateLabelDistance.constant = AmpFieldToGraphLabelDistance.constant * 1.35
+        RateLabel.font = SoundLabel.titleLabel?.font
+        RateLabelToFieldDistance.constant = AmpLabelToAmpControlDistance.constant * 1.5
+        Rate.font = Amp.font
+        RateFieldWidth.constant = AmpFieldWidth.constant
+        RateFieldHeight.constant = AmpFieldHeight.constant
+        RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
+        LoopingSwitchXPos.constant = screenSize.width / 20
+        LoopingLabelXPos.constant = -screenSize.width / 20
+        LoopingLabel.font = Amp.font
+        LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant * 0.75
+        ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
+        ClearToResetLabelDistance.constant = screenSize.height * 0.0075
+        ResetLabel.titleLabel?.font = AmpLabel.titleLabel?.font
+        ResetToReturnLabelDistance.constant = ClearToResetLabelDistance.constant
+        ReturnLabel.titleLabel?.font = AmpLabel.titleLabel?.font
+    }
+    
+    func format2208Screen() {
+        TopToTitleDistance.constant = 22
+        AdvancedTitle.font = AdvancedTitle.font.withSize(22)
+        TitleToFreqLabelDistance.constant = TopToTitleDistance.constant
+        FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(16)
+        FreqLabelToFreqControlDistance.constant = TitleToFreqLabelDistance.constant * 0.4
+        FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant * 1.5
+        AmpLabel.titleLabel?.font = FreqLabel.titleLabel?.font
+        AmpLabelWidth.constant = screenSize.width * 0.25
+        AmpLabelToAmpControlDistance.constant = FreqLabelToFreqControlDistance.constant * 0.75
+        AmpFieldWidth.constant = AmpLabelWidth.constant * 0.6
+        AmpFieldHeight.constant = screenSize.height * 0.015
+        Amp.font = Amp.font?.withSize(AmpFieldHeight.constant * 0.4)
+        AmpFieldToSoundLabelDistance.constant = FreqControlToAmpLabelDistance.constant
+        AmpFieldToGraphLabelDistance.constant = AmpFieldToSoundLabelDistance.constant
+        SoundLabel.titleLabel?.font = AmpLabel.titleLabel?.font
+        GraphLabel.titleLabel?.font = SoundLabel.titleLabel?.font
+        GraphLabelXPos.constant = screenSize.width * 0.075
+        SoundLabelXPos.constant = -GraphLabelXPos.constant
+        SoundLabelToSwitchDistance.constant = AmpLabelToAmpControlDistance.constant
+        GraphLabelToSwitchDistance.constant = SoundLabelToSwitchDistance.constant
         SoundSwitchToRateLabelDistance.constant = AmpFieldToGraphLabelDistance.constant * 1.25
         RateLabel.font = SoundLabel.titleLabel?.font
         RateLabelToFieldDistance.constant = AmpLabelToAmpControlDistance.constant
@@ -159,17 +214,26 @@ extension AdvancedScreen {
         RateFieldWidth.constant = AmpFieldWidth.constant
         RateFieldHeight.constant = AmpFieldHeight.constant
         RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
-        LoopingSwitchXPos.constant = screenSize.width / 25
-        LoopingLabelXPos.constant = -screenSize.width / 25
-        LoopingLabel.font = Amp.font
+        LoopingSwitchXPos.constant = screenSize.width * 0.025
+        LoopingLabelXPos.constant = -screenSize.width * 0.025
+        LoopingLabel.font = RateLabel.font
         LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant
-        ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
-        ClearToResetLabelDistance.constant = screenSize.height * 0.005
+        ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font
+        ClearToResetLabelDistance.constant = screenSize.height * 0.0075
         ResetLabel.titleLabel?.font = AmpLabel.titleLabel?.font
         ResetToReturnLabelDistance.constant = ClearToResetLabelDistance.constant
         ReturnLabel.titleLabel?.font = AmpLabel.titleLabel?.font
     }
     
+    func format2436Screen() {
+        format2208Screen()
+        AdvancedTitle.font = AdvancedTitle.font.withSize(28)
+        RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant * 1.5
+        LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant * 1.35
+    }
+}
+
+extension AdvancedScreen {
     func addDoneButtons() {
         Amp.delegate = self
         Rate.delegate = self

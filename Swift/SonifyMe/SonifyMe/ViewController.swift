@@ -5,16 +5,12 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Fix formatting for non-iPhone 8
+ -Format "Save Graph" Button
  -Aesthetics
     -Make errorScreens and popUps look nicer
     -Format displayScreen differently in landscape
- -Save images and sound to phone
- -Send Feedback
- -Geology Facts?
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Send raw data to self
- -FAQ button
  */
 
 class ViewController: UIViewController, UITextFieldDelegate {
