@@ -37,6 +37,9 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var LoopingLabelXPos: NSLayoutConstraint!
     @IBOutlet weak var LoopingSwitchXPos: NSLayoutConstraint!
     @IBOutlet weak var LoopingLabel: UILabel!
+    @IBOutlet weak var SaveGraphsLabelXPos: NSLayoutConstraint!
+    @IBOutlet weak var SaveGraphsSwitchXPos: NSLayoutConstraint!
+    @IBOutlet weak var SaveGraphsLabel: UILabel!
     @IBOutlet weak var LoopingLabelToClearDistance: NSLayoutConstraint!
     @IBOutlet weak var ClearCacheLabel: UIButton!
     @IBOutlet weak var ClearToResetLabelDistance: NSLayoutConstraint!
@@ -175,9 +178,12 @@ extension AdvancedScreen {
         RateFieldWidth.constant = AmpFieldWidth.constant
         RateFieldHeight.constant = AmpFieldHeight.constant
         RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
-        LoopingSwitchXPos.constant = screenSize.width / 20
-        LoopingLabelXPos.constant = -screenSize.width / 20
         LoopingLabel.font = Amp.font
+        LoopingSwitchXPos.constant = -45
+        LoopingLabelXPos.constant = -100
+        SaveGraphsLabel.font = LoopingLabel.font
+        SaveGraphsLabelXPos.constant = 40
+        SaveGraphsSwitchXPos.constant = 110
         LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant * 0.75
         ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
         ClearToResetLabelDistance.constant = screenSize.height * 0.0075
@@ -214,9 +220,12 @@ extension AdvancedScreen {
         RateFieldWidth.constant = AmpFieldWidth.constant
         RateFieldHeight.constant = AmpFieldHeight.constant
         RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
-        LoopingSwitchXPos.constant = screenSize.width * 0.025
-        LoopingLabelXPos.constant = -screenSize.width * 0.025
         LoopingLabel.font = RateLabel.font
+        LoopingSwitchXPos.constant = -62
+        LoopingLabelXPos.constant = -125
+        SaveGraphsLabel.font = LoopingLabel.font
+        SaveGraphsLabelXPos.constant = 55
+        SaveGraphsSwitchXPos.constant = 133
         LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant
         ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font
         ClearToResetLabelDistance.constant = screenSize.height * 0.0075
