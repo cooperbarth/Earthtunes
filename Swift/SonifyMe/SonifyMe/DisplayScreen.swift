@@ -159,6 +159,7 @@ extension DisplayScreen {
             format2208Screen()
             break
         case 2436.0:
+            format2436Screen()
             break
         default:
             break
@@ -186,8 +187,8 @@ extension DisplayScreen {
     func format2436Screen() {
         TitleToTopDistance.constant = TitleToTopDistance.constant * 1.25
         TitleToGraphDistance.constant = TitleToGraphDistance.constant * 1.5
-        PauseHeight.constant = PauseHeight.constant * 1.25
-        SliderToPlayDistance.constant = SliderToPlayDistance.constant * 3
+        PauseHeight.constant = PauseHeight.constant
+        SliderToPlayDistance.constant = SliderToPlayDistance.constant * 2
     }
 }
 
