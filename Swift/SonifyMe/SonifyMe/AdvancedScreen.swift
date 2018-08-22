@@ -81,7 +81,7 @@ class AdvancedScreen : ViewController {
     }
     
     func ChannelHelp(expType: String) {
-        let expTitle = expType + "Channel"
+        let expTitle = expType + " Channel"
         let expString = channelText1 + expType.lowercased() + channelText2
         let alertController = UIAlertController(title: expTitle, message: expString, preferredStyle: .alert)
         let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
