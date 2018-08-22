@@ -18,65 +18,67 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2wP-Ta-uhh">
-                                <rect key="frame" x="112.5" y="487" width="150" height="30"/>
+                                <rect key="frame" x="112.5" y="483" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="76c-SV-PFS"/>
                                     <constraint firstAttribute="height" constant="30" id="UIk-hQ-xqw"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XT-FV-SdI">
-                                <rect key="frame" x="154.5" y="90" width="66" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="156" y="90" width="63.5" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uK-sq-fQY">
-                                <rect key="frame" x="169.5" y="209" width="36" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="170" y="208" width="35" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aj-Cx-t33">
-                                <rect key="frame" x="168.5" y="328" width="38" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="169.5" y="326" width="36" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
-                                <rect key="frame" x="123.5" y="461" width="128" height="21"/>
+                                <rect key="frame" x="123.5" y="458" width="128" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="128" id="wuh-Y2-zPJ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMu-KE-ETd">
-                                <rect key="frame" x="27" y="104" width="320" height="100"/>
+                                <rect key="frame" x="27" y="103" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4am-h4-XqT"/>
                                     <constraint firstAttribute="width" constant="320" id="mKO-zo-bL1"/>
                                 </constraints>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
-                                <rect key="frame" x="163" y="622" width="49" height="30"/>
+                                <rect key="frame" x="161.5" y="624" width="52" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
                                     <action selector="ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HtV-ae-cWu"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyb-bj-gAM">
-                                <rect key="frame" x="124.5" y="582" width="126" height="30"/>
+                                <rect key="frame" x="119" y="581" width="137" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Advanced Options"/>
                                 <connections>
                                     <action selector="AdvancedPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oBI-ba-WUn"/>
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1fX-hj-buG">
-                                <rect key="frame" x="28" y="223" width="320" height="100"/>
+                                <rect key="frame" x="28" y="221" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4WD-Dg-7jy"/>
                                     <constraint firstAttribute="width" constant="320" id="eT9-Vn-XSp"/>
@@ -89,7 +91,7 @@
                                 </connections>
                             </datePicker>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-1c-sK0">
-                                <rect key="frame" x="28" y="342" width="320" height="114"/>
+                                <rect key="frame" x="28" y="339" width="320" height="114"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="114" id="LeZ-MT-c2i"/>
                                     <constraint firstAttribute="width" constant="320" id="PYZ-qM-uk8"/>
@@ -108,7 +110,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-kn-h1s">
-                                <rect key="frame" x="142" y="542" width="92" height="30"/>
+                                <rect key="frame" x="141" y="538" width="94" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Saved Events"/>
                                 <connections>
                                     <action selector="SamplePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zl4-Ox-9Hm"/>
@@ -195,53 +198,53 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playback Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-bS-ZC3">
-                                <rect key="frame" x="133" y="384" width="108" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="136" y="383" width="102.5" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
-                                <rect key="frame" x="226" y="320" width="83" height="29"/>
+                                <rect key="frame" x="226" y="319" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
                                 </segments>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLK-eC-Gmr">
-                                <rect key="frame" x="113" y="224" width="150" height="30"/>
+                                <rect key="frame" x="113" y="223" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4sz-5P-SnK"/>
                                     <constraint firstAttribute="height" constant="30" id="NVy-NS-c6a"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B3l-w6-bKW">
-                                <rect key="frame" x="112" y="413" width="150" height="30"/>
+                                <rect key="frame" x="112" y="411" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4dB-iL-saf"/>
                                     <constraint firstAttribute="height" constant="30" id="nz9-cn-TIu"/>
                                 </constraints>
                                 <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advanced Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9i5-kO-K9H">
-                                <rect key="frame" x="114.5" y="45" width="146.5" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <rect key="frame" x="119" y="45" width="137.5" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
-                                <rect key="frame" x="66" y="320" width="83" height="29"/>
+                                <rect key="frame" x="66" y="319" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
                                     <segment title="LHZ"/>
                                 </segments>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="nvp-mp-dIE">
-                                <rect key="frame" x="23" y="127" width="329" height="29"/>
+                                <rect key="frame" x="23" y="126" width="329" height="29"/>
                                 <segments>
                                     <segment title="0.1 Hz"/>
                                     <segment title="0.5 Hz"/>
@@ -252,82 +255,85 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-qg-R60">
-                                <rect key="frame" x="128" y="582" width="118" height="30"/>
+                                <rect key="frame" x="125.5" y="582" width="123" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Reset to Defaults"/>
                                 <connections>
                                     <action selector="ResetDefaults:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="fYG-eN-F8T"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
-                                <rect key="frame" x="164" y="622" width="46" height="30"/>
+                                <rect key="frame" x="162.5" y="625" width="49" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Return"/>
                                 <connections>
                                     <action selector="ReturnButton:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="pTO-1U-NKh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GK-PO-V6D">
-                                <rect key="frame" x="126" y="86" width="123" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="128.5" y="85" width="118" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Frequency Limit"/>
                                 <connections>
                                     <action selector="FrequencyHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="CNL-Ut-qMq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPB-VD-OUg">
-                                <rect key="frame" x="130" y="183" width="115" height="33"/>
+                                <rect key="frame" x="130" y="182" width="115" height="33"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="115" id="ajF-Yh-z6X"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Max Amplitude"/>
                                 <connections>
                                     <action selector="AmplitudeHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="ejg-pz-SLq"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8h-O8-jQu">
-                                <rect key="frame" x="145" y="542" width="84" height="30"/>
+                                <rect key="frame" x="142" y="539" width="90" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Clear Cache"/>
                                 <connections>
                                     <action selector="ClearCache:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="KIY-wt-pLL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usP-zQ-600">
-                                <rect key="frame" x="210" y="282" width="115" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="211" y="281" width="113" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Graph Channel"/>
                                 <connections>
                                     <action selector="GraphChannelHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="WUo-lS-cwv"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-fI-L8p">
-                                <rect key="frame" x="49" y="282" width="117" height="33"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="51" y="281" width="113" height="33"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Sound Channel"/>
                                 <connections>
                                     <action selector="SoundChannelHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="ocH-jf-wM9"/>
                                 </connections>
                             </button>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pS4-0O-pXk">
-                                <rect key="frame" x="113" y="482" width="51" height="31"/>
+                                <rect key="frame" x="113" y="479.5" width="51" height="31"/>
                                 <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="LoopingPressed:" destination="8fP-Gv-uzW" eventType="valueChanged" id="9Il-NV-HwE"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70k-fc-sv8">
-                                <rect key="frame" x="41.5" y="487" width="62" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="42.5" y="485" width="60" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Graphs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-tT-ON0">
-                                <rect key="frame" x="187" y="487" width="97" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <rect key="frame" x="190.5" y="485" width="91" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Fp3-XZ-s10">
-                                <rect key="frame" x="292" y="482" width="51" height="31"/>
+                                <rect key="frame" x="292" y="479.5" width="51" height="31"/>
                                 <connections>
                                     <action selector="SavePressed:" destination="8fP-Gv-uzW" eventType="valueChanged" id="ypO-fB-6wq"/>
                                 </connections>
@@ -444,7 +450,7 @@
                                             <constraint firstAttribute="height" constant="100" id="Cjc-8F-lwT"/>
                                             <constraint firstAttribute="width" constant="256" id="zZ1-Ue-KbQ"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHv-kk-Mdf">
@@ -452,6 +458,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="137.5" id="jyX-b4-6Qt"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="InfoSave:" destination="YMt-gm-oyN" eventType="touchUpInside" id="FkL-NE-K3C"/>
@@ -462,6 +469,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="137.5" id="FEk-lR-UXt"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <state key="normal" title="Close"/>
                                         <connections>
                                             <action selector="InfoClose:" destination="YMt-gm-oyN" eventType="touchUpInside" id="Xeb-HG-11W"/>
@@ -510,12 +518,12 @@
                             <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3p-vR-JNx">
                                 <rect key="frame" x="67" y="110" width="240" height="400"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="66p-92-ZFM">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="66p-92-ZFM">
                                         <rect key="frame" x="0.0" y="35" width="240" height="323"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Cell" id="ScY-cD-hTs" customClass="TableViewCell" customModule="SonifyMe" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Cell" id="ScY-cD-hTs">
                                                 <rect key="frame" x="0.0" y="28" width="240" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ScY-cD-hTs" id="RTz-eD-gT5">
@@ -530,6 +538,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="42" id="6Q7-FN-bCP"/>
                                         </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <state key="normal" title="Select">
                                             <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </state>
@@ -548,8 +557,11 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3R-w2-AUR">
-                                <rect key="frame" x="134.5" y="119" width="107" height="21"/>
-                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <rect key="frame" x="138" y="120" width="100" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="LNr-Wr-hRU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -585,11 +597,11 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
-                                        <rect key="frame" x="177" y="294" width="20" height="20"/>
+                                        <rect key="frame" x="177" y="294.5" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
-                                        <rect key="frame" x="150" y="238.5" width="75" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <rect key="frame" x="151" y="239" width="73" height="20.5"/>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -643,30 +655,31 @@
                                     <action selector="YellowPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="ZJf-c6-BtA"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5o0-Lw-Qfm">
-                                <rect key="frame" x="170.5" y="35" width="34" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5o0-Lw-Qfm">
+                                <rect key="frame" x="172" y="35" width="31" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
-                                <rect key="frame" x="170" y="622" width="34" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
+                                <rect key="frame" x="168" y="621" width="38" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="34" id="GRy-8q-EKj"/>
+                                    <constraint firstAttribute="width" constant="38" id="GRy-8q-EKj"/>
                                 </constraints>
+                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="BackButton:" destination="0vR-sf-a3A" eventType="touchUpInside" id="pOG-SV-hxz"/>
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-Zt-Aje">
-                                <rect key="frame" x="-4.5" y="451" width="384" height="31"/>
+                                <rect key="frame" x="-4.5" y="450" width="384" height="31"/>
                                 <connections>
                                     <action selector="SoundSlider:" destination="0vR-sf-a3A" eventType="valueChanged" id="mmk-yP-I3g"/>
                                 </connections>
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPU-Gb-YcJ">
-                                <rect key="frame" x="140" y="501" width="95" height="95"/>
+                                <rect key="frame" x="140" y="500" width="95" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="bgC-c8-kZK"/>
                                     <constraint firstAttribute="width" constant="95" id="qPh-gb-4V0"/>
@@ -677,7 +690,7 @@
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NId-aO-pDk">
-                                <rect key="frame" x="140" y="501" width="95" height="95"/>
+                                <rect key="frame" x="140" y="500" width="95" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="GWd-8w-bhR"/>
                                     <constraint firstAttribute="width" constant="95" id="fGI-lT-wBg"/>
@@ -688,7 +701,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddS-py-hen">
-                                <rect key="frame" x="264" y="501" width="95" height="95"/>
+                                <rect key="frame" x="264" y="500" width="95" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="HSj-DG-K9P"/>
                                     <constraint firstAttribute="width" constant="95" id="SSr-L5-rqz"/>
@@ -699,7 +712,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-cE-gFq">
-                                <rect key="frame" x="16" y="501" width="95" height="95"/>
+                                <rect key="frame" x="16" y="500" width="95" height="95"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="95" id="Nha-PO-uMp"/>
                                     <constraint firstAttribute="width" constant="95" id="UQo-0i-cRp"/>
@@ -721,7 +734,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nKE-IA-8Od">
-                                <rect key="frame" x="-2.5" y="71" width="380" height="365"/>
+                                <rect key="frame" x="-2.5" y="70" width="380" height="365"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="380" id="j24-Tc-c7J"/>
                                     <constraint firstAttribute="height" constant="365" id="we6-Xb-g70"/>
@@ -735,7 +748,6 @@
                             <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="zLw-aO-WjU" secondAttribute="trailing" constant="8" id="Cca-mE-qFq"/>
                             <constraint firstItem="ddS-py-hen" firstAttribute="leading" secondItem="NId-aO-pDk" secondAttribute="trailing" constant="29" id="DBM-Jw-KgD"/>
                             <constraint firstItem="zLw-aO-WjU" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="DlW-Md-5ps"/>
-                            <constraint firstItem="NId-aO-pDk" firstAttribute="leading" secondItem="cVj-gJ-gnv" secondAttribute="trailing" constant="-64" id="EQn-JP-dIu"/>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="cVj-gJ-gnv" secondAttribute="bottom" constant="15" id="G7B-6v-uiZ"/>
                             <constraint firstItem="q7B-9Z-WdK" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="IaK-4R-tSn"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="top" secondItem="EPU-Gb-YcJ" secondAttribute="bottom" constant="26" id="Jh6-DH-NKt"/>
@@ -747,7 +759,6 @@
                             <constraint firstItem="NId-aO-pDk" firstAttribute="top" secondItem="vWu-Zt-Aje" secondAttribute="bottom" constant="20" id="fRO-pO-PGT"/>
                             <constraint firstItem="EPU-Gb-YcJ" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="hn3-aa-8wv"/>
                             <constraint firstItem="NId-aO-pDk" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="ibH-1m-gmd"/>
-                            <constraint firstItem="EPU-Gb-YcJ" firstAttribute="leading" secondItem="cVj-gJ-gnv" secondAttribute="trailing" constant="-64" id="jCU-5z-MLc"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="top" secondItem="NId-aO-pDk" secondAttribute="bottom" constant="26" id="ke3-5a-Pbd"/>
                             <constraint firstItem="cVj-gJ-gnv" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="lWL-gK-2Sf"/>
                             <constraint firstItem="nKE-IA-8Od" firstAttribute="top" secondItem="5o0-Lw-Qfm" secondAttribute="bottom" constant="15" id="mpx-pH-kFm"/>
@@ -797,6 +808,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L9a-Em-sCh"/>
+        <segue reference="lar-ca-Cwf"/>
     </inferredMetricsTieBreakers>
 </document>
