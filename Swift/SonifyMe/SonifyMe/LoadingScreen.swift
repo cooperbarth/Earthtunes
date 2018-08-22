@@ -33,7 +33,7 @@ class LoadingScreen : ViewController {
 
 extension LoadingScreen {
     func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
         LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
         LoadingView.layer.cornerRadius = 8.0
     }
