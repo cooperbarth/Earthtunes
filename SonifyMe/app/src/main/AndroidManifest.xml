@@ -29,7 +29,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".InputActivity" />
         </activity>
-        <activity android:name=".LoadingActivity"></activity>
+        <activity android:name=".LoadingActivity" />
+        <activity android:name=".EventsActivity"></activity>
     </application>
 
 </manifest>
