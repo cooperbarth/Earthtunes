@@ -30,7 +30,7 @@ class InfoScreen : ViewController {
 
 extension InfoScreen {
     func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         let editingEvent = events[eventIndex]
         InfoText.text = editingEvent.descript
         InfoView.layer.cornerRadius = 8.0

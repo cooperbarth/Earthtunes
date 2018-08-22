@@ -84,7 +84,7 @@ extension SuggestionScreen {
     }
     
     func makeViewAppear() {
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         SuggestionView.layer.cornerRadius = 8.0
     }
 }
