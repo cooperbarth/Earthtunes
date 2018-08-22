@@ -114,7 +114,6 @@ extension LoadingScreen {
             do {
                 dfSound = try String(contentsOf: URL(string: soundUrl)!)
             } catch {
-                //showPopup(name: "Error 404")
                 showError404()
                 return
             }
