@@ -3,14 +3,6 @@ import AVKit
 import Foundation
 import AudioToolbox
 
-/*
- Things to Implement:
- -Change amplitude to volume slider
- -Format displayScreen differently in landscape?
- -Figure out time zone stuff? (2 options: local and UTC?)
- -Send raw data to self
- */
-
 class ViewController: UIViewController, UITextFieldDelegate {
     let screenSize: CGRect = UIScreen.main.nativeBounds
     let ud = UserDefaults.standard
