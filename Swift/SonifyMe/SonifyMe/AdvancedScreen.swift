@@ -104,7 +104,7 @@ class AdvancedScreen : ViewController {
             } else if (photos != .authorized) {
                 let alertController = UIAlertController(title: "Save Graphs", message: saveGraphText, preferredStyle: .alert)
                 let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
-                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                    guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                         return
                     }
                     if UIApplication.shared.canOpenURL(settingsUrl) {
@@ -207,7 +207,7 @@ extension AdvancedScreen {
         FreqLabelToFreqControlDistance.constant = TitleToFreqLabelDistance.constant * 0.4
         let segFont = FreqLabel.titleLabel?.font!.withSize((FreqLabel.titleLabel?.font!.pointSize)! * 0.8)
         Freq.apportionsSegmentWidthsByContent = true
-        Freq.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
+        Freq.setTitleTextAttributes([NSAttributedString.Key.font: segFont!], for: .normal)
         FreqControlToAmpLabelDistance.constant = TitleToFreqLabelDistance.constant * 1.35
         AmpLabel.titleLabel?.font = FreqLabel.titleLabel?.font
         AmpLabelWidth.constant = screenSize.width * 0.25
@@ -224,9 +224,9 @@ extension AdvancedScreen {
         SoundLabelToSwitchDistance.constant = AmpLabelToAmpControlDistance.constant
         GraphLabelToSwitchDistance.constant = SoundLabelToSwitchDistance.constant
         SChannel.apportionsSegmentWidthsByContent = true
-        SChannel.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
+        SChannel.setTitleTextAttributes([NSAttributedString.Key.font: segFont!], for: .normal)
         GChannel.apportionsSegmentWidthsByContent = true
-        GChannel.setTitleTextAttributes([NSAttributedStringKey.font: segFont!], for: .normal)
+        GChannel.setTitleTextAttributes([NSAttributedString.Key.font: segFont!], for: .normal)
         SoundSwitchToRateLabelDistance.constant = AmpFieldToGraphLabelDistance.constant * 1.35
         RateLabel.font = SoundLabel.titleLabel?.font
         RateLabelToFieldDistance.constant = AmpLabelToAmpControlDistance.constant * 1.5
