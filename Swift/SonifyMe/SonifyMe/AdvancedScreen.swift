@@ -1,5 +1,6 @@
 import UIKit
 import Foundation
+import Photos
 
 class AdvancedScreen : ViewController {
     @IBOutlet weak var Freq: UISegmentedControl!
@@ -8,6 +9,7 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var SChannel: UISegmentedControl!
     @IBOutlet weak var GChannel: UISegmentedControl!
     @IBOutlet weak var LoopingSwitch: UISwitch!
+    @IBOutlet weak var SaveGraphSwitch: UISwitch!
     
     @IBOutlet weak var TopToTitleDistance: NSLayoutConstraint!
     @IBOutlet weak var AdvancedTitle: UILabel!
@@ -37,6 +39,9 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var LoopingLabelXPos: NSLayoutConstraint!
     @IBOutlet weak var LoopingSwitchXPos: NSLayoutConstraint!
     @IBOutlet weak var LoopingLabel: UILabel!
+    @IBOutlet weak var SaveGraphsLabelXPos: NSLayoutConstraint!
+    @IBOutlet weak var SaveGraphsSwitchXPos: NSLayoutConstraint!
+    @IBOutlet weak var SaveGraphsLabel: UILabel!
     @IBOutlet weak var LoopingLabelToClearDistance: NSLayoutConstraint!
     @IBOutlet weak var ClearCacheLabel: UIButton!
     @IBOutlet weak var ClearToResetLabelDistance: NSLayoutConstraint!
@@ -52,29 +57,82 @@ class AdvancedScreen : ViewController {
     }
     
     @IBAction func FrequencyHelp(_ sender: Any) {
-        showPopup(name: "FreqExplain")
+        let alertController = UIAlertController(title: "Frequency", message: freqText, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func AmplitudeHelp(_ sender: Any) {
-        showPopup(name: "AmpExplain")
+        let alertController = UIAlertController(title: "Amplitude", message: ampText, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func SoundChannelHelp(_ sender: Any) {
-        ud.set("Sound", forKey: "ChannelHelp")
-        showPopup(name: "ChannelExplain")
+        ChannelHelp(expType: "Sound")
     }
     
     @IBAction func GraphChannelHelp(_ sender: Any) {
-        ud.set("Graph", forKey: "ChannelHelp")
-        showPopup(name: "ChannelExplain")
+        ChannelHelp(expType: "Graph")
+    }
+    
+    func ChannelHelp(expType: String) {
+        let expString = channelText1 + expType.lowercased() + channelText2
+        let alertController = UIAlertController(title: expType, message: expString, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func LoopingPressed(_ sender: Any) {
         ud.set(LoopingSwitch.isOn, forKey: "Loop")
     }
     
+    @IBAction func SavePressed(_ sender: Any) {
+        if (SaveGraphSwitch.isOn) {
+            let photos = PHPhotoLibrary.authorizationStatus()
+            if (photos == .notDetermined) {
+                PHPhotoLibrary.requestAuthorization({status in
+                    if status == .authorized {return} else {return}
+                })
+            } else if (photos != .authorized) {
+                let alertController = UIAlertController(title: "Save Graphs", message: saveGraphText, preferredStyle: .alert)
+                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+                    guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+                        return
+                    }
+                    
+                    if UIApplication.shared.canOpenURL(settingsUrl) {
+                        UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                            print("Settings opened: \(success)")
+                        })
+                    }
+                }
+                alertController.addAction(settingsAction)
+                let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+                alertController.addAction(cancelAction)
+                
+                present(alertController, animated: true, completion: nil)
+            }
+        }
+        self.ud.set(self.SaveGraphSwitch.isOn, forKey: "Save")
+    }
+    
     @IBAction func ClearCache(_ sender: Any) {
-        showPopup(name: "ClearCache")
+        let alertController = UIAlertController(title: "Clear Cache", message: clearCacheText, preferredStyle: .alert)
+        let clearCacheAction = UIAlertAction(title: "Clear", style: .default, handler: { (_) -> Void in
+            saveEvents(events: [])
+        })
+        alertController.addAction(clearCacheAction)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func ResetDefaults(_ sender: Any) {
@@ -120,6 +178,7 @@ class AdvancedScreen : ViewController {
         SChannel.selectedSegmentIndex = ud.integer(forKey: "SCIndex")
         GChannel.selectedSegmentIndex = ud.integer(forKey: "GCIndex")
         LoopingSwitch.isOn = ud.bool(forKey: "Loop")
+        SaveGraphSwitch.isOn = ud.bool(forKey: "Save")
     }
 }
 
@@ -175,9 +234,12 @@ extension AdvancedScreen {
         RateFieldWidth.constant = AmpFieldWidth.constant
         RateFieldHeight.constant = AmpFieldHeight.constant
         RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
-        LoopingSwitchXPos.constant = screenSize.width / 20
-        LoopingLabelXPos.constant = -screenSize.width / 20
         LoopingLabel.font = Amp.font
+        LoopingSwitchXPos.constant = -45
+        LoopingLabelXPos.constant = -100
+        SaveGraphsLabel.font = LoopingLabel.font
+        SaveGraphsLabelXPos.constant = 40
+        SaveGraphsSwitchXPos.constant = 110
         LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant * 0.75
         ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
         ClearToResetLabelDistance.constant = screenSize.height * 0.0075
@@ -214,9 +276,12 @@ extension AdvancedScreen {
         RateFieldWidth.constant = AmpFieldWidth.constant
         RateFieldHeight.constant = AmpFieldHeight.constant
         RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
-        LoopingSwitchXPos.constant = screenSize.width * 0.025
-        LoopingLabelXPos.constant = -screenSize.width * 0.025
         LoopingLabel.font = RateLabel.font
+        LoopingSwitchXPos.constant = -62
+        LoopingLabelXPos.constant = -125
+        SaveGraphsLabel.font = LoopingLabel.font
+        SaveGraphsLabelXPos.constant = 55
+        SaveGraphsSwitchXPos.constant = 133
         LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant
         ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font
         ClearToResetLabelDistance.constant = screenSize.height * 0.0075

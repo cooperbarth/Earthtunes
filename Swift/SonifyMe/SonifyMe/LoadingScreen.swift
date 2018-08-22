@@ -114,7 +114,8 @@ extension LoadingScreen {
             do {
                 dfSound = try String(contentsOf: URL(string: soundUrl)!)
             } catch {
-                showPopup(name: "Error 404")
+                //showPopup(name: "Error 404")
+                showError404()
                 return
             }
             let s32 = processData(data: dfSound)
@@ -170,6 +171,17 @@ extension LoadingScreen {
             s32.append(Float64((2^31))*atan(sound[ii]/fixedamp)/(0.5*Double.pi))
         }
         return s32
+    }
+    
+    func showError404() {
+        let alertController = UIAlertController(title: "Error 404", message: error404Text, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default) { (_) -> Void in
+            UIView.setAnimationsEnabled(false)
+            self.performSegue(withIdentifier: "Error404", sender: self)
+        }
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     func checkRepeats() -> event? {

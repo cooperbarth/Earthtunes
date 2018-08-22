@@ -134,15 +134,24 @@ extension SuggestionScreen {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = deleteAction(at: indexPath)
-        return UISwipeActionsConfiguration(actions: [delete])
+        return UISwipeActionsConfiguration(actions: [delete!])
     }
     
-    func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
+    func deleteAction(at indexPath: IndexPath) -> UIContextualAction? {
         let action = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, completion) in
-            self.events.remove(at: indexPath.row)
-            saveFavorites(events: self.events)
-            self.SuggestionScroll.deleteRows(at: [indexPath], with: .automatic)
-            completion(true)
+            let alertController = UIAlertController(title: "Delete Event", message: deleteEventText, preferredStyle: .alert)
+            let clearCacheAction = UIAlertAction(title: "Delete", style: .default, handler: { (_) -> Void in
+                self.events.remove(at: indexPath.row)
+                saveFavorites(events: self.events)
+                self.SuggestionScroll.deleteRows(at: [indexPath], with: .automatic)
+                completion(true)
+            })
+            alertController.addAction(clearCacheAction)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: { (_) -> Void in
+                completion(false)
+            })
+            alertController.addAction(cancelAction)
+            self.present(alertController, animated: true, completion: nil)
         })
         action.title = "Delete"
         action.backgroundColor = UIColor.red

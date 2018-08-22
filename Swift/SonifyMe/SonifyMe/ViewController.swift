@@ -5,10 +5,11 @@ import AudioToolbox
 
 /*
  Things to Implement:
- -Format "Save Graph" Button
+ -Learn to make custom alerts?
+ -Change amplitude to volume slider
  -Aesthetics
     -Make errorScreens and popUps look nicer
-    -Format displayScreen differently in landscape
+    -Format displayScreen differently in landscape?
  -Figure out time zone stuff? (2 options: local and UTC?)
  -Send raw data to self
  */
@@ -48,7 +49,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     func initDoneButton() -> UIView {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
-        doneToolbar.barTintColor = UIColor.white
         let flexSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.flexibleSpace, target: nil, action: nil)
         let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.done, target: self, action: #selector(doneButtonAction))
         var items = [UIBarButtonItem]()
@@ -83,5 +83,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 self.view.removeFromSuperview()
             }
         });
+    }
+    
+    func showInputError() {
+        let alertController = UIAlertController(title: "Input Error", message: ud.string(forKey: "Input Error"), preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
 }

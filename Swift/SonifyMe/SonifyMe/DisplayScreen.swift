@@ -46,6 +46,9 @@ class DisplayScreen : ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         formatScreen()
+        if (ud.bool(forKey: "Save")) {
+            UIImageWriteToSavedPhotosAlbum(img!, self, nil, nil)
+        }
         let newImg = cropToBounds(image: graphImage!, width: 320, height: 350)
         self.GraphView.image = newImg
         favorites = retrieveFavorites()!
@@ -126,10 +129,6 @@ class DisplayScreen : ViewController {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
     
-    @IBAction func SaveGraph(_ sender: Any) {
-        UIImageWriteToSavedPhotosAlbum(img!, self, nil, nil)
-    }
-    
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
@@ -137,21 +136,6 @@ class DisplayScreen : ViewController {
 }
 
 extension DisplayScreen {
-    /*
-     5s - 1136
-     SE - 1136
-     
-     6 - 1334
-     7 - 1334
-     8 - 1334
-     
-     6 plus - 2208
-     7 plus - 2208
-     8 plus - 2208
-     
-     X - 2436
-     */
-    
     func formatScreen() {
         graphImage = img!
         switch screenSize.height {
