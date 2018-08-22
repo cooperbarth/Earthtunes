@@ -1,5 +1,6 @@
 package com.example.michaelji.sonifyme;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -10,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -44,7 +46,6 @@ public class InputActivity extends AppCompatActivity {
     private static String time;
     private static String duration;
     private static boolean saved = false;
-    private static int[] selection = new int[]{-1};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,50 +114,6 @@ public class InputActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume()
-    {
-        super.onResume();
-        if(selection[0] != -1)
-        {
-            int selected = selection[0];
-            selection[0] = -1;
-
-            Spinner locate = findViewById(R.id.spinner);
-
-            CalendarView day = findViewById(R.id.calendarView2);
-
-            Button button = findViewById(R.id.button5);
-
-            EditText dur = findViewById(R.id.DurationText);
-            switch (selected)
-            {
-                case 0: {
-                    locate.setSelection(0);
-                    day.setDate(1496361600);
-                }
-                case 1: {
-
-                }
-                case 2: {
-
-                }
-                case 3: {
-
-                }
-                case 4: {
-
-                }
-                case 5: {
-
-                }
-                default: {
-
-                }
-            }
-        }
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         // Save UI state changes to the savedInstanceState.
@@ -207,7 +164,7 @@ public class InputActivity extends AppCompatActivity {
         } else {
             String[] url = getUrl(locate, duration, time, date);
 
-            new DownloadFile().execute(url[0] + "audio");
+            new DownloadFile().execute(url[0] + "audio&audiocompress=true");
             new DownloadImage().execute(url[0] + "plot");
 
             intent.putExtra(EXTRA_MESSAGE, locate);
@@ -299,43 +256,10 @@ public class InputActivity extends AppCompatActivity {
 
     public void showSavedEventsDialog(View v)
     {
-        DialogFragment saved = new SavedEventsDialog();
-        saved.show(getSupportFragmentManager(), "saved");
+        Intent intent = new Intent(InputActivity.this, EventsActivity.class);
+        startActivity(intent);
     }
 
-    public static class SavedEventsDialog extends DialogFragment {
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the Builder class for convenient dialog construction
-            final int[] mSelectedItems = new int[]{-1};  // Where we track the selected item
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle("Saved Events");
-            builder.setSingleChoiceItems(R.array.events_array, -1,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    mSelectedItems[0] = which;
-                                }
-                            })
-                    // Set the action buttons
-                    .setPositiveButton("Select", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User clicked OK, so save the mSelectedItems results somewhere
-                            // or return them to the component that opened the dialog
-                            selection[0] = mSelectedItems[0];
-                        }
-                    })
-                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int id) {
-                            dismiss();
-                        }
-                    });
-            // Create the AlertDialog object and return it
-            return builder.create();
-        }
-    }
 
     public String[] getUrl(String loc, String dur, String time, String date)
     {
@@ -432,6 +356,7 @@ public class InputActivity extends AppCompatActivity {
         String when = "&starttime=" + date + "T" + time + "&duration=" + dur;
         String[] out = {"http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=", soundname};
         return out;
+        //http://service.iris.edu/irisws/timeseries/1/query?net=TA&sta=L44A&loc=--&cha=BHZ&starttime=2018-08-22T00:00:00&duration=7200&demean=true&scale=auto&output=audio
     }
 
     public class DownloadFile extends AsyncTask<String, Integer, String> {
