@@ -21,6 +21,15 @@ class InfoScreen : ViewController {
         events[eventIndex].descript = InfoText.text!
         saveFavorites(events: events)
         self.removeAnimate()
+        savedAlert()
+    }
+    
+    func savedAlert() {
+        let alertController = UIAlertController(title: "Description Saved", message: nil, preferredStyle: .alert)
+        let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
+        alertController.addAction(returnAction)
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func InfoClose(_ sender: Any) {
