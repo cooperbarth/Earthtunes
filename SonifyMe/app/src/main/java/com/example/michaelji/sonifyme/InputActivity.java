@@ -111,6 +111,23 @@ public class InputActivity extends AppCompatActivity {
             DownloadErrorDialogFragment error = new DownloadErrorDialogFragment();
             error.show(getSupportFragmentManager(),"error");
         }
+        int loc = intent.getIntExtra("location", -1);
+        if(loc != -1)
+        {
+            long dat = intent.getLongExtra("date", Calendar.getInstance().getTimeInMillis());
+            String tim = intent.getStringExtra("time");
+            String dur = intent.getStringExtra("duration");
+
+            Spinner spinner = (Spinner) findViewById(R.id.spinner);
+            Button timeText = findViewById(R.id.button5);
+            EditText durationText = (EditText) findViewById(R.id.DurationText);
+            CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
+
+            spinner.setSelection(loc);
+            calendar.setDate(dat);
+            timeText.setText(tim);
+            durationText.setText(dur);
+        }
     }
 
     @Override

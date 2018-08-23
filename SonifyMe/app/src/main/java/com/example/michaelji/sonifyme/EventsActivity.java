@@ -44,11 +44,14 @@ public class EventsActivity extends AppCompatActivity {
         switch (selected)
         {
             case 0: {
-                locate = 0;
                 day = 1496361600;
+                time = "00:00";
+                dur = "4";
             }
             case 1: {
-
+                locate = 0;
+                time = "01:00";
+                dur = "4";
             }
             case 2: {
 
@@ -68,6 +71,10 @@ public class EventsActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(EventsActivity.this, InputActivity.class);
+        intent.putExtra("location", locate);
+        intent.putExtra("time", time);
+        intent.putExtra("date", day);
+        intent.putExtra("duration", dur);
         startActivity(intent);
     }
 }
