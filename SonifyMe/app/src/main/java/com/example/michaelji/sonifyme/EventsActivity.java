@@ -40,30 +40,32 @@ public class EventsActivity extends AppCompatActivity {
 
         String time = "00:00";
 
-        String dur = "2";
+        String dur = "4";
         switch (selected)
         {
             case 0: {
                 day = 1496361600;
-                time = "00:00";
-                dur = "4";
+                break;
             }
             case 1: {
-                locate = 0;
                 time = "01:00";
-                dur = "4";
+                break;
             }
             case 2: {
-
+                time = "06:00";
+                break;
             }
             case 3: {
-
+                time = "22:00";
+                break;
             }
             case 4: {
-
+                time = "16:00";
+                break;
             }
             case 5: {
-
+                time = "13:00";
+                break;
             }
             default: {
 
