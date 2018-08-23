@@ -508,25 +508,25 @@ class SampleScreen(GridLayout):
 		super(SampleScreen, self).__init__(**kwargs)
 		self.cols=1
 		self.layout=GridLayout(cols=2,size_hint=(1,0.9))
-		self.layout.add_widget(Label(text='Earthquake from Ryerson\nDate: January 23rd, 2018 Time: 10:00 Duration: 4 hours',size_hint=(0.7,0.148), halign='center'))
-		self.one=CheckBox(group='a_group',size_hint=(0.3,0.148))
+		self.layout.add_widget(Label(text='Magnitude 5.0 Earthquake in Oklahoma\nDate: November 7th, 2016 Time: 01:30 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.one=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.one)
-		self.layout.add_widget(Label(text='Event 1\nDate: June 2nd, 2017 Time: 00:23 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.layout.add_widget(Label(text='Sunny Day at Ryerson Station\nDate: June 2nd, 2017 Time: 00:23 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
 		self.two=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.two)
-		self.layout.add_widget(Label(text='Event 2\nDate: November 7th, 2016 Time: 01:30 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.layout.add_widget(Label(text='Magnitude 5.8 Earthquake in Montana\nDate: July 6th, 2017 Time: 6:29 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
 		self.three=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.three)
-		self.layout.add_widget(Label(text='Event 3\nDate: July 6th, 2017 Time: 6:29 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
-		self.four=CheckBox(group='a_group',size_hint=(0.3,0.142))
+		self.layout.add_widget(Label(text='Earthquake at Ryerson Station\nDate: January 23rd, 2018 Time: 10:00 Duration: 4 hours',size_hint=(0.7,0.148), halign='center'))
+		self.four=CheckBox(group='a_group',size_hint=(0.3,0.148))
 		self.layout.add_widget(self.four)
-		self.layout.add_widget(Label(text='Event 4\nDate: May 4th, 2018 Time: 22:33 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.layout.add_widget(Label(text='Magnitude 5.4 Earthquake in Hawaii\nDate: May 4th, 2018 Time: 22:33 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
 		self.five=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.five)
-		self.layout.add_widget(Label(text='Event 5\nDate: July 8th, 2018 Time: 16:30 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.layout.add_widget(Label(text='Students jumping on ground at Ryerson Station\nDate: July 8th, 2018 Time: 16:30 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
 		self.six=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.six)
-		self.layout.add_widget(Label(text='Event 6\nDate: July 24th, 2018 Time: 14:00 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
+		self.layout.add_widget(Label(text='Thunderstorm at Ryerson Station\nDate: July 24th, 2018 Time: 14:00 Duration: 4 hours',size_hint=(0.7,0.142), halign='center'))
 		self.seven=CheckBox(group='a_group',size_hint=(0.3,0.142))
 		self.layout.add_widget(self.seven)
 		self.add_widget(self.layout)
@@ -540,8 +540,8 @@ class SampleScreen(GridLayout):
 		input = sm.get_screen('Input Screen')
 		if self.one.active:
 			input.location.text = 'Ryerson (IL,USA)'
-			input.date.text = '2018-01-23'
-			input.startTime.text = '08:00'
+			input.date.text = '2016-11-07'
+			input.startTime.text = '00:00'
 			input.duration.text = '4'
 		elif self.two.active:
 			input.location.text = 'Ryerson (IL,USA)'
@@ -550,13 +550,13 @@ class SampleScreen(GridLayout):
 			input.duration.text = '4'
 		elif self.three.active:
 			input.location.text = 'Ryerson (IL,USA)'
-			input.date.text = '2016-11-07'
-			input.startTime.text = '00:00'
+			input.date.text = '2017-07-06'
+			input.startTime.text = '05:00'
 			input.duration.text = '4'
 		elif self.four.active:
 			input.location.text = 'Ryerson (IL,USA)'
-			input.date.text = '2017-07-06'
-			input.startTime.text = '05:00'
+			input.date.text = '2018-01-23'
+			input.startTime.text = '08:00'
 			input.duration.text = '4'
 		elif self.five.active:
 			input.location.text = 'Ryerson (IL,USA)'
