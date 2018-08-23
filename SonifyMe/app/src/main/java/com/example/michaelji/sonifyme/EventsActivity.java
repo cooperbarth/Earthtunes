@@ -68,5 +68,6 @@ public class EventsActivity extends AppCompatActivity {
         }
 
         Intent intent = new Intent(EventsActivity.this, InputActivity.class);
+        startActivity(intent);
     }
 }
