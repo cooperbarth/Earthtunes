@@ -189,12 +189,21 @@ extension AdvancedScreen {
             format1136Screen()
             break
         case 2208.0:
-            format2208Screen()
+            if (!zoomed) {
+                format2208Screen()
+            }
             break
         case 2436.0:
-            format2436Screen()
+            if (zoomed) {
+                format2208Screen()
+            } else {
+                format2436Screen()
+            }
             break
         default:
+            if (zoomed) {
+                format1136Screen()
+            }
             break
         }
     }
@@ -203,7 +212,11 @@ extension AdvancedScreen {
         TopToTitleDistance.constant = screenSize.height * 0.02
         AdvancedTitle.font = AdvancedTitle.font.withSize(TopToTitleDistance.constant * 0.8)
         TitleToFreqLabelDistance.constant = TopToTitleDistance.constant * 0.5
-        FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
+        if (zoomed) {
+            FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.4)
+        } else {
+            FreqLabel.titleLabel?.font = FreqLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
+        }
         FreqLabelToFreqControlDistance.constant = TitleToFreqLabelDistance.constant * 0.4
         let segFont = FreqLabel.titleLabel?.font!.withSize((FreqLabel.titleLabel?.font!.pointSize)! * 0.8)
         Freq.apportionsSegmentWidthsByContent = true
@@ -234,15 +247,23 @@ extension AdvancedScreen {
         RateFieldWidth.constant = AmpFieldWidth.constant
         RateFieldHeight.constant = AmpFieldHeight.constant
         RateFieldToLoopingLabelDistance.constant = SoundSwitchToRateLabelDistance.constant
-        LoopingLabel.font = Amp.font
+        LoopingLabel.font = RateLabel.font
         LoopingSwitchXPos.constant = -45
         LoopingLabelXPos.constant = -100
         SaveGraphsLabel.font = LoopingLabel.font
         SaveGraphsLabelXPos.constant = 40
-        SaveGraphsSwitchXPos.constant = 110
+        if (!zoomed) {
+            SaveGraphsSwitchXPos.constant = 110
+        } else {
+            SaveGraphsSwitchXPos.constant = 100
+        }
         LoopingLabelToClearDistance.constant = SoundSwitchToRateLabelDistance.constant * 0.75
-        ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font.withSize(TopToTitleDistance.constant * 0.65)
-        ClearToResetLabelDistance.constant = screenSize.height * 0.0075
+        ClearCacheLabel.titleLabel?.font = AmpLabel.titleLabel?.font
+        if (!zoomed) {
+            ClearToResetLabelDistance.constant = screenSize.height * 0.0075
+        } else {
+            ClearToResetLabelDistance.constant = screenSize.height * 0.005
+        }
         ResetLabel.titleLabel?.font = AmpLabel.titleLabel?.font
         ResetToReturnLabelDistance.constant = ClearToResetLabelDistance.constant
         ReturnLabel.titleLabel?.font = AmpLabel.titleLabel?.font

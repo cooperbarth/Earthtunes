@@ -145,12 +145,21 @@ extension InputScreen {
             format1136Screen()
             break
         case 2208.0:
-            format2208Screen()
+            if (!zoomed) {
+                format2208Screen()
+            }
             break
         case 2436.0:
-            format2436Screen()
+            if (zoomed) {
+                format2208Screen()
+            } else {
+                format2436Screen()
+            }
             break
         default:
+            if (zoomed) {
+                format1136Screen()
+            }
             break
         }
     }

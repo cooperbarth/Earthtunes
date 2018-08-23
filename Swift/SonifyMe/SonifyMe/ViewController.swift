@@ -5,6 +5,7 @@ import AudioToolbox
 
 class ViewController: UIViewController, UITextFieldDelegate {
     let screenSize: CGRect = UIScreen.main.nativeBounds
+    let zoomed: Bool = UIScreen.main.nativeScale > UIScreen.main.scale
     let ud = UserDefaults.standard
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
