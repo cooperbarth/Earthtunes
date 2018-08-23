@@ -12,7 +12,8 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         self.makeViewAppear()
         self.showAnimate()
         self.setUpLongPress()
-        
+
+        firstTime()
         events = retrieveFavorites()!
         
         SuggestionScroll.dataSource = self
@@ -23,6 +24,16 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         setAllFields()
         UIView.setAnimationsEnabled(false)
         performSegue(withIdentifier: "Select Event", sender: self)
+    }
+    
+    func firstTime() {
+        if (!ud.bool(forKey: "Opened Suggestion Previously?")) {
+            ud.set(true, forKey: "Opened Suggestion Previously?")
+            let alertController = UIAlertController(title: "Saved Events", message: suggestionIntroText, preferredStyle: .alert)
+            let continueAction = UIAlertAction(title: "Continue", style: .default)
+            alertController.addAction(continueAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
     }
     
     func setAllFields() {
@@ -162,6 +173,10 @@ extension SuggestionScreen {
         action.backgroundColor = UIColor.red
         
         return action
+    }
+    
+    func showDeleteAlert() {
+        
     }
     
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {

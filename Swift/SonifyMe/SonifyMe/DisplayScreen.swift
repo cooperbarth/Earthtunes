@@ -57,8 +57,10 @@ class DisplayScreen : ViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         do {
-            player = try AVAudioPlayer(contentsOf: url)
-            playSound()
+            if !firstTime() {
+                player = try AVAudioPlayer(contentsOf: url)
+                playSound()
+            }
         } catch {
             print("Audio Player Not Found.")
         }
@@ -132,6 +134,21 @@ class DisplayScreen : ViewController {
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
+    }
+    
+    func firstTime() -> Bool {
+        if (!ud.bool(forKey: "Opened Display Previously?")) {
+            ud.set(true, forKey: "Opened Display Previously?")
+            let alertController = UIAlertController(title: "Audio", message: ringerText, preferredStyle: .alert)
+            let continueAction = UIAlertAction(title: "Continue", style: .default, handler: { (_) -> Void in
+                player = try? AVAudioPlayer(contentsOf: url)
+                self.playSound()
+            })
+            alertController.addAction(continueAction)
+            self.present(alertController, animated: true, completion: nil)
+            return true
+        }
+        return false
     }
 }
 

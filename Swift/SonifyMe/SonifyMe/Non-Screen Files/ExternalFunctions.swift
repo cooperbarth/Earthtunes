@@ -24,7 +24,7 @@ let defaultEvents: [event] = [
     event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Sunny Day at Ryerson Station"),
     event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Magnitude 5.8 Earthquake in Montana"),
     event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Magnitude 5.4 Earthquake in Hawaii"),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Students went to Ryerson station and jumped on the ground near the seismometer. See if you can find a frequency to hear it!"),
+    event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Students went to Ryerson station and jumped on the ground near the seismometer. See if you can find a frequency at which you can hear it!"),
     event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: "Thunderstorm at Ryerson Station")
 ]
 
@@ -36,6 +36,8 @@ let saveGraphText = "To save your graphs, open Settings and allow Earthtunes to 
 let clearCacheText = "This action will erase all previous searches from memory. Proceed?"
 let deleteEventText = "Are you sure you want to delete the saved event?"
 let error404Text = "The requested URL could not be found."
+let suggestionIntroText = "This is the saved events screen, where events saved by the user are shown. Long-pressing on an event will show its editable description, and swiping left will delete it from the list."
+let ringerText = "Make sure your ringer is turned on to hear the sound!"
 
 func isNumber(num: String) -> Bool {
     if (Float(num) != nil) {return true}
