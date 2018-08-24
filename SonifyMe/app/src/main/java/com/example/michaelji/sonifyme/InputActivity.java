@@ -1,6 +1,5 @@
 package com.example.michaelji.sonifyme;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -11,7 +10,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -21,8 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
-import android.widget.ListAdapter;
-import android.widget.RemoteViews;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -33,7 +29,6 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.net.URLConnection;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -51,7 +46,7 @@ public class InputActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.locations_array, android.R.layout.simple_spinner_item);
@@ -60,7 +55,7 @@ public class InputActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
+        CalendarView calendar = findViewById(R.id.calendarView2);
         calendar.setMaxDate(calendar.getDate());
         calendar.setOnDateChangeListener( new CalendarView.OnDateChangeListener() {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -107,7 +102,6 @@ public class InputActivity extends AppCompatActivity {
         boolean errored = intent.getBooleanExtra(EXTRA_MESSAGE, false);
         if(errored)
         {
-            errored = false;
             DownloadErrorDialogFragment error = new DownloadErrorDialogFragment();
             error.show(getSupportFragmentManager(),"error");
         }
@@ -118,10 +112,10 @@ public class InputActivity extends AppCompatActivity {
             String tim = intent.getStringExtra("time");
             String dur = intent.getStringExtra("duration");
 
-            Spinner spinner = (Spinner) findViewById(R.id.spinner);
+            Spinner spinner = findViewById(R.id.spinner);
             Button timeText = findViewById(R.id.button5);
-            EditText durationText = (EditText) findViewById(R.id.DurationText);
-            CalendarView calendar = (CalendarView) findViewById(R.id.calendarView2);
+            EditText durationText = findViewById(R.id.DurationText);
+            CalendarView calendar = findViewById(R.id.calendarView2);
 
             spinner.setSelection(loc);
             calendar.setDate(dat);
@@ -160,7 +154,7 @@ public class InputActivity extends AppCompatActivity {
     public void sendMessage(View view) {
         Intent intent = new Intent(InputActivity.this, LoadingActivity.class);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         String locate = (String) spinner.getSelectedItem();
         String duration = "-1";
         String time = "-1";
@@ -193,7 +187,7 @@ public class InputActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(InputActivity.this, DisplayActivity.class);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = findViewById(R.id.spinner);
         String locate = (String) spinner.getSelectedItem();
 
         intent.putExtra(EXTRA_MESSAGE, locate);
