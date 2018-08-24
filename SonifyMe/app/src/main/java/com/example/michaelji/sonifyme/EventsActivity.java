@@ -48,22 +48,27 @@ public class EventsActivity extends AppCompatActivity {
                 break;
             }
             case 1: {
+                day = 1478476800;
                 time = "01:00";
                 break;
             }
             case 2: {
+                day = 1499299200;
                 time = "06:00";
                 break;
             }
             case 3: {
+                day = 1525392000;
                 time = "22:00";
                 break;
             }
             case 4: {
+                day = 1531008000;
                 time = "16:00";
                 break;
             }
             case 5: {
+                day = 1532390400;
                 time = "13:00";
                 break;
             }
