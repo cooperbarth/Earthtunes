@@ -597,10 +597,10 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
-                                        <rect key="frame" x="177" y="294.5" width="20" height="20"/>
+                                        <rect key="frame" x="177" y="299" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
-                                        <rect key="frame" x="151" y="239" width="73" height="20.5"/>
+                                        <rect key="frame" x="151" y="253.5" width="73" height="20.5"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -608,8 +608,8 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="OTG-ax-qu6" firstAttribute="centerY" secondItem="a7J-Pe-S8s" secondAttribute="centerY" constant="-75" id="17r-6A-2Yx"/>
-                                    <constraint firstItem="YW0-QI-0l3" firstAttribute="top" secondItem="OTG-ax-qu6" secondAttribute="bottom" constant="35" id="1YB-jR-d1n"/>
+                                    <constraint firstItem="OTG-ax-qu6" firstAttribute="centerY" secondItem="a7J-Pe-S8s" secondAttribute="centerY" constant="-60" id="17r-6A-2Yx"/>
+                                    <constraint firstItem="YW0-QI-0l3" firstAttribute="top" secondItem="OTG-ax-qu6" secondAttribute="bottom" constant="25" id="1YB-jR-d1n"/>
                                     <constraint firstItem="OTG-ax-qu6" firstAttribute="centerX" secondItem="a7J-Pe-S8s" secondAttribute="centerX" id="lUo-gA-vCv"/>
                                     <constraint firstItem="YW0-QI-0l3" firstAttribute="centerX" secondItem="a7J-Pe-S8s" secondAttribute="centerX" id="qkN-0k-AuJ"/>
                                 </constraints>
@@ -808,6 +808,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="htf-sJ-yhm"/>
+        <segue reference="L9a-Em-sCh"/>
     </inferredMetricsTieBreakers>
 </document>
