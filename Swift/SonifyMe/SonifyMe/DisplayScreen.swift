@@ -49,7 +49,6 @@ class DisplayScreen : ViewController {
         if (ud.bool(forKey: "Save")) {
             UIImageWriteToSavedPhotosAlbum(img!, self, nil, nil)
         }
-        //let newImg = cropToBounds(image: graphImage!, width: 1000, height: 350)
         let newImg = cropGraph(image: graphImage!)
         
         self.GraphView.image = newImg

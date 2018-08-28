@@ -113,10 +113,10 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         if (ud.string(forKey: "First") == nil) {
             ud.set(3, forKey: "FreqIndex")
             ud.set(0, forKey: "SCIndex")
-            ud.set(1, forKey: "GCIndex")
+            ud.set(0, forKey: "GCIndex")
             ud.set("10 Hz", forKey: "Frequency")
             ud.set("BHZ", forKey: "SChannel")
-            ud.set("LHZ", forKey: "GChannel")
+            ud.set("BHZ", forKey: "GChannel")
             
             saveEvents(events: [])
             let favorites = defaultEvents

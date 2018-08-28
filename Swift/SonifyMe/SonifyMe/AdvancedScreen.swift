@@ -140,7 +140,7 @@ class AdvancedScreen : ViewController {
         ud.set("0.0001", forKey: "Amplitude")
         ud.set("1.0", forKey: "Rate")
         ud.set(0, forKey: "SCIndex")
-        ud.set(1, forKey: "GCIndex")
+        ud.set(0, forKey: "GCIndex")
 
         fillIn()
         

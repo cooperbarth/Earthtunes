@@ -203,7 +203,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
                                 <rect key="frame" x="226" y="319" width="83" height="29"/>
                                 <segments>
                                     <segment title="BHZ"/>
@@ -808,6 +808,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="L9a-Em-sCh"/>
+        <segue reference="lar-ca-Cwf"/>
     </inferredMetricsTieBreakers>
 </document>
