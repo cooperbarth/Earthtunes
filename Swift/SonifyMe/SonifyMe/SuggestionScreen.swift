@@ -175,10 +175,6 @@ extension SuggestionScreen {
         return action
     }
     
-    func showDeleteAlert() {
-        
-    }
-    
     @objc func longPress(_ longPressGestureRecognizer: UILongPressGestureRecognizer) {
         let touchPoint = longPressGestureRecognizer.location(in: self.SuggestionScroll)
         if let indexPath = SuggestionScroll.indexPathForRow(at: touchPoint) {
