@@ -21,6 +21,7 @@ class LoadingScreen : ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.makeViewAppear()
         self.showAnimate()
     }

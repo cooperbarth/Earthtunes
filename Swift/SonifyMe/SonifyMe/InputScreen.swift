@@ -255,4 +255,8 @@ extension InputScreen {
         ud.set(row, forKey: "Location Index")
         ud.set(ScrollMenuData[row], forKey: "Location")
     }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        DurationField.text! = ""
+    }
 }

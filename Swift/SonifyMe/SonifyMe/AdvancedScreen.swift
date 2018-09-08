@@ -327,6 +327,11 @@ extension AdvancedScreen {
         self.Rate.inputAccessoryView = initDoneButton()
     }
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        Amp.text! = ""
+        Rate.text! = ""
+    }
+    
     func validInputs() -> Bool {
         if (Amp.text == "" || Rate.text == "") {
             ud.set("Empty Field(s)", forKey: "Input Error")
