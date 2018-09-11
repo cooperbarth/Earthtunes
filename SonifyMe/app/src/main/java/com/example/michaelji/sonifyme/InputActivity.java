@@ -43,6 +43,7 @@ public class InputActivity extends AppCompatActivity {
     private static boolean saved = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_input);
 
