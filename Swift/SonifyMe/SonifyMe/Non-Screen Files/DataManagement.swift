@@ -34,14 +34,14 @@ func saveFile(buff: [Float64], sample_rate: Float64) {
     
     let outputFormatSettings = [
         AVFormatIDKey:kAudioFormatLinearPCM,
-        AVLinearPCMBitDepthKey:64,
+        AVLinearPCMBitDepthKey:32,
         AVLinearPCMIsFloatKey: true,
         AVLinearPCMIsBigEndianKey: false,
         AVSampleRateKey: SAMPLE_RATE,
         AVNumberOfChannelsKey: 1
         ] as [String : Any]
     
-    let audioFile = try? AVAudioFile(forWriting: url, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat64, interleaved: false)
+    let audioFile = try? AVAudioFile(forWriting: url, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
     
     let bufferFormat = AVAudioFormat(settings: outputFormatSettings)
     let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat!, frameCapacity: AVAudioFrameCount(buff.count))
