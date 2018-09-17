@@ -7,12 +7,15 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class EventsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_events);
 
@@ -33,7 +36,7 @@ public class EventsActivity extends AppCompatActivity {
 
         int locate = 0;
 
-        long day = Calendar.getInstance().getTimeInMillis();
+        String day = "01 01 2001";
 
         String time = "00:00";
 
@@ -41,31 +44,31 @@ public class EventsActivity extends AppCompatActivity {
         switch (selected)
         {
             case 0: {
-                day = 1496361600;
+                day = "06 02 2017";
                 break;
             }
             case 1: {
-                day = 1478476800;
+                day = "11 07 2016";
                 time = "01:00";
                 break;
             }
             case 2: {
-                day = 1499299200;
+                day = "07 06 2017";
                 time = "06:00";
                 break;
             }
             case 3: {
-                day = 1525392000;
+                day = "05 04 2018";
                 time = "22:00";
                 break;
             }
             case 4: {
-                day = 1531008000;
+                day = "07 08 2018";
                 time = "16:00";
                 break;
             }
             case 5: {
-                day = 1532390400;
+                day = "07 24 2018";
                 time = "13:00";
                 break;
             }
@@ -74,10 +77,21 @@ public class EventsActivity extends AppCompatActivity {
             }
         }
 
+        SimpleDateFormat df = new SimpleDateFormat("MM dd yyyy");
+        Date date = null;
+        try{
+            date = df.parse(day);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        long epoch = date.getTime();
+
         Intent intent = new Intent(EventsActivity.this, InputActivity.class);
         intent.putExtra("location", locate);
         intent.putExtra("time", time);
-        intent.putExtra("date", day);
+        intent.putExtra("date", epoch);
         intent.putExtra("duration", dur);
         startActivity(intent);
     }
