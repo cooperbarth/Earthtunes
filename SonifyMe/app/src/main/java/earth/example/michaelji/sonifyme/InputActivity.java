@@ -1,4 +1,4 @@
-package com.example.michaelji.sonifyme;
+package earth.example.michaelji.sonifyme;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

@@ -1,4 +1,4 @@
-package com.example.michaelji.sonifyme;
+package earth.example.michaelji.sonifyme;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

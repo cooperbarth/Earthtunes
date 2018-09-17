@@ -1,4 +1,4 @@
-package com.example.michaelji.sonifyme;
+package earth.example.michaelji.sonifyme;
 
 import org.junit.Test;
 

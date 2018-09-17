@@ -1,4 +1,4 @@
-package com.example.michaelji.sonifyme;
+package earth.example.michaelji.sonifyme;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
