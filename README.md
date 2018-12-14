@@ -7,7 +7,7 @@ Developed by Cooper Barth and Michael Ji, with original concept and advising fro
 
 The Earthtunes project consists of three applications: one for use on Windows machines, one for mobile iOS devices, and one for mobile Android devices.
 
-iOS app: https://itunes.apple.com/us/app/earthtunes/id1432170040?mt=8
+iOS app: https://itunes.apple.com/us/app/earthtunes/id1432170040?mt=8<br>
 Android app: https://play.google.com/store/apps/details?id=earth.example.michaelji.sonifyme
 
 This project was developed as a component to a seismology outreach activity from Northwestern University's Department of Earth and Planetary Sciences,
