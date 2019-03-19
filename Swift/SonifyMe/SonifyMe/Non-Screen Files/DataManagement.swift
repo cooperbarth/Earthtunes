@@ -40,14 +40,14 @@ func saveFile(buff: [Float64], sample_rate: Float64) {
         AVSampleRateKey: SAMPLE_RATE,
         AVNumberOfChannelsKey: 1
         ] as [String : Any]
-    
+
     let audioFile = try? AVAudioFile(forWriting: url, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
-    
+
     let bufferFormat = AVAudioFormat(settings: outputFormatSettings)
     let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat!, frameCapacity: AVAudioFrameCount(buff.count))
     for i in 0..<buff.count {outputBuffer!.floatChannelData!.pointee[i] = Float(buff[i])}
     outputBuffer?.frameLength = AVAudioFrameCount(buff.count)
-    
+
     do {
         try audioFile?.write(from: outputBuffer!)
     } catch {
@@ -66,7 +66,7 @@ class event: NSObject, NSCoding {
     var gchannel: String
     var s32: [Float64]
     var descript: String
-    
+
     required init(Location: String, Date: String, Time: String, Duration: String, Frequency: String, Amplitude: String, SChannel: String, GChannel: String, S32: [Float64], Descript: String) {
         location = Location
         date = Date
@@ -79,7 +79,7 @@ class event: NSObject, NSCoding {
         s32 = S32
         descript = Descript
     }
-    
+
     func encode(with aCoder: NSCoder) {
         aCoder.encode(location, forKey: "location")
         aCoder.encode(date, forKey: "date")
@@ -92,7 +92,7 @@ class event: NSObject, NSCoding {
         aCoder.encode(s32, forKey: "s32")
         aCoder.encode(descript, forKey: "descript")
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         location = aDecoder.decodeObject(forKey: "location") as! String
         date = aDecoder.decodeObject(forKey: "date") as! String
@@ -106,4 +106,3 @@ class event: NSObject, NSCoding {
         descript = aDecoder.decodeObject(forKey: "descript") as! String
     }
 }
-

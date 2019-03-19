@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,7 +56,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMu-KE-ETd">
-                                <rect key="frame" x="27" y="103" width="320" height="100"/>
+                                <rect key="frame" x="27.5" y="103" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4am-h4-XqT"/>
                                     <constraint firstAttribute="width" constant="320" id="mKO-zo-bL1"/>
@@ -78,7 +79,7 @@
                                 </connections>
                             </button>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1fX-hj-buG">
-                                <rect key="frame" x="28" y="221" width="320" height="100"/>
+                                <rect key="frame" x="27.5" y="221" width="320" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="4WD-Dg-7jy"/>
                                     <constraint firstAttribute="width" constant="320" id="eT9-Vn-XSp"/>
@@ -91,7 +92,7 @@
                                 </connections>
                             </datePicker>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-1c-sK0">
-                                <rect key="frame" x="28" y="340" width="320" height="114"/>
+                                <rect key="frame" x="27.5" y="340" width="320" height="114"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="114" id="LeZ-MT-c2i"/>
                                     <constraint firstAttribute="width" constant="320" id="PYZ-qM-uk8"/>
@@ -110,7 +111,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-kn-h1s">
-                                <rect key="frame" x="141" y="539" width="94" height="33"/>
+                                <rect key="frame" x="140.5" y="539" width="94" height="33"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Saved Events"/>
                                 <connections>
@@ -198,7 +199,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playback Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-bS-ZC3">
-                                <rect key="frame" x="136" y="383" width="102.5" height="20"/>
+                                <rect key="frame" x="136.5" y="383" width="102.5" height="20"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -211,7 +212,7 @@
                                 </segments>
                             </segmentedControl>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLK-eC-Gmr">
-                                <rect key="frame" x="113" y="223" width="150" height="30"/>
+                                <rect key="frame" x="112.5" y="223" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4sz-5P-SnK"/>
                                     <constraint firstAttribute="height" constant="30" id="NVy-NS-c6a"/>
@@ -221,7 +222,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B3l-w6-bKW">
-                                <rect key="frame" x="112" y="411" width="150" height="30"/>
+                                <rect key="frame" x="112.5" y="411" width="150" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="4dB-iL-saf"/>
                                     <constraint firstAttribute="height" constant="30" id="nz9-cn-TIu"/>
@@ -255,7 +256,7 @@
                                 </segments>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-qg-R60">
-                                <rect key="frame" x="125.5" y="582" width="123" height="33"/>
+                                <rect key="frame" x="126" y="582" width="123" height="33"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Reset to Defaults"/>
                                 <connections>
@@ -263,7 +264,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
-                                <rect key="frame" x="162.5" y="625" width="49" height="33"/>
+                                <rect key="frame" x="163" y="625" width="49" height="33"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Return"/>
                                 <connections>
@@ -290,7 +291,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8h-O8-jQu">
-                                <rect key="frame" x="142" y="539" width="90" height="33"/>
+                                <rect key="frame" x="142.5" y="539" width="90" height="33"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <state key="normal" title="Clear Cache"/>
                                 <connections>
@@ -327,7 +328,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Graphs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-tT-ON0">
-                                <rect key="frame" x="190.5" y="485" width="91" height="20"/>
+                                <rect key="frame" x="190" y="485" width="91" height="20"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -441,10 +442,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30e-EP-ub0">
-                                <rect key="frame" x="49.5" y="258.5" width="275" height="150"/>
+                                <rect key="frame" x="50" y="258.5" width="275" height="150"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CIL-wY-Unj">
-                                        <rect key="frame" x="10" y="8" width="256" height="100"/>
+                                        <rect key="frame" x="9.5" y="8" width="256" height="100"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Cjc-8F-lwT"/>
@@ -465,7 +466,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGr-JT-ZyP">
-                                        <rect key="frame" x="138" y="108" width="137" height="42"/>
+                                        <rect key="frame" x="137.5" y="108" width="137.5" height="42"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="137.5" id="FEk-lR-UXt"/>
                                         </constraints>
@@ -516,7 +517,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3p-vR-JNx">
-                                <rect key="frame" x="67" y="133.5" width="240" height="400"/>
+                                <rect key="frame" x="67.5" y="133.5" width="240" height="400"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="66p-92-ZFM">
                                         <rect key="frame" x="0.0" y="35" width="240" height="323"/>
@@ -557,7 +558,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3R-w2-AUR">
-                                <rect key="frame" x="138" y="143.5" width="100" height="20"/>
+                                <rect key="frame" x="137.5" y="143.5" width="100" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="LNr-Wr-hRU"/>
                                 </constraints>
@@ -597,7 +598,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
-                                        <rect key="frame" x="177" y="299" width="20" height="20"/>
+                                        <rect key="frame" x="177.5" y="299" width="20" height="20"/>
                                     </activityIndicatorView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
                                         <rect key="frame" x="151" y="253.5" width="73" height="20.5"/>
@@ -662,7 +663,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
-                                <rect key="frame" x="168" y="621" width="38" height="31"/>
+                                <rect key="frame" x="168.5" y="621" width="38" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="GRy-8q-EKj"/>
                                 </constraints>
@@ -808,6 +809,6 @@
         <image name="Yellow Star" width="225" height="225"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lar-ca-Cwf"/>
+        <segue reference="O0B-H3-m4Q"/>
     </inferredMetricsTieBreakers>
 </document>
