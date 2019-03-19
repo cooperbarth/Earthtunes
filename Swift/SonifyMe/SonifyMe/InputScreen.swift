@@ -37,8 +37,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var AdvancedToSubmitDistance: NSLayoutConstraint!
     @IBOutlet weak var SubmitLabel: UIButton!
     
-    var font : Int = 0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         formatScreen()
