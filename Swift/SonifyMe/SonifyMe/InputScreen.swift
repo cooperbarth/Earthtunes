@@ -6,40 +6,9 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
     @IBOutlet weak var DateField: UIDatePicker!
     @IBOutlet weak var TimeField: UIDatePicker!
     @IBOutlet weak var DurationField: UITextField!
-    
-    @IBOutlet weak var TitleDistanceFromTop: NSLayoutConstraint!
-    @IBOutlet weak var TitleLabel: UILabel!
-    @IBOutlet weak var TitleToLocationDistance: NSLayoutConstraint!
-    @IBOutlet weak var LocationLabel: UILabel!
-    @IBOutlet weak var LocationLabelToSpinnerDistance: NSLayoutConstraint!
-    @IBOutlet weak var LocationSpinnerHeight: NSLayoutConstraint!
-    @IBOutlet weak var LocationSpinnerWidth: NSLayoutConstraint!
-    @IBOutlet weak var LocationSpinnerToDateLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var DateLabel: UILabel!
-    @IBOutlet weak var DateLabelToSpinnerDistance: NSLayoutConstraint!
-    @IBOutlet weak var DateSpinnerHeight: NSLayoutConstraint!
-    @IBOutlet weak var DateSpinnerWidth: NSLayoutConstraint!
-    @IBOutlet weak var DateSpinnerToTimeLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var TimeLabel: UILabel!
-    @IBOutlet weak var TimeLabelToSpinnerDistance: NSLayoutConstraint!
-    @IBOutlet weak var TimeSpinnerHeight: NSLayoutConstraint!
-    @IBOutlet weak var TimeSpinnerWidth: NSLayoutConstraint!
-    @IBOutlet weak var TimeSpinnerToDurationLabelDistance: NSLayoutConstraint!
-    @IBOutlet weak var DurationLabel: UILabel!
-    @IBOutlet weak var DurationLabelWidth: NSLayoutConstraint!
-    @IBOutlet weak var DurationLabelToFieldDistance: NSLayoutConstraint!
-    @IBOutlet weak var DurationTextFieldWidth: NSLayoutConstraint!
-    @IBOutlet weak var DurationFieldTextHeight: NSLayoutConstraint!
-    @IBOutlet weak var DurationFieldToSavedEventsDistance: NSLayoutConstraint!
-    @IBOutlet weak var SavedEventsLabel: UIButton!
-    @IBOutlet weak var SavedToAdvancedDistance: NSLayoutConstraint!
-    @IBOutlet weak var AdvancedOptionsLabel: UIButton!
-    @IBOutlet weak var AdvancedToSubmitDistance: NSLayoutConstraint!
-    @IBOutlet weak var SubmitLabel: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        //formatScreen()
         UIView.setAnimationsEnabled(true)
 
         LocationField.delegate = self
@@ -133,111 +102,6 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             return true
         }
         return false
-    }
-}
-
-extension InputScreen {
-    func formatScreen() {
-        switch screenSize.height {
-        case 1136.0:
-            format1136Screen()
-            break
-        case 2208.0:
-            if (!zoomed) {
-                format2208Screen()
-            }
-            break
-        case 2436.0:
-            if (zoomed) {
-                format2208Screen()
-            } else {
-                format2436Screen()
-            }
-            break
-        default:
-            if (zoomed) {
-                format1136Screen()
-            }
-            break
-        }
-    }
-    
-    func format1136Screen() {
-        TitleDistanceFromTop.constant = 10
-        TitleLabel.font = UIFont(name: TitleLabel.font.fontName, size: 28)
-        TitleToLocationDistance.constant = TitleDistanceFromTop.constant
-        LocationLabel.font = LocationLabel.font.withSize(16)
-        LocationLabelToSpinnerDistance.constant = 0
-        LocationSpinnerHeight.constant = 75
-        LocationSpinnerWidth.constant = LocationSpinnerHeight.constant * 3.2
-        LocationSpinnerToDateLabelDistance.constant = TitleToLocationDistance.constant * 0.6
-        DateLabel.font = LocationLabel.font
-        DateLabelToSpinnerDistance.constant = 0
-        DateSpinnerHeight.constant = LocationSpinnerHeight.constant
-        DateSpinnerWidth.constant = LocationSpinnerWidth.constant
-        DateSpinnerToTimeLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
-        TimeLabel.font = LocationLabel.font
-        TimeLabelToSpinnerDistance.constant = DateLabelToSpinnerDistance.constant
-        TimeSpinnerHeight.constant = LocationSpinnerHeight.constant
-        TimeSpinnerWidth.constant = LocationSpinnerWidth.constant
-        TimeSpinnerToDurationLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
-        DurationLabel.font = LocationLabel.font
-        DurationLabelWidth.constant = screenSize.width * 0.25
-        DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant
-        DurationTextFieldWidth.constant = DurationLabelWidth.constant * 1.1
-        DurationFieldTextHeight.constant = screenSize.height * 0.035
-        DurationField.font = DurationField.font?.withSize(DurationFieldTextHeight.constant * 0.4)
-        DurationField.textAlignment = .center
-        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.4
-        SavedEventsLabel.titleLabel?.font = DurationLabel.font?.withSize(DurationFieldTextHeight.constant * 0.3)
-        SavedToAdvancedDistance.constant = TimeSpinnerToDurationLabelDistance.constant
-        AdvancedOptionsLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
-        AdvancedToSubmitDistance.constant = SavedToAdvancedDistance.constant
-        SubmitLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
-    }
-    
-    func format2436Screen() {
-        TitleDistanceFromTop.constant = 16
-        formatBiggerScreens()
-        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.4
-    }
-    
-    func format2208Screen() {
-        TitleDistanceFromTop.constant = 10
-        formatBiggerScreens()
-        DurationFieldToSavedEventsDistance.constant = TitleToLocationDistance.constant * 1.8
-    }
-    
-    func formatBiggerScreens() {
-        TitleLabel.font = UIFont(name: TitleLabel.font.fontName, size: 36)
-        TitleToLocationDistance.constant = TitleDistanceFromTop.constant
-        LocationLabel.font = LocationLabel.font.withSize(18)
-        LocationLabelToSpinnerDistance.constant = 0
-        LocationSpinnerHeight.constant = 120
-        LocationSpinnerWidth.constant = LocationSpinnerHeight.constant * 3.2
-        LocationSpinnerToDateLabelDistance.constant = TitleToLocationDistance.constant * 0.6
-        DateLabel.font = LocationLabel.font
-        DateLabelToSpinnerDistance.constant = 0
-        DateSpinnerHeight.constant = LocationSpinnerHeight.constant
-        DateSpinnerWidth.constant = LocationSpinnerWidth.constant
-        DateSpinnerToTimeLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
-        TimeLabel.font = LocationLabel.font
-        TimeLabelToSpinnerDistance.constant = DateLabelToSpinnerDistance.constant
-        TimeSpinnerHeight.constant = LocationSpinnerHeight.constant
-        TimeSpinnerWidth.constant = LocationSpinnerWidth.constant
-        TimeSpinnerToDurationLabelDistance.constant = LocationSpinnerToDateLabelDistance.constant
-        DurationLabel.font = LocationLabel.font
-        DurationLabelWidth.constant = screenSize.width * 0.25
-        DurationLabelToFieldDistance.constant = DateSpinnerToTimeLabelDistance.constant
-        DurationTextFieldWidth.constant = DurationLabelWidth.constant * 0.7
-        DurationFieldTextHeight.constant = 35
-        DurationField.font = DurationField.font?.withSize(DurationFieldTextHeight.constant * 0.4)
-        DurationField.textAlignment = .center
-        SavedEventsLabel.titleLabel?.font = DurationLabel.font?.withSize(14)
-        SavedToAdvancedDistance.constant = TimeSpinnerToDurationLabelDistance.constant * 1.8
-        AdvancedOptionsLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
-        AdvancedToSubmitDistance.constant = SavedToAdvancedDistance.constant
-        SubmitLabel.titleLabel?.font = SavedEventsLabel.titleLabel?.font
     }
 }
 

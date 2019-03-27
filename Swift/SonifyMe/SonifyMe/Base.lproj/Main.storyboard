@@ -92,19 +92,16 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-76-Kfx">
-                                        <rect key="frame" x="96" y="445" width="128" height="55.5"/>
+                                        <rect key="frame" x="98" y="445" width="124" height="55.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="20.5"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="128" id="wuh-Y2-zPJ"/>
-                                                </constraints>
+                                                <rect key="frame" x="0.0" y="0.0" width="124" height="20.5"/>
                                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2wP-Ta-uhh">
-                                                <rect key="frame" x="0.0" y="25.5" width="128" height="30"/>
+                                                <rect key="frame" x="0.0" y="25.5" width="124" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ZJS-07-9pb"/>
                                                 </constraints>
@@ -155,22 +152,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="AdvancedOptionsLabel" destination="Vyb-bj-gAM" id="lh2-7s-658"/>
                         <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
-                        <outlet property="DateLabel" destination="1uK-sq-fQY" id="1C7-0Y-foP"/>
-                        <outlet property="DateSpinnerHeight" destination="4WD-Dg-7jy" id="Yec-DK-Hde"/>
                         <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
-                        <outlet property="DurationLabel" destination="On6-n7-VNJ" id="izE-A8-fTV"/>
-                        <outlet property="DurationLabelWidth" destination="wuh-Y2-zPJ" id="8Ie-i5-foJ"/>
                         <outlet property="LocationField" destination="wMu-KE-ETd" id="qpS-A3-lSO"/>
-                        <outlet property="LocationLabel" destination="7XT-FV-SdI" id="JFl-cE-fzi"/>
-                        <outlet property="LocationSpinnerHeight" destination="4am-h4-XqT" id="Ikj-dc-GZX"/>
-                        <outlet property="SavedEventsLabel" destination="EcL-kn-h1s" id="UhY-qA-Ozl"/>
-                        <outlet property="SubmitLabel" destination="2fb-gI-jCh" id="V6X-SL-QnU"/>
                         <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
-                        <outlet property="TimeLabel" destination="2aj-Cx-t33" id="rpe-B2-wsR"/>
-                        <outlet property="TimeSpinnerHeight" destination="LeZ-MT-c2i" id="Pib-ax-qqi"/>
-                        <outlet property="TitleLabel" destination="nKg-xr-ve2" id="Haf-qU-iWW"/>
                         <segue destination="Ky7-K0-5BQ" kind="presentation" identifier="ToLoading" id="oiZ-qh-wIF"/>
                         <segue destination="8fP-Gv-uzW" kind="presentation" identifier="ToAdvanced" id="opf-df-TSD"/>
                     </connections>
