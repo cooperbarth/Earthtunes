@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -18,170 +19,158 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2wP-Ta-uhh">
-                                <rect key="frame" x="112.5" y="484" width="150" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="76c-SV-PFS"/>
-                                    <constraint firstAttribute="height" constant="30" id="UIk-hQ-xqw"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XT-FV-SdI">
-                                <rect key="frame" x="156" y="90" width="63.5" height="20"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uK-sq-fQY">
-                                <rect key="frame" x="170" y="208" width="35" height="20"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time (UTC)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aj-Cx-t33">
-                                <rect key="frame" x="145.5" y="326" width="84" height="21"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
-                                <rect key="frame" x="123.5" y="459" width="128" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="wuh-Y2-zPJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMu-KE-ETd">
-                                <rect key="frame" x="27.5" y="103" width="320" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="4am-h4-XqT"/>
-                                    <constraint firstAttribute="width" constant="320" id="mKO-zo-bL1"/>
-                                </constraints>
-                            </pickerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
-                                <rect key="frame" x="161.5" y="625" width="52" height="33"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <state key="normal" title="Submit"/>
-                                <connections>
-                                    <action selector="ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HtV-ae-cWu"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyb-bj-gAM">
-                                <rect key="frame" x="119" y="582" width="137" height="33"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <state key="normal" title="Advanced Options"/>
-                                <connections>
-                                    <action selector="AdvancedPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oBI-ba-WUn"/>
-                                </connections>
-                            </button>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1fX-hj-buG">
-                                <rect key="frame" x="27.5" y="221" width="320" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="4WD-Dg-7jy"/>
-                                    <constraint firstAttribute="width" constant="320" id="eT9-Vn-XSp"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="554744015.83097601">
-                                    <!--2018-07-31 15:33:35 +0000-->
-                                </date>
-                                <connections>
-                                    <action selector="DateChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="jrD-t1-DBa"/>
-                                </connections>
-                            </datePicker>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-1c-sK0">
-                                <rect key="frame" x="27.5" y="340" width="320" height="114"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="114" id="LeZ-MT-c2i"/>
-                                    <constraint firstAttribute="width" constant="320" id="PYZ-qM-uk8"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="554746568.410321">
-                                    <!--2018-07-31 16:16:08 +0000-->
-                                </date>
-                                <connections>
-                                    <action selector="TimeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="44Z-4m-aVd"/>
-                                </connections>
-                            </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earthtunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
-                                <rect key="frame" x="104" y="35" width="167" height="43"/>
-                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="36"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-kn-h1s">
-                                <rect key="frame" x="140.5" y="539" width="94" height="33"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
-                                <state key="normal" title="Saved Events"/>
-                                <connections>
-                                    <action selector="SamplePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zl4-Ox-9Hm"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Th-Rof">
+                                <rect key="frame" x="27.5" y="35" width="320" height="622"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earthtunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
+                                        <rect key="frame" x="77" y="0.0" width="166.5" height="43"/>
+                                        <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eRr-gj-OMs">
+                                        <rect key="frame" x="0.0" y="49.5" width="320" height="120.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XT-FV-SdI">
+                                                <rect key="frame" x="128.5" y="0.0" width="63.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMu-KE-ETd">
+                                                <rect key="frame" x="0.0" y="20.5" width="320" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="4am-h4-XqT"/>
+                                                </constraints>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LkX-tr-Lmo">
+                                        <rect key="frame" x="0.0" y="176.5" width="320" height="120.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uK-sq-fQY">
+                                                <rect key="frame" x="142.5" y="0.0" width="35" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1fX-hj-buG">
+                                                <rect key="frame" x="0.0" y="20.5" width="320" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="4WD-Dg-7jy"/>
+                                                </constraints>
+                                                <date key="date" timeIntervalSinceReferenceDate="554744015.83097601">
+                                                    <!--2018-07-31 15:33:35 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="DateChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="jrD-t1-DBa"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uSs-EE-f8S">
+                                        <rect key="frame" x="0.0" y="304" width="320" height="134.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time (UTC)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aj-Cx-t33">
+                                                <rect key="frame" x="118" y="0.0" width="84" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-1c-sK0">
+                                                <rect key="frame" x="0.0" y="20.5" width="320" height="114"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="114" id="LeZ-MT-c2i"/>
+                                                </constraints>
+                                                <date key="date" timeIntervalSinceReferenceDate="554746568.410321">
+                                                    <!--2018-07-31 16:16:08 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="TimeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="44Z-4m-aVd"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-76-Kfx">
+                                        <rect key="frame" x="96" y="445" width="128" height="55.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="128" height="20.5"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="128" id="wuh-Y2-zPJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2wP-Ta-uhh">
+                                                <rect key="frame" x="0.0" y="25.5" width="128" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="ZJS-07-9pb"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j2D-LP-wS4">
+                                        <rect key="frame" x="91.5" y="507" width="137" height="115"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-kn-h1s">
+                                                <rect key="frame" x="21.5" y="0.0" width="94" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Saved Events"/>
+                                                <connections>
+                                                    <action selector="SamplePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zl4-Ox-9Hm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyb-bj-gAM">
+                                                <rect key="frame" x="0.0" y="41" width="137" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Advanced Options"/>
+                                                <connections>
+                                                    <action selector="AdvancedPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oBI-ba-WUn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
+                                                <rect key="frame" x="42.5" y="82" width="52" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HtV-ae-cWu"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2wP-Ta-uhh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0XP-8z-nSQ"/>
-                            <constraint firstItem="2aj-Cx-t33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3QC-nn-iS7"/>
-                            <constraint firstItem="7XT-FV-SdI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3QJ-ge-OEy"/>
-                            <constraint firstItem="1uK-sq-fQY" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3af-ho-upG"/>
-                            <constraint firstItem="nKg-xr-ve2" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="4CO-uA-foM"/>
-                            <constraint firstItem="2fb-gI-jCh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4zv-bX-jQT"/>
-                            <constraint firstItem="2fb-gI-jCh" firstAttribute="top" secondItem="Vyb-bj-gAM" secondAttribute="bottom" constant="10" id="63m-PS-7Lv"/>
-                            <constraint firstItem="1fX-hj-buG" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8og-ab-eJC"/>
-                            <constraint firstItem="On6-n7-VNJ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BiH-w0-Yga"/>
-                            <constraint firstItem="tQc-1c-sK0" firstAttribute="top" secondItem="2aj-Cx-t33" secondAttribute="bottom" constant="-7" id="UUR-KB-vNw"/>
-                            <constraint firstItem="2aj-Cx-t33" firstAttribute="top" secondItem="1fX-hj-buG" secondAttribute="bottom" constant="5" id="Xca-KN-0ex"/>
-                            <constraint firstItem="nKg-xr-ve2" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cD2-9k-xsS"/>
-                            <constraint firstItem="EcL-kn-h1s" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cMJ-KS-iAA"/>
-                            <constraint firstItem="1fX-hj-buG" firstAttribute="top" secondItem="1uK-sq-fQY" secondAttribute="bottom" constant="-7" id="fm4-qH-8A7"/>
-                            <constraint firstItem="EcL-kn-h1s" firstAttribute="top" secondItem="2wP-Ta-uhh" secondAttribute="bottom" constant="25" id="gZQ-cZ-0UQ"/>
-                            <constraint firstItem="wMu-KE-ETd" firstAttribute="top" secondItem="7XT-FV-SdI" secondAttribute="bottom" constant="-7" id="h2U-cK-zRC"/>
-                            <constraint firstItem="1uK-sq-fQY" firstAttribute="top" secondItem="wMu-KE-ETd" secondAttribute="bottom" constant="5" id="ngq-Ka-BG8"/>
-                            <constraint firstItem="tQc-1c-sK0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pXT-ME-xsO"/>
-                            <constraint firstItem="2wP-Ta-uhh" firstAttribute="top" secondItem="On6-n7-VNJ" secondAttribute="bottom" constant="5" id="rCe-J0-Q0I"/>
-                            <constraint firstItem="Vyb-bj-gAM" firstAttribute="top" secondItem="EcL-kn-h1s" secondAttribute="bottom" constant="10" id="rLf-du-VM2"/>
-                            <constraint firstItem="7XT-FV-SdI" firstAttribute="top" secondItem="nKg-xr-ve2" secondAttribute="bottom" constant="12" id="sPy-S3-3Qo"/>
-                            <constraint firstItem="Vyb-bj-gAM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tlS-3t-HKP"/>
-                            <constraint firstItem="On6-n7-VNJ" firstAttribute="top" secondItem="tQc-1c-sK0" secondAttribute="bottom" constant="5" id="u7E-mf-iKW"/>
-                            <constraint firstItem="wMu-KE-ETd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uMt-aw-Zjz"/>
+                            <constraint firstItem="Kjh-Th-Rof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="7uP-dM-QcG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kjh-Th-Rof" secondAttribute="bottom" constant="10" id="GKu-jl-dfR"/>
+                            <constraint firstItem="Kjh-Th-Rof" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sEU-Dq-KJp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="AdvancedOptionsLabel" destination="Vyb-bj-gAM" id="lh2-7s-658"/>
-                        <outlet property="AdvancedToSubmitDistance" destination="63m-PS-7Lv" id="31R-Yp-APF"/>
                         <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
                         <outlet property="DateLabel" destination="1uK-sq-fQY" id="1C7-0Y-foP"/>
-                        <outlet property="DateLabelToSpinnerDistance" destination="fm4-qH-8A7" id="WEu-rY-5Wy"/>
                         <outlet property="DateSpinnerHeight" destination="4WD-Dg-7jy" id="Yec-DK-Hde"/>
-                        <outlet property="DateSpinnerToTimeLabelDistance" destination="Xca-KN-0ex" id="A1W-ia-Zty"/>
-                        <outlet property="DateSpinnerWidth" destination="eT9-Vn-XSp" id="vVa-Ls-Sds"/>
                         <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
-                        <outlet property="DurationFieldTextHeight" destination="UIk-hQ-xqw" id="cwh-G2-3WK"/>
-                        <outlet property="DurationFieldToSavedEventsDistance" destination="gZQ-cZ-0UQ" id="tBA-N6-eej"/>
                         <outlet property="DurationLabel" destination="On6-n7-VNJ" id="izE-A8-fTV"/>
-                        <outlet property="DurationLabelToFieldDistance" destination="rCe-J0-Q0I" id="fMQ-ii-yJM"/>
                         <outlet property="DurationLabelWidth" destination="wuh-Y2-zPJ" id="8Ie-i5-foJ"/>
-                        <outlet property="DurationTextFieldWidth" destination="76c-SV-PFS" id="L4K-9x-B0t"/>
                         <outlet property="LocationField" destination="wMu-KE-ETd" id="qpS-A3-lSO"/>
                         <outlet property="LocationLabel" destination="7XT-FV-SdI" id="JFl-cE-fzi"/>
-                        <outlet property="LocationLabelToSpinnerDistance" destination="h2U-cK-zRC" id="r24-Dk-PWe"/>
                         <outlet property="LocationSpinnerHeight" destination="4am-h4-XqT" id="Ikj-dc-GZX"/>
-                        <outlet property="LocationSpinnerToDateLabelDistance" destination="ngq-Ka-BG8" id="mTF-7N-lMT"/>
-                        <outlet property="LocationSpinnerWidth" destination="mKO-zo-bL1" id="1lJ-a8-FyF"/>
                         <outlet property="SavedEventsLabel" destination="EcL-kn-h1s" id="UhY-qA-Ozl"/>
-                        <outlet property="SavedToAdvancedDistance" destination="rLf-du-VM2" id="WvR-QI-M0c"/>
                         <outlet property="SubmitLabel" destination="2fb-gI-jCh" id="V6X-SL-QnU"/>
                         <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
                         <outlet property="TimeLabel" destination="2aj-Cx-t33" id="rpe-B2-wsR"/>
-                        <outlet property="TimeLabelToSpinnerDistance" destination="UUR-KB-vNw" id="bQr-GY-YIH"/>
                         <outlet property="TimeSpinnerHeight" destination="LeZ-MT-c2i" id="Pib-ax-qqi"/>
-                        <outlet property="TimeSpinnerToDurationLabelDistance" destination="u7E-mf-iKW" id="87F-tn-mmY"/>
-                        <outlet property="TimeSpinnerWidth" destination="PYZ-qM-uk8" id="7k5-L4-KPs"/>
-                        <outlet property="TitleDistanceFromTop" destination="4CO-uA-foM" id="uGX-qC-e6w"/>
                         <outlet property="TitleLabel" destination="nKg-xr-ve2" id="Haf-qU-iWW"/>
-                        <outlet property="TitleToLocationDistance" destination="sPy-S3-3Qo" id="doQ-r7-COq"/>
                         <segue destination="Ky7-K0-5BQ" kind="presentation" identifier="ToLoading" id="oiZ-qh-wIF"/>
                         <segue destination="8fP-Gv-uzW" kind="presentation" identifier="ToAdvanced" id="opf-df-TSD"/>
                     </connections>
