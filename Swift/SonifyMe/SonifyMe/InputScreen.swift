@@ -41,15 +41,15 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         super.viewDidLoad()
         formatScreen()
         UIView.setAnimationsEnabled(true)
-        
+
         LocationField.delegate = self
         LocationField.dataSource = self
         DurationField.delegate = self
-        
+
         DateField.maximumDate = Date()
         df1.dateFormat = "YYYY-MM-dd"
         df2.dateFormat = "HH:mm"
-        
+
         self.DurationField.inputAccessoryView = initDoneButton()
         setUpFields()
     }

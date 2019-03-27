@@ -7,6 +7,7 @@ let df1 = DateFormatter()
 let df2 = DateFormatter()
 var player : AVAudioPlayer?
 var count = 0
+var locationChosen : Bool = false
 
 let ScrollMenuData = ["Ryerson (IL,USA)",
                       "Yellowstone (WY,USA)",
@@ -17,7 +18,6 @@ let ScrollMenuData = ["Ryerson (IL,USA)",
                       "Addis Ababa, Ethiopia",
                       "Ar Rayn, Saudi Arabia",
                       "Antarctica"]
-var locationChosen : Bool = false
 
 let defaultEvents: [event] = [
     event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventOneDescription),
@@ -27,6 +27,41 @@ let defaultEvents: [event] = [
     event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventFiveDescription),
     event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventSixDescription)
 ]
+
+let locations: [String: (String, String, String)] = [
+    "Ryerson (IL,USA)": ("L44A", "TA", "--"),
+    "Yellowstone (WY,USA)": ("H17A", "TA", "--"),
+    "Anchorage (AK,USA)": ("SSN", "AK", "--"),
+    "Paris, France": ("CLF", "G", "00"),
+    "Inuyama, Japan": ("INU", "G", "00"),
+    "Cachiyuyo, Chile": ("LCO", "IU", "10"),
+    "Addis Ababa, Ethiopia": ("FURI", "IU", "00"),
+    "Ar Rayn, Saudi Arabia": ("RAYN", "II", "10"),
+    "Antarctica": ("CASY", "IU", "10")
+]
+
+func getLocation(location: String) -> (String, String, String) {
+    switch location {
+    case "Yellowstone (WY,USA)":
+        return ("H17A", "TA", "--")
+    case "Anchorage (AK,USA)":
+        return ("SSN", "AK", "--")
+    case "Paris, France":
+        return ("CLF", "G", "00")
+    case "Inuyama, Japan":
+        return ("INU", "G", "00")
+    case "Cachiyuyo, Chile":
+        return ("LCO", "IU", "10")
+    case "Addis Ababa, Ethiopia":
+        return ("FURI", "IU", "00")
+    case "Ar Rayn, Saudi Arabia":
+        return ("RAYN", "II", "10")
+    case "Antarctica":
+        return ("CASY", "IU", "10")
+    default:
+        return ("L44A", "TA", "--")
+    }
+}
 
 func isNumber(num: String) -> Bool {
     if (Float(num) != nil) {return true}

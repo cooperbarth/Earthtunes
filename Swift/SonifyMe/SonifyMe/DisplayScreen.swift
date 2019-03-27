@@ -80,7 +80,7 @@ class DisplayScreen : ViewController {
             YellowButton.isEnabled = false
         }
     }
-    
+
     @IBAction func BlackPressed(_ sender: Any) {
         if (!inFavorites()) {
             favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: ""))
@@ -91,7 +91,7 @@ class DisplayScreen : ViewController {
         BlackButton.isHidden = true
         BlackButton.isEnabled = false
     }
-    
+
     @IBAction func YellowPressed(_ sender: Any) {
         removeFavorite()
         saveFavorites(events: favorites)
@@ -100,7 +100,7 @@ class DisplayScreen : ViewController {
         YellowButton.isEnabled = false
         BlackButton.isEnabled = true
     }
-    
+
     @IBAction func PauseButtonPressed(_ sender: Any) {
         pauseSound()
     }
@@ -118,7 +118,7 @@ class DisplayScreen : ViewController {
             pauseSound()
         }
     }
-    
+
     @IBAction func RewindButtonPressed(_ sender: Any) {
         let newTime = (player?.currentTime)! - TimeInterval(7.5)
         if (Float(newTime) > 0.0) {
@@ -271,28 +271,11 @@ extension DisplayScreen {
         let cgimage = image.cgImage!
         let contextImage: UIImage = UIImage(cgImage: cgimage)
         let contextSize: CGSize = contextImage.size
-        
+
         let rect: CGRect = CGRect(x: 75.0, y: 0.0, width: contextSize.width * 0.9, height: contextSize.height)
         let imageRef: CGImage = cgimage.cropping(to: rect)!
         let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
-        
+
         return image
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

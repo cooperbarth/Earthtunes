@@ -20,7 +20,7 @@
 		F267AB36212F0AB500A96288 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F267AB34212F0AB500A96288 /* LaunchScreen.storyboard */; };
 		F2A6EDF32125EA70001672EC /* InfoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2A6EDF22125EA70001672EC /* InfoScreen.swift */; };
 		F2FAF2FF2121FDD900753512 /* DataManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF2FE2121FDD900753512 /* DataManagement.swift */; };
-		F2FAF3012121FFB800753512 /* ExternalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF3002121FFB800753512 /* ExternalFunctions.swift */; };
+		F2FAF3012121FFB800753512 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FAF3002121FFB800753512 /* Resources.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,7 @@
 		F267AB35212F0AB500A96288 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2A6EDF22125EA70001672EC /* InfoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoScreen.swift; sourceTree = "<group>"; };
 		F2FAF2FE2121FDD900753512 /* DataManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagement.swift; sourceTree = "<group>"; };
-		F2FAF3002121FFB800753512 /* ExternalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalFunctions.swift; sourceTree = "<group>"; };
+		F2FAF3002121FFB800753512 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				F2FAF2FE2121FDD900753512 /* DataManagement.swift */,
-				F2FAF3002121FFB800753512 /* ExternalFunctions.swift */,
+				F2FAF3002121FFB800753512 /* Resources.swift */,
 				CDF068682144686A00B6E5F0 /* Text.swift */,
 			);
 			path = "Non-Screen Files";
@@ -131,7 +131,7 @@
 				TargetAttributes = {
 					CD01B88921077765000EFCC9 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -176,7 +176,7 @@
 				F2A6EDF32125EA70001672EC /* InfoScreen.swift in Sources */,
 				CD01B89021077766000EFCC9 /* ViewController.swift in Sources */,
 				CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */,
-				F2FAF3012121FFB800753512 /* ExternalFunctions.swift in Sources */,
+				F2FAF3012121FFB800753512 /* Resources.swift in Sources */,
 				F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */,
 				CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */,
 				F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */,
@@ -335,7 +335,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.SonifyMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -354,7 +354,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.SonifyMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
