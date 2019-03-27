@@ -5,7 +5,6 @@ import AudioToolbox
 
 class LoadingScreen : ViewController {
     @IBOutlet weak var LoadingLabel: UILabel!
-    @IBOutlet weak var LoadingView: UIView!
 
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
@@ -18,13 +17,13 @@ class LoadingScreen : ViewController {
     let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
     var fsps : Double = 0.0
     var bandsHZ : Double = 0.0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.makeViewAppear()
         self.showAnimate()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getSoundAndGraph()
