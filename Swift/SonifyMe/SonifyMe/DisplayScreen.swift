@@ -40,19 +40,16 @@ class DisplayScreen : ViewController {
     let data = UserDefaults.standard.array(forKey: "Data")!
     let yMax = UserDefaults.standard.double(forKey: "Max")
     var favorites : [event] = []
-    
-    var graphImage : UIImage? = nil
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        formatScreen()
         if (ud.bool(forKey: "Save")) {
             UIImageWriteToSavedPhotosAlbum(img!, self, nil, nil)
         }
-        let newImg = cropGraph(image: graphImage!)
-        
+        let newImg = cropGraph(image: img!)
+
         self.GraphView.image = newImg
-        favorites = retrieveFavorites()!
+        self.favorites = retrieveFavorites()!
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -67,7 +64,7 @@ class DisplayScreen : ViewController {
         }
         player?.delegate = self
     }
-    
+
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         GraphTitle.text = ud.string(forKey: "Title")
@@ -155,7 +152,6 @@ class DisplayScreen : ViewController {
 
 extension DisplayScreen {
     func formatScreen() {
-        graphImage = img!
         switch screenSize.height {
         case 1136.0:
             format1136Screen()
