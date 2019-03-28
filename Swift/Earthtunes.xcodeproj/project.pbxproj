@@ -58,7 +58,7 @@
 		CD01B88121077765000EFCC9 = {
 			isa = PBXGroup;
 			children = (
-				CD01B88C21077766000EFCC9 /* SonifyMe */,
+				CD01B88C21077766000EFCC9 /* Earthtunes */,
 				CD01B88B21077766000EFCC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,7 +71,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CD01B88C21077766000EFCC9 /* SonifyMe */ = {
+		CD01B88C21077766000EFCC9 /* Earthtunes */ = {
 			isa = PBXGroup;
 			children = (
 				CD01B89121077766000EFCC9 /* Main.storyboard */,
@@ -88,7 +88,7 @@
 				CD01B89421077767000EFCC9 /* Assets.xcassets */,
 				CD01B89921077767000EFCC9 /* Info.plist */,
 			);
-			path = SonifyMe;
+			path = Earthtunes;
 			sourceTree = "<group>";
 		};
 		F2E80D2321234F0A0049AB07 /* Non-Screen Files */ = {
@@ -118,7 +118,7 @@
 			dependencies = (
 			);
 			name = Earthtunes;
-			productName = SonifyMe;
+			productName = Earthtunes;
 			productReference = CD01B88A21077766000EFCC9 /* Earthtunes.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -331,13 +331,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83LR657G4K;
-				INFOPLIST_FILE = SonifyMe/Info.plist;
+				INFOPLIST_FILE = Earthtunes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.SonifyMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.Earthtunes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -350,13 +350,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83LR657G4K;
-				INFOPLIST_FILE = SonifyMe/Info.plist;
+				INFOPLIST_FILE = Earthtunes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.SonifyMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.Earthtunes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
