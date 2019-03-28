@@ -87,7 +87,6 @@ extension LoadingScreen {
         var tot = Float64(head.split(separator: " ")[2])!
         var sound = [Float64]()
         var maxAmp = 0.0
-        print(dflines[0])
         for i in 1..<dflines.count {
             if (isNumber(num: String(dflines[i]))) {
                 let f = Float64(dflines[i])!
