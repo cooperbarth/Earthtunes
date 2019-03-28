@@ -209,10 +209,7 @@
                                         <rect key="frame" x="89.5" y="147.5" width="150" height="71"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPB-VD-OUg">
-                                                <rect key="frame" x="17.5" y="0.0" width="115" height="33"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="115" id="ajF-Yh-z6X"/>
-                                                </constraints>
+                                                <rect key="frame" x="18.5" y="0.0" width="113" height="33"/>
                                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                                 <state key="normal" title="Max Amplitude"/>
                                                 <connections>

@@ -1,5 +1,5 @@
-import UIKit
 import Foundation
+import UIKit
 
 class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var LocationField: UIPickerView!

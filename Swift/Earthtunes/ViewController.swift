@@ -1,7 +1,5 @@
-import UIKit
-import AVKit
 import Foundation
-import AudioToolbox
+import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     let screenSize: CGRect = UIScreen.main.nativeBounds
@@ -49,11 +47,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
         
         return doneToolbar
     }
-    
+
     @objc func doneButtonAction() {
         view.endEditing(true)
     }
-    
+
     func showAnimate() {
         self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         self.view.alpha = 0.0;
@@ -63,7 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             
         });
     }
-    
+
     func removeAnimate() {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -74,7 +72,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         });
     }
-    
+
     func showInputError() {
         let alertController = UIAlertController(title: "Input Error", message: ud.string(forKey: "Input Error"), preferredStyle: .alert)
         let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)

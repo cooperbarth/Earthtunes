@@ -1,7 +1,5 @@
 import UIKit
-import AVKit
 import Foundation
-import AudioToolbox
 
 class LoadingScreen : ViewController {
     @IBOutlet weak var LoadingLabel: UILabel!
@@ -28,9 +26,7 @@ class LoadingScreen : ViewController {
         super.viewDidAppear(animated)
         getSoundAndGraph()
     }
-}
 
-extension LoadingScreen {
     func makeViewAppear() {
         self.view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
         LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
