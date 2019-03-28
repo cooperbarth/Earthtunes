@@ -13,6 +13,7 @@
 		CD01B89521077767000EFCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89421077767000EFCC9 /* Assets.xcassets */; };
 		CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD326F9B210FDA5300F690F7 /* SuggestionScreen.swift */; };
 		CDF068692144686A00B6E5F0 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF068682144686A00B6E5F0 /* Text.swift */; };
+		CDF4554A224C4E4A001356B7 /* BiggerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF45549224C4E4A001356B7 /* BiggerSlider.swift */; };
 		F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F8C7A210F85B600D18B38 /* AdvancedScreen.swift */; };
 		F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818122108ED6900EB66D7 /* InputScreen.swift */; };
 		F25818172108ED9000EB66D7 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F25818162108ED9000EB66D7 /* LoadingScreen.swift */; };
@@ -24,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CD01B88A21077766000EFCC9 /* SonifyMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SonifyMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD01B88A21077766000EFCC9 /* Earthtunes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Earthtunes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD01B88D21077766000EFCC9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CD01B88F21077766000EFCC9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CD01B89221077766000EFCC9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -32,6 +33,7 @@
 		CD01B89921077767000EFCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD326F9B210FDA5300F690F7 /* SuggestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionScreen.swift; sourceTree = "<group>"; };
 		CDF068682144686A00B6E5F0 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
+		CDF45549224C4E4A001356B7 /* BiggerSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiggerSlider.swift; sourceTree = "<group>"; };
 		F22F8C7A210F85B600D18B38 /* AdvancedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedScreen.swift; sourceTree = "<group>"; };
 		F25818122108ED6900EB66D7 /* InputScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputScreen.swift; sourceTree = "<group>"; };
 		F25818162108ED9000EB66D7 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
@@ -56,7 +58,7 @@
 		CD01B88121077765000EFCC9 = {
 			isa = PBXGroup;
 			children = (
-				CD01B88C21077766000EFCC9 /* SonifyMe */,
+				CD01B88C21077766000EFCC9 /* Earthtunes */,
 				CD01B88B21077766000EFCC9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -64,12 +66,12 @@
 		CD01B88B21077766000EFCC9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CD01B88A21077766000EFCC9 /* SonifyMe.app */,
+				CD01B88A21077766000EFCC9 /* Earthtunes.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CD01B88C21077766000EFCC9 /* SonifyMe */ = {
+		CD01B88C21077766000EFCC9 /* Earthtunes */ = {
 			isa = PBXGroup;
 			children = (
 				CD01B89121077766000EFCC9 /* Main.storyboard */,
@@ -86,7 +88,7 @@
 				CD01B89421077767000EFCC9 /* Assets.xcassets */,
 				CD01B89921077767000EFCC9 /* Info.plist */,
 			);
-			path = SonifyMe;
+			path = Earthtunes;
 			sourceTree = "<group>";
 		};
 		F2E80D2321234F0A0049AB07 /* Non-Screen Files */ = {
@@ -95,6 +97,7 @@
 				F2FAF2FE2121FDD900753512 /* DataManagement.swift */,
 				F2FAF3002121FFB800753512 /* Resources.swift */,
 				CDF068682144686A00B6E5F0 /* Text.swift */,
+				CDF45549224C4E4A001356B7 /* BiggerSlider.swift */,
 			);
 			path = "Non-Screen Files";
 			sourceTree = "<group>";
@@ -102,9 +105,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CD01B88921077765000EFCC9 /* SonifyMe */ = {
+		CD01B88921077765000EFCC9 /* Earthtunes */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "SonifyMe" */;
+			buildConfigurationList = CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "Earthtunes" */;
 			buildPhases = (
 				CD01B88621077765000EFCC9 /* Sources */,
 				CD01B88721077765000EFCC9 /* Frameworks */,
@@ -114,9 +117,9 @@
 			);
 			dependencies = (
 			);
-			name = SonifyMe;
-			productName = SonifyMe;
-			productReference = CD01B88A21077766000EFCC9 /* SonifyMe.app */;
+			name = Earthtunes;
+			productName = Earthtunes;
+			productReference = CD01B88A21077766000EFCC9 /* Earthtunes.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -135,7 +138,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "SonifyMe" */;
+			buildConfigurationList = CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "Earthtunes" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -148,7 +151,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CD01B88921077765000EFCC9 /* SonifyMe */,
+				CD01B88921077765000EFCC9 /* Earthtunes */,
 			);
 		};
 /* End PBXProject section */
@@ -179,6 +182,7 @@
 				F2FAF3012121FFB800753512 /* Resources.swift in Sources */,
 				F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */,
 				CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */,
+				CDF4554A224C4E4A001356B7 /* BiggerSlider.swift in Sources */,
 				F25818192108EE2500EB66D7 /* DisplayScreen.swift in Sources */,
 				CDF068692144686A00B6E5F0 /* Text.swift in Sources */,
 				F25818132108ED6900EB66D7 /* InputScreen.swift in Sources */,
@@ -327,13 +331,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83LR657G4K;
-				INFOPLIST_FILE = SonifyMe/Info.plist;
+				INFOPLIST_FILE = Earthtunes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.SonifyMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.Earthtunes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -346,13 +350,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 83LR657G4K;
-				INFOPLIST_FILE = SonifyMe/Info.plist;
+				INFOPLIST_FILE = Earthtunes/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.SonifyMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cooper.Earthtunes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -362,7 +366,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "SonifyMe" */ = {
+		CD01B88521077765000EFCC9 /* Build configuration list for PBXProject "Earthtunes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD01B89A21077767000EFCC9 /* Debug */,
@@ -371,7 +375,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "SonifyMe" */ = {
+		CD01B89C21077767000EFCC9 /* Build configuration list for PBXNativeTarget "Earthtunes" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CD01B89D21077767000EFCC9 /* Debug */,
