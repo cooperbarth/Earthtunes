@@ -532,10 +532,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3R-w2-AUR">
-                                <rect key="frame" x="137.5" y="143.5" width="100" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="LNr-Wr-hRU"/>
-                                </constraints>
+                                <rect key="frame" x="140.5" y="143.5" width="94.5" height="20"/>
                                 <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -657,14 +654,10 @@
                                     </stackView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKE-IA-8Od">
                                         <rect key="frame" x="0.0" y="47" width="375" height="403"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="375" id="TnW-Pg-WCd"/>
-                                        </constraints>
                                     </imageView>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-Zt-Aje" customClass="BiggerSlider" customModule="SonifyMe" customModuleProvider="target">
                                         <rect key="frame" x="-2" y="462" width="379" height="51"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="375" id="fQr-XM-QAr"/>
                                             <constraint firstAttribute="height" constant="50" id="gpY-z5-cLF"/>
                                         </constraints>
                                         <connections>
@@ -727,8 +720,10 @@
                                     </stackView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="nKE-IA-8Od" secondAttribute="trailing" id="QXp-XS-EzW"/>
-                                    <constraint firstItem="nKE-IA-8Od" firstAttribute="leading" secondItem="NzM-My-Ler" secondAttribute="leading" id="t6o-fc-x1H"/>
+                                    <constraint firstItem="nKE-IA-8Od" firstAttribute="leading" secondItem="NzM-My-Ler" secondAttribute="leading" id="8Tf-VC-P4t"/>
+                                    <constraint firstAttribute="trailing" secondItem="vWu-Zt-Aje" secondAttribute="trailing" id="eXZ-yb-vZr"/>
+                                    <constraint firstAttribute="trailing" secondItem="nKE-IA-8Od" secondAttribute="trailing" id="ein-Xv-ag7"/>
+                                    <constraint firstItem="vWu-Zt-Aje" firstAttribute="leading" secondItem="NzM-My-Ler" secondAttribute="leading" id="idq-Gb-X3Y"/>
                                 </constraints>
                             </stackView>
                         </subviews>
@@ -736,7 +731,9 @@
                         <constraints>
                             <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="NzM-My-Ler" secondAttribute="bottom" constant="20" id="Lhp-qQ-46C"/>
                             <constraint firstItem="NzM-My-Ler" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="VLL-aQ-K4k"/>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="NzM-My-Ler" secondAttribute="trailing" id="ZdQ-OI-93m"/>
                             <constraint firstItem="NzM-My-Ler" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="aeg-rC-GEw"/>
+                            <constraint firstItem="NzM-My-Ler" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="zX6-qs-ekb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gih-OP-X9R"/>
                     </view>
