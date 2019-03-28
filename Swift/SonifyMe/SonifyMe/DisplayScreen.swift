@@ -6,28 +6,11 @@ import AudioToolbox
 class DisplayScreen : ViewController {
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
+    @IBOutlet weak var GraphView: UIImageView!
+    @IBOutlet weak var SaveButton: UIButton!
     @IBOutlet weak var PauseButton: UIButton!
     @IBOutlet weak var PlayButton: UIButton!
-    @IBOutlet weak var FFButton: UIButton!
-    @IBOutlet weak var RewindButton: UIButton!
-    @IBOutlet weak var BlackButton: UIButton!
-    @IBOutlet weak var YellowButton: UIButton!
-    @IBOutlet weak var GraphView: UIImageView!
-    
-    @IBOutlet weak var GraphHeight: NSLayoutConstraint!
-    @IBOutlet weak var GraphWidth: NSLayoutConstraint!
-    @IBOutlet weak var PauseHeight: NSLayoutConstraint!
-    @IBOutlet weak var PauseWidth: NSLayoutConstraint!
-    @IBOutlet weak var PlayHeight: NSLayoutConstraint!
-    @IBOutlet weak var PlayWidth: NSLayoutConstraint!
-    @IBOutlet weak var FFHeight: NSLayoutConstraint!
-    @IBOutlet weak var FFWidth: NSLayoutConstraint!
-    @IBOutlet weak var RewindHeight: NSLayoutConstraint!
-    @IBOutlet weak var RewindWidth: NSLayoutConstraint!
-    @IBOutlet weak var TitleToTopDistance: NSLayoutConstraint!
-    @IBOutlet weak var TitleToGraphDistance: NSLayoutConstraint!
-    @IBOutlet weak var SliderToPlayDistance: NSLayoutConstraint!
-    
+
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
     let time = UserDefaults.standard.string(forKey: "Time")!
@@ -69,33 +52,29 @@ class DisplayScreen : ViewController {
         super.viewDidLayoutSubviews()
         GraphTitle.text = ud.string(forKey: "Title")
         SoundSlideLayout.value = 0.0
-        if (inFavorites()) {
-            BlackButton.isHidden = true
-            BlackButton.isEnabled = false
-        } else {
-            YellowButton.isHidden = true
-            YellowButton.isEnabled = false
-        }
+        updateSavedPic()
     }
 
-    @IBAction func BlackPressed(_ sender: Any) {
-        if (!inFavorites()) {
+    @IBAction func SavePressed(_ sender: Any) {
+        if (inFavorites()) {
+            removeFavorite()
+        } else {
             favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: ""))
         }
         saveFavorites(events: favorites)
-        YellowButton.isHidden = false
-        YellowButton.isEnabled = true
-        BlackButton.isHidden = true
-        BlackButton.isEnabled = false
+        updateSavedPic()
     }
 
-    @IBAction func YellowPressed(_ sender: Any) {
-        removeFavorite()
-        saveFavorites(events: favorites)
-        BlackButton.isHidden = false
-        YellowButton.isHidden = true
-        YellowButton.isEnabled = false
-        BlackButton.isEnabled = true
+    func updateSavedPic() {
+        if (inFavorites()) {
+            if let image = UIImage(named: "YellowStar.png") {
+                SaveButton.setImage(image, for: .normal)
+            }
+        } else {
+            if let image = UIImage(named: "BlackStar.png") {
+                SaveButton.setImage(image, for: .normal)
+            }
+        }
     }
 
     @IBAction func PauseButtonPressed(_ sender: Any) {
@@ -128,7 +107,7 @@ class DisplayScreen : ViewController {
     @IBAction func SoundSlider(_ sender: Any) {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
-    
+
     @IBAction func BackButton(_ sender: Any) {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
@@ -147,58 +126,6 @@ class DisplayScreen : ViewController {
             return true
         }
         return false
-    }
-}
-
-extension DisplayScreen {
-    func formatScreen() {
-        switch screenSize.height {
-        case 1136.0:
-            format1136Screen()
-            break
-        case 2208.0:
-            if (!zoomed) {
-                format2208Screen()
-            }
-            break
-        case 2436.0:
-            if (zoomed) {
-                format2208Screen()
-            } else {
-                format2436Screen()
-            }
-            break
-        default:
-            if (zoomed) {
-                format1136Screen()
-            }
-            break
-        }
-        PauseWidth.constant = PauseHeight.constant
-        PlayHeight.constant = PauseHeight.constant
-        PlayWidth.constant = PlayHeight.constant
-        FFHeight.constant = PlayHeight.constant
-        FFWidth.constant = FFHeight.constant
-        RewindHeight.constant = FFHeight.constant
-        RewindWidth.constant = RewindHeight.constant
-    }
-    
-    func format1136Screen() {
-        GraphWidth.constant = GraphWidth.constant * 0.85
-        GraphHeight.constant = GraphHeight.constant * 0.75
-        PauseHeight.constant = PauseHeight.constant * 0.8
-    }
-    
-    func format2208Screen() {
-        GraphWidth.constant = GraphWidth.constant * 1.15
-        GraphHeight.constant = GraphHeight.constant * 1.25
-    }
-    
-    func format2436Screen() {
-        TitleToTopDistance.constant = TitleToTopDistance.constant * 1.25
-        TitleToGraphDistance.constant = TitleToGraphDistance.constant * 1.5
-        PauseHeight.constant = PauseHeight.constant
-        SliderToPlayDistance.constant = SliderToPlayDistance.constant * 2
     }
 }
 
@@ -268,7 +195,7 @@ extension DisplayScreen {
         let contextImage: UIImage = UIImage(cgImage: cgimage)
         let contextSize: CGSize = contextImage.size
 
-        let rect: CGRect = CGRect(x: 75.0, y: 0.0, width: contextSize.width * 0.9, height: contextSize.height)
+        let rect: CGRect = CGRect(x: 75.0, y: 25.0, width: contextSize.width * 0.9, height: contextSize.height)
         let imageRef: CGImage = cgimage.cropping(to: rect)!
         let image: UIImage = UIImage(cgImage: imageRef, scale: image.scale, orientation: image.imageOrientation)
 
