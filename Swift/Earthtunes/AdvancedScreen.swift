@@ -10,7 +10,7 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var GChannel: UISegmentedControl!
     @IBOutlet weak var LoopingSwitch: UISwitch!
     @IBOutlet weak var SaveGraphSwitch: UISwitch!
-    
+
     @IBOutlet weak var TopToTitleDistance: NSLayoutConstraint!
     @IBOutlet weak var AdvancedTitle: UILabel!
     @IBOutlet weak var TitleToFreqLabelDistance: NSLayoutConstraint!
@@ -48,14 +48,14 @@ class AdvancedScreen : ViewController {
     @IBOutlet weak var ResetLabel: UIButton!
     @IBOutlet weak var ResetToReturnLabelDistance: NSLayoutConstraint!
     @IBOutlet weak var ReturnLabel: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         formatScreen()
         addDoneButtons()
         fillIn()
     }
-    
+
     @IBAction func FrequencyHelp(_ sender: Any) {
         let alertController = UIAlertController(title: "Frequency", message: freqText, preferredStyle: .alert)
         let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
@@ -63,7 +63,7 @@ class AdvancedScreen : ViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
+
     @IBAction func AmplitudeHelp(_ sender: Any) {
         let alertController = UIAlertController(title: "Amplitude", message: ampText, preferredStyle: .alert)
         let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
@@ -71,15 +71,15 @@ class AdvancedScreen : ViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
+
     @IBAction func SoundChannelHelp(_ sender: Any) {
         ChannelHelp(expType: "Sound")
     }
-    
+
     @IBAction func GraphChannelHelp(_ sender: Any) {
         ChannelHelp(expType: "Graph")
     }
-    
+
     func ChannelHelp(expType: String) {
         let expTitle = expType + " Channel"
         let expString = channelText1 + expType.lowercased() + channelText2
@@ -89,11 +89,11 @@ class AdvancedScreen : ViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
+
     @IBAction func LoopingPressed(_ sender: Any) {
         ud.set(LoopingSwitch.isOn, forKey: "Loop")
     }
-    
+
     @IBAction func SavePressed(_ sender: Any) {
         if (SaveGraphSwitch.isOn) {
             let photos = PHPhotoLibrary.authorizationStatus()
@@ -122,7 +122,7 @@ class AdvancedScreen : ViewController {
         }
         self.ud.set(self.SaveGraphSwitch.isOn, forKey: "Save")
     }
-    
+
     @IBAction func ClearCache(_ sender: Any) {
         let alertController = UIAlertController(title: "Clear Cache", message: clearCacheText, preferredStyle: .alert)
         let clearCacheAction = UIAlertAction(title: "Clear", style: .default, handler: { (_) -> Void in
@@ -134,7 +134,7 @@ class AdvancedScreen : ViewController {
         
         present(alertController, animated: true, completion: nil)
     }
-    
+
     @IBAction func ResetDefaults(_ sender: Any) {
         ud.set(3, forKey: "FreqIndex")
         ud.set("0.0001", forKey: "Amplitude")
@@ -143,12 +143,12 @@ class AdvancedScreen : ViewController {
         ud.set(0, forKey: "GCIndex")
 
         fillIn()
-        
+
         ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
         ud.set(SChannel.titleForSegment(at: SChannel.selectedSegmentIndex)!, forKey: "SChannel")
         ud.set(GChannel.titleForSegment(at: GChannel.selectedSegmentIndex)!, forKey: "GChannel")
     }
-    
+
     @IBAction func ReturnButton(_ sender: Any) {
         view.endEditing(true)
         if (validInputs()) {
@@ -158,7 +158,7 @@ class AdvancedScreen : ViewController {
             showPopup(name: "Input Error")
         }
     }
-    
+
     func setValues() {
         ud.set(Freq.titleForSegment(at: Freq.selectedSegmentIndex)!, forKey: "Frequency")
         ud.set(Amp.text!, forKey: "Amplitude")
@@ -170,7 +170,7 @@ class AdvancedScreen : ViewController {
         ud.set(SChannel.selectedSegmentIndex, forKey: "SCIndex")
         ud.set(GChannel.selectedSegmentIndex, forKey: "GCIndex")
     }
-    
+
     func fillIn() {
         Freq.selectedSegmentIndex = ud.integer(forKey: "FreqIndex")
         Amp.text = ud.string(forKey: "Amplitude")
@@ -207,7 +207,7 @@ extension AdvancedScreen {
             break
         }
     }
-    
+
     func format1136Screen() {
         TopToTitleDistance.constant = screenSize.height * 0.02
         AdvancedTitle.font = AdvancedTitle.font.withSize(TopToTitleDistance.constant * 0.8)
@@ -310,7 +310,7 @@ extension AdvancedScreen {
         ResetToReturnLabelDistance.constant = ClearToResetLabelDistance.constant
         ReturnLabel.titleLabel?.font = AmpLabel.titleLabel?.font
     }
-    
+
     func format2436Screen() {
         format2208Screen()
         AdvancedTitle.font = AdvancedTitle.font.withSize(28)

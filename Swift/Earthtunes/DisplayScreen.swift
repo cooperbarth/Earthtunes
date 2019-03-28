@@ -10,17 +10,15 @@ class DisplayScreen : ViewController {
     @IBOutlet weak var SaveButton: UIButton!
     @IBOutlet weak var PlayPauseButton: UIButton!
 
-    var locate = UserDefaults.standard.string(forKey: "Location")!
-    let date = UserDefaults.standard.string(forKey: "Date")!
-    let time = UserDefaults.standard.string(forKey: "Time")!
-    let duration = UserDefaults.standard.string(forKey: "Duration")!
-    let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
-    let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
-    let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
-    let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
-    let data = UserDefaults.standard.array(forKey: "Data")!
-    let yMax = UserDefaults.standard.double(forKey: "Max")
+    lazy var locate = ud.string(forKey: "Location")!
+    lazy var date = ud.string(forKey: "Date")!
+    lazy var time = ud.string(forKey: "Time")!
+    lazy var duration = ud.string(forKey: "Duration")!
+    lazy var inputFreq = ud.string(forKey: "Frequency")!
+    lazy var inputAmp = ud.string(forKey: "Amplitude")!
+    lazy var inputRate = ud.string(forKey: "Rate")!
+    lazy var inputSChannel = ud.string(forKey: "SChannel")!
+    lazy var inputGChannel = ud.string(forKey: "GChannel")!
     var favorites : [event] = []
 
     override func viewDidLoad() {
@@ -30,8 +28,8 @@ class DisplayScreen : ViewController {
         }
         let newImg = cropGraph(image: img!)
 
-        self.GraphView.image = newImg
-        self.favorites = retrieveFavorites()!
+        GraphView.image = newImg
+        favorites = retrieveFavorites()!
     }
 
     override func viewDidAppear(_ animated: Bool) {
