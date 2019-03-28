@@ -797,47 +797,46 @@ class FloatInput(TextInput):
 			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
 		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
-# Create screen manager
-sm = ScreenManager()
-
-#Creating InputError popup
-errscreen = InputError(as_popup = True) 
-errpopup=Popup(title="Input Error", content = errscreen, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating Error404 popup
-errscreen2 = Error404(as_popup = True)
-errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating ChooseScreen popup
-chooseScreen = ChooseScreen(as_popup=True)
-choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating SampleScreen popup
-sampleScreen = SampleScreen(as_popup=True)
-samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.8,0.8), background = 'black.jpg', separator_color = (1,1,1,1))
-
-#Creating AdvancedScreen popup
-advScreen = AdvancedScreen(as_popup=True)
-advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating InofScreen popup
-infoScreen = InfoScreen(as_popup=True)
-infoPopup=Popup(title='Information', content = infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
-infoPopup.bind(on_dismiss=lambda x:advancedScreen.open())
-
-#Create LoadingScreen popup
-loadScreen = LoadingScreen(as_popup=True)
-loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), background = "black.jpg", separator_color = (1,1,1,1), on_open=loadScreen.loadData)
-
-#Creating Screens
-input = InputScreen(name='Input Screen')
-sm.add_widget(input)
-display = DisplayScreen(name='Display Screen')
-sm.add_widget(display)
-
-sm.current = 'Input Screen'
-
 class SonifyMe(App):
+	# Create screen manager
+	sm = ScreenManager()
+
+	#Creating InputError popup
+	errscreen = InputError(as_popup = True) 
+	errpopup=Popup(title="Input Error", content = errscreen, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating Error404 popup
+	errscreen2 = Error404(as_popup = True)
+	errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating ChooseScreen popup
+	chooseScreen = ChooseScreen(as_popup=True)
+	choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating SampleScreen popup
+	sampleScreen = SampleScreen(as_popup=True)
+	samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.8,0.8), background = 'black.jpg', separator_color = (1,1,1,1))
+
+	#Creating AdvancedScreen popup
+	advScreen = AdvancedScreen(as_popup=True)
+	advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating InfoScreen popup
+	infoScreen = InfoScreen(as_popup=True)
+	infoPopup=Popup(title='Information', content = infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
+	infoPopup.bind(on_dismiss=lambda x:advancedScreen.open())
+
+	#Create LoadingScreen popup
+	loadScreen = LoadingScreen(as_popup=True)
+	loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), background = "black.jpg", separator_color = (1,1,1,1), on_open=loadScreen.loadData)
+
+	#Creating Screens
+	input = InputScreen(name='Input Screen')
+	sm.add_widget(input)
+	display = DisplayScreen(name='Display Screen')
+	sm.add_widget(display)
+
+	sm.current = 'Input Screen'
 
 	def build(self):
 		return sm
