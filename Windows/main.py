@@ -1,17 +1,13 @@
 import kivy
 kivy.require('1.10.1')
-import numpy
 import urllib2
 import random
 import re
 
-from scipy.io import wavfile
-from matplotlib.pyplot import *
 from datetime import date, datetime, timedelta
 from functools import partial
 from os import path, system
-
-matplotlib.pyplot.style.use(['dark_background'])
+from getSoundAndGraph import getSoundAndGraph
 
 from kivy.app import App
 from kivy.clock import Clock
@@ -186,139 +182,6 @@ class LoadingScreen(GridLayout):
 			loadPopup.dismiss()
 			sm.transition.direction = 'left'
 			sm.current = 'Display Screen'
-
-	#getSoundAndGraph: Script that pulls data and processes into image and audio
-	def getSoundAndGraph(self, locate, date, time, duration, AF, FA):
-		halfpi = 0.5*numpy.pi
-		duration = str(float(duration) * 3600)
-		disploc = locate
-		time = time + ':00'
-
-		#setting location and station based on user input
-		if locate == 'Ryerson (IL,USA)':
-			soundname = 'ryerson'
-			station = "L44A"
-			net = "TA"
-			location = "--"
-			channel = "BHZ"
-		elif locate == 'Yellowstone (WY,USA)':
-			soundname = 'yellowstone' 
-			station = "H17A"
-			net = "TA"
-			location = "--"
-			channel = "BHZ"
-		elif locate == 'Antarctica':
-			soundname = 'antarctica'
-			station = 'BELA'
-			net = 'AI'
-			location = '04'
-			channel = 'BHZ'
-		elif locate == 'Cachiyuyo, Chile':
-			soundname = 'chile'
-			station = 'LCO'
-			net = 'IU'
-			location = '10'
-			channel = 'BHZ'
-		elif locate == 'Anchorage (AK,USA)':
-			soundname = 'alaska'
-			station = 'SSN'
-			net = 'AK'
-			location = '--'
-			channel = 'BHZ'
-		elif locate == "Kyoto, Japan":
-			soundname = 'japan'
-			station = 'JWT'
-			net = 'JP'
-			location = '--'
-			channel = 'BHZ'
-		elif locate == 'London, UK':
-			soundname = 'london'
-			station = 'HMNX'
-			net = 'GB'
-			location = '--'
-			channel = 'BHZ'
-		elif locate == 'Ar Rayn, Saudi Arabia':
-			soundname = 'saudiarabia'
-			station = 'RAYN'
-			net = 'II'
-			location = '10'
-			channel = 'BHZ'
-		elif locate == 'Addis Ababa, Ethiopia':
-			soundname = 'ethiopia'
-			station = 'FURI'
-			net = 'IU'
-			location = '00'
-			channel = 'BHZ'
-		else:
-			return
-
-		#getting data from online
-		print "Getting data from",disploc,'on',date
-		type = net + "&sta=" + station + "&loc=" + location + "&cha=" + channel
-		when = "&starttime=" + date + "T" + time + "&duration=" + duration
-		url = "http://service.iris.edu/irisws/timeseries/1/query?net=" + type + when + "&demean=true&scale=auto&output=ascii1"
-		print "requesting data from IRIS...please be patient..."
-		ws = urllib2.urlopen(url)
-		print "loading data ..."
-		df = ws.read()
-		print "processing data..."
-		dflines = df.split('\n')
-
-		#getting the data from the doc
-		head = dflines[0]
-		fsps = numpy.float(head.split()[4])
-		tot = numpy.float(head.split()[2])
-		sound = []
-		maxAmp = 0
-		for l in dflines[1:-1]:
-			if self.isNumber(l):
-				l = float(l)
-				sound.append(l)
-				maxAmp = max(maxAmp, abs(l))
-			else:
-				tot = tot + numpy.float(l.split()[2])
-		sound = numpy.asarray(sound)
-
-		#setting amplitude and frequency based on user input
-		if AF == '0.1 Hz':
-			bandsHZ = 64000
-		elif AF == '0.5 Hz':
-			bandsHZ = 16000
-		elif AF == '5 Hz':
-			bandsHZ = 1600
-		elif AF == '20 Hz':
-			bandsHZ = 400
-		elif AF == '50 Hz':
-			bandsHZ = 160
-		else:
-			bandsHZ = 800
-
-		if FA == '':
-			fixedamp = maxAmp / 3.
-		else:
-			fixedamp = float(FA)
-
-		#creating the sound file
-		realduration = (tot/fsps)/3600.
-		print "original duration = %7.2f hours" % realduration
-		hours = numpy.linspace(0,realduration,tot)
-		soundduration = tot/(fsps*bandsHZ)
-		print "max 20Hz wav file duration = %8.1f seconds" % (soundduration)
-		mxs = 1.01*numpy.max(sound)
-		mns = 1.01*numpy.min(sound)
-		scaledsound = (2**31)*numpy.arctan(sound/fixedamp)/halfpi
-		s32 = numpy.int32(scaledsound)
-		ssps = bandsHZ * fsps
-		wavfile.write(soundname + ".wav",ssps,s32)
-
-		#plotting the graph
-		axes(xlim=[0,realduration], ylim=[1000*mns,1000*mxs], xlabel="Time since "+time+ " (hours)",ylabel="Ground Velocity (mm/s)", title=locate+', '+date)
-		plot(hours,1000.*sound)
-		axishours = [time]
-		axis([hours[0],hours[-1],-3000.*fixedamp,3000.*fixedamp])
-		savefig(soundname + ".png",bbox_inches='tight')
-
-		return soundname
 
 	#isNumber: isdigit function that works with scientific notation
 	def isNumber(self, number):
@@ -934,47 +797,46 @@ class FloatInput(TextInput):
 			s = '.'.join([re.sub(pat, '', s) for s in substring.split('.', 1)])
 		return super(FloatInput, self).insert_text(s, from_undo=from_undo)
 
-# Create screen manager
-sm = ScreenManager()
-
-#Creating InputError popup
-errscreen = InputError(as_popup = True) 
-errpopup=Popup(title="Input Error", content = errscreen, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating Error404 popup
-errscreen2 = Error404(as_popup = True)
-errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating ChooseScreen popup
-chooseScreen = ChooseScreen(as_popup=True)
-choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating SampleScreen popup
-sampleScreen = SampleScreen(as_popup=True)
-samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.8,0.8), background = 'black.jpg', separator_color = (1,1,1,1))
-
-#Creating AdvancedScreen popup
-advScreen = AdvancedScreen(as_popup=True)
-advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
-
-#Creating InofScreen popup
-infoScreen = InfoScreen(as_popup=True)
-infoPopup=Popup(title='Information', content = infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
-infoPopup.bind(on_dismiss=lambda x:advancedScreen.open())
-
-#Create LoadingScreen popup
-loadScreen = LoadingScreen(as_popup=True)
-loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), background = "black.jpg", separator_color = (1,1,1,1), on_open=loadScreen.loadData)
-
-#Creating Screens
-input = InputScreen(name='Input Screen')
-sm.add_widget(input)
-display = DisplayScreen(name='Display Screen')
-sm.add_widget(display)
-
-sm.current = 'Input Screen'
-
 class SonifyMe(App):
+	# Create screen manager
+	sm = ScreenManager()
+
+	#Creating InputError popup
+	errscreen = InputError(as_popup = True) 
+	errpopup=Popup(title="Input Error", content = errscreen, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating Error404 popup
+	errscreen2 = Error404(as_popup = True)
+	errpopup2=Popup(title = 'ERROR 404', content = errscreen2, size_hint = (0.9,0.5), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating ChooseScreen popup
+	chooseScreen = ChooseScreen(as_popup=True)
+	choosePopup=Popup(title='Select Location', content = chooseScreen, size_hint = (0.9, 0.8), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating SampleScreen popup
+	sampleScreen = SampleScreen(as_popup=True)
+	samplePopup=Popup(title='Sample Inputs', content = sampleScreen, size_hint = (0.8,0.8), background = 'black.jpg', separator_color = (1,1,1,1))
+
+	#Creating AdvancedScreen popup
+	advScreen = AdvancedScreen(as_popup=True)
+	advancedScreen=Popup(title = 'Advanced Options', content = advScreen, size_hint = (0.9,0.95), background = "black.jpg", separator_color = (1,1,1,1))
+
+	#Creating InfoScreen popup
+	infoScreen = InfoScreen(as_popup=True)
+	infoPopup=Popup(title='Information', content = infoScreen, size_hint = (0.9,0.95), background = 'black.jpg', separator_color = (1,1,1,1))
+	infoPopup.bind(on_dismiss=lambda x:advancedScreen.open())
+
+	#Create LoadingScreen popup
+	loadScreen = LoadingScreen(as_popup=True)
+	loadPopup = Popup(title='Loading', content = loadScreen, size_hint = (0.9, 0.5), background = "black.jpg", separator_color = (1,1,1,1), on_open=loadScreen.loadData)
+
+	#Creating Screens
+	input = InputScreen(name='Input Screen')
+	sm.add_widget(input)
+	display = DisplayScreen(name='Display Screen')
+	sm.add_widget(display)
+
+	sm.current = 'Input Screen'
 
 	def build(self):
 		return sm
