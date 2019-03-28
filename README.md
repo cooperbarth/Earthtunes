@@ -1,8 +1,7 @@
 # Earthtunes
-This is a ReadMe
-:)
 
-Earthtunes: An application that sonifies and visualizes seismic data from around the world
+Earthtunes: Applications that sonify and visualize seismic data from around the world!
+
 Developed by Cooper Barth and Michael Ji, with original concept and advising from Professor Suzan van der Lee, and sonification idea from Professor Bryan Pardo.
 
 The Earthtunes project consists of three applications: one for use on Windows machines, one for mobile iOS devices, and one for mobile Android devices.
@@ -16,3 +15,6 @@ with assistance from Lake County's Ryerson Conservation Area, Earthscope, the US
 This project was funded by the Undergraduate Research Assistant Program (URAP) at Northwestern University
 
 This project was made possible by the data web services offered by the IRIS Data Management Center, which is funded by the Nation Science Foundation.
+
+This is a ReadMe
+:)
