@@ -22,25 +22,25 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
         self.DurationField.inputAccessoryView = initDoneButton()
         setUpFields()
     }
-    
+
     @IBAction func DateChanged(_ sender: Any) {
         ud.set(df1.string(from: DateField.date), forKey: "Date")
     }
-    
+
     @IBAction func TimeChanged(_ sender: Any) {
         ud.set(df2.string(from: TimeField.date), forKey: "Time")
     }
-    
+
     @IBAction func SamplePressed(_ sender: Any) {
         view.endEditing(true)
         showPopup(name: "Suggestion Screen")
     }
-    
+
     @IBAction func AdvancedPressed(_ sender: Any) {
         ud.set(DurationField.text!, forKey: "Duration")
         performSegue(withIdentifier: "ToAdvanced", sender: self)
     }
-    
+
     @IBAction func ButtonPressed(_ sender: Any) {
         view.endEditing(true)
         if (!validInputs()) {
@@ -50,49 +50,7 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
             showPopup(name: "Loading Screen")
         }
     }
-    
-    func setUpFields() {
-        if (ud.string(forKey: "Location") == nil) {
-            ud.set("Ryerson (IL,USA)", forKey: "Location")
-        }
-        if (ud.string(forKey: "Date") == nil) {
-            ud.set(df1.string(from: Date()), forKey: "Date")
-        }
-        if (ud.string(forKey: "Time") == nil) {
-            ud.set("00:00", forKey: "Time")
-        }
-        if (ud.string(forKey: "Duration") == nil) {
-            ud.set("2", forKey: "Duration")
-        }
-        LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
-        DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
-        TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
-        DurationField.text = ud.string(forKey: "Duration")
 
-        
-        if (ud.string(forKey: "Amplitude") == nil) {
-            ud.set("0.0001", forKey: "Amplitude")
-        }
-        if (ud.string(forKey: "Rate") == nil) {
-            ud.set("1.0", forKey: "Rate")
-        }
-        
-        if (ud.string(forKey: "First") == nil) {
-            ud.set(3, forKey: "FreqIndex")
-            ud.set(0, forKey: "SCIndex")
-            ud.set(0, forKey: "GCIndex")
-            ud.set("10 Hz", forKey: "Frequency")
-            ud.set("BHZ", forKey: "SChannel")
-            ud.set("BHZ", forKey: "GChannel")
-            
-            saveEvents(events: [])
-            let favorites = defaultEvents
-            saveFavorites(events: favorites)
-            
-            ud.set("Set", forKey: "First")
-        }
-    }
-    
     func validInputs() -> Bool {
         if (DurationField.text! == "") {
             ud.set("Empty Field(s)", forKey: "Input Error")
@@ -117,8 +75,58 @@ extension InputScreen {
         ud.set(row, forKey: "Location Index")
         ud.set(ScrollMenuData[row], forKey: "Location")
     }
-    
+}
+
+extension InputScreen {
+    func setUpFields() {
+        if (ud.string(forKey: "Location") == nil) {
+            ud.set("Ryerson (IL,USA)", forKey: "Location")
+        }
+        if (ud.string(forKey: "Date") == nil) {
+            ud.set(df1.string(from: Date()), forKey: "Date")
+        }
+        if (ud.string(forKey: "Time") == nil) {
+            ud.set("00:00", forKey: "Time")
+        }
+        if (ud.string(forKey: "Duration") == nil) {
+            ud.set("2", forKey: "Duration")
+        }
+        LocationField.selectRow(ud.integer(forKey: "Location Index"), inComponent: 0, animated: false)
+        DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
+        TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
+        DurationField.text = ud.string(forKey: "Duration")
+        
+        if (ud.string(forKey: "Amplitude") == nil) {
+            ud.set("0.0001", forKey: "Amplitude")
+        }
+        if (ud.string(forKey: "Rate") == nil) {
+            ud.set("1.0", forKey: "Rate")
+        }
+        
+        if (ud.string(forKey: "First") == nil) {
+            ud.set(3, forKey: "FreqIndex")
+            ud.set(0, forKey: "SCIndex")
+            ud.set(0, forKey: "GCIndex")
+            ud.set("10 Hz", forKey: "Frequency")
+            ud.set("BHZ", forKey: "SChannel")
+            ud.set("BHZ", forKey: "GChannel")
+            
+            saveEvents(events: [])
+            let favorites = defaultEvents
+            saveFavorites(events: favorites)
+            
+            ud.set("Set", forKey: "First")
+        }
+    }
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        DurationField.text! = ""
+        ud.set(textField.text!, forKey: "Latest Text")
+        textField.text! = ""
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
+        if (textField.text! == "") {
+            textField.text = ud.string(forKey: "Latest Text")
+        }
     }
 }
