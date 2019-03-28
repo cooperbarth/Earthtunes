@@ -7,11 +7,11 @@ class ViewController: UIViewController, UITextFieldDelegate {
     let screenSize: CGRect = UIScreen.main.nativeBounds
     let zoomed: Bool = UIScreen.main.nativeScale > UIScreen.main.scale
     let ud = UserDefaults.standard
-    
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
+
     func showPopup(name: String) {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
         self.addChild(popOverVC)
@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         self.view.addSubview(popOverVC.view)
         popOverVC.didMove(toParent: self)
     }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch string {
         case "0","1","2","3","4","5","6","7","8","9":
@@ -35,7 +35,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return false
         }
     }
-    
+
     func initDoneButton() -> UIView {
         let doneToolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 320, height: 50))
         doneToolbar.barStyle = UIBarStyle.default
