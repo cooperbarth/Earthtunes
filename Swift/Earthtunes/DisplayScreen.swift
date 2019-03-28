@@ -36,15 +36,7 @@ class DisplayScreen : ViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        do {
-            if !firstTime() {
-                player = try AVAudioPlayer(contentsOf: url)
-                playSound()
-            }
-        } catch {
-            print("Audio Player Not Found.")
-        }
-        player?.delegate = self
+        setUpPlayer()
     }
 
     override func viewDidLayoutSubviews() {
@@ -102,7 +94,7 @@ class DisplayScreen : ViewController {
             player?.currentTime = TimeInterval(0.0)
         }
     }
-    
+
     @IBAction func SoundSlider(_ sender: Any) {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
@@ -111,7 +103,7 @@ class DisplayScreen : ViewController {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
     }
-    
+
     func firstTime() -> Bool {
         if (!ud.bool(forKey: "Opened Display Previously?")) {
             ud.set(true, forKey: "Opened Display Previously?")
@@ -137,7 +129,7 @@ extension DisplayScreen {
         }
         return false
     }
-    
+
     func removeFavorite() {
         var count = 0
         for e in favorites {
@@ -151,6 +143,23 @@ extension DisplayScreen {
 }
 
 extension DisplayScreen : AVAudioPlayerDelegate {
+    func setUpPlayer() {
+        do {
+            if !firstTime() {
+                player = try AVAudioPlayer(contentsOf: url)
+                playSound()
+            }
+        } catch {
+            print("Audio Player Not Found.")
+        }
+
+        SoundSlideLayout.maximumValue = Float((player?.duration)!)
+        player?.enableRate = true
+        player?.rate = Float(inputRate)!
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        player?.delegate = self
+    }
+
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if (ud.bool(forKey: "Loop")) {
             player.currentTime = TimeInterval(0.0)
@@ -161,20 +170,12 @@ extension DisplayScreen : AVAudioPlayerDelegate {
     }
 
     func playSound() {
-        SoundSlideLayout.maximumValue = Float((player?.duration)!)
         player?.prepareToPlay()
-        player?.enableRate = true
-        player?.rate = Float(inputRate)!
-        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         player?.play()
 
         if let image = UIImage(named: "Pause.png") {
             PlayPauseButton.setImage(image, for: .normal)
         }
-    }
-
-    @objc func updateSlider(_ timer: Timer) {
-        SoundSlideLayout.value = Float((player?.currentTime)!)
     }
 
     func pauseSound() {
@@ -185,6 +186,10 @@ extension DisplayScreen : AVAudioPlayerDelegate {
         if let image = UIImage(named: "Play.png") {
             PlayPauseButton.setImage(image, for: .normal)
         }
+    }
+
+    @objc func updateSlider(_ timer: Timer) {
+        SoundSlideLayout.value = Float((player?.currentTime)!)
     }
 }
 
