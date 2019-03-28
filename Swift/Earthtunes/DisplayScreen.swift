@@ -8,8 +8,7 @@ class DisplayScreen : ViewController {
     @IBOutlet weak var SoundSlideLayout: UISlider!
     @IBOutlet weak var GraphView: UIImageView!
     @IBOutlet weak var SaveButton: UIButton!
-    @IBOutlet weak var PauseButton: UIButton!
-    @IBOutlet weak var PlayButton: UIButton!
+    @IBOutlet weak var PlayPauseButton: UIButton!
 
     var locate = UserDefaults.standard.string(forKey: "Location")!
     let date = UserDefaults.standard.string(forKey: "Date")!
@@ -34,7 +33,7 @@ class DisplayScreen : ViewController {
         self.GraphView.image = newImg
         self.favorites = retrieveFavorites()!
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         do {
@@ -77,14 +76,14 @@ class DisplayScreen : ViewController {
         }
     }
 
-    @IBAction func PauseButtonPressed(_ sender: Any) {
-        pauseSound()
+    @IBAction func PlayPauseButtonPressed(_ sender: Any) {
+        if (player?.isPlaying)! {
+            pauseSound()
+        } else {
+            playSound()
+        }
     }
-    
-    @IBAction func PlayButtonPressed(_ sender: Any) {
-        playSound()
-    }
-    
+
     @IBAction func FFButtonPressed(_ sender: Any) {
         let newTime = (player?.currentTime)! + TimeInterval(7.5)
         if (Float(newTime) < Float((player?.duration)!)) {
@@ -160,32 +159,32 @@ extension DisplayScreen : AVAudioPlayerDelegate {
             pauseSound()
         }
     }
-    
+
     func playSound() {
         SoundSlideLayout.maximumValue = Float((player?.duration)!)
         player?.prepareToPlay()
         player?.enableRate = true
         player?.rate = Float(inputRate)!
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         player?.play()
-        PlayButton.isHidden = true
-        PlayButton.isEnabled = false
-        PauseButton.isHidden = false
-        PauseButton.isEnabled = true
+
+        if let image = UIImage(named: "Pause.png") {
+            PlayPauseButton.setImage(image, for: .normal)
+        }
     }
-    
+
     @objc func updateSlider(_ timer: Timer) {
         SoundSlideLayout.value = Float((player?.currentTime)!)
     }
-    
+
     func pauseSound() {
         if (player?.isPlaying)! {
             player?.stop()
         }
-        PauseButton.isHidden = true
-        PauseButton.isEnabled = false
-        PlayButton.isHidden = false
-        PlayButton.isEnabled = true
+
+        if let image = UIImage(named: "Play.png") {
+            PlayPauseButton.setImage(image, for: .normal)
+        }
     }
 }
 
