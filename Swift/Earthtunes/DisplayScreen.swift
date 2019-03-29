@@ -1,27 +1,23 @@
 import UIKit
 import AVKit
 import Foundation
-import AudioToolbox
 
 class DisplayScreen : ViewController {
     @IBOutlet weak var GraphTitle: UILabel!
     @IBOutlet weak var SoundSlideLayout: UISlider!
     @IBOutlet weak var GraphView: UIImageView!
     @IBOutlet weak var SaveButton: UIButton!
-    @IBOutlet weak var PauseButton: UIButton!
-    @IBOutlet weak var PlayButton: UIButton!
+    @IBOutlet weak var PlayPauseButton: UIButton!
 
-    var locate = UserDefaults.standard.string(forKey: "Location")!
-    let date = UserDefaults.standard.string(forKey: "Date")!
-    let time = UserDefaults.standard.string(forKey: "Time")!
-    let duration = UserDefaults.standard.string(forKey: "Duration")!
-    let inputFreq = UserDefaults.standard.string(forKey: "Frequency")!
-    let inputAmp = UserDefaults.standard.string(forKey: "Amplitude")!
-    let inputRate = UserDefaults.standard.string(forKey: "Rate")!
-    let inputSChannel = UserDefaults.standard.string(forKey: "SChannel")!
-    let inputGChannel = UserDefaults.standard.string(forKey: "GChannel")!
-    let data = UserDefaults.standard.array(forKey: "Data")!
-    let yMax = UserDefaults.standard.double(forKey: "Max")
+    lazy var locate = ud.string(forKey: "Location")!
+    lazy var date = ud.string(forKey: "Date")!
+    lazy var time = ud.string(forKey: "Time")!
+    lazy var duration = ud.string(forKey: "Duration")!
+    lazy var inputFreq = ud.string(forKey: "Frequency")!
+    lazy var inputAmp = ud.string(forKey: "Amplitude")!
+    lazy var inputRate = ud.string(forKey: "Rate")!
+    lazy var inputSChannel = ud.string(forKey: "SChannel")!
+    lazy var inputGChannel = ud.string(forKey: "GChannel")!
     var favorites : [event] = []
 
     override func viewDidLoad() {
@@ -31,21 +27,13 @@ class DisplayScreen : ViewController {
         }
         let newImg = cropGraph(image: img!)
 
-        self.GraphView.image = newImg
-        self.favorites = retrieveFavorites()!
+        GraphView.image = newImg
+        favorites = retrieveFavorites()!
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
-        do {
-            if !firstTime() {
-                player = try AVAudioPlayer(contentsOf: url)
-                playSound()
-            }
-        } catch {
-            print("Audio Player Not Found.")
-        }
-        player?.delegate = self
+        setUpPlayer()
     }
 
     override func viewDidLayoutSubviews() {
@@ -77,14 +65,14 @@ class DisplayScreen : ViewController {
         }
     }
 
-    @IBAction func PauseButtonPressed(_ sender: Any) {
-        pauseSound()
+    @IBAction func PlayPauseButtonPressed(_ sender: Any) {
+        if (player?.isPlaying)! {
+            pauseSound()
+        } else {
+            playSound()
+        }
     }
-    
-    @IBAction func PlayButtonPressed(_ sender: Any) {
-        playSound()
-    }
-    
+
     @IBAction func FFButtonPressed(_ sender: Any) {
         let newTime = (player?.currentTime)! + TimeInterval(7.5)
         if (Float(newTime) < Float((player?.duration)!)) {
@@ -103,7 +91,7 @@ class DisplayScreen : ViewController {
             player?.currentTime = TimeInterval(0.0)
         }
     }
-    
+
     @IBAction func SoundSlider(_ sender: Any) {
         player?.currentTime = TimeInterval(SoundSlideLayout.value)
     }
@@ -112,7 +100,7 @@ class DisplayScreen : ViewController {
         performSegue(withIdentifier: "BackToInput", sender: self)
         pauseSound()
     }
-    
+
     func firstTime() -> Bool {
         if (!ud.bool(forKey: "Opened Display Previously?")) {
             ud.set(true, forKey: "Opened Display Previously?")
@@ -138,7 +126,7 @@ extension DisplayScreen {
         }
         return false
     }
-    
+
     func removeFavorite() {
         var count = 0
         for e in favorites {
@@ -152,6 +140,23 @@ extension DisplayScreen {
 }
 
 extension DisplayScreen : AVAudioPlayerDelegate {
+    func setUpPlayer() {
+        do {
+            if !firstTime() {
+                player = try AVAudioPlayer(contentsOf: url)
+                playSound()
+            }
+        } catch {
+            print("Audio Player Not Found.")
+        }
+
+        SoundSlideLayout.maximumValue = Float((player?.duration)!)
+        player?.enableRate = true
+        player?.rate = Float(inputRate)!
+        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
+        player?.delegate = self
+    }
+
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         if (ud.bool(forKey: "Loop")) {
             player.currentTime = TimeInterval(0.0)
@@ -160,32 +165,28 @@ extension DisplayScreen : AVAudioPlayerDelegate {
             pauseSound()
         }
     }
-    
+
     func playSound() {
-        SoundSlideLayout.maximumValue = Float((player?.duration)!)
         player?.prepareToPlay()
-        player?.enableRate = true
-        player?.rate = Float(inputRate)!
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
         player?.play()
-        PlayButton.isHidden = true
-        PlayButton.isEnabled = false
-        PauseButton.isHidden = false
-        PauseButton.isEnabled = true
+
+        if let image = UIImage(named: "Pause.png") {
+            PlayPauseButton.setImage(image, for: .normal)
+        }
     }
-    
-    @objc func updateSlider(_ timer: Timer) {
-        SoundSlideLayout.value = Float((player?.currentTime)!)
-    }
-    
+
     func pauseSound() {
         if (player?.isPlaying)! {
             player?.stop()
         }
-        PauseButton.isHidden = true
-        PauseButton.isEnabled = false
-        PlayButton.isHidden = false
-        PlayButton.isEnabled = true
+
+        if let image = UIImage(named: "Play.png") {
+            PlayPauseButton.setImage(image, for: .normal)
+        }
+    }
+
+    @objc func updateSlider(_ timer: Timer) {
+        SoundSlideLayout.value = Float((player?.currentTime)!)
     }
 }
 
