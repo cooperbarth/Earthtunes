@@ -18,13 +18,13 @@ let ScrollMenuData = ["Ryerson (IL,USA)",
                       "Ar Rayn, Saudi Arabia",
                       "Antarctica"]
 
-let defaultEvents: [event] = [
-    event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventOneDescription),
-    event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventTwoDescription),
-    event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventThreeDescription),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventFourDescription),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventFiveDescription),
-    event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Duration: "2", Frequency: "10 Hz", Amplitude: "0.0001", SChannel: "BHZ", GChannel: "LHZ", S32: [], Descript: eventSixDescription)
+let defaultEvents: [Event] = [
+    Event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Descript: eventOneDescription),
+    Event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Descript: eventTwoDescription),
+    Event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Descript: eventThreeDescription),
+    Event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Descript: eventFourDescription),
+    Event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Descript: eventFiveDescription),
+    Event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Descript: eventSixDescription)
 ]
 
 let locations: [String: (String, String, String)] = [

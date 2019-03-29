@@ -5,7 +5,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var SuggestionView: UIView!
     @IBOutlet weak var SuggestionScroll: UITableView!
     
-    var events : [event] = []
+    var events : [Event] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()

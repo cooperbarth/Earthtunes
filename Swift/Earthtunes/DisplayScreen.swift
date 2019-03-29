@@ -18,7 +18,8 @@ class DisplayScreen : ViewController {
     lazy var inputRate = ud.string(forKey: "Rate")!
     lazy var inputSChannel = ud.string(forKey: "SChannel")!
     lazy var inputGChannel = ud.string(forKey: "GChannel")!
-    var favorites : [event] = []
+    lazy var newEvent = Event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: "")
+    var favorites : [Event] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class DisplayScreen : ViewController {
         if (inFavorites()) {
             removeFavorite()
         } else {
-            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: ""))
+            favorites.append(newEvent)
         }
         saveFavorites(events: favorites)
         updateSavedPic()

@@ -133,7 +133,7 @@ extension LoadingScreen {
         present(alertController, animated: true, completion: nil)
     }
 
-    func checkRepeats() -> event? {
+    func checkRepeats() -> Event? {
         for e in retrieveEvents()! {
             if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 LoadingLabel.text! = "Loading Previously \nSaved Data From \n" + ud.string(forKey: "Location")!
@@ -144,7 +144,7 @@ extension LoadingScreen {
     }
 
     func saveData(s32: [Float64]) {
-        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: s32, Descript: "")
+        let newEvent = Event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: s32, Descript: "")
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)
