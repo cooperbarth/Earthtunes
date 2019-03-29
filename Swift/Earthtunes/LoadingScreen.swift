@@ -18,18 +18,14 @@ class LoadingScreen : ViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.makeViewAppear()
+        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
+        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
         self.showAnimate()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getSoundAndGraph()
-    }
-
-    func makeViewAppear() {
-        self.view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
-        LoadingLabel.text! = "Loading Data From \n" + ud.string(forKey: "Location")!
     }
 }
 
@@ -57,13 +53,18 @@ extension LoadingScreen {
         let prevData = checkRepeats()
         if (prevData != nil) {
             let s32 = prevData?.s32
-            saveFile(buff: s32!, sample_rate: ssps)
+            do {
+                try saveFile(buff: s32!, sample_rate: ssps)
+            } catch {
+                showError404()
+                return
+            }
             ud.set(s32, forKey: "Data")
         } else {
             do {
                 let dfSound = try String(contentsOf: URL(string: soundUrl)!)
                 let s32 = processData(data: dfSound)
-                saveFile(buff: s32, sample_rate: ssps)
+                try saveFile(buff: s32, sample_rate: ssps)
                 ud.set(s32, forKey: "Data")
                 saveData(s32: s32)
             } catch {
@@ -132,7 +133,7 @@ extension LoadingScreen {
         present(alertController, animated: true, completion: nil)
     }
 
-    func checkRepeats() -> event? {
+    func checkRepeats() -> Event? {
         for e in retrieveEvents()! {
             if (e.location == locate && e.date == date && e.time == time && e.duration == duration && e.frequency == inputFreq && e.amplitude == inputAmp && e.schannel == inputSChannel && e.gchannel == inputGChannel) {
                 LoadingLabel.text! = "Loading Previously \nSaved Data From \n" + ud.string(forKey: "Location")!
@@ -143,7 +144,7 @@ extension LoadingScreen {
     }
 
     func saveData(s32: [Float64]) {
-        let newEvent = event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: s32, Descript: "")
+        let newEvent = Event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: s32, Descript: "")
         var newEvents = retrieveEvents()
         newEvents!.append(newEvent)
         saveEvents(events: newEvents!)

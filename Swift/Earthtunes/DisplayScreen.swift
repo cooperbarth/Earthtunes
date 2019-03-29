@@ -18,7 +18,8 @@ class DisplayScreen : ViewController {
     lazy var inputRate = ud.string(forKey: "Rate")!
     lazy var inputSChannel = ud.string(forKey: "SChannel")!
     lazy var inputGChannel = ud.string(forKey: "GChannel")!
-    var favorites : [event] = []
+    lazy var newEvent = Event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: "")
+    var favorites : [Event] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +48,7 @@ class DisplayScreen : ViewController {
         if (inFavorites()) {
             removeFavorite()
         } else {
-            favorites.append(event(Location: locate, Date: date, Time: time, Duration: duration, Frequency: inputFreq, Amplitude: inputAmp, SChannel: inputSChannel, GChannel: inputGChannel, S32: [], Descript: ""))
+            favorites.append(newEvent)
         }
         saveFavorites(events: favorites)
         updateSavedPic()
@@ -66,7 +67,7 @@ class DisplayScreen : ViewController {
     }
 
     @IBAction func PlayPauseButtonPressed(_ sender: Any) {
-        if (player?.isPlaying)! {
+        if (player.isPlaying) {
             pauseSound()
         } else {
             playSound()
@@ -74,26 +75,26 @@ class DisplayScreen : ViewController {
     }
 
     @IBAction func FFButtonPressed(_ sender: Any) {
-        let newTime = (player?.currentTime)! + TimeInterval(7.5)
-        if (Float(newTime) < Float((player?.duration)!)) {
-            player?.currentTime = newTime
+        let newTime = player.currentTime + TimeInterval(7.5)
+        if (Float(newTime) < Float(player.duration)) {
+            player.currentTime = newTime
         } else {
-            player?.currentTime = TimeInterval(0.0)
+            player.currentTime = TimeInterval(0.0)
             pauseSound()
         }
     }
 
     @IBAction func RewindButtonPressed(_ sender: Any) {
-        let newTime = (player?.currentTime)! - TimeInterval(7.5)
+        let newTime = player.currentTime - TimeInterval(7.5)
         if (Float(newTime) > 0.0) {
-            player?.currentTime = newTime
+            player.currentTime = newTime
         } else {
-            player?.currentTime = TimeInterval(0.0)
+            player.currentTime = TimeInterval(0.0)
         }
     }
 
     @IBAction func SoundSlider(_ sender: Any) {
-        player?.currentTime = TimeInterval(SoundSlideLayout.value)
+        player.currentTime = TimeInterval(SoundSlideLayout.value)
     }
 
     @IBAction func BackButton(_ sender: Any) {
@@ -106,7 +107,6 @@ class DisplayScreen : ViewController {
             ud.set(true, forKey: "Opened Display Previously?")
             let alertController = UIAlertController(title: "Audio", message: ringerText, preferredStyle: .alert)
             let continueAction = UIAlertAction(title: "Continue", style: .default, handler: { (_) -> Void in
-                player = try? AVAudioPlayer(contentsOf: url)
                 self.playSound()
             })
             alertController.addAction(continueAction)
@@ -142,19 +142,19 @@ extension DisplayScreen {
 extension DisplayScreen : AVAudioPlayerDelegate {
     func setUpPlayer() {
         do {
+            player = try AVAudioPlayer(contentsOf: url)
             if !firstTime() {
-                player = try AVAudioPlayer(contentsOf: url)
                 playSound()
             }
         } catch {
             print("Audio Player Not Found.")
         }
 
-        SoundSlideLayout.maximumValue = Float((player?.duration)!)
-        player?.enableRate = true
-        player?.rate = Float(inputRate)!
+        SoundSlideLayout.maximumValue = Float(player.duration)
+        player.enableRate = true
+        player.rate = Float(inputRate)!
         Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(self.updateSlider), userInfo: nil, repeats: true)
-        player?.delegate = self
+        player.delegate = self
     }
 
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -167,8 +167,8 @@ extension DisplayScreen : AVAudioPlayerDelegate {
     }
 
     func playSound() {
-        player?.prepareToPlay()
-        player?.play()
+        player.prepareToPlay()
+        player.play()
 
         if let image = UIImage(named: "Pause.png") {
             PlayPauseButton.setImage(image, for: .normal)
@@ -176,8 +176,8 @@ extension DisplayScreen : AVAudioPlayerDelegate {
     }
 
     func pauseSound() {
-        if (player?.isPlaying)! {
-            player?.stop()
+        if (player.isPlaying) {
+            player.stop()
         }
 
         if let image = UIImage(named: "Play.png") {
@@ -186,7 +186,7 @@ extension DisplayScreen : AVAudioPlayerDelegate {
     }
 
     @objc func updateSlider(_ timer: Timer) {
-        SoundSlideLayout.value = Float((player?.currentTime)!)
+        SoundSlideLayout.value = Float(player.currentTime)
     }
 }
 

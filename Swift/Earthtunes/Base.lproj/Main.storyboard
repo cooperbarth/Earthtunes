@@ -602,8 +602,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NzM-My-Ler">
                                 <rect key="frame" x="0.0" y="28" width="375" height="619"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="73" translatesAutoresizingMaskIntoConstraints="NO" id="sub-Ic-H2x">
-                                        <rect key="frame" x="16.5" y="0.0" width="342" height="35"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="65" translatesAutoresizingMaskIntoConstraints="NO" id="sub-Ic-H2x">
+                                        <rect key="frame" x="12" y="0.0" width="351" height="35"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="35"/>
@@ -614,16 +614,16 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5o0-Lw-Qfm">
-                                                <rect key="frame" x="109" y="0.0" width="125" height="35"/>
+                                                <rect key="frame" x="101" y="0.0" width="150" height="35"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="125" id="gIM-G3-r3y"/>
+                                                    <constraint firstAttribute="width" constant="150" id="gIM-G3-r3y"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-Mm-iWy">
-                                                <rect key="frame" x="307" y="0.0" width="35" height="35"/>
+                                                <rect key="frame" x="316" y="0.0" width="35" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="35" id="a59-iJ-xqw"/>
                                                     <constraint firstAttribute="height" constant="35" id="ge4-Uu-p0t"/>
@@ -728,6 +728,6 @@
         <image name="Rewind" width="183" height="184"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lar-ca-Cwf"/>
+        <segue reference="O0B-H3-m4Q"/>
     </inferredMetricsTieBreakers>
 </document>

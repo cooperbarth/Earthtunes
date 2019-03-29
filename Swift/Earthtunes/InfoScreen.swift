@@ -5,7 +5,7 @@ class InfoScreen : ViewController {
     @IBOutlet weak var InfoView: UIView!
     @IBOutlet weak var InfoText: UITextView!
     
-    var events: [event] = []
+    var events: [Event] = []
     let eventIndex = UserDefaults.standard.integer(forKey: "Long-Pressed Index")
     
     override func viewDidLoad() {
