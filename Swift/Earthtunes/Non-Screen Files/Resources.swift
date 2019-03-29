@@ -5,8 +5,7 @@ let url = URL(fileURLWithPath: NSTemporaryDirectory().appending("sound.wav"))
 var img : UIImage? = nil
 let df1 = DateFormatter()
 let df2 = DateFormatter()
-var player : AVAudioPlayer?
-var count = 0
+var player = AVAudioPlayer()
 var locationChosen : Bool = false
 
 let ScrollMenuData = ["Ryerson (IL,USA)",

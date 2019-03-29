@@ -2,20 +2,10 @@ import Foundation
 import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
-    let screenSize: CGRect = UIScreen.main.nativeBounds
-    let zoomed: Bool = UIScreen.main.nativeScale > UIScreen.main.scale
     let ud = UserDefaults.standard
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
-    }
-
-    func showPopup(name: String) {
-        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
-        self.addChild(popOverVC)
-        popOverVC.view.frame = self.view.frame
-        self.view.addSubview(popOverVC.view)
-        popOverVC.didMove(toParent: self)
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -44,12 +34,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
         items.append(done)
         doneToolbar.items = items
         doneToolbar.sizeToFit()
-        
+
         return doneToolbar
     }
 
     @objc func doneButtonAction() {
         view.endEditing(true)
+    }
+
+
+    func showPopup(name: String) {
+        let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
+        self.addChild(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParent: self)
     }
 
     func showAnimate() {
@@ -58,7 +57,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         UIView.animate(withDuration: 0.25, animations: {
             self.view.alpha = 1.0
             self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            
         });
     }
 

@@ -29,7 +29,7 @@ func retrieveFavorites() -> [event]? {
     return nil
 }
 
-func saveFile(buff: [Float64], sample_rate: Float64) {
+func saveFile(buff: [Float64], sample_rate: Float64) throws {
     let SAMPLE_RATE = sample_rate
     
     let outputFormatSettings = [
@@ -41,7 +41,12 @@ func saveFile(buff: [Float64], sample_rate: Float64) {
         AVNumberOfChannelsKey: 1
         ] as [String : Any]
 
-    let audioFile = try? AVAudioFile(forWriting: url, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
+    var audioFile: AVAudioFile
+    do {
+        audioFile = try AVAudioFile(forWriting: url, settings: outputFormatSettings, commonFormat: AVAudioCommonFormat.pcmFormatFloat32, interleaved: false)
+    } catch let error as NSError {
+        throw error
+    }
 
     let bufferFormat = AVAudioFormat(settings: outputFormatSettings)
     let outputBuffer = AVAudioPCMBuffer(pcmFormat: bufferFormat!, frameCapacity: AVAudioFrameCount(buff.count))
@@ -49,7 +54,7 @@ func saveFile(buff: [Float64], sample_rate: Float64) {
     outputBuffer?.frameLength = AVAudioFrameCount(buff.count)
 
     do {
-        try audioFile?.write(from: outputBuffer!)
+        try audioFile.write(from: outputBuffer!)
     } catch {
         print("Error writing audio file")
     }
