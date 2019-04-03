@@ -30,14 +30,13 @@ func retrieveFavorites() -> [Event]? {
 }
 
 func saveFile(buff: [Float64], sample_rate: Float64) throws {
-    let SAMPLE_RATE = sample_rate
-    
+
     let outputFormatSettings = [
         AVFormatIDKey:kAudioFormatLinearPCM,
         AVLinearPCMBitDepthKey:32,
         AVLinearPCMIsFloatKey: true,
         AVLinearPCMIsBigEndianKey: false,
-        AVSampleRateKey: SAMPLE_RATE,
+        AVSampleRateKey: sample_rate,
         AVNumberOfChannelsKey: 1
         ] as [String : Any]
 

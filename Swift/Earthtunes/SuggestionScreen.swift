@@ -156,7 +156,7 @@ extension SuggestionScreen {
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction? {
         let action = UIContextualAction(style: .destructive, title: "Delete", handler: { (action, view, completion) in
             let alertController = UIAlertController(title: "Delete Event", message: deleteEventText, preferredStyle: .alert)
-            let clearCacheAction = UIAlertAction(title: "Delete", style: .default, handler: { (_) -> Void in
+            let clearCacheAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (_) -> Void in
                 self.events.remove(at: indexPath.row)
                 saveFavorites(events: self.events)
                 self.SuggestionScroll.deleteRows(at: [indexPath], with: .automatic)

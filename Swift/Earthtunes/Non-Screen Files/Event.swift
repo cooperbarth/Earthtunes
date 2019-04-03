@@ -11,6 +11,7 @@ class Event: NSObject, NSCoding {
     var gchannel: String = "LHZ"
     var s32: [Float64] = []
     var descript: String
+    var favorite: Bool = false
 
     required init(Location: String, Date: String, Time: String, Duration: String, Frequency: String, Amplitude: String, SChannel: String, GChannel: String, S32: [Float64], Descript: String) {
         location = Location

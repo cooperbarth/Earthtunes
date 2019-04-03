@@ -65,13 +65,12 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
 
 extension InputScreen {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return ScrollMenuData.count}
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return ScrollMenuData[row]}
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let ud = UserDefaults.standard
         ud.set(row, forKey: "Location Index")
         ud.set(ScrollMenuData[row], forKey: "Location")
     }
@@ -110,11 +109,10 @@ extension InputScreen {
             ud.set("10 Hz", forKey: "Frequency")
             ud.set("BHZ", forKey: "SChannel")
             ud.set("BHZ", forKey: "GChannel")
-            
+
             saveEvents(events: [])
-            let favorites = defaultEvents
-            saveFavorites(events: favorites)
-            
+            saveFavorites(events: defaultEvents)
+
             ud.set("Set", forKey: "First")
         }
     }
