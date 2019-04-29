@@ -1,0 +1,733 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Input Screen-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController title="Input Screen" id="BYZ-38-t0r" customClass="InputScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Kjh-Th-Rof">
+                                <rect key="frame" x="27.5" y="35" width="320" height="622"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earthtunes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nKg-xr-ve2">
+                                        <rect key="frame" x="77" y="0.0" width="166.5" height="43"/>
+                                        <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="36"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eRr-gj-OMs">
+                                        <rect key="frame" x="0.0" y="49.5" width="320" height="120.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7XT-FV-SdI">
+                                                <rect key="frame" x="128.5" y="0.0" width="63.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMu-KE-ETd">
+                                                <rect key="frame" x="0.0" y="20.5" width="320" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="4am-h4-XqT"/>
+                                                </constraints>
+                                            </pickerView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="LkX-tr-Lmo">
+                                        <rect key="frame" x="0.0" y="176.5" width="320" height="120.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1uK-sq-fQY">
+                                                <rect key="frame" x="142.5" y="0.0" width="35" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="1fX-hj-buG">
+                                                <rect key="frame" x="0.0" y="20.5" width="320" height="100"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="4WD-Dg-7jy"/>
+                                                </constraints>
+                                                <date key="date" timeIntervalSinceReferenceDate="554744015.83097601">
+                                                    <!--2018-07-31 15:33:35 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="DateChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="jrD-t1-DBa"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="uSs-EE-f8S">
+                                        <rect key="frame" x="0.0" y="304" width="320" height="134.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time (UTC)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aj-Cx-t33">
+                                                <rect key="frame" x="118" y="0.0" width="84" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tQc-1c-sK0">
+                                                <rect key="frame" x="0.0" y="20.5" width="320" height="114"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="114" id="LeZ-MT-c2i"/>
+                                                </constraints>
+                                                <date key="date" timeIntervalSinceReferenceDate="554746568.410321">
+                                                    <!--2018-07-31 16:16:08 +0000-->
+                                                </date>
+                                                <connections>
+                                                    <action selector="TimeChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="44Z-4m-aVd"/>
+                                                </connections>
+                                            </datePicker>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="vUr-76-Kfx">
+                                        <rect key="frame" x="98" y="445" width="124" height="55.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Duration (Hours)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="On6-n7-VNJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="124" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="2wP-Ta-uhh">
+                                                <rect key="frame" x="0.0" y="25.5" width="124" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="ZJS-07-9pb"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j2D-LP-wS4">
+                                        <rect key="frame" x="91.5" y="507" width="137" height="115"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EcL-kn-h1s">
+                                                <rect key="frame" x="21.5" y="0.0" width="94" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Saved Events"/>
+                                                <connections>
+                                                    <action selector="SamplePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zl4-Ox-9Hm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vyb-bj-gAM">
+                                                <rect key="frame" x="0.0" y="41" width="137" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Advanced Options"/>
+                                                <connections>
+                                                    <action selector="AdvancedPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oBI-ba-WUn"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fb-gI-jCh">
+                                                <rect key="frame" x="42.5" y="82" width="52" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Submit"/>
+                                                <connections>
+                                                    <action selector="ButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HtV-ae-cWu"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="Kjh-Th-Rof" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="15" id="7uP-dM-QcG"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Kjh-Th-Rof" secondAttribute="bottom" constant="10" id="GKu-jl-dfR"/>
+                            <constraint firstItem="Kjh-Th-Rof" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sEU-Dq-KJp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="DateField" destination="1fX-hj-buG" id="wtW-IE-L7G"/>
+                        <outlet property="DurationField" destination="2wP-Ta-uhh" id="qSU-Y7-jgX"/>
+                        <outlet property="LocationField" destination="wMu-KE-ETd" id="qpS-A3-lSO"/>
+                        <outlet property="TimeField" destination="tQc-1c-sK0" id="bXp-dK-fRU"/>
+                        <segue destination="Ky7-K0-5BQ" kind="presentation" identifier="ToLoading" id="oiZ-qh-wIF"/>
+                        <segue destination="8fP-Gv-uzW" kind="presentation" identifier="ToAdvanced" id="opf-df-TSD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="669.60000000000002" y="59.820089955022496"/>
+        </scene>
+        <!--Advanced Screen-->
+        <scene sceneID="64r-qo-TkT">
+            <objects>
+                <viewController title="Advanced Screen" id="8fP-Gv-uzW" customClass="AdvancedScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fLL-Xt-cNN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="Act-Gz-vlo">
+                                <rect key="frame" x="23" y="45" width="329" height="597"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Advanced Options" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9i5-kO-K9H">
+                                        <rect key="frame" x="76" y="0.0" width="177.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="22"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="IPF-eg-Cjh">
+                                        <rect key="frame" x="0.0" y="52.5" width="329" height="69"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0GK-PO-V6D">
+                                                <rect key="frame" x="105.5" y="0.0" width="118" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Frequency Limit"/>
+                                                <connections>
+                                                    <action selector="FrequencyHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="CNL-Ut-qMq"/>
+                                                </connections>
+                                            </button>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="nvp-mp-dIE">
+                                                <rect key="frame" x="0.0" y="41" width="329" height="29"/>
+                                                <segments>
+                                                    <segment title="0.1 Hz"/>
+                                                    <segment title="0.5 Hz"/>
+                                                    <segment title="5 Hz"/>
+                                                    <segment title="10 Hz"/>
+                                                    <segment title="20 Hz"/>
+                                                    <segment title="50 Hz"/>
+                                                </segments>
+                                            </segmentedControl>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zN1-Xf-GoN">
+                                        <rect key="frame" x="89.5" y="147.5" width="150" height="71"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPB-VD-OUg">
+                                                <rect key="frame" x="18.5" y="0.0" width="113" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Max Amplitude"/>
+                                                <connections>
+                                                    <action selector="AmplitudeHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="ejg-pz-SLq"/>
+                                                </connections>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GLK-eC-Gmr">
+                                                <rect key="frame" x="0.0" y="41" width="150" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="4sz-5P-SnK"/>
+                                                    <constraint firstAttribute="height" constant="30" id="NVy-NS-c6a"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="47" translatesAutoresizingMaskIntoConstraints="NO" id="vTc-0L-LBm">
+                                        <rect key="frame" x="28" y="244.5" width="273" height="66"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="mvh-YB-mAP">
+                                                <rect key="frame" x="0.0" y="0.0" width="113" height="66"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Th-fI-L8p">
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="33"/>
+                                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                        <state key="normal" title="Sound Channel"/>
+                                                        <connections>
+                                                            <action selector="SoundChannelHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="ocH-jf-wM9"/>
+                                                        </connections>
+                                                    </button>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="2ve-Gc-hQk">
+                                                        <rect key="frame" x="0.0" y="38" width="113" height="29"/>
+                                                        <segments>
+                                                            <segment title="BHZ"/>
+                                                            <segment title="LHZ"/>
+                                                        </segments>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="YTC-we-IYg">
+                                                <rect key="frame" x="160" y="0.0" width="113" height="66"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="usP-zQ-600">
+                                                        <rect key="frame" x="0.0" y="0.0" width="113" height="33"/>
+                                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                        <state key="normal" title="Graph Channel"/>
+                                                        <connections>
+                                                            <action selector="GraphChannelHelp:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="WUo-lS-cwv"/>
+                                                        </connections>
+                                                    </button>
+                                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ztt-rI-awL">
+                                                        <rect key="frame" x="0.0" y="38" width="113" height="29"/>
+                                                        <segments>
+                                                            <segment title="BHZ"/>
+                                                            <segment title="LHZ"/>
+                                                        </segments>
+                                                    </segmentedControl>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="8iZ-jf-edK">
+                                        <rect key="frame" x="89.5" y="336.5" width="150" height="58.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playback Rate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FDh-bS-ZC3">
+                                                <rect key="frame" x="24" y="0.0" width="102.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B3l-w6-bKW">
+                                                <rect key="frame" x="0.0" y="28.5" width="150" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="4dB-iL-saf"/>
+                                                    <constraint firstAttribute="height" constant="30" id="nz9-cn-TIu"/>
+                                                </constraints>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="n6k-9o-nSL">
+                                        <rect key="frame" x="15.5" y="421" width="298" height="31"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="nBB-vd-J18">
+                                                <rect key="frame" x="0.0" y="0.0" width="119" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Looping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="70k-fc-sv8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="60" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pS4-0O-pXk">
+                                                        <rect key="frame" x="70" y="0.0" width="51" height="31"/>
+                                                        <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <connections>
+                                                            <action selector="LoopingPressed:" destination="8fP-Gv-uzW" eventType="valueChanged" id="9Il-NV-HwE"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="8Wp-ol-tRd">
+                                                <rect key="frame" x="147" y="0.0" width="151" height="31"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Save Graphs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLF-tT-ON0">
+                                                        <rect key="frame" x="0.0" y="0.0" width="91" height="31"/>
+                                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Fp3-XZ-s10">
+                                                        <rect key="frame" x="102" y="0.0" width="51" height="31"/>
+                                                        <connections>
+                                                            <action selector="SavePressed:" destination="8fP-Gv-uzW" eventType="valueChanged" id="ypO-fB-6wq"/>
+                                                        </connections>
+                                                    </switch>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Nc1-0M-NAY">
+                                        <rect key="frame" x="103" y="478" width="123" height="119"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o8h-O8-jQu">
+                                                <rect key="frame" x="16.5" y="0.0" width="90" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Clear Cache"/>
+                                                <connections>
+                                                    <action selector="ClearCache:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="KIY-wt-pLL"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2xX-qg-R60">
+                                                <rect key="frame" x="0.0" y="43" width="123" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Reset to Defaults"/>
+                                                <connections>
+                                                    <action selector="ResetDefaults:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="fYG-eN-F8T"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ano-M4-rzf">
+                                                <rect key="frame" x="37" y="86" width="49" height="33"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Return"/>
+                                                <connections>
+                                                    <action selector="ReturnButton:" destination="8fP-Gv-uzW" eventType="touchUpInside" id="pTO-1U-NKh"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Act-Gz-vlo" firstAttribute="centerX" secondItem="fLL-Xt-cNN" secondAttribute="centerX" id="Fdm-1L-Juj"/>
+                            <constraint firstItem="Act-Gz-vlo" firstAttribute="top" secondItem="IBm-h0-0fi" secondAttribute="top" constant="25" id="Rbb-Vp-IZt"/>
+                            <constraint firstItem="IBm-h0-0fi" firstAttribute="bottom" secondItem="Act-Gz-vlo" secondAttribute="bottom" constant="25" id="xue-u9-iAl"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IBm-h0-0fi"/>
+                    </view>
+                    <connections>
+                        <outlet property="Amp" destination="GLK-eC-Gmr" id="lbj-br-Omn"/>
+                        <outlet property="Freq" destination="nvp-mp-dIE" id="B3Q-Ax-qOk"/>
+                        <outlet property="GChannel" destination="ztt-rI-awL" id="peJ-CE-M4h"/>
+                        <outlet property="LoopingSwitch" destination="pS4-0O-pXk" id="CLh-px-I91"/>
+                        <outlet property="Rate" destination="B3l-w6-bKW" id="xIT-MW-esr"/>
+                        <outlet property="SChannel" destination="2ve-Gc-hQk" id="dYq-ev-hTW"/>
+                        <outlet property="SaveGraphSwitch" destination="Fp3-XZ-s10" id="GHz-qf-Tho"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="SetAdvanced" id="lar-ca-Cwf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1z2-ww-8eO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-47.200000000000003" y="59.820089955022496"/>
+        </scene>
+        <!--Info Screen-->
+        <scene sceneID="rxD-Iw-W5j">
+            <objects>
+                <viewController storyboardIdentifier="Info Screen" title="Info Screen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="YMt-gm-oyN" customClass="InfoScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="U2j-fE-WRn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30e-EP-ub0">
+                                <rect key="frame" x="50" y="258.5" width="275" height="150"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CIL-wY-Unj">
+                                        <rect key="frame" x="9.5" y="8" width="256" height="100"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="Cjc-8F-lwT"/>
+                                            <constraint firstAttribute="width" constant="256" id="zZ1-Ue-KbQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHv-kk-Mdf">
+                                        <rect key="frame" x="0.0" y="108" width="137.5" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="137.5" id="jyX-b4-6Qt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="InfoSave:" destination="YMt-gm-oyN" eventType="touchUpInside" id="FkL-NE-K3C"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bGr-JT-ZyP">
+                                        <rect key="frame" x="137.5" y="108" width="137.5" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="137.5" id="FEk-lR-UXt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <state key="normal" title="Close"/>
+                                        <connections>
+                                            <action selector="InfoClose:" destination="YMt-gm-oyN" eventType="touchUpInside" id="Xeb-HG-11W"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="bGr-JT-ZyP" secondAttribute="bottom" id="27P-LH-jDf"/>
+                                    <constraint firstItem="CIL-wY-Unj" firstAttribute="centerX" secondItem="30e-EP-ub0" secondAttribute="centerX" id="5Ah-jL-7e5"/>
+                                    <constraint firstAttribute="width" constant="275" id="Bnw-eX-FoX"/>
+                                    <constraint firstAttribute="height" constant="150" id="LGU-YV-0bw"/>
+                                    <constraint firstItem="kHv-kk-Mdf" firstAttribute="top" secondItem="CIL-wY-Unj" secondAttribute="bottom" id="Zjc-DQ-Vp6"/>
+                                    <constraint firstAttribute="trailing" secondItem="bGr-JT-ZyP" secondAttribute="trailing" id="hIm-wh-f3F"/>
+                                    <constraint firstItem="bGr-JT-ZyP" firstAttribute="top" secondItem="CIL-wY-Unj" secondAttribute="bottom" id="jqm-Wn-xh9"/>
+                                    <constraint firstAttribute="bottom" secondItem="kHv-kk-Mdf" secondAttribute="bottom" id="mWo-x7-ab6"/>
+                                    <constraint firstItem="CIL-wY-Unj" firstAttribute="top" secondItem="30e-EP-ub0" secondAttribute="top" constant="8" id="uY5-Yf-t83"/>
+                                    <constraint firstItem="kHv-kk-Mdf" firstAttribute="leading" secondItem="30e-EP-ub0" secondAttribute="leading" id="zDw-N7-zYl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="30e-EP-ub0" firstAttribute="centerY" secondItem="U2j-fE-WRn" secondAttribute="centerY" id="aXn-6x-x1n"/>
+                            <constraint firstItem="30e-EP-ub0" firstAttribute="centerX" secondItem="U2j-fE-WRn" secondAttribute="centerX" id="mJx-2O-bXa"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eBX-1L-dHM"/>
+                    </view>
+                    <connections>
+                        <outlet property="InfoText" destination="CIL-wY-Unj" id="Rp2-AI-sQJ"/>
+                        <outlet property="InfoView" destination="30e-EP-ub0" id="7a7-cz-jdz"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="l9R-kn-SmJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1414" y="-629"/>
+        </scene>
+        <!--Suggestion Screen-->
+        <scene sceneID="8dl-tY-6KU">
+            <objects>
+                <viewController storyboardIdentifier="Suggestion Screen" title="Suggestion Screen" id="yYD-fC-Qj3" customClass="SuggestionScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LZY-iM-2ER">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3p-vR-JNx">
+                                <rect key="frame" x="67.5" y="133.5" width="240" height="400"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="66p-92-ZFM">
+                                        <rect key="frame" x="0.0" y="35" width="240" height="323"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Event Cell" id="ScY-cD-hTs">
+                                                <rect key="frame" x="0.0" y="28" width="240" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ScY-cD-hTs" id="RTz-eD-gT5">
+                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vw2-7I-3hJ">
+                                        <rect key="frame" x="0.0" y="358" width="240" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="42" id="6Q7-FN-bCP"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                        <state key="normal" title="Select">
+                                            <color key="titleShadowColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="ReturnButton:" destination="yYD-fC-Qj3" eventType="touchUpInside" id="BrP-9H-bxG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94865204020000005" green="0.94865204020000005" blue="0.94865204020000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="vw2-7I-3hJ" firstAttribute="leading" secondItem="i3p-vR-JNx" secondAttribute="leading" id="ELb-qN-OsI"/>
+                                    <constraint firstAttribute="width" constant="240" id="EtJ-xj-H9t"/>
+                                    <constraint firstAttribute="trailing" secondItem="vw2-7I-3hJ" secondAttribute="trailing" id="c7v-45-dlj"/>
+                                    <constraint firstAttribute="height" constant="400" id="oXN-R3-qqc"/>
+                                    <constraint firstAttribute="bottom" secondItem="vw2-7I-3hJ" secondAttribute="bottom" id="uEM-Wr-Onh"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saved Events" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v3R-w2-AUR">
+                                <rect key="frame" x="140.5" y="143.5" width="94.5" height="20"/>
+                                <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="v3R-w2-AUR" firstAttribute="centerX" secondItem="LZY-iM-2ER" secondAttribute="centerX" id="Cbh-KJ-d4F"/>
+                            <constraint firstItem="i3p-vR-JNx" firstAttribute="top" secondItem="v3R-w2-AUR" secondAttribute="bottom" constant="-30" id="SZ1-BL-SSa"/>
+                            <constraint firstItem="i3p-vR-JNx" firstAttribute="centerX" secondItem="LZY-iM-2ER" secondAttribute="centerX" id="XRb-jl-zlT"/>
+                            <constraint firstItem="i3p-vR-JNx" firstAttribute="centerY" secondItem="LZY-iM-2ER" secondAttribute="centerY" id="hcf-qa-eHI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ErX-hV-COR"/>
+                    </view>
+                    <connections>
+                        <outlet property="SuggestionScroll" destination="66p-92-ZFM" id="8JA-Bk-R1D"/>
+                        <outlet property="SuggestionView" destination="i3p-vR-JNx" id="qQj-r2-DWi"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="Select Event" id="htf-sJ-yhm"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yel-9u-lw7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="682.39999999999998" y="-629.2353823088456"/>
+        </scene>
+        <!--Loading Screen-->
+        <scene sceneID="psx-1Q-nVD">
+            <objects>
+                <viewController storyboardIdentifier="Loading Screen" id="Ky7-K0-5BQ" customClass="LoadingScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Lk4-EY-kWO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.75" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a7J-Pe-S8s">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="SXV-Q5-v0R">
+                                        <rect key="frame" x="151" y="278.5" width="73" height="60.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OTG-ax-qu6">
+                                                <rect key="frame" x="0.0" y="0.0" width="73" height="20.5"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YW0-QI-0l3">
+                                                <rect key="frame" x="26.5" y="40.5" width="20" height="20"/>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="SXV-Q5-v0R" firstAttribute="centerY" secondItem="a7J-Pe-S8s" secondAttribute="centerY" constant="-15" id="Yqn-Vz-qGH"/>
+                                    <constraint firstItem="SXV-Q5-v0R" firstAttribute="centerX" secondItem="a7J-Pe-S8s" secondAttribute="centerX" id="q5F-TK-oY5"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="a7J-Pe-S8s" firstAttribute="top" secondItem="3tH-mJ-Hx7" secondAttribute="top" id="4BW-6g-2Rr"/>
+                            <constraint firstItem="a7J-Pe-S8s" firstAttribute="trailing" secondItem="3tH-mJ-Hx7" secondAttribute="trailing" id="C8S-F8-z9x"/>
+                            <constraint firstItem="a7J-Pe-S8s" firstAttribute="bottom" secondItem="3tH-mJ-Hx7" secondAttribute="bottom" id="fMF-IC-1Ee"/>
+                            <constraint firstItem="a7J-Pe-S8s" firstAttribute="leading" secondItem="3tH-mJ-Hx7" secondAttribute="leading" id="qaP-QV-PRn"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="3tH-mJ-Hx7"/>
+                    </view>
+                    <connections>
+                        <outlet property="LoadingLabel" destination="OTG-ax-qu6" id="GHJ-jJ-QcL"/>
+                        <segue destination="0vR-sf-a3A" kind="presentation" identifier="ToDisplay" id="g2J-KY-UGA"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="Error404" id="L9a-Em-sCh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S1E-EU-c7v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1413.5999999999999" y="59.820089955022496"/>
+        </scene>
+        <!--Display Screen-->
+        <scene sceneID="UAs-7B-U0g">
+            <objects>
+                <viewController id="0vR-sf-a3A" customClass="DisplayScreen" customModule="Earthtunes" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="n0b-dH-cYg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="NzM-My-Ler">
+                                <rect key="frame" x="0.0" y="28" width="375" height="619"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="65" translatesAutoresizingMaskIntoConstraints="NO" id="sub-Ic-H2x">
+                                        <rect key="frame" x="12" y="0.0" width="351" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cVj-gJ-gnv">
+                                                <rect key="frame" x="0.0" y="0.0" width="36" height="35"/>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <state key="normal" title="Back"/>
+                                                <connections>
+                                                    <action selector="BackButton:" destination="0vR-sf-a3A" eventType="touchUpInside" id="pOG-SV-hxz"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5o0-Lw-Qfm">
+                                                <rect key="frame" x="101" y="0.0" width="150" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="150" id="gIM-G3-r3y"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E1u-Mm-iWy">
+                                                <rect key="frame" x="316" y="0.0" width="35" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="35" id="a59-iJ-xqw"/>
+                                                    <constraint firstAttribute="height" constant="35" id="ge4-Uu-p0t"/>
+                                                </constraints>
+                                                <connections>
+                                                    <action selector="SavePressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="0Li-Oz-93W"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKE-IA-8Od">
+                                        <rect key="frame" x="0.0" y="47" width="375" height="403"/>
+                                    </imageView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="vWu-Zt-Aje" customClass="BiggerSlider" customModule="Earthtunes" customModuleProvider="target">
+                                        <rect key="frame" x="-2" y="462" width="379" height="51"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="gpY-z5-cLF"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="SoundSlider:" destination="0vR-sf-a3A" eventType="valueChanged" id="mmk-yP-I3g"/>
+                                        </connections>
+                                    </slider>
+                                    <stackView opaque="NO" contentMode="scaleAspectFit" spacing="30" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Rr-kN-AEO">
+                                        <rect key="frame" x="15" y="524" width="345" height="95"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NvE-cE-gFq">
+                                                <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="95" id="Nha-PO-uMp"/>
+                                                    <constraint firstAttribute="width" constant="95" id="UQo-0i-cRp"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="Rewind"/>
+                                                <connections>
+                                                    <action selector="RewindButtonPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="hfc-n4-3d8"/>
+                                                </connections>
+                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QYQ-nW-gvf">
+                                                <rect key="frame" x="125" y="0.0" width="95" height="95"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPU-Gb-YcJ">
+                                                        <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="95" id="bgC-c8-kZK"/>
+                                                            <constraint firstAttribute="width" constant="95" id="qPh-gb-4V0"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Pause" image="Pause"/>
+                                                        <connections>
+                                                            <action selector="PlayPauseButtonPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="WxW-gS-MRI"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ddS-py-hen">
+                                                <rect key="frame" x="250" y="0.0" width="95" height="95"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="95" id="HSj-DG-K9P"/>
+                                                    <constraint firstAttribute="width" constant="95" id="SSr-L5-rqz"/>
+                                                </constraints>
+                                                <state key="normal" title="Button" image="FF"/>
+                                                <connections>
+                                                    <action selector="FFButtonPressed:" destination="0vR-sf-a3A" eventType="touchUpInside" id="nnp-Sk-vXg"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="nKE-IA-8Od" firstAttribute="leading" secondItem="NzM-My-Ler" secondAttribute="leading" id="8Tf-VC-P4t"/>
+                                    <constraint firstAttribute="trailing" secondItem="vWu-Zt-Aje" secondAttribute="trailing" id="eXZ-yb-vZr"/>
+                                    <constraint firstAttribute="trailing" secondItem="nKE-IA-8Od" secondAttribute="trailing" id="ein-Xv-ag7"/>
+                                    <constraint firstItem="vWu-Zt-Aje" firstAttribute="leading" secondItem="NzM-My-Ler" secondAttribute="leading" id="idq-Gb-X3Y"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="bottom" secondItem="NzM-My-Ler" secondAttribute="bottom" constant="20" id="Lhp-qQ-46C"/>
+                            <constraint firstItem="NzM-My-Ler" firstAttribute="top" secondItem="gih-OP-X9R" secondAttribute="top" constant="8" id="VLL-aQ-K4k"/>
+                            <constraint firstItem="gih-OP-X9R" firstAttribute="trailing" secondItem="NzM-My-Ler" secondAttribute="trailing" id="ZdQ-OI-93m"/>
+                            <constraint firstItem="NzM-My-Ler" firstAttribute="centerX" secondItem="n0b-dH-cYg" secondAttribute="centerX" id="aeg-rC-GEw"/>
+                            <constraint firstItem="NzM-My-Ler" firstAttribute="leading" secondItem="gih-OP-X9R" secondAttribute="leading" id="zX6-qs-ekb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gih-OP-X9R"/>
+                    </view>
+                    <connections>
+                        <outlet property="GraphTitle" destination="5o0-Lw-Qfm" id="RkT-Lo-hPo"/>
+                        <outlet property="GraphView" destination="nKE-IA-8Od" id="3fw-h0-3HC"/>
+                        <outlet property="PlayPauseButton" destination="EPU-Gb-YcJ" id="1WO-tE-536"/>
+                        <outlet property="SaveButton" destination="E1u-Mm-iWy" id="hy7-mn-Uc0"/>
+                        <outlet property="SoundSlideLayout" destination="vWu-Zt-Aje" id="d1s-BO-OTO"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="BackToInput" id="O0B-H3-m4Q"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vba-Ps-Qml" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2173.5999999999999" y="59.820089955022496"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="FF" width="188" height="186"/>
+        <image name="Pause" width="183" height="181"/>
+        <image name="Rewind" width="183" height="184"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="O0B-H3-m4Q"/>
+    </inferredMetricsTieBreakers>
+</document>
