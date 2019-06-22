@@ -8,8 +8,8 @@ let df2 = DateFormatter()
 var player = AVAudioPlayer()
 var locationChosen : Bool = false
 
-let ScrollMenuData = ["Ryerson (IL,USA)",
-                      "Yellowstone (WY,USA)",
+let ScrollMenuData = [//"Ryerson (IL,USA)",
+                      //"Yellowstone (WY,USA)",
                       "Anchorage (AK,USA)",
                       "Paris, France",
                       "Inuyama, Japan",
@@ -18,18 +18,19 @@ let ScrollMenuData = ["Ryerson (IL,USA)",
                       "Ar Rayn, Saudi Arabia",
                       "Antarctica"]
 
-let defaultEvents: [Event] = [
+let defaultEvents: [Event] = []
+/*let defaultEvents: [Event] = [
     Event(Location: "Ryerson (IL,USA)", Date: "2016-11-07", Time: "00:30", Descript: eventOneDescription),
     Event(Location: "Ryerson (IL,USA)", Date: "2017-06-02", Time: "00:00", Descript: eventTwoDescription),
     Event(Location: "Ryerson (IL,USA)", Date: "2017-07-06", Time: "05:30", Descript: eventThreeDescription),
     Event(Location: "Ryerson (IL,USA)", Date: "2018-05-04", Time: "22:00", Descript: eventFourDescription),
     Event(Location: "Ryerson (IL,USA)", Date: "2018-07-08", Time: "15:30", Descript: eventFiveDescription),
     Event(Location: "Ryerson (IL,USA)", Date: "2018-07-24", Time: "13:00", Descript: eventSixDescription)
-]
+]*/
 
 let locations: [String: (String, String, String)] = [
-    "Ryerson (IL,USA)": ("L44A", "NW", "00"),
-    "Yellowstone (WY,USA)": ("H17A", "TA", "--"),
+    //"Ryerson (IL,USA)": ("L44A", "NW", "00"),
+    //"Yellowstone (WY,USA)": ("H17A", "TA", "--"),
     "Anchorage (AK,USA)": ("SSN", "AK", "--"),
     "Paris, France": ("CLF", "G", "00"),
     "Inuyama, Japan": ("INU", "G", "00"),

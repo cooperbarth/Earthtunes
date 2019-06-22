@@ -65,11 +65,11 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
 
 extension InputScreen {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
-    
+
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return ScrollMenuData.count}
-    
+
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return ScrollMenuData[row]}
-    
+
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         let ud = UserDefaults.standard
         ud.set(row, forKey: "Location Index")
@@ -102,7 +102,7 @@ extension InputScreen {
         if (ud.string(forKey: "Rate") == nil) {
             ud.set("1.0", forKey: "Rate")
         }
-        
+
         if (ud.string(forKey: "First") == nil) {
             ud.set(3, forKey: "FreqIndex")
             ud.set(0, forKey: "SCIndex")
