@@ -34,7 +34,7 @@ extension LoadingScreen {
         let station: String
         let net: String
         let location: String
-        if locations.keys.contains(self.locate) {
+        if (self.locate in locations) {
             (station, net, location) = locations[self.locate]!
         } else {
             print("Location not in set")

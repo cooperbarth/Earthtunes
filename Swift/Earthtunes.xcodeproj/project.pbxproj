@@ -13,6 +13,7 @@
 		CD01B89521077767000EFCC9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CD01B89421077767000EFCC9 /* Assets.xcassets */; };
 		CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD326F9B210FDA5300F690F7 /* SuggestionScreen.swift */; };
 		CD63B99E224DAA0D00E3EBE3 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD63B99D224DAA0D00E3EBE3 /* Event.swift */; };
+		CD93868822BEE4CA00D5945C /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD93868722BEE4CA00D5945C /* Location.swift */; };
 		CDF068692144686A00B6E5F0 /* Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF068682144686A00B6E5F0 /* Text.swift */; };
 		CDF4554A224C4E4A001356B7 /* BiggerSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF45549224C4E4A001356B7 /* BiggerSlider.swift */; };
 		F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F22F8C7A210F85B600D18B38 /* AdvancedScreen.swift */; };
@@ -34,6 +35,7 @@
 		CD01B89921077767000EFCC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD326F9B210FDA5300F690F7 /* SuggestionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionScreen.swift; sourceTree = "<group>"; };
 		CD63B99D224DAA0D00E3EBE3 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		CD93868722BEE4CA00D5945C /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		CDF068682144686A00B6E5F0 /* Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Text.swift; sourceTree = "<group>"; };
 		CDF45549224C4E4A001356B7 /* BiggerSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BiggerSlider.swift; sourceTree = "<group>"; };
 		F22F8C7A210F85B600D18B38 /* AdvancedScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedScreen.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 				F2FAF2FE2121FDD900753512 /* DataManagement.swift */,
 				F2FAF3002121FFB800753512 /* Resources.swift */,
 				CDF068682144686A00B6E5F0 /* Text.swift */,
+				CD93868722BEE4CA00D5945C /* Location.swift */,
 			);
 			path = "Non-Screen Files";
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				CD01B89021077766000EFCC9 /* ViewController.swift in Sources */,
 				CD01B88E21077766000EFCC9 /* AppDelegate.swift in Sources */,
 				F2FAF3012121FFB800753512 /* Resources.swift in Sources */,
+				CD93868822BEE4CA00D5945C /* Location.swift in Sources */,
 				F22F8C7B210F85B600D18B38 /* AdvancedScreen.swift in Sources */,
 				CD326F9C210FDA5300F690F7 /* SuggestionScreen.swift in Sources */,
 				CDF4554A224C4E4A001356B7 /* BiggerSlider.swift in Sources */,

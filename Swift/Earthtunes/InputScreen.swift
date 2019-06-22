@@ -66,20 +66,20 @@ class InputScreen : ViewController, UIPickerViewDelegate, UIPickerViewDataSource
 extension InputScreen {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {return 1}
 
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return ScrollMenuData.count}
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {return locations.count}
 
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return ScrollMenuData[row]}
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {return locations[row].name}
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         ud.set(row, forKey: "Location Index")
-        ud.set(ScrollMenuData[row], forKey: "Location")
+        ud.set(locations[row].name, forKey: "Location")
     }
 }
 
 extension InputScreen {
     func setUpFields() {
         if (ud.string(forKey: "Location") == nil) {
-            ud.set("Ryerson (IL,USA)", forKey: "Location")
+            ud.set("", forKey: "Location")
         }
         if (ud.string(forKey: "Date") == nil) {
             ud.set(df1.string(from: Date()), forKey: "Date")
@@ -94,7 +94,7 @@ extension InputScreen {
         DateField.date = df1.date(from: ud.string(forKey: "Date")!)!
         TimeField.date = df2.date(from: ud.string(forKey: "Time")!)!
         DurationField.text = ud.string(forKey: "Duration")
-        
+
         if (ud.string(forKey: "Amplitude") == nil) {
             ud.set("0.0001", forKey: "Amplitude")
         }
