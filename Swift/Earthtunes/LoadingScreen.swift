@@ -124,7 +124,7 @@ extension LoadingScreen {
     }
 
     func showError404() {
-        let alertController = UIAlertController(title: "Error 404", message: error404Text, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Couldn't Load Data", message: error404Text, preferredStyle: .alert)
         let returnAction = UIAlertAction(title: "Return", style: .default) { (_) -> Void in
             UIView.setAnimationsEnabled(false)
             self.performSegue(withIdentifier: "Error404", sender: self)

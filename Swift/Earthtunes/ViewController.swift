@@ -42,7 +42,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
 
-
     func showPopup(name: String) {
         let popOverVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
         self.addChild(popOverVC)
@@ -75,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let alertController = UIAlertController(title: "Input Error", message: ud.string(forKey: "Input Error"), preferredStyle: .alert)
         let returnAction = UIAlertAction(title: "Return", style: .default, handler: nil)
         alertController.addAction(returnAction)
-        
+
         present(alertController, animated: true, completion: nil)
     }
 }
