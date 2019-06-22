@@ -115,6 +115,7 @@ def getSoundAndGraph(self, locate, date, time, duration, AF, FA):
         fixedamp = float(FA)
 
     #creating the sound file
+    ''' #all graphing stuff
     realduration = (tot/fsps)/3600.
     print "original duration = %7.2f hours" % realduration
     hours = np.linspace(0,realduration,tot)
@@ -122,6 +123,7 @@ def getSoundAndGraph(self, locate, date, time, duration, AF, FA):
     print "max 20Hz wav file duration = %8.1f seconds" % (soundduration)
     mxs = 1.01*np.max(sound)
     mns = 1.01*np.min(sound)
+    '''
     scaledsound = (2**31)*np.arctan(sound/fixedamp)/halfpi
     s32 = np.int32(scaledsound)
     ssps = bandsHZ * fsps

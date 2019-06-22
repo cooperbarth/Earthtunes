@@ -4,9 +4,9 @@ import UIKit
 class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate {
     @IBOutlet weak var SuggestionView: UIView!
     @IBOutlet weak var SuggestionScroll: UITableView!
-    
+
     var events : [Event] = []
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.makeViewAppear()
@@ -15,7 +15,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
 
         firstTime()
         events = retrieveFavorites()!
-        
+
         SuggestionScroll.dataSource = self
         SuggestionScroll.delegate = self
     }
@@ -41,7 +41,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
         let selectedRow = SuggestionScroll.indexPathForSelectedRow?.row
         if (selectedRow == nil) {return}
         let Event = events[selectedRow!]
-        
+
         ud.set(Event.location, forKey: "Location")
         ud.set(Event.date, forKey: "Date")
         ud.set(Event.time, forKey: "Time")
@@ -59,7 +59,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
             }
             count += 1
         }
-        
+
         let frequencies = ["0.1 Hz", "0.5 Hz", "5 Hz", "10 Hz", "20 Hz", "50 Hz"]
         count = 0
         for freq in frequencies {
@@ -69,7 +69,7 @@ class SuggestionScreen : ViewController, UITableViewDelegate, UITableViewDataSou
             }
             count += 1
         }
-        
+
         if (Event.schannel == "BHZ") {
             ud.set(0, forKey: "SCIndex")
         } else {
