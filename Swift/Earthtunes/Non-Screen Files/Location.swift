@@ -10,7 +10,6 @@ struct Location {
     var name: String
     var network: String
     var station: String
-    var location: String
 
     init(name: String, network: String, station: String) {
         self.name = name
